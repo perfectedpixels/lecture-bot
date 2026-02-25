@@ -1,0 +1,126 @@
+Course Page: improving-accessibility-3
+
+Improving Accessibility
+Some students choose to work with
+UW Disability Resources for Students (DRS)
+to make formal accommodation requests. Not all students with disabilities make this choice or know they have the option. Include an
+access and accomodations statement
+in your syllabus to encourage students seeking accommodations to work with
+UW DRS
+.
+Providing accessible materials will have a broader impact than you may ever know. Students in your class may have temporary disabilities, due to illness or injury, or hidden disabilities, such as mental illness or chronic pain; an accessible course benefits everyone. Because accessibility is an ongoing practice, here are a few simple ways to begin to
+build accessibility
+into your course:
+Use Headings
+Use Meaningful Link Text
+Add Alternate Text to Images
+Use Tables Wisely
+Ensure PDFs are Accessible
+Caption Your Videos
+and use videos that are already captioned
+Below you’ll find a quick reference for each of these tasks.
+Learn more about how these practices help all students
+, by visiting the
+Practical Skills for Creating Accessible Course Content
+module in UW Learning Technologies'
+Teaching with UW Technologies
+course.
+You can also
+review the accessibility
+of your course using
+Ally
+, the Canvas
+Accessibility Checker
+, and the DRS
+Online Course Accessibility Checklist
+.
+Use Headings
+Sighted learners can skim a page and use visual cues, such as
+larger
+or
+bold
+text, to find the section of a document they want to read. However, for someone using an
+assistive technology
+such as a
+screen reader
+, these visual markups are useless for navigation.
+Using styles and headings allows a screen reader to navigate from section to section, creating a more equitable experience.
+In Canvas,
+Heading 1
+is reserved for page titles. You can use the style menu at the top of the
+Rich Content Editor
+to apply
+Headers 2
+,
+3
+, and
+4
+to your text. There's no option to preserve existing formatting when you apply Headers in Canvas, but you can adjust formatting after the header is applied.
+Use Meaningful Link Text
+Meaningful links are links where the URL is embedded in text, which are more accessible for anyone using a screen reader
+or speech-to-text technology
+. You can see an example of a meaningful link in the next sentence.
+Use this step-by-step guide
+with screenshots to create a meaningful link in Canvas.
+Add Alternative Text to Images
+Alt text
+is "Alt text is a short description of the image, residing behind the scenes, where its purpose is to communicate the content of an image to people who can’t see it (for example, a person who is blind, using an audible screen reader or Braille device)". Browsers also display alt text visibly if an image fails to load.
+By default, Canvas uses the image file name as the alt text, which should be changed to something more descriptive. Alt text is not the same as the image title, which generates text when users hover over the image.
+You can learn more about how to provide alt text for images or marking non-informational images as decorative in
+Canvas in this
+guide on embedding images
+.
+Use Tables Wisely
+Tables are a great tool for organizing information, but when used incorrectly or improperly formatted they can be a roadblock for students who use screen readers. Many of us are guilty of using tables for layout in our documents, helping to make everything neat and tidy. And who hasn't used a table to provide a schedule in their syllabus?
+For greater accessibility, it’s best to only use tables when absolutely necessary and to make sure they are
+formatted correctly
+for students to navigate with a screen reader.
+The
+Canvas Accessibility Checker
+can help you with making your tables accessible.
+Ensure PDFs are Accessible
+PDF files pose unique challenges for accessibility. In order to be accessible, PDFs must be “tagged,” meaning that text, headings, images, and other elements of the documents have been labeled in a specific way to be readable by assistive technologies.
+Image-based PDF files may need to be converted.
+UW Disability Resource Services
+can assist with conversion for accommodation requests. Faculty, students and staff can use the
+free online conversion tool
+to turn one file type (image PDF) into another (text selectable PDF).
+For detailed instructions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:
+Checking PDFs for Accessibility
+Creating Accessible PDFs from Microsoft Word
+Creating Accessible PDF Forms Using Adobe Acrobat Pro
+Creating Accessible PDFs from Adobe InDesign
+Caption Your Videos
+According to UW Accessible Technology, captions are "... essential for ensuring your video is accessible to students, employees, and members of the public who are deaf or hard of hearing. They also help non-native English speakers to understand the video, make it possible to search for content within the video, [and] help all students learn the spelling of technical terms spoken in the video...".
+Here are guides on how to caption in the most common UW supported teaching tools:
+Canvas
+: For videos created or uploaded into Canvas, Canvas uses a tool called
+Amara
+to sync your script with a video.
+Learn more about captioning videos in Canvas
+.
+Panopto
+:
+By default, machine-generated captions are automatically added to your Panopto videos. These captions do not satisfy any DRS accommodations. Learn more about
+Captioning Panopto Recordings
+.
+Zoom
+:
+Use audio transcription for cloud recording
+If you have course-related recordings that will be heavily used, you may be able to have them professionally captioned for free. To apply, simply fill out the
+captioning service application
+.  If you have had a request for accommodations then your video is not eligible for this funding; instead work with
+UW Disability Resources for Students
+or the
+Disability Services Office
+.
+Additional UW Resources for Accessibility
+Accessible Technology at the UW
+University of Washington IT Accessibility Guidelines
+UW-IT Accessible Technology Services (ATS)
+Disability Resources for Students (DRS)
+Disabilities, Opportunities, Internetworking, and Technology (DO-IT)
+Practical Skills for Creating Accessible Course Content:
+module in UW Learning Technologies'
+Teaching with UW Technologies
+course.

@@ -1,0 +1,75 @@
+Course Page: user-research-and-ux-strategy
+
+User Research & UX Strategy
+Instructor:
+Jason Levine, Head of UX at AWS
+Classes:
+Mondays, 6:00pm - 9:50pm in
+CMU
+104
+Zoom ID:
+941 3146 5927
+Zoom Open Office Hours:
+Wednesdays, 12:30pm - 1:00pm on
+Zoom
+Email:
+levine13@uw.edu
+LinkedIn:
+linkedin.com/in/jasonl
+Portfolio:
+perfectpixels.com
+Course Description
+This course focuses on the design, implementation, and evaluation of user interfaces from a usability perspective. The aim of the course is to study the concepts, methods, and techniques of usability engineering, with a focus on the artifacts where user experience is essential. Historically, usability has covered aspects of efficiency, learnability, and ease of use. Today, a large number of other measures for success rely on elements such as playability, engagement, entertainment, immersion, and aesthetics.
+Several concepts will be detailed with the expectation that by the end of the quarter, students will recognize the aspects of each of the following deliverables within Interface Design and User Research. At the completion of this course, students will have portfolio-ready, end-to-end work examples to demonstrate they can:
+Understand basic principles of user interface design, implementation, and evaluation
+Methodologies and best practices for achieving user goals
+Design and conduct usability studies
+Select an appropriate evaluation method and articulating its advantages and disadvantages
+Establish useful test objectives
+Prepare reports and presenting results
+Class In-Person and Zoom Policy
+This class is a discussion-based course. Students are required to attend class in person unless previously cleared by the instructor. We will be recording the lectures to reference.
+Zoom Recordings
+•
+Sep 29, 2025 Recording
+•
+Oct 6, 2025 Recording
+•
+Oct 13, 2025 Recording Part 1
+•
+Oct 20, 2025 Recording Part 1
+|
+Part 2
+•
+Oct 27, 2025 Recording
+•
+Nov 3, 2025 Recording Part 1
+|
+Part 2
+•
+Nov 10, 2025 Recording Part 1
+|
+Part 2
+•
+Nov 24, 2025 Recording
+•
+Dec 1, 2025 Recording
+Principles for AI use in this course
+I want you to use LLMs as an assistant in your assignments, but not as a replacement for your doing the work on the assignment. For more, review
+https://link.springer.com/article/10.1007/s40593-025-00501-w
+Allowed / healthy use
+Brainstorming, outlining, light copyediting.
+Asking an LLM to help rephrase
+your
+ideas.
+Not OK
+Copy-pasting large blocks of generated text with minimal or no modification.
+Letting an LLM invent examples you never checked.
+Re-using my sample work with superficial edits.
+The deduction model (−1.0 → −0.25) as a “penalty” dimension layered on top.
+Assignments
+Syllabus
+Files
+Additional Reading
+Learning/Community Resources
+About The Instructor

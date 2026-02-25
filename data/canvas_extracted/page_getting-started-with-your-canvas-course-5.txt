@@ -1,0 +1,64 @@
+Course Page: getting-started-with-your-canvas-course-5
+
+Getting Started with Your Canvas Course
+WHAT'S IN A CANVAS COURSE?
+Home/Modules
+The home page of this course is set to Modules. Modules help you organize your course content in a logical, linear structure. Once a student clicks the first item in the Module, they will be guided through each item in order.
+For example, in the Module shown below, students will first read the “Crafting a Strong Resume: Format and Structure” Page, then submit to the Assignment “Activity: Write Your Own Resume Blurbs”, and finally, take a Quiz to assess their understanding of the material.
+Learn more about
+adding content
+or
+text headers
+to your modules
+.
+You can organize Modules by weeks, topics, units, or any structure that makes sense for your course structure.
+Syllabus
+You can use the
+built-in Syllabus page
+in your course to post a syllabus for students.
+Note:
+Providing a link to a downloadable and printable version syllabus file (such as a .docx) makes it easier for students to print a copy. Otherwise they’ll have to try to reformat and print from the Syllabus page, which isn't designed to be printable.
+Files
+By default, the
+Files
+section of this course is hidden from students to reduce visual clutter and direct them to Modules. You can use the Files section to store materials for the course but
+make sure to leave files unpublished if you do not want students to view them
+.
+If you choose to make the Files section visible, consider these helpful practices:
+To help students locate materials quickly and easily, use a folder scheme that matches the organization of the course or Modules.
+Use recognizable folder and file names.
+Be consistent with names and organization.
+Pages
+The information you're reading now is one example of how to use a Page in Canvas.
+Learn more about adding content with Pages
+. Consider beginning each Module with an overview page that frames the week, letting students know what to expect with clear tasks and due dates. You can even
+add Pages to students' To-Do lists
+to help them understand how components of the course fit into their week.
+Once you've created Pages, add them into the correct Module so students can find them easily and understand how they fit into their learning.
+Other content areas
+To learn how to use other Canvas features, see the documentation on IT Connect under
+Canvas Help for Instructors and Staff
+.
+Here are some Canvas tools to explore:
+Announcements
+Calendar
+Discussions
+Groups
+Quizzes
+Collaborations
+TIPS AND TOOLS
+Editing Course Navigation
+You
+control which items are included in the course navigation
+and in what order. We've
+already hidden some navigation items
+to simplify the course as you get started.
+Hidden items (and areas without any content) aren't visible to students and are marked with an icon of an eye with a line through it.
+You may choose to hide other navigation items to clearly direct students to use Modules as their starting point for navigating the course, rather than randomly searching through the course navigation.
+Student View
+Student View
+in
+Canvas gives you the opportunity to experience your course as students will see it. Use this view as you build your course to ensure the structure you create is clear, logical, and linear. When you’re finished using Student View, remember to click the
+Leave Student View
+button to resume working with your course in the Teacher role.
+Please note that once you use Student View, a “Test Student” will be permanently added to your gradebook. This will not affect grades or course data.

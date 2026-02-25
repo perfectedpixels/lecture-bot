@@ -1,0 +1,101 @@
+Course Page: technology-support-and-resources-share-with-students-5
+
+Technology Support and Resources (SHARE WITH STUDENTS)
+Ways to Get Help
+Basic Troubleshooting
+Often, simple problems such as display issues or buttons that don’t work can be addressed with the following steps:
+Refresh the page to make sure it loaded completely and correctly
+Close and restart your browser
+Try using a different web browser: if you were using Safari, try Chrome or Firefox
+Trying these quick steps first can save you time before sending in a help request.
+Report a Problem from within Canvas
+At the bottom of the left sidebar, click
+Help
+, and choose an option. From here you can quickly contact your instructor, search the Canvas guides for step-by-step instructions, or report a problem.
+If you have a technical problem:
+Select
+Report a problem
+, and complete the form.
+In the subject line, enter a short phrase to help identify your request.
+In the description field, describe the problem you encountered.
+Tip:
+Include useful details such as the page you were on, the link you clicked, and the expected behavior and actual results of your actions. Your description could also be a series of steps someone else could follow to replicate the problem.
+Select an option under “How is this affecting you?”
+Click
+Submit ticket
+. Your report will be forwarded to a specialist in Learning Technologies.
+Contact Technical Support
+For technical issues with Canvas, Panopto, Poll Everywhere, or Zoom:
+send an email to
+help@uw.edu
+visit Odegaard Library, Room 230
+call 206-221-5000 and select option 3;
+if leaving a voicemail, please provide your UW NetID and a description of the issue you are having
+Support hours are M-F 9:00am - 5:00pm.
+Technologies Used in This Course
+[
+Use this space to provide information about other tools or technologies you use in your course. Let students know how to access them and where to go for help. We've provided two examples below, delete or edit them as needed.
+]
+Example:
+ALEKS
+In this course, we will be using ALEKS, a researched-based, adaptive learning program. In ALEKS, you will work toward completing learning objectives, rather than traditional homework assignments. Consult the Module about ALEKS for detailed instructions on how to register and to review a getting started video.
+If you need help with ALEKS, contact the ALEKS technical support team directly.
+The ALEKS support staff are fast, efficient, clever, and are your best option should you encounter technical issues. To contact ALEKS support, fill out the webform at
+https://www.aleks.com/support/form/
+or call 800-258-2374.
+Example:
+MATLAB
+In this course, we will be using
+MATLAB as the primary environment for numerical computation.
+UW provides MATLAB licenses
+for all students at no charge. No previous coding experience is required. An overview of MATLAB's syntax, code structure and algorithms will be provided. If technical assistance for MATLAB is needed, please visit
+MathWorks Support
+for help.
+UW Supported Teaching Technologies
+Canvas
+View browser requirements for Canvas
+Canvas has
+guides to help students
+with all aspects of Canvas. If you're new to Canvas or just need a refresher on some topics, review the guides below:
+How do I set my Canvas notification preferences?
+How do I view instructor feedback on my assignment?
+How do I reply to a discussion?
+How do I embed an image in a discussion reply?
+How do I upload a video using the Rich Content Editor?
+How do I record audio and video using the Rich Content Editor?
+Visit the
+UW Resources
+link in the course navigation (if it's available) for help with Canvas and campus resources to assist with learning.
+Ally Tool for Accessibility (included in Canvas)
+If you are in need of an accessible version of any document in a Canvas course, or are interested in alternative formats for any documents in the course, please make use of the Ally tool available in Canvas. Look for this icon next to any linked files:
+When you click the icon, a popup menu will appear, where you can Preview the document, Download it, or choose Alternative formats:
+Clicking
+Alternative formats
+brings up the Ally popup menu, which provides you with options to download a tagged PDF, HTML, ePub, Electronic braille, or Audio version of the original file (available formats may vary depending on the original document):
+Panopto
+Some course video content may be delivered via the video platform Panopto.
+Check out Panopto
+’
+s viewing requirements
+to make sure you are able to watch any recordings in your course.
+Zoom
+To
+join a Zoom meeting
+you may need to
+sign in with your UW NetID
+.
+Poll Everywhere
+Poll Everywhere, a classroom response system (aka “clickers”), may be used in your course. If you have been registered for Poll Everywhere by an instructor, read more about
+setting up your account and logging in
+.  To
+respond to Poll Everywhere activities
+you will need to ensure that your default email address in Canvas is set to your UW email address.
+UW Google
+Google's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have
+activated UW Google
+and are signed in with your UW account.
+Microsoft O365
+Office 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.
+UW Technology Resources for Students
+STLP (Student Technology Loan Program)
+: borrow laptops, tablets, and audio/video equipment

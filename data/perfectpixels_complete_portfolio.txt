@@ -1,0 +1,757 @@
+JASON LEVINE - COMPLETE PORTFOLIO
+PERFECT PIXELS MEDIA GROUP & PROFESSIONAL WORK
+================================================
+
+SOURCE: https://perfectpixels.com
+COMPILED: February 2026
+
+NOTE: Perfect Pixels (PPMG) was Jason Levine's previous agency. Each project represents work Jason led as Creative Director or in other leadership roles for major clients.
+
+---
+
+HOMEPAGE - PROFESSIONAL SUMMARY
+================================
+
+DESIGNING IS KINDA MY THING
+
+I'm Jason Levine, an award winning design leader with a branding and interaction design background, based in Seattle.
+
+I head UX for the Applied AI Solutions division of AWS and am Senior Faculty at the University of Washington.
+
+MY EXPERTISE:
+• Focusing on product strategy, user research, UX design, and brand-centric solutions for all forms of interactive media
+• Building, leading, and mentoring design teams to produce quality service and output
+• My portfolio includes Amazon, GM, Microsoft, T-Mobile, Premera Blue Cross, Stanford University, ABC Television, Trulia, American Express, Toyota, Indeed, and Match.com
+
+CONTACT:
+Phone: 206.235.1635
+Email: knockknock@perfectpixels.com
+
+---
+
+AWS - HEAD OF UX FOR EMERGENT TECHNOLOGIES
+===========================================
+
+ROLE: Head of UX for AWS Emergent Technologies
+
+I oversee the design and research studios for AWS' Emergent Technologies portfolio, covering solutions in industries like Automotive, Aerospace, Health AI, Life Sciences & Connected Care, IoT Smart Home, etc. We leverage generative AI, AR/VR, Digital Twins, and other technologies.
+
+I oversee teams responsible for all touchpoints of customer experiences including knowledge management, crafting and pitching product strategies, LLM-based solutions, driving alignment on product experience solutions, north-star visions, and customer engagement decisions with executives and stakeholders across AWS senior leadership.
+
+KEY ACHIEVEMENTS:
+• Built a large high-performing team of UX Designers, Researchers, Technologists, and Managers in 8 locations
+• Launched 70+ products across business groups, supporting 3 VPs and 5 GMs with ~$2.4B in attributable revenue and averaging growth of 28% YoY
+• Established a customer health program leveraged across AWS, tracking ease of use metrics, leading to doubling the efficiency of our core funnels, and a 10-point CSAT improvement YoY to averaging >80%
+• +330M daily cloud connected devices, 100B+ daily transactions, and +1 Petabyte of data per day
+• Partners include Philips, VW, Toyota, Mercedes Benz, GE Health, Verizon, Samsung, LG, Deutsche Telekom, Bayer, NVIDIA, and Airbus, as well as industry startups like iRobot, Wyze, Rivian, and Peloton
+
+IMAGES: Portfolio includes visual work samples
+
+---
+
+AMAZON.COM - UX LEAD FOR RECOMMERCE SERVICES
+=============================================
+
+ROLE: UX Lead for Amazon Recommerce Services
+DURATION: March 2014 to June 2018
+
+Led the branding, user experience, user research and visual design for four Amazon global sub-brands, totaling +$800M GMS. As a key stakeholder in all product planning and development, my role was to lead the UX strategy, team management, resource planning and oversight of all design deliverables for all customer-facing efforts on desktop.
+
+BRANDS MANAGED:
+• Amazon Trade-In
+• Rentals
+• Warehouse Deals
+• Liquidations
+
+MISSION: Reduce landfills waste of 30M in customer returns from +14% to 2.5%
+
+RESPONSIBILITIES:
+• Knowledge management
+• Managing work queues
+• Crafting and pitching design strategies
+• Driving alignment around design and product decisions
+• Development of other designers
+• Partnering with peers, stakeholders, and owners across Amazon
+
+KEY ACHIEVEMENTS:
+• Trade-In increased revenue +50%, increased submission by over 300%, grew customer base over 60%, and improved retention 15%
+• Rentals market share grew 160%, and average basket per customer size by over 70%
+• Warehouse Deals processing facilities saved $2M per year from design improvements
+• Filed a pending patent March 2018
+
+IMAGES: Slideshow of Amazon Recommerce work available
+
+---
+
+INDEED - DIRECTOR OF UX
+=======================
+
+ROLE: Director of UX
+
+Led a team of designers, researchers and design technologists with 5 direct reports re-imagining Indeed's Profile experience for its 250 million job seekers.
+
+KEY ACHIEVEMENTS:
+• Launched 55 experiments, leading to 6.5% growth in qualified user-base
+• Introduced processes and mechanisms to optimize individual skill sets, building product requirements, review cycles, resulting in decreasing time to launch and improving overall deliverable quality
+• Initiated, scoped and led a site-wide redesign, launched Q3 2019
+
+DELIVERABLES:
+• Profile prototype (video demonstration available)
+
+IMAGES: Profile prototype video and design samples
+
+---
+
+STANFORD UNIVERSITY - DIGITAL TRANSFORMATION PROJECTS
+======================================================
+
+PROJECT 1: PROFESSORIAL APPOINTMENT TOOL
+
+CHALLENGE:
+Stanford University needed a tool to simplify the process of professorial appointments. Traditionally, it required a tedious series of back-and-forth communications via printed forms, sticky notes and emails between administration staff and leadership to approve appointments.
+
+SOLUTION:
+The assignment was to create a seamless workflow via an online form. The solution not only created a simplified approval process, but also allowed users to collaborate on completing the needed information.
+
+DELIVERABLES:
+• Sitemap
+• User flows
+• Responsive Design Solutions
+• Wireframes
+• Usability Testing
+• Website Design
+
+PROJECT 2: AXESS PORTAL
+
+The following project awarded by Stanford was to re-design the central extranet portal, used by all students, staff and faculty to support access to class enrollment and schedules, self-service payments, employee and student benefits services, campus communications, etc. Tool was designed to be responsive and able to support tablets, phones and computers.
+
+IMAGES: Design samples and wireframes available
+
+---
+
+MICROSOFT - CREATIVE DIRECTOR FOR MULTIPLE BRANDS
+==================================================
+
+ROLE: Creative Director for Perfect Pixels and Ramp Group
+
+Led the effort in creating design, branding and information architecture services for several of Microsoft's brands including Windows Vista, Technet, MSN Spaces, Windows Mobile, Customer Experience Group, MS Learning and Azure.
+
+APPROACH:
+Hired as a design lead, I have led teams to provide innovative and out-of-box thinking for internal groups to help their various initiatives. Our approach is to work collaboratively and in-house as often as possible to make sure that we are as close as possible to providing on-target deliveries. Projects regularly required an iterative process of wireframe reviews to allow for multiple Agile sprints while coordinating with Microsoft's internal team leads.
+
+SERVICES PROVIDED:
+• Information architecture
+• User research and usability studies
+• Clickable prototype production
+• Creative direction
+• Interactive strategy
+• Responsive design solutions
+• UX Design and wireframes
+
+SAMPLE WORK: CPE sitemap + wireframe v2.07 available
+
+IMAGES: Wireframes and design documentation
+
+---
+
+TRULIA - SEO AND BRAND DESIGN
+==============================
+
+PROJECT: SEO HITS THE MARK
+
+Trulia is a real estate aggregate site that combines Google Maps with search results. The User Interface needed to be built so search engines like Yahoo! And Google could spider through the entire inventory of properties. This was so effective that Trulia became the #1 real estate Google Search result immediately after launch.
+
+BRAND DESIGN:
+The Trulia mark was designed with extensibility in mind. It is used in the map interface, as a highlighted feature of the UI and as an integral part of the identity system.
+
+KEY ACHIEVEMENT:
+Trulia became #1 real estate Google Search result immediately after launch
+
+IMAGES: Trulia brand mark and interface designs
+
+---
+
+CLASSMATES.COM - BRAND REDESIGN AND UX IMPROVEMENT
+===================================================
+
+PROJECT: BRAND SIGNIFICANCE - COMMUNITY AND NOSTALGIA
+
+CHALLENGE:
+The challenge was to convey meaning to an undermined legacy brand. The solution needed to be distinguishable and resonate with its 42 million customers while not risking $70 million in user generated revenue.
+
+SOLUTION:
+The new design focused strictly on school and nostalgia, while introducing a more contemporary and extensible system.
+
+ROLE:
+Hired in 2004 to improve the user experience and brand, I led a team of 10 to increase consumer awareness with a new, distinguishable system of interface design, information architecture, branding, promotional material, icons, buttons, and graphics.
+
+KEY ACHIEVEMENTS:
+• 140% increase in registrations
+• 50% increase on per-user time spent on the site
+• 30% increase in user generated content
+• 25% increase in conversions to paid membership
+• 20% increase in opens via email click-through
+
+The consistent use of these graphic systems significantly increased the value and user engagement on the site.
+
+IMAGES: Brand redesign samples and interface elements
+
+---
+
+VIRGIN TRAVEL GROUP - CREATIVE DIRECTOR
+========================================
+
+PROJECT: BRAND SIGNIFICANCE - AUDIENCE LOYALTY
+
+ROLE: Creative Director for Virgin's Travel Group
+DURATION: 2002 to 2004 (UK)
+
+I was tasked to lead a team of web developers, writers and designers. Virgin Travelstore's core audience is loyal to the Virgin brand and expects Virgin's core values to be represented.
+
+APPROACH:
+All aspects of Virgin Travelstore were overhauled to emphasize value, ease-of-use, and edginess. Virgin Travelstore tripled its monthly sales by increasing the opportunities for cross-selling and reducing the steps required to purchase.
+
+FEATURES:
+Many advanced features were built into the various interfaces of Virgin Travelstore's sections. All functionality, production, design, and production decisions were based on business needs. The Flights section functionality and layout were designed to streamline the searching and selecting process. The Holidays section was designed to provide resort information to support the user's sale decision.
+
+KEY ACHIEVEMENTS:
+• Virgin Travelstore's sales increased three-fold
+• Went from 10th in the UK to 5th top online travel site
+
+IMAGES: Virgin Travelstore interface designs
+
+---
+
+TOYOTA - COROLLA SOCIAL DRIVER CAMPAIGN
+========================================
+
+PROJECT: FUN AND PLAYFUL
+
+In support of Toyota Corolla's Social Driver Campaign, I led an effort for a co-branding project contracted by All Recipes to create a kicky party planner and sweepstakes mini-website.
+
+ROLE: Creative Director for Perfect Pixels
+
+SERVICES PROVIDED:
+• Information architecture
+• Design
+• Illustration
+• Development for the initial launch and 3 subsequent site refreshes
+
+FEATURES:
+We successfully tied Toyota Corolla's print ad campaign with the online experience and gave their representing agency an excellent resell opportunity with the Flash party-planner application. The robust experience included many online-community functionalities such as:
+• Blogging
+• Sharing to mobile phone
+• Automated sweepstakes entries
+• Photo-sharing
+• User-generated content
+
+IMAGES: Toyota Corolla campaign designs and party planner interface
+
+---
+
+CAREOREGON - BRANDING + WEB DESIGN
+===================================
+
+PROJECT: Medicare and Medicaid Provider Website Redesign
+
+CareOregon is the largest Medicare and Medicaid provider in the state of Oregon. The redesign effort was to support a re-invisioning of the brand and the website.
+
+PROCESS:
+• User surveys
+• Usability tests
+• Creating user personas
+• Brand exploration
+• Editorial
+• Photography selection
+• Content mapping
+• Wireframing
+• Design
+
+GOAL:
+The design was targeting to improve the level of user engagement and efficiency in users reaching their intended content.
+
+KEY ACHIEVEMENTS (comparing month since launch vs. previous year):
+• +34.88% improvement in new visits
+• -34.44% reduction in bounce rate
+• +34.18% improvement in time spent on the site
+• +10.46% improvement on the number of pages viewed per user
+• +38.36% improvement on visitors sourced by search engines
+• +35.77% on new visitors
+• 0.02% of users relied on search (65th most visited page was search results). Previous: 10.1%, the 9th most visited page
+
+PRESENTATION: SlideShare presentation with voice over available
+
+IMAGES: CareOregon brand and website designs
+
+---
+
+WASHINGTON STATE EMPLOYMENT SECURITY DEPARTMENT
+================================================
+
+PROJECT: Complete Re-architecture and Redesign
+
+ROLE: Creative Director at Ramp Group
+
+I was tasked to lead a complete re-architecture and redesign of the Employment Security Department's employment and economic information website. The site contains thousands of publications, reports and presentations which required a complete overhaul.
+
+APPROACH:
+We accomplished this task by focusing on a persona-based, task oriented navigation structure.
+
+KEY ACHIEVEMENTS:
+• Usability testing showed a two-fold improvement on success rates and time to complete tasks
+• The ESD redesign won Best Government Site by eRepublic in 2012
+
+DELIVERABLES:
+• User research
+• Content strategy
+• Site mapping
+• Wireframing
+• Usability testing
+• Interface design
+• Heuristic analysis
+
+SAMPLE WORK: ESD Wireframes available with voice-over walk-through
+
+IMAGES: Wireframes and design documentation with audio presentation
+
+---
+
+SEALASKA - NATIVE AMERICAN LAND CORPORATION BRANDING
+=====================================================
+
+PROJECT: Brand Strategy and Cultural Preservation
+
+Sealaska is the largest Native American land corporation in Alaska, supporting the three local tribal groups of the area.
+
+CHALLENGE:
+Sealaska's challenges, in many ways, are not unique - preserving a cultural significance to your heritage while looking to grow and be relevant. What they needed was a brand strategy to communicate their vision.
+
+SOLUTION:
+Teaming with Doris Quan of Mother of Pearl, we introduced a brand and direction to re-imagine their vision as a central force for sustaining a vibrant tribal culture within their community.
+
+DELIVERABLES:
+• Heuristics Analysis
+• Competitive Audit
+• User Personas
+• Brand and Content Strategy
+• Photo Selection and Guidelines
+
+PRESENTATION: Brand Presentation available
+
+IMAGES: Brand strategy presentation materials
+
+---
+
+SEATTLE UNIVERSITY - REBRANDING THE HUMANITIES SCHOOL
+======================================================
+
+PROJECT: Matteo Ricci College Redesign and Rebrand
+
+Redesign, rebrand and rework of the Matteo Ricci College, the Humanities School for Seattle University.
+
+PROCESS:
+Working with Mother of Pearl, we conducted interviews with faculty and students to determine the best brand positioning for the college. Upon presenting a re-invisioned brand strategy, we then worked with the College Dean and SU's Marketing Department to execute a new website and brochure collateral.
+
+FINAL DELIVERABLES:
+• Renaming
+• Tagline
+• Logo
+• User Personas
+• Heuristics Analysis
+• Sitemap & Wireframes
+• Photo Library
+• Website Designs
+• Brochure Designs
+
+SAMPLE WORK: Project samples available
+
+IMAGES: Brand materials, website designs, and brochure designs
+
+---
+
+JEWISH FAMILY SERVICE - CIRCLE OF GIVING
+=========================================
+
+PROJECT: Website Redesign for Community Non-Profit
+
+Jewish Family Service of Seattle has deep roots in the Puget Sound area with over 117 years of commitment to the community in the North West. JFS has grown from an agency that provided support to jewish immigrants to a non-profit organization that services many diverse populations in the Seattle area.
+
+CHALLENGE:
+JFS' website was not adequately presenting their mission, scope, and strategy.
+
+SOLUTION:
+Our solution was to make the imagery and messaging reflect the community connections JFS support provides.
+
+KEY ACHIEVEMENTS (within first month of launch):
+Through our collaborative efforts, JFS's understanding of their audience, and PPMG's expertise:
+• Average user time spent on the site increased 81%
+• The bounce rate decreased 22%
+• Page views increased 54%
+
+IMAGES: JFS website designs showing community imagery
+
+---
+
+FLUTTER - BRAND SIGNIFICANCE BUILT FOR SPEED
+=============================================
+
+PROJECT: Chinese Market Expansion
+
+Flutter.com's move to support a Chinese version required working with a series of focus groups and translators to effectively communicate the concept of person-to-person betting to a foreign audience.
+
+CHALLENGE:
+The original version was a tedious interface, requiring the user to step through six separate pages to complete a bet.
+
+SOLUTION:
+The new interface limited the steps to three on a single screen. Another key change was to provide a separate view for novice and experienced users.
+
+KEY ACHIEVEMENTS:
+The new design dramatically increased market share from 8% to over 30% in less than three months.
+
+IMAGES: Flutter interface redesign samples
+
+---
+
+GETTY IMAGES - BRAND DEFINITION VISUAL VIBRANCY
+================================================
+
+PROJECT: Email Marketing Communications
+
+Getty Images launched a new brand and needed email marketing communications to be branded in the new style.
+
+CHALLENGE:
+At the time, there was no style guide in place yet and only a rough direction to work from.
+
+SOLUTION:
+Perfect Pixels created a punchy, vibrant series of email designs that evoked the new brand system.
+
+IMAGES: Getty Images email marketing designs
+
+---
+
+SNAP VILLAGE - BRAND SIGNIFICANCE GET FRESH
+============================================
+
+PROJECT: Corbis Web 2.0 Brand Launch
+
+Corbis entered into the Web 2.0 space with its SnapVillage brand.
+
+ROLE:
+Working in conjunction with another agency, PPMG created the distinctive mark that speaks directly to the core audience, photography enthusiasts.
+
+DESIGN APPROACH:
+The logotype and colors were selected to provide the punch that Corbis was looking for in the brand. We used warm colors and high contrast along with a sophisticated use of white space to fulfill the brand ethos – freshness and pop.
+
+ADDITIONAL SERVICES:
+We also consulted and provided strategic direction for interface design, user flow and information architecture.
+
+IMAGES: SnapVillage brand mark and interface designs
+
+---
+
+TOWNSHIP 110 - TREASURING NATURE
+=================================
+
+PROJECT: Exurban Retirement/Second Home Living Branding
+
+Township110 offers exurban retirement/second home living in rural areas throughout the United States.
+
+BRANDING:
+Perfect Pixels worked closely with the company's executive team to create a logo and tagline that reflected Township110's integrity and environmental policies.
+
+TAGLINE STRATEGY:
+The tagline speaks to the outdoor enthusiast on a visceral level. The intention was to create a tagline that's tone could apply to various demographics.
+
+WEBSITE APPROACH:
+This site needed to speak to the target audience and showcase multiple land developments while furthering the brand. Perfect Pixels chose to incorporate Flash animation elements to immediately introduce the user to the beauty of the homesites with an image rotator and a flipbook. This site gives the user an overview of Township110's land offerings and gives them the option to research further by going to the specific development itself, or to a featured homesite.
+
+IMAGES: Township 110 brand materials and website designs
+
+---
+
+WILD TANGENT - DYNAMIC EXCITEMENT
+==================================
+
+PROJECT: Casual Game Company Homepage
+
+Wild Tangent, a casual game company looked to PPMG to create a dynamic, exciting, templatized homepage that could present different views based on the users profile and the featured games that WildTangent wanted to promote.
+
+SOLUTION:
+We created a large featured game spot that extends beyond the frame of the page. We used highly saturated color and movements to represent the excitement of online gaming.
+
+IMAGES: Wild Tangent homepage designs
+
+---
+
+INNER AGENCY - THE SECRET SOURCE
+=================================
+
+PROJECT: In-house Design Team Brand Strategy
+
+I led this in-house design team to extend their capabilities and reach with a brand strategy devised to emote creativity.
+
+BRAND CONCEPT:
+The "secret agent" motif reflected the light-hearted, casual ethos of the agency. This brand stance allowed them to extend their reach past the in-house model and into the competitive agency world with a fresh look and feel.
+
+IMAGES: Inner Agency brand materials
+
+---
+
+ALL RECIPES - BRAND EXTENSION
+==============================
+
+PROJECT: Ongoing Partnership for Applications and Monetization
+
+Allrecipes.com regularly leans on PPMG for concepting, strategy, information architecture, and Flash based application design and execution.
+
+APPROACH:
+Our collaborative philosophy has yielded several applications that Allrecipes.com has been able to monetize through their partners. PPMG has successfully extended the Allrecipes.com brand to fit into their website while at the same time presenting their partners' brands to great success.
+
+ACHIEVEMENT:
+We have continually met their business goals and stayed true to their brand ethos.
+
+IMAGES: All Recipes application designs and brand extensions
+
+---
+
+PROFESSIONAL PHILOSOPHY & APPROACH
+===================================
+
+From the blog post "Working in a Virtual Team (Part One: Remote Client Management)":
+
+Jason Levine's approach to project management and client relationships emphasizes:
+
+PSYCHOLOGY-DRIVEN MANAGEMENT:
+• Pay attention to clients' needs and comfort levels
+• Know the strengths and weaknesses of resources and assign appropriately
+• Recognize how often or infrequently to touch the client and in what way
+• Keep project management feelers out and pay attention to intuition
+
+EMOTIONAL INTELLIGENCE:
+"In fact, your emotional reactions become your biggest asset when managing virtually. The more removed the client, the more you must rely on your human instincts."
+
+CLIENT-CENTRIC APPROACH:
+• No one-size-fits all approach to remote project management
+• Must be agile, responsive, and pro-active
+• Change with the project as it changes to the benefit and with the buy-in of the client
+• Keep the clients' best interests at the forefront of interactions, recommendations, and deliverables
+• The ultimate success of the project – serving the financial, business, emotional, and strategic needs of the client – should be the motivating force
+
+TOOLS & COLLABORATION:
+• Conference phone lines
+• Collaboration tools (Concept Share)
+• Project management (Base Camp)
+• Screen sharing (Yuuguu.com)
+• Video conferencing & international calls (Skype)
+
+PHILOSOPHY:
+"This is not altruism but good business."
+
+---
+
+PERFECT PIXELS MEDIA GROUP - COMPANY PHILOSOPHY
+================================================
+
+Perfect Pixels Media Group creates and conveys digital brand messaging within the synergistic framework of diverse and multiple brand communication platforms. We integrate the on-line brand experience as a simultaneous and independent yet interconnected dimension of brand gestalt.
+
+At PPMG, we practice an extended user experience through digital media: expressing itself through design, communication, and information architecture.
+
+---
+
+CORE COMPETENCIES DEMONSTRATED ACROSS PROJECTS
+===============================================
+
+LEADERSHIP & MANAGEMENT:
+• Team building and leadership (teams of 5-10+ designers, researchers, technologists)
+• Resource planning and allocation
+• Cross-functional collaboration with executives and stakeholders
+• Mentoring and developing other designers
+• Remote/virtual team management across multiple locations
+
+UX & DESIGN:
+• User experience design
+• User research and usability testing
+• Information architecture
+• Interaction design
+• Visual design and branding
+• Responsive design solutions
+• Wireframing and prototyping
+• Design systems and style guides
+
+STRATEGY:
+• Product strategy
+• Brand strategy and positioning
+• Content strategy
+• UX strategy and vision
+• Customer engagement strategy
+• LLM-based solutions
+
+RESEARCH & TESTING:
+• User personas
+• Heuristic analysis
+• Competitive audits
+• Usability testing
+• A/B testing and experimentation
+• Customer health programs
+• Ease of use metrics
+
+BUSINESS IMPACT:
+• Revenue growth (demonstrated across multiple projects)
+• Conversion optimization
+• User engagement improvement
+• Customer acquisition and retention
+• Cost savings through design improvements
+• SEO optimization
+
+TECHNICAL:
+• Agile/Sprint methodology
+• Clickable prototypes
+• Flash applications
+• Responsive web design
+• Mobile design (tablets, phones)
+• AR/VR and Digital Twins
+• Generative AI applications
+
+---
+
+AWARDS & RECOGNITION
+=====================
+
+• Award-winning design leader
+• Best Government Site by eRepublic (2012) - Washington State ESD project
+• Patent filed (March 2018) - Amazon Recommerce work
+
+---
+
+SUMMARY OF QUANTIFIABLE ACHIEVEMENTS
+=====================================
+
+AMAZON RECOMMERCE:
+• +$800M GMS across four brands
+• Trade-In: +50% revenue, +300% submissions, +60% customer base, +15% retention
+• Rentals: +160% market share, +70% average basket size
+• $2M annual savings in Warehouse Deals facilities
+
+AWS EMERGENT TECHNOLOGIES:
+• 70+ products launched
+• ~$2.4B in attributable revenue
+• 28% YoY average growth
+• 10-point CSAT improvement to >80%
+• 330M+ daily cloud connected devices
+• 100B+ daily transactions
+• 1+ Petabyte of data per day
+
+INDEED:
+• 55 experiments launched
+• 6.5% growth in qualified user-base
+• Site-wide redesign launched Q3 2019
+
+CLASSMATES.COM:
+• 140% increase in registrations
+• 50% increase in time spent on site
+• 30% increase in user generated content
+• 25% increase in paid membership conversions
+• 20% increase in email click-through
+
+VIRGIN TRAVELSTORE:
+• 3x increase in monthly sales
+• Moved from 10th to 5th top online travel site in UK
+
+FLUTTER:
+• Market share increased from 8% to 30% in under 3 months
+• Reduced bet completion from 6 pages to 3 steps on single screen
+
+JEWISH FAMILY SERVICE:
+• 81% increase in average user time on site
+• 22% decrease in bounce rate
+• 54% increase in page views
+
+CAREOREGON:
+• 34.88% improvement in new visits
+• 34.44% reduction in bounce rate
+• 34.18% improvement in time spent on site
+• 10.46% improvement in pages viewed per user
+• 38.36% improvement in search engine sourced visitors
+
+WASHINGTON STATE ESD:
+• 2x improvement in task success rates and completion time
+• Won Best Government Site award
+
+---
+
+KEY PARTNERS & CLIENTS
+=======================
+
+TECHNOLOGY:
+Amazon, AWS, Microsoft, Indeed, Getty Images, Wild Tangent, Flutter
+
+AUTOMOTIVE:
+Toyota, VW, Mercedes Benz, Rivian
+
+HEALTHCARE:
+CareOregon, Philips, GE Health, Bayer
+
+EDUCATION:
+Stanford University, Seattle University, University of Washington (Senior Faculty)
+
+TRAVEL & HOSPITALITY:
+Virgin Travel Group, Trulia, All Recipes
+
+TELECOMMUNICATIONS & IOT:
+Verizon, Samsung, LG, Deutsche Telekom
+
+CONSUMER:
+Classmates.com, Township 110, SnapVillage (Corbis)
+
+AEROSPACE & DEFENSE:
+Airbus, NVIDIA
+
+NON-PROFIT & GOVERNMENT:
+Jewish Family Service, Washington State Employment Security Department, Sealaska
+
+STARTUPS:
+iRobot, Wyze, Peloton
+
+---
+
+LOCATION & CONTACT
+==================
+
+Based in: Seattle, Washington
+Phone: 206.235.1635
+Email: knockknock@perfectpixels.com
+
+CURRENT ROLES:
+• Head of UX - Applied AI Solutions Division, AWS
+• Senior Faculty - University of Washington
+
+---
+
+IMAGE REFERENCES BY PROJECT
+============================
+
+Note: The following projects include visual portfolio samples (slideshows, images, videos, presentations):
+
+• Amazon.com - Slideshow of Recommerce work
+• AWS - Portfolio visual samples
+• Indeed - Profile prototype video
+• Stanford University - Design samples and wireframes
+• Microsoft - Wireframes and design documentation (CPE sitemap + wireframe v2.07)
+• Trulia - Brand mark and interface designs
+• Classmates.com - Brand redesign samples and interface elements
+• Virgin Travel Group - Interface designs
+• Toyota - Campaign designs and party planner interface
+• CareOregon - Brand and website designs, SlideShare presentation with voice over
+• Washington State ESD - Wireframes with voice-over walk-through
+• Sealaska - Brand strategy presentation materials
+• Seattle University - Brand materials, website designs, brochure designs
+• Jewish Family Service - Website designs with community imagery
+• Flutter - Interface redesign samples
+• Getty Images - Email marketing designs
+• Snap Village - Brand mark and interface designs
+• Township 110 - Brand materials and website designs with Flash animation
+• Wild Tangent - Homepage designs
+• Inner Agency - Brand materials
+• All Recipes - Application designs and brand extensions
+
+All visual materials demonstrate Jason Levine's expertise in UX design, branding, information architecture, and visual design across diverse industries and project types.

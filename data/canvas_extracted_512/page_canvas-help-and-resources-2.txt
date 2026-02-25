@@ -1,0 +1,48 @@
+Course Page: canvas-help-and-resources-2
+
+Canvas Help and Resources-2
+UW Resources in the Course Navigation
+The
+UW Resources link
+in the Canvas course navigation provides quick links to helpful tools in your course along with tri-campus teaching resources such as guides, workshops, and self-paced training.
+Your students can also see the link, but when
+they
+click they're provided with student-centered help, Canvas assistance, and campus resources.
+Canvas Guides
+Canvas provides extensive support
+specifically for instructors
+. This includes
+guides organized around topics and frequently asked questions
+. If you're new to Canvas or just need a refresher on some topics, review the guides below:
+What are the browser requirements for Canvas?
+How do I set my Canvas notification preferences?
+How do I use the Canvas Dashboard?
+How do I add an announcement in a course?
+How do I copy content from another Canvas course using the Course Import tool?
+Canvas also has
+guides to help students
+with all aspects of Canvas. This information is provided in the
+Technology Support and Resources (FOR STUDENTS)
+page in this course, along with direct links to guides that can help them with the basics in your course.
+Canvas Help
+For quick access to Canvas and UW resources for teaching in Canvas, click
+Help
+in the course navigation.
+If you experience an issue while using Canvas, click
+Help
+and choose
+Report a Problem
+. This will open a request to
+help@uw.edu
+with information about the page you're on, which can help Learning Technologies support staff respond more efficiently to your issue.
+Contact Learning Technologies
+If you need assistance with your course, UW Learning Technologies can be reached through a variety of methods:
+Email your question to
+help@uw.edu
+Click Help in the left sidebar of the Canvas interface and select
+Report a Problem
+Join a synchronous session
+hosted by Learning Technologies staff, such as office hours or a workshop
+Schedule a consultation by emailing
+help@uw.edu
+for a Zoom meeting appointment

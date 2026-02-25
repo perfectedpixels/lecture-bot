@@ -1,0 +1,301 @@
+{
+  "Information Architecture": {
+    "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems.",
+    "key_principles": [
+      "Organization schemes (hierarchical, sequential, matrix)",
+      "Labeling systems that are clear and consistent",
+      "Navigation systems that support wayfinding",
+      "Search systems for content discovery",
+      "Content modeling and taxonomy development"
+    ],
+    "related_affinity_clusters": ["ia_fundamentals", "navigation_design", "content_strategy"],
+    "keywords": ["site map", "navigation", "taxonomy", "content structure", "findability", "wireframes", "user flows", "information hierarchy"],
+    "example_deliverables": ["site maps", "navigation diagrams", "content models", "wireframes", "user flow diagrams"],
+    "portfolio_examples": ["washington-state-employment-security-department", "careoregon", "classmates-com", "trulia"]
+  },
+  
+  "User Research Methods": {
+    "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods.",
+    "key_principles": [
+      "Qualitative vs quantitative research approaches",
+      "Generative research (discover needs) vs evaluative research (test solutions)",
+      "Contextual inquiry and ethnographic methods",
+      "Triangulation of data from multiple sources",
+      "Ethical research practices and informed consent"
+    ],
+    "related_affinity_clusters": ["research_methods", "user_testing", "personas"],
+    "keywords": ["interviews", "surveys", "observation", "usability testing", "personas", "user research", "empathy mapping", "journey mapping"],
+    "example_deliverables": ["research plans", "interview guides", "personas", "journey maps", "research reports", "empathy maps"],
+    "portfolio_examples": ["amazon", "aws", "indeed", "toyota", "careoregon"]
+  },
+  
+  "Interface Design": {
+    "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts.",
+    "key_principles": [
+      "Visual hierarchy and information density",
+      "Consistency in UI patterns and components",
+      "Affordances and signifiers for interaction",
+      "Responsive and adaptive design",
+      "Accessibility and inclusive design"
+    ],
+    "related_affinity_clusters": ["ui_design", "visual_design", "interaction_design"],
+    "keywords": ["user interface", "UI design", "screens", "layouts", "components", "responsive design", "interface", "visual design"],
+    "example_deliverables": ["high-fidelity mockups", "UI specifications", "interactive prototypes", "design comps"],
+    "portfolio_examples": ["indeed", "flutter", "wild-tangent", "microsoft", "classmates-com"]
+  },
+  
+  "Usability Testing": {
+    "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance.",
+    "key_principles": [
+      "Task-based testing with realistic scenarios",
+      "Think-aloud protocol for insight into user thinking",
+      "Moderated vs unmoderated testing",
+      "Quantitative metrics (success rate, time, errors)",
+      "Iterative testing throughout design process"
+    ],
+    "related_affinity_clusters": ["user_testing", "evaluation", "iteration"],
+    "keywords": ["usability testing", "user testing", "testing", "evaluation", "iteration", "feedback"],
+    "example_deliverables": ["test plans", "test scripts", "findings reports", "recommendations", "video recordings"],
+    "portfolio_examples": ["careoregon", "washington-state-employment-security-department", "trulia", "flutter"]
+  },
+  
+  "Persona Definition": {
+    "definition": "Research-based archetypal representations of user segments that embody goals, behaviors, and pain points to guide design decisions.",
+    "key_principles": [
+      "Based on real user research data, not assumptions",
+      "Focus on goals, behaviors, and contexts",
+      "Include relevant demographics and psychographics",
+      "Use narrative format to build empathy",
+      "Keep focused and actionable (3-5 personas typical)"
+    ],
+    "related_affinity_clusters": ["personas", "user_research", "empathy"],
+    "keywords": ["personas", "user personas", "persona definition", "empathy mapping", "user profiles"],
+    "example_deliverables": ["persona documents", "persona posters", "empathy maps", "user profiles"],
+    "portfolio_examples": ["amazon", "aws", "toyota", "trulia", "careoregon"]
+  },
+  
+  "Branding & Identity": {
+    "definition": "The strategic development of visual and verbal identity systems that communicate an organization's values, personality, and positioning.",
+    "key_principles": [
+      "Brand strategy aligned with business goals",
+      "Visual identity (logo, color, typography, imagery)",
+      "Verbal identity (voice, tone, messaging)",
+      "Brand guidelines and systems thinking",
+      "Consistency across touchpoints"
+    ],
+    "related_affinity_clusters": ["branding", "visual_identity", "brand_strategy"],
+    "keywords": ["branding", "brand identity", "logo design", "visual identity", "brand strategy", "brand presentation"],
+    "example_deliverables": ["brand strategy documents", "logo designs", "brand guidelines", "style guides", "brand presentations"],
+    "portfolio_examples": ["sealaska", "seattle-university", "snap-village", "township-110", "inner-agency"]
+  },
+  
+  "Design Systems": {
+    "definition": "Comprehensive collections of reusable components, patterns, and guidelines that ensure consistency and efficiency in product design.",
+    "key_principles": [
+      "Component-based architecture",
+      "Design tokens for scalable styling",
+      "Documentation and usage guidelines",
+      "Governance and contribution models",
+      "Accessibility built into components"
+    ],
+    "related_affinity_clusters": ["design_systems", "components", "patterns"],
+    "keywords": ["design system", "component library", "design patterns", "UI components", "style guide"],
+    "example_deliverables": ["component libraries", "pattern libraries", "design tokens", "documentation sites"],
+    "portfolio_examples": ["amazon", "aws", "microsoft"]
+  },
+  
+  "Prototyping": {
+    "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas.",
+    "key_principles": [
+      "Match fidelity to research questions",
+      "Low-fidelity for early concept testing",
+      "High-fidelity for detailed interaction testing",
+      "Interactive prototypes for user testing",
+      "Rapid iteration based on feedback"
+    ],
+    "related_affinity_clusters": ["prototyping", "wireframing", "iteration"],
+    "keywords": ["prototype", "wireframes", "mockups", "interactive prototype", "low-fidelity", "high-fidelity"],
+    "example_deliverables": ["paper prototypes", "clickable prototypes", "interactive mockups", "coded prototypes"],
+    "portfolio_examples": ["flutter", "virgin-travel-group", "washington-state-employment-security-department"]
+  },
+  
+  "Journey Mapping": {
+    "definition": "Visual representations of user experiences over time, showing touchpoints, emotions, pain points, and opportunities across the customer journey.",
+    "key_principles": [
+      "Based on user research and data",
+      "Shows emotional journey alongside actions",
+      "Identifies pain points and opportunities",
+      "Includes multiple touchpoints and channels",
+      "Collaborative creation with stakeholders"
+    ],
+    "related_affinity_clusters": ["journey_mapping", "user_experience", "service_design"],
+    "keywords": ["journey map", "customer journey", "user journey", "experience map", "touchpoints"],
+    "example_deliverables": ["journey maps", "experience maps", "service blueprints", "touchpoint matrices"],
+    "portfolio_examples": ["toyota", "amazon", "aws"]
+  },
+  
+  "Visual Design": {
+    "definition": "The aesthetic and communicative aspects of design including typography, color, imagery, and composition to create engaging and effective interfaces.",
+    "key_principles": [
+      "Visual hierarchy and focal points",
+      "Color theory and psychology",
+      "Typography and readability",
+      "Grid systems and composition",
+      "Consistency and brand alignment"
+    ],
+    "related_affinity_clusters": ["visual_design", "aesthetics", "branding"],
+    "keywords": ["visual design", "typography", "color", "imagery", "composition", "aesthetics"],
+    "example_deliverables": ["visual comps", "style tiles", "mood boards", "design specifications"],
+    "portfolio_examples": ["getty-images", "inner-agency", "seattle-university"]
+  },
+  
+  "Interaction Design": {
+    "definition": "The design of interactive behaviors and feedback in digital products, focusing on how users accomplish tasks and receive system responses.",
+    "key_principles": [
+      "Interaction patterns and conventions",
+      "Feedback and system status visibility",
+      "Error prevention and recovery",
+      "Micro-interactions and animations",
+      "Task flows and user workflows"
+    ],
+    "related_affinity_clusters": ["interaction_design", "ux_patterns", "workflows"],
+    "keywords": ["interaction design", "user flows", "workflows", "interactions", "micro-interactions"],
+    "example_deliverables": ["interaction specifications", "flow diagrams", "animation specs", "state diagrams"],
+    "portfolio_examples": ["flutter", "indeed", "microsoft"]
+  },
+  
+  "Accessibility": {
+    "definition": "Designing products that are usable by people with diverse abilities, following WCAG guidelines and inclusive design principles.",
+    "key_principles": [
+      "WCAG 2.1 compliance (A, AA, AAA levels)",
+      "Perceivable, operable, understandable, robust (POUR)",
+      "Keyboard navigation and screen reader support",
+      "Color contrast and text alternatives",
+      "Inclusive design for diverse abilities"
+    ],
+    "related_affinity_clusters": ["accessibility", "inclusive_design", "wcag"],
+    "keywords": ["accessibility", "WCAG", "inclusive design", "a11y", "screen reader", "keyboard navigation"],
+    "example_deliverables": ["accessibility audits", "WCAG compliance reports", "remediation plans"],
+    "portfolio_examples": ["washington-state-employment-security-department", "careoregon"]
+  },
+  
+  "Content Strategy": {
+    "definition": "Planning, creation, delivery, and governance of useful, usable content that meets user needs and business goals.",
+    "key_principles": [
+      "Content modeling and structure",
+      "Voice and tone guidelines",
+      "Content lifecycle management",
+      "SEO and findability",
+      "Governance and workflow"
+    ],
+    "related_affinity_clusters": ["content_strategy", "information_architecture", "writing"],
+    "keywords": ["content strategy", "content model", "voice and tone", "copywriting", "content governance"],
+    "example_deliverables": ["content models", "editorial calendars", "voice and tone guides", "content audits"],
+    "portfolio_examples": ["sealaska", "jewish-family-service"]
+  },
+  
+  "Design Thinking": {
+    "definition": "Human-centered problem-solving methodology emphasizing empathy, ideation, prototyping, and testing to create innovative solutions.",
+    "key_principles": [
+      "Empathize with users through research",
+      "Define the problem clearly",
+      "Ideate multiple solutions",
+      "Prototype quickly and cheaply",
+      "Test and iterate based on feedback"
+    ],
+    "related_affinity_clusters": ["design_thinking", "innovation", "problem_solving"],
+    "keywords": ["design thinking", "ideation", "empathy", "innovation", "problem solving"],
+    "example_deliverables": ["empathy maps", "problem statements", "ideation workshops", "prototypes"],
+    "portfolio_examples": ["indeed", "aws", "amazon"]
+  },
+  
+  "Agile/Lean UX": {
+    "definition": "Collaborative, iterative approach to UX design that emphasizes rapid experimentation, continuous learning, and cross-functional teamwork.",
+    "key_principles": [
+      "Cross-functional collaboration",
+      "Rapid iteration and experimentation",
+      "Minimum viable product (MVP) thinking",
+      "Continuous user feedback",
+      "Outcomes over outputs"
+    ],
+    "related_affinity_clusters": ["agile", "lean_ux", "iteration"],
+    "keywords": ["agile", "lean UX", "sprint", "iteration", "MVP", "continuous delivery"],
+    "example_deliverables": ["sprint plans", "MVPs", "experiment designs", "retrospectives"],
+    "portfolio_examples": ["indeed", "aws", "flutter"]
+  },
+  
+  "Data-Driven Design": {
+    "definition": "Using quantitative and qualitative data to inform design decisions, measure success, and optimize user experiences.",
+    "key_principles": [
+      "Define metrics aligned with goals",
+      "A/B testing and multivariate testing",
+      "Analytics and user behavior data",
+      "Combine quantitative and qualitative insights",
+      "Continuous measurement and optimization"
+    ],
+    "related_affinity_clusters": ["analytics", "testing", "optimization"],
+    "keywords": ["analytics", "A/B testing", "metrics", "data analysis", "optimization", "conversion"],
+    "example_deliverables": ["analytics reports", "A/B test plans", "dashboards", "optimization recommendations"],
+    "portfolio_examples": ["indeed", "flutter", "virgin-travel-group"]
+  },
+  
+  "Simplification & Clarity": {
+    "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently.",
+    "key_principles": [
+      "Progressive disclosure of information",
+      "Clear visual and information hierarchy",
+      "Removal of unnecessary features and content",
+      "Plain language and clear labeling",
+      "Focus on core user tasks"
+    ],
+    "related_affinity_clusters": ["simplification", "clarity", "minimalism"],
+    "keywords": ["simplification", "clarity", "minimalism", "focus", "reduction", "streamlining"],
+    "example_deliverables": ["before/after comparisons", "feature prioritization", "simplified workflows"],
+    "portfolio_examples": ["flutter", "indeed", "washington-state-employment-security-department"]
+  },
+  
+  "Workflow Automation": {
+    "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration.",
+    "key_principles": [
+      "Identify repetitive manual tasks",
+      "Design for automation and AI integration",
+      "Human-in-the-loop for critical decisions",
+      "Error handling and edge cases",
+      "Monitoring and optimization"
+    ],
+    "related_affinity_clusters": ["automation", "ai", "efficiency"],
+    "keywords": ["automation", "workflow", "AI", "efficiency", "orchestration", "process design"],
+    "example_deliverables": ["workflow diagrams", "automation specs", "process maps", "AI integration designs"],
+    "portfolio_examples": ["aws", "amazon"]
+  },
+  
+  "AI Ethics": {
+    "definition": "Ethical considerations in designing AI-powered products, including fairness, transparency, privacy, accountability, and human agency.",
+    "key_principles": [
+      "Fairness and bias mitigation",
+      "Transparency and explainability",
+      "Privacy and data protection",
+      "Human agency and oversight",
+      "Accountability and responsibility"
+    ],
+    "related_affinity_clusters": ["ai_ethics", "responsible_ai", "fairness"],
+    "keywords": ["AI ethics", "fairness", "bias", "transparency", "privacy", "responsible AI"],
+    "example_deliverables": ["ethics frameworks", "bias audits", "transparency reports", "ethical guidelines"],
+    "portfolio_examples": ["aws", "amazon"]
+  },
+  
+  "Service Design": {
+    "definition": "Holistic approach to designing services that considers all touchpoints, stakeholders, and behind-the-scenes processes to create seamless experiences.",
+    "key_principles": [
+      "End-to-end service experience",
+      "Multiple touchpoints and channels",
+      "Front-stage and back-stage processes",
+      "Stakeholder ecosystem mapping",
+      "Service blueprints and systems thinking"
+    ],
+    "related_affinity_clusters": ["service_design", "systems_thinking", "touchpoints"],
+    "keywords": ["service design", "touchpoints", "service blueprint", "ecosystem", "end-to-end experience"],
+    "example_deliverables": ["service blueprints", "stakeholder maps", "touchpoint matrices", "service prototypes"],
+    "portfolio_examples": ["careoregon", "jewish-family-service", "virgin-travel-group"]
+  }
+}

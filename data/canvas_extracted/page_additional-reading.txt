@@ -1,0 +1,122 @@
+Course Page: additional-reading
+
+Additional Reading
+Recommended Books
+Throughout the course, we will be referencing
+DESIGNING FOR THE DIGITAL AGE: How to Create Human-Centered Products and Services
+by Kim Goodwin. It is not totally required, but it is so good as a long term career reference and to your advantage with each assignment to use this textbook for guidance.
+Books & Articles
+How-to walkthrough books
+Don't Make Me Think: A Common Sense Approach to Web Usability
+(Links to an external site.)
+by Steve Krug
+Rocket Surgery Made Easy: The Do-It-Yourself Guide to Finding and Fixing Usability Problems (Links to an external site.)
+by Steve Krug
+Sketching User Experiences: The Workbook (Links to an external site.)
+by Saul Greenberg
+Needfinding: The Why and How of Uncovering People’s Needs
+by Jump
+Web Articles:
+The Psychology of Design Principles
+by
+Growth Design
+"Affordances and Signifiers in Mobile Interface Design"
+Luke Wroblewski
+wrote
+"Designing for Large Screen Smartphones"
+"Norman Doors: Don’t Know Whether to Push or Pull? Blame Design."
+"Laws of UX
+" written by
+Jon Yablonski
+8 Things UX/UI Designers Can Learn From Steve Jobs
+by J
+ulia Zell
+Primer on Needfinding
+from Stanford
+UX and User Research Related Books:
+Sources of Power: How People Make Decisions
+by Gary Klein
+Thinking Fast and Slow
+by Daniel Kahneman
+The Aesthetic Brain
+by Anjan Chatterjee
+About Face: The Essentials of Interaction Design
+by Alan Cooper
+The User Experience Team of One: A Research and Design Survival Guide
+by Leah Buley
+100 Things Every Designer Needs to Know About People
+by Susan Weinschenk
+Books to Inspire and Understand Design:
+The Design of Everyday Things
+by Don Norman
+The Innovators: How a group of hackers, geniuses and geeks defined the digital revolution
+by Walter Isaacson
+Insanely Simple: The obsession that drives Apple's success
+by Ken Segall
+Rules for UX Design
+Fitts' Law
+: "The time to acquire a target is a function of the distance to and size of and position of the target."
+Device layout map of usable area on a screen
+sample
+Done well:
+Centered
+for
+better reachability
+Jakob Nielson's 10 Heuristics
+Material Design: Floating Action Button
+Done well :
+Calendaring Sample
+Done poorly:
+Multiple choice call to actions sample
+Jakob's Law
+: "Users spend most of their time on other sites. This means that users prefer your site to work the same way as all the other sites they already know."
+Using natural actions and affordances
+: introduced
+pull-to-refresh
+in Tweetie
+Situational awareness includes understanding progression.
+Done poorly: Apple uses
+scroll-jacking
+on their
+Mojave site
+Bock's Law: "Most people
+don't have
+the newest stuff.", so build for a common denominator
+Wenni's Principle:
+"Don't move tap targets."
+The Doherty Threshold
+: "Productivity soars when a computer and its users interact at a pace (<400ms) that ensures that neither has to wait on the other."
+Hick's Law
+: "The time it takes to make a decision increases with the number and complexity of choices."
+Done well:
+Apple Music's Now Playing sheet
+Done poorly:
+Chat tool sample
+Miller's Law
+: "The average person can only keep 7 (plus or minus 2) items in their working memory."
+Gestalt Grouping
+Law of Common Region
+: "Elements tend to be perceived into groups if they are sharing an area with a clearly defined boundary."
+Done well:
+Action sheets in Apple's Human Interface Guidelines
+Law of Proximity
+: "Objects that are near, or proximate to each other, tend to be grouped together."
+Law of Similarity
+: "The human eye tends to perceive similar elements in a design as a complete picture, shape, or group, even if those elements are separated."
+Done well:
+IOS Settings
+Done poorly:
+Hawaii Emergency Alert System
+Affordance
+: "the qualities or properties of an object that define its possible uses or make clear how it can or should be used"
+Done Poorly:
+Sample Binary Selector
+Done well:
+Toggle sample
+Videos
+"Loren Brichter on Tweetie"
+"The paradox of choice | Barry Schwartz"
+"It's not you. Bad doors are everywhere."
+Simon Sinek on 'Why'
+Available to rent here
+Available free with Prime Video here

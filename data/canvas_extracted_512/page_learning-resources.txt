@@ -1,0 +1,50 @@
+Course Page: learning-resources
+
+Learning Resources
+Professional organizations
+Neilson Norman Groups: free articles on UX Design, as well as conferences and certification programs
+https://www.nngroup.com/articles/
+Interaction Design Foundation: free articles, conferences, local charters, and certificates. Free or discounted with membership
+https://www.interaction-design.org/literature/article/overview
+Interaction Design Association: Professional group with conferences, certifications, classes, etc.
+https://ixda.org/
+User Experience Professional Association: conferences, publications, training, etc
+https://uxpa.org/about-uxpa-international/
+Toastmasters: a safe environment for practicing public speaking
+toastmasters.org
+AIGA Seattle: While not specific to UX it offers speaking events, meetups, etc with other designers
+https://seattle.aiga.org/
+Conferences
+Automotive UI: Conference and community for automotive interface designers, researchers, and engineers.
+IXDA:
+CIGCHI:
+BAD Conference: Behavior and Design conference. focusing on the psychology of design and how we can improve behaviors ethically.
+Meet-up
+Download the app, create an account, and search or UX, Design, UX research, product management, system design, etc. Join the Group. Note: with covid you can attend group meetings from around the world.
+Sample groups:
+Los angeles UX Meetup - Los Angeles
+Long Beach UX Design - Los Angeles
+Content Strategy LA - Los Angeles
+UX Writing - Seattle
+Learn UX Seattle
+Seattle Games UX - Seattle
+UX Victoria -
+Agile Victoria -
+Product Hive LA - Los Angeles
+Los Angeles Service Design - Los Angeles
+UXPALA - Los Angeles
+UX Speak easy - San Diego
+Blogs
+https://uxdesign.cc/
+- articles from designers on design reflections, methodologies, case studies, etc
+https://bootcamp.uxdesign.cc/
+- articles from designers for personal stories, advice for designers who start out, etc
+https://medium.theuxblog.com/
+- Short reads that are interesting and insightful. (Can be opeds - so keep a lookout)
+http://www.usabilitycounts.com/
+great tips and advice on UX design and career
+Start your own blog to capture thoughts and reflections!
+Medium.com
+is quick to start, or if you’d like to build your own,
+Wordpress.com or Wordpress.org
+are great.

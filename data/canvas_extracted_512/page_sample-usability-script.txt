@@ -1,0 +1,84 @@
+Course Page: sample-usability-script
+
+Sample Usability Script
+Test URL
+https://www.amazon.com/Call-Duty-Infinite-Warfare-Standard-PlayStation/dp/B01EZA0D8Y
+Demographic
+Participants using computers
+Age
+18–40
+Income
+$0K–$100K
+Gender
+Any
+Country
+United States
+Web expertise
+Any
+Operating Systems
+Any
+Web browsers
+Chrome, Firefox, Safari
+Social network
+Any
+Online gaming genres
+Any
+Other requirements
+You must own and play console video games
+Demographic
+Participants using computers
+Age
+25–55
+Income
+$40K–$150K+
+Gender
+Any
+Country
+United States
+Web expertise
+Any
+Operating Systems
+Any
+Web browsers
+Internet explorer
+Social network
+Any
+Online gaming genres
+Any
+Other requirements
+You must own and play console video games
+Screener
+Which video game platform do you primarily use?
+Playstation : [ Accept ]
+Xbox : [ Accept ]
+Nintendo : [ Accept ]
+Tablet or Phone : [ Reject ]
+PC Gaming : [ Accept ]
+Steam : [ Reject ]
+Other : [ Reject ]
+None of the above : [ Reject ]
+This test may require a transaction on Amazon.com. While taking the test, you will be receiving a 2¢ Amazon Gift Card which will require a 2¢ charge to your account. Do you wish to continue the test?
+Yes, I understand it will require a 2¢ charge to my Amazon account : [ Accept ]
+No, thank you : [ Reject ]
+Introduction
+Today you will be reviewing a new feature on Amazon.com. If you experience something confusing or frustrating, please explain what you would expect to happen and continue as best you can.
+Tasks
+Demonstrate how you would go about reducing the cost of buying Call of Duty. Select items you own that you wish to sell back. STOP before confirming your submission.
+Did you complete the task successfully? [Success: Yes, No]
+Overall, this task was: [Rating Scale: Very Difficult to Very Easy]
+Rate the selection and pricing available for the trade-in service. [Rating Scale: Poor to Excellent]
+Now add to your trade-in "Medal of Honor: Vanguard" listed for $0.02. Once you have added it, remove all other games and submit your order. Your submission total should be for 2¢. Click the "Go back to shopping" button once you are done.
+Did you complete the task successfully? [Success: Yes, No]
+Overall, this task was: [Rating Scale: Very Difficult to Very Easy]
+From your understanding of the experience you just completed, explain what you expect to happen next in with your trade-in, and how you expect to receive your trade-in payment. [Verbal Response]
+What do you think would happen if you ended up not mailing in the trade-in you just submitted? [Verbal Response]
+Go to
+http://test.perfectpixels.com/InstantSavings/gmailinbox.html
+to review an example of the confirmation emails.
+After reviewing, describe if your understanding of trading in is different in any way than your initial expectations.
+How likely are you to use the Trade-In Feature in the future? Is there anything you found frustrating or you would like to see different to improve the trade-in feature? Please explain. [Rating Scale: Not at all likely to Very likely]
+Questions
+What kind of connection to the internet are you using for this test? (Dial-Up, DSL, ISDN, Hotspot, High-Speed Broadband, Sattelite, Cable, etc.)
+If you had a magic wand, how would you improve Amazon Trade-In?
+How likely are you to recommend Amazon Trade-In to a friend or colleague (0=Not at all likely, and 10=Very Likely)?
+Thank you for your participation. You will find in your inbox confirmation emails from your trade-in test. Feel free to ignore or cancel the order.

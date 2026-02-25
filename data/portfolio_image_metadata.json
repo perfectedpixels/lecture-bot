@@ -1,0 +1,3582 @@
+{
+  "amazon": {
+    "title": "amazon",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Emerging Technologies"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing",
+        "Design Systems"
+      ],
+      "key_outcomes": "Built design and research teams for AWS Emergent Technologies portfolio covering industries like Automotive, Aerospace, Health AI, IoT, leveraging AI, AR/VR, Digital Twins."
+    },
+    "images": [
+      {
+        "filename": "amazon_1.jpg",
+        "path": "portfolio_images/amazon/amazon_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research",
+          "Empathy Mapping"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Persona and user research artifacts",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "amazon_2.png",
+        "path": "portfolio_images/amazon/amazon_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_2.png",
+        "concept_tags": [
+          "Information Architecture",
+          "User Flows",
+          "Wireframes"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Site maps and user flow diagrams",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "amazon_3.png",
+        "path": "portfolio_images/amazon/amazon_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_3.png",
+        "concept_tags": [
+          "Interface Design",
+          "UI Components",
+          "Design Systems"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "UI design mockups and component library",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "amazon_4.png",
+        "path": "portfolio_images/amazon/amazon_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_4.png",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback",
+          "Iterative Design"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing sessions and feedback notes",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "amazon_5.jpg",
+        "path": "portfolio_images/amazon/amazon_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_5.jpg",
+        "concept_tags": [
+          "Branding",
+          "Visual Identity",
+          "Style Guides"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand identity and style guide artifacts",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "amazon_6.png",
+        "path": "portfolio_images/amazon/amazon_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/amazon/amazon_6.png",
+        "concept_tags": [
+          "Data Visualization",
+          "Information Design",
+          "AI Ethics"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Data visualization and AI ethics design concepts",
+        "teaching_concepts": []
+      }
+    ],
+    "lecture_mentions": [
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Course Page: sample-usability-script\n\nSample Usability Script\nTest URL\nhttps://www.amazon.com/Call-Duty-Infinite-Warfare-Standard-PlayStation/dp/B01EZA0D8Y\nDemographic\nParticipants using computers\nAge\n18\u201340\nIncome\n$0K\u2013$100K\nGender\nAny\nCountry\nUnited States\nWeb expertise\nAny\nOperating Syst",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "usability testing",
+          "mention_type": "brief",
+          "key_takeaway": "The transcript provides a sample usability testing script for testing the Amazon website, including details on the test URL, target demographics, and system requirements. This illustrates how to set up and conduct usability testing for evaluating a website's user experience.",
+          "relevance_score": 0.9
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Xbox : [ Accept ]\nNintendo : [ Accept ]\nTablet or Phone : [ Reject ]\nPC Gaming : [ Accept ]\nSteam : [ Reject ]\nOther : [ Reject ]\nNone of the above : [ Reject ]\nThis test may require a transaction on Amazon.com. While taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user acceptance testing",
+          "mention_type": "detailed",
+          "key_takeaway": "The importance of conducting user acceptance testing, including potentially making small charges to user accounts for testing purposes.",
+          "relevance_score": 0.9
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "ject ]\nPC Gaming : [ Accept ]\nSteam : [ Reject ]\nOther : [ Reject ]\nNone of the above : [ Reject ]\nThis test may require a transaction on Amazon.com. While taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing or research with real users",
+          "mention_type": "brief",
+          "key_takeaway": "Testing products or features with real users, even if it requires a small transaction, is important for getting realistic feedback and understanding the user experience.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "hile taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]\nIntroduction\nToday you will be reviewing a new feature on Amazon.com. If you experience something confusing or frustrating, please explain what you wou",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing or research for new product features",
+          "mention_type": "brief",
+          "key_takeaway": "Conducting user testing and research is important when developing new product features to identify potential issues or areas of confusion.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]\nIntroduction\nToday you will be reviewing a new feature on Amazon.com. If you experience something confusing or frustrating, please explain what you would expect to happen and continue as best you can.\nTasks\nDemonstrate how you would go about reducing the cost of b",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing and feedback",
+          "mention_type": "brief",
+          "key_takeaway": "Gathering user feedback and identifying pain points during product testing is important for improving the user experience.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "estions\nWhat kind of connection to the internet are you using for this test? (Dial-Up, DSL, ISDN, Hotspot, High-Speed Broadband, Sattelite, Cable, etc.)\nIf you had a magic wand, how would you improve Amazon Trade-In?\nHow likely are you to recommend Amazon Trade-In to a friend or colleague (0=Not at all likely, and 10=Very Likely)?\nThank you for your participation. You will find in your inbox confirmatio",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user research and feedback",
+          "mention_type": "brief",
+          "key_takeaway": "Gathering user feedback and insights is important for improving products and services.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "re you using for this test? (Dial-Up, DSL, ISDN, Hotspot, High-Speed Broadband, Sattelite, Cable, etc.)\nIf you had a magic wand, how would you improve Amazon Trade-In?\nHow likely are you to recommend Amazon Trade-In to a friend or colleague (0=Not at all likely, and 10=Very Likely)?\nThank you for your participation. You will find in your inbox confirmation emails from your trade-in test. Feel free to ig",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user research and feedback",
+          "mention_type": "brief",
+          "key_takeaway": "Gathering user feedback and insights through surveys and testing is important for improving products and services.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Course Page: sample-usability-script\n\nSample Usability Script\nTest URL\nhttps://www.amazon.com/Call-Duty-Infinite-Warfare-Standard-PlayStation/dp/B01EZA0D8Y\nDemographic\nParticipants using computers\nAge\n18\u201340\nIncome\n$0K\u2013$100K\nGender\nAny\nCountry\nUnited States\nWeb expertise\nAny\nOperating Syst",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "usability testing",
+          "mention_type": "detailed",
+          "key_takeaway": "The transcript provides detailed instructions and parameters for conducting a usability test on the Amazon website, specifically for purchasing a video game. This illustrates how to set up and carry out a usability study.",
+          "relevance_score": 1.0
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Xbox : [ Accept ]\nNintendo : [ Accept ]\nTablet or Phone : [ Reject ]\nPC Gaming : [ Accept ]\nSteam : [ Reject ]\nOther : [ Reject ]\nNone of the above : [ Reject ]\nThis test may require a transaction on Amazon.com. While taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user acceptance testing",
+          "mention_type": "brief",
+          "key_takeaway": "Testing may involve small transactions or charges to simulate real-world scenarios and gather user feedback.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "ject ]\nPC Gaming : [ Accept ]\nSteam : [ Reject ]\nOther : [ Reject ]\nNone of the above : [ Reject ]\nThis test may require a transaction on Amazon.com. While taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing or research involving real transactions",
+          "mention_type": "brief",
+          "key_takeaway": "The lecture is introducing a test that involves a small real transaction on Amazon.com to simulate a realistic user experience.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "hile taking the test, you will be receiving a 2\u00a2 Amazon Gift Card which will require a 2\u00a2 charge to your account. Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]\nIntroduction\nToday you will be reviewing a new feature on Amazon.com. If you experience something confusing or frustrating, please explain what you wou",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing or research for new product features",
+          "mention_type": "brief",
+          "key_takeaway": "Conducting user testing and research is important when developing new features for products like Amazon.com to understand user experience and identify potential issues.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "Do you wish to continue the test?\nYes, I understand it will require a 2\u00a2 charge to my Amazon account : [ Accept ]\nNo, thank you : [ Reject ]\nIntroduction\nToday you will be reviewing a new feature on Amazon.com. If you experience something confusing or frustrating, please explain what you would expect to happen and continue as best you can.\nTasks\nDemonstrate how you would go about reducing the cost of b",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user testing or usability testing",
+          "mention_type": "brief",
+          "key_takeaway": "The importance of gathering user feedback and identifying usability issues during product development.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "estions\nWhat kind of connection to the internet are you using for this test? (Dial-Up, DSL, ISDN, Hotspot, High-Speed Broadband, Sattelite, Cable, etc.)\nIf you had a magic wand, how would you improve Amazon Trade-In?\nHow likely are you to recommend Amazon Trade-In to a friend or colleague (0=Not at all likely, and 10=Very Likely)?\nThank you for your participation. You will find in your inbox confirmatio",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user research and feedback",
+          "mention_type": "brief",
+          "key_takeaway": "Gathering user feedback and insights is important for improving products and services.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_sample-usability-script.txt",
+        "context": "re you using for this test? (Dial-Up, DSL, ISDN, Hotspot, High-Speed Broadband, Sattelite, Cable, etc.)\nIf you had a magic wand, how would you improve Amazon Trade-In?\nHow likely are you to recommend Amazon Trade-In to a friend or colleague (0=Not at all likely, and 10=Very Likely)?\nThank you for your participation. You will find in your inbox confirmation emails from your trade-in test. Feel free to ig",
+        "analysis": {
+          "aspect": "testing",
+          "teaching_concept": "user research and feedback",
+          "mention_type": "brief",
+          "key_takeaway": "Gathering user feedback and insights is important for improving products and services.",
+          "relevance_score": 0.8
+        }
+      }
+    ]
+  },
+  "aws": {
+    "title": "aws",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Emerging Technologies"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Iterative Design",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Designed user experiences for AWS' emerging technologies portfolio across industries like automotive, aerospace, healthcare, and smart home."
+    },
+    "images": [
+      {
+        "filename": "aws_1.jpg",
+        "path": "portfolio_images/aws/aws_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles for different target user groups",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_2.png",
+        "path": "portfolio_images/aws/aws_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_2.png",
+        "concept_tags": [
+          "User Flows",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "User flow diagrams mapping out the end-to-end experience",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_3.png",
+        "path": "portfolio_images/aws/aws_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_3.png",
+        "concept_tags": [
+          "Wireframes",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Low-fidelity wireframes exploring different UI layouts and content organization",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_4.png",
+        "path": "portfolio_images/aws/aws_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_4.png",
+        "concept_tags": [
+          "Prototyping",
+          "Usability Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Interactive prototypes used for usability testing with target users",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_5.png",
+        "path": "portfolio_images/aws/aws_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_5.png",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Reusable UI component library and design system guidelines",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_6.png",
+        "path": "portfolio_images/aws/aws_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_6.png",
+        "concept_tags": [
+          "Data Visualization",
+          "Information Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Visualizations for displaying complex data in a clear and intuitive manner",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_7.png",
+        "path": "portfolio_images/aws/aws_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_7.png",
+        "concept_tags": [
+          "Augmented Reality",
+          "Spatial Computing"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "AR concepts and prototypes for spatial computing experiences",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_8.png",
+        "path": "portfolio_images/aws/aws_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_8.png",
+        "concept_tags": [
+          "Virtual Reality",
+          "Immersive Experiences"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "VR environment and interface designs for immersive virtual experiences",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_9.png",
+        "path": "portfolio_images/aws/aws_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_9.png",
+        "concept_tags": [
+          "AI Ethics",
+          "Responsible Design"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Ethical considerations and guidelines for designing AI-powered experiences",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_10.png",
+        "path": "portfolio_images/aws/aws_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_10.png",
+        "concept_tags": [
+          "Design Critique",
+          "Collaborative Review"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design critiques and collaborative review sessions with cross-functional teams",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_11.png",
+        "path": "portfolio_images/aws/aws_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_11.png",
+        "concept_tags": [
+          "Branding",
+          "Visual Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand identity and visual language exploration for new product offerings",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "aws_12.png",
+        "path": "portfolio_images/aws/aws_12.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/aws/aws_12.png",
+        "concept_tags": [
+          "Design Workshops",
+          "Team Collaboration"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Collaborative design workshops and ideation sessions with cross-functional teams",
+        "teaching_concepts": []
+      }
+    ],
+    "lecture_mentions": [
+      {
+        "lecture_file": "page_additional-reading.txt",
+        "context": "rowth Design\n\"Affordances and Signifiers in Mobile Interface Design\"\nLuke Wroblewski\nwrote\n\"Designing for Large Screen Smartphones\"\n\"Norman Doors: Don\u2019t Know Whether to Push or Pull? Blame Design.\"\n\"Laws of UX\n\" written by\nJon Yablonski\n8 Things UX/UI Designers Can Learn From Steve Jobs\nby J\nulia Zell\nMachines of Loving Grace\nUX and User Research Related Books:\nSources of Power: How People Make Decis",
+        "analysis": {
+          "aspect": "research",
+          "teaching_concept": "Affordances and signifiers in mobile interface design",
+          "mention_type": "brief",
+          "key_takeaway": "The lecture covers research and concepts related to designing intuitive mobile interfaces with clear visual cues.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_additional-reading.txt",
+        "context": "rowth Design\n\"Affordances and Signifiers in Mobile Interface Design\"\nLuke Wroblewski\nwrote\n\"Designing for Large Screen Smartphones\"\n\"Norman Doors: Don\u2019t Know Whether to Push or Pull? Blame Design.\"\n\"Laws of UX\n\" written by\nJon Yablonski\n8 Things UX/UI Designers Can Learn From Steve Jobs\nby J\nulia Zell\nMachines of Loving Grace\nUX and User Research Related Books:\nSources of Power: How People Make Decis",
+        "analysis": {
+          "aspect": "research",
+          "teaching_concept": "affordances and signifiers in mobile interface design",
+          "mention_type": "brief",
+          "key_takeaway": "The lecture covers research and resources related to designing effective mobile interfaces with clear affordances and signifiers.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_user-research-and-ux-strategy.txt",
+        "context": "Course Page: user-research-and-ux-strategy\n\nUser Research & UX Strategy\nInstructor:\nJason Levine, Head of UX at AWS\nClasses:\nMondays, 6:00pm - 9:50pm in\nCMU\n104\nZoom ID:\n941 3146 5927\nZoom Open Office Hours:\nWednesdays, 12:30pm - 1:00pm on\nZoom\nEmail:\nlevine13@uw.edu\nLinkedIn:\nlinkedin.com/in/jasonl\nPortfolio:\nper",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "user research and UX strategy",
+          "mention_type": "brief",
+          "key_takeaway": "The instructor, Jason Levine, is the Head of UX at AWS, suggesting that AWS may be used as a case study or example in teaching user research and UX strategy concepts.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_user-research-and-ux-strategy.txt",
+        "context": "Course Page: user-research-and-ux-strategy\n\nUser Research & UX Strategy\nInstructor:\nJason Levine, Head of UX at AWS\nClasses:\nMondays, 6:00pm - 9:50pm in\nCMU\n104\nZoom ID:\n941 3146 5927\nZoom Open Office Hours:\nWednesdays, 12:30pm - 1:00pm on\nZoom\nEmail:\nlevine13@uw.edu\nLinkedIn:\nlinkedin.com/in/jasonl\nPortfolio:\nper",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "user research and UX strategy",
+          "mention_type": "brief",
+          "key_takeaway": "The instructor, Jason Levine, is the Head of UX at AWS, which suggests that the course covers user research and UX strategy, potentially drawing examples and case studies from AWS projects.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "d preference, and business objectives to create online user experiences that deliver on performance, user engagement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "user experience design for online products and services",
+          "mention_type": "brief",
+          "key_takeaway": "The speaker has extensive experience leading user experience design for various companies and products, illustrating real-world application of UX principles.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "d preference, and business objectives to create online user experiences that deliver on performance, user engagement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "user experience design for digital products and services",
+          "mention_type": "brief",
+          "key_takeaway": "The portfolio showcases the speaker's experience in designing user experiences across various industries and companies.",
+          "relevance_score": 0.8
+        }
+      }
+    ]
+  },
+  "indeed": {
+    "title": "indeed",
+    "summary": {
+      "primary_concepts": [
+        "User Research",
+        "Information Architecture"
+      ],
+      "methodologies_used": [
+        "Usability Testing",
+        "Persona Definition"
+      ],
+      "key_outcomes": "Designed and launched a job search platform with improved user experience and information architecture."
+    },
+    "images": [
+      {
+        "filename": "indeed_1.jpg",
+        "path": "portfolio_images/indeed/indeed_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/indeed/indeed_1.jpg",
+        "concept_tags": [
+          "Job Search",
+          "User Interface",
+          "Responsive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A responsive user interface design for the Indeed job search platform.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "stanford-university": {
+    "title": "stanford-university",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Product Strategy"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing",
+        "Design Systems"
+      ],
+      "key_outcomes": "Developed user-centered product strategies and experiences for AWS Emergent Technologies portfolio."
+    },
+    "images": [
+      {
+        "filename": "stanford-university_1.jpg",
+        "path": "portfolio_images/stanford-university/stanford-university_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles for different customer segments",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_2.png",
+        "path": "portfolio_images/stanford-university/stanford-university_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_2.png",
+        "concept_tags": [
+          "User Flows",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "User flow diagrams mapping customer journeys",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_3.png",
+        "path": "portfolio_images/stanford-university/stanford-university_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_3.png",
+        "concept_tags": [
+          "Wireframes",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Low-fidelity wireframes for product interfaces",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_4.png",
+        "path": "portfolio_images/stanford-university/stanford-university_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_4.png",
+        "concept_tags": [
+          "Prototypes",
+          "Usability Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Interactive prototypes for usability testing sessions",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_5.png",
+        "path": "portfolio_images/stanford-university/stanford-university_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_5.png",
+        "concept_tags": [
+          "Design Systems",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Reusable UI component library from the design system",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_6.png",
+        "path": "portfolio_images/stanford-university/stanford-university_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_6.png",
+        "concept_tags": [
+          "Branding",
+          "Visual Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand identity guidelines and visual assets",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_7.png",
+        "path": "portfolio_images/stanford-university/stanford-university_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_7.png",
+        "concept_tags": [
+          "Data Visualization",
+          "Information Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Data visualization designs for complex information",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_8.png",
+        "path": "portfolio_images/stanford-university/stanford-university_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_8.png",
+        "concept_tags": [
+          "Accessibility",
+          "Inclusive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Accessibility considerations and inclusive design principles",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_9.png",
+        "path": "portfolio_images/stanford-university/stanford-university_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_9.png",
+        "concept_tags": [
+          "Design Critique",
+          "Iteration"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design critique session for iterating on concepts",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_10.png",
+        "path": "portfolio_images/stanford-university/stanford-university_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_10.png",
+        "concept_tags": [
+          "User Testing",
+          "Feedback Analysis"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing sessions and analysis of feedback",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_11.png",
+        "path": "portfolio_images/stanford-university/stanford-university_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_11.png",
+        "concept_tags": [
+          "Roadmaps",
+          "Product Planning"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Product roadmaps and strategic planning artifacts",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_12.png",
+        "path": "portfolio_images/stanford-university/stanford-university_12.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_12.png",
+        "concept_tags": [
+          "Design Principles",
+          "Guidelines"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Documented design principles and guidelines",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_13.png",
+        "path": "portfolio_images/stanford-university/stanford-university_13.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_13.png",
+        "concept_tags": [
+          "Presentations",
+          "Stakeholder Alignment"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Presentations for aligning with stakeholders",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_14.png",
+        "path": "portfolio_images/stanford-university/stanford-university_14.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_14.png",
+        "concept_tags": [
+          "Design Workshops",
+          "Collaboration"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Collaborative design workshops with cross-functional teams",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "stanford-university_15.png",
+        "path": "portfolio_images/stanford-university/stanford-university_15.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/stanford-university/stanford-university_15.png",
+        "concept_tags": [
+          "AI Ethics",
+          "Responsible Design"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Considerations for ethical AI and responsible design",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "microsoft": {
+    "title": "microsoft",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Emerging Technologies"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing",
+        "Design Systems"
+      ],
+      "key_outcomes": "Designed user experiences for AWS' emerging technologies portfolio across industries like Automotive, Aerospace, Health AI, and IoT Smart Home."
+    },
+    "images": [
+      {
+        "filename": "microsoft_1.jpg",
+        "path": "portfolio_images/microsoft/microsoft_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles representing different customer segments",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_2.png",
+        "path": "portfolio_images/microsoft/microsoft_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_2.png",
+        "concept_tags": [
+          "User Flows",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Diagram showing user flows and information architecture",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_3.png",
+        "path": "portfolio_images/microsoft/microsoft_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_3.png",
+        "concept_tags": [
+          "Wireframes",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe sketches for interface design exploration",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_4.png",
+        "path": "portfolio_images/microsoft/microsoft_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_4.png",
+        "concept_tags": [
+          "Prototyping",
+          "Usability Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Interactive prototype for usability testing with users",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_5.jpg",
+        "path": "portfolio_images/microsoft/microsoft_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_5.jpg",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design system with reusable UI components and styles",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_6.png",
+        "path": "portfolio_images/microsoft/microsoft_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_6.png",
+        "concept_tags": [
+          "User Journey Maps",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User journey maps visualizing customer experiences",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_7.png",
+        "path": "portfolio_images/microsoft/microsoft_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_7.png",
+        "concept_tags": [
+          "Branding",
+          "Visual Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand identity and visual style exploration",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_8.jpg",
+        "path": "portfolio_images/microsoft/microsoft_8.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_8.jpg",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Usability testing session with a participant providing feedback",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_9.jpg",
+        "path": "portfolio_images/microsoft/microsoft_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_9.jpg",
+        "concept_tags": [
+          "Design Workshops",
+          "Collaboration"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design workshop with cross-functional team members collaborating",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_10.png",
+        "path": "portfolio_images/microsoft/microsoft_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_10.png",
+        "concept_tags": [
+          "AI Ethics",
+          "Responsible Design"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Considerations for ethical and responsible design of AI systems",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_11.png",
+        "path": "portfolio_images/microsoft/microsoft_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_11.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_12.png",
+        "path": "portfolio_images/microsoft/microsoft_12.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_12.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_13.jpg",
+        "path": "portfolio_images/microsoft/microsoft_13.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_13.jpg",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_14.png",
+        "path": "portfolio_images/microsoft/microsoft_14.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_14.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_15.png",
+        "path": "portfolio_images/microsoft/microsoft_15.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_15.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_16.jpg",
+        "path": "portfolio_images/microsoft/microsoft_16.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_16.jpg",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_17.jpg",
+        "path": "portfolio_images/microsoft/microsoft_17.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_17.jpg",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_18.png",
+        "path": "portfolio_images/microsoft/microsoft_18.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_18.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_19.png",
+        "path": "portfolio_images/microsoft/microsoft_19.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_19.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "microsoft_20.png",
+        "path": "portfolio_images/microsoft/microsoft_20.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/microsoft/microsoft_20.png",
+        "concept_tags": [],
+        "phase": "unknown",
+        "methodology": "",
+        "description": "",
+        "teaching_concepts": []
+      }
+    ],
+    "lecture_mentions": [
+      {
+        "lecture_file": "page_improving-accessibility-4.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Instructors should follow guidelines to ensure PDFs and videos included in their courses are accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-4.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Follow the provided guides from UW Accessible Technology to ensure PDFs and videos included in the course are accessible.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-5.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Providing guides and resources for making PDFs and videos accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-5.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Instructors should follow guidelines to ensure PDFs and videos in their courses are accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-2.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Follow guidelines from UW Accessible Technology for creating accessible PDFs and captioning videos to ensure course content is accessible to all students.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-2.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Ensuring PDFs and videos included in a course are accessible to students with disabilities",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-3.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Following guidelines from UW Accessible Technology to ensure PDFs and videos in a course are accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility-3.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"... essential for ensu",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Providing guides and resources for making PDFs and videos accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "using Microsoft Office 365 and Google G Suite in Canvas",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty need to sign in with their UW account to use Microsoft Office 365 and Google G Suite in Canvas.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "outcome",
+          "teaching_concept": "using software tools in an educational context",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty at the university have access to Microsoft Office 365 and Google G Suite, which can be used within the Canvas learning management system.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"essential for ensuring",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Ensuring PDFs and videos included in a course are accessible to students with disabilities is important.",
+          "relevance_score": 0.7
+        }
+      },
+      {
+        "lecture_file": "page_improving-accessibility.txt",
+        "context": "uctions on how to ensure that PDFs included in your course are accessible, please see the following guides from UW Accessible Technology:\nChecking PDFs for Accessibility\nCreating Accessible PDFs from Microsoft Word\nCreating Accessible PDF Forms Using Adobe Acrobat Pro\nCreating Accessible PDFs from Adobe InDesign\nCaption Your Videos\nAccording to UW Accessible Technology, captions are \"essential for ensuring",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "creating accessible course materials",
+          "mention_type": "brief",
+          "key_takeaway": "Ensuring PDFs and videos included in a course are accessible to students with disabilities.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "user experiences that deliver on performance, user engagement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixe",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "professional portfolio and experience",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting the speaker's professional design experience and portfolio of work for various companies to establish their credibility and expertise in user experience design.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "ce grown, from ranking 28th in travel within the UK to the top 10, as well as tripling sales for 2003.\nJason has also developed sites for clients ranging from the UK\u2019s National Lottery to idealab! to Microsoft and Hewlett Packard. He spent several years in Los Angeles with the branding agency Siegel & Gale working with clients ranging from American Express, Countrywide, Experian, Rockwell and CB Richard El",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of client work",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is using Jason's experience working with high-profile clients like Microsoft and Hewlett Packard to illustrate the importance of building a strong portfolio of client work in the design industry.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "user experiences that deliver on performance, user engagement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixe",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio showcasing design work across various clients and industries",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting the speaker's extensive design portfolio and experience working with diverse clients to illustrate their expertise in user experience design.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "ce grown, from ranking 28th in travel within the UK to the top 10, as well as tripling sales for 2003.\nJason has also developed sites for clients ranging from the UK\u2019s National Lottery to idealab! to Microsoft and Hewlett Packard. He spent several years in Los Angeles with the branding agency Siegel & Gale working with clients ranging from American Express, Countrywide, Experian, Rockwell and CB Richard El",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of client work",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is using Jason's experience working with major clients like Microsoft and Hewlett Packard to illustrate the importance of building a strong portfolio of client work in the design industry.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students-5.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "accessing and using Microsoft Office 365 and Google G Suite in the university's learning management system (Canvas)",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty need to sign in with their university account to use Microsoft Office 365 and Google G Suite in Canvas.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students-5.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "accessing and using Microsoft Office 365 and Google G Suite in Canvas",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty need to sign in with their UW account to use Microsoft Office 365 and Google G Suite in Canvas.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students-4.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "accessing and using Microsoft Office 365 and Google G Suite in Canvas",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty need to sign in with their UW account to use Microsoft Office 365 and Google G Suite in Canvas.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_technology-support-and-resources-share-with-students-4.txt",
+        "context": ".\nUW Google\nGoogle's G Suite is available to all current students, staff, and faculty. In order to use it in Canvas make sure that you have\nactivated UW Google\nand are signed in with your UW account.\nMicrosoft O365\nOffice 365 is available and activated by default for all current students, staff, and faculty. In order to use it in Canvas make sure that you are signed in with your UW account.\nUW Technology R",
+        "analysis": {
+          "aspect": "process",
+          "teaching_concept": "using Microsoft Office 365 and Google G Suite in Canvas",
+          "mention_type": "brief",
+          "key_takeaway": "Students, staff, and faculty need to sign in with their UW account to use Microsoft Office 365 and Google G Suite in Canvas.",
+          "relevance_score": 0.7
+        }
+      }
+    ]
+  },
+  "trulia": {
+    "title": "trulia",
+    "summary": {
+      "primary_concepts": [
+        "Information Architecture",
+        "User Research Methods"
+      ],
+      "methodologies_used": [
+        "Persona Definition",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Redesigned user experience for Trulia's real estate platform based on user research and usability testing."
+    },
+    "images": [
+      {
+        "filename": "trulia_1.jpg",
+        "path": "portfolio_images/trulia/trulia_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles representing different types of home buyers and their goals, needs, and pain points.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_2.jpg",
+        "path": "portfolio_images/trulia/trulia_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_2.jpg",
+        "concept_tags": [
+          "User Flows",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "User flow diagrams illustrating the steps and interactions involved in searching for and purchasing a home on the Trulia platform.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_3.jpg",
+        "path": "portfolio_images/trulia/trulia_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_3.jpg",
+        "concept_tags": [
+          "Wireframes",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Low-fidelity wireframes exploring different layout and interface options for the Trulia home search and listing pages.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_4.jpg",
+        "path": "portfolio_images/trulia/trulia_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_4.jpg",
+        "concept_tags": [
+          "Prototypes",
+          "Usability Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Interactive prototypes used for usability testing sessions with potential users to evaluate the redesigned Trulia experience.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_5.jpg",
+        "path": "portfolio_images/trulia/trulia_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_5.jpg",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Notes and feedback gathered from usability testing sessions, highlighting areas for improvement and refinement in the Trulia redesign.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_6.jpg",
+        "path": "portfolio_images/trulia/trulia_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_6.jpg",
+        "concept_tags": [
+          "Visual Design",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockups showcasing the final visual design and branding elements for the redesigned Trulia platform.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "trulia_7.jpg",
+        "path": "portfolio_images/trulia/trulia_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/trulia/trulia_7.jpg",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A comprehensive design system documenting the various UI components, patterns, and guidelines for the Trulia redesign.",
+        "teaching_concepts": []
+      }
+    ],
+    "lecture_mentions": [
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "venue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixels\n, merged with Ramp Group- a leading UX and Development firm base",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of work",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting the diverse range of projects and clients that the speaker has worked on to demonstrate their experience and expertise in user experience design.",
+          "relevance_score": 0.8
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "venue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixels\n, merged with Ramp Group- a leading UX and Development firm base",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of work showcasing experience",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting the speaker's professional experience and design portfolio to establish their credibility and expertise in user experience design.",
+          "relevance_score": 0.8
+        }
+      }
+    ]
+  },
+  "classmates-com": {
+    "title": "classmates-com",
+    "summary": {
+      "primary_concepts": [
+        "Information Architecture",
+        "Interface Design"
+      ],
+      "methodologies_used": [
+        "User Research Methods",
+        "Usability Testing",
+        "Persona Definition"
+      ],
+      "key_outcomes": "Redesigned Classmates.com website with improved information architecture, user interface, and user experience based on user research and testing."
+    },
+    "images": [
+      {
+        "filename": "classmates-com_1.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_1.jpg",
+        "concept_tags": [
+          "User Research",
+          "Persona Definition"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User personas and research insights",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_2.png",
+        "path": "portfolio_images/classmates-com/classmates-com_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_2.png",
+        "concept_tags": [
+          "Information Architecture",
+          "Site Map"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Site map and information architecture",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_3.png",
+        "path": "portfolio_images/classmates-com/classmates-com_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_3.png",
+        "concept_tags": [
+          "Wireframes",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframes for the redesigned website",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_4.png",
+        "path": "portfolio_images/classmates-com/classmates-com_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_4.png",
+        "concept_tags": [
+          "Visual Design",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Visual design and branding elements",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_5.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_5.jpg",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Usability testing session with user feedback",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_6.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_6.jpg",
+        "concept_tags": [
+          "Design Iteration",
+          "Prototyping"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design iterations and prototyping process",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_7.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_7.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Visual Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Final user interface design for the website",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_8.png",
+        "path": "portfolio_images/classmates-com/classmates-com_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_8.png",
+        "concept_tags": [
+          "Responsive Design",
+          "Mobile Interface"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Responsive design for mobile devices",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_9.png",
+        "path": "portfolio_images/classmates-com/classmates-com_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_9.png",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Design system and UI component library",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_10.png",
+        "path": "portfolio_images/classmates-com/classmates-com_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_10.png",
+        "concept_tags": [
+          "User Flows",
+          "Task Analysis"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User flows and task analysis diagrams",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_11.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_11.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_11.jpg",
+        "concept_tags": [
+          "User Testing",
+          "Usability Evaluation"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing and usability evaluation sessions",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_12.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_12.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_12.jpg",
+        "concept_tags": [
+          "Design Presentation",
+          "Stakeholder Communication"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Presenting the redesign to stakeholders",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "classmates-com_13.jpg",
+        "path": "portfolio_images/classmates-com/classmates-com_13.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/classmates-com/classmates-com_13.jpg",
+        "concept_tags": [
+          "Design Process",
+          "Project Documentation"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Documentation of the design process and project",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "virgin-travel-group": {
+    "title": "virgin-travel-group",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Branding and Identity"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Iterative Design",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Redesigned Virgin Travelstore website with improved user experience, increased cross-selling opportunities, and streamlined purchase process, resulting in tripled monthly sales."
+    },
+    "images": [
+      {
+        "filename": "virgin-travel-group_1.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_1.jpg",
+        "concept_tags": [
+          "Wireframes",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe sketches showing layout and information hierarchy for the website.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_2.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_2.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles representing the target audience for Virgin Travelstore.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_3.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_3.jpg",
+        "concept_tags": [
+          "Visual Design",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Visual design concepts and mockups showcasing the Virgin brand identity and style.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_4.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_4.jpg",
+        "concept_tags": [
+          "User Flow",
+          "Task Analysis"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "User flow diagrams mapping out the steps and interactions for key tasks on the website.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_5.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_5.jpg",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Notes and findings from usability testing sessions with users.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_6.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_6.jpg",
+        "concept_tags": [
+          "Prototyping",
+          "Interaction Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Interactive prototypes demonstrating the user interface and interactions for the website.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_7.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_7.jpg",
+        "concept_tags": [
+          "Analytics",
+          "Conversion Optimization"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Analytics data and reports showing website performance and conversion rates.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_8.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_8.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_8.jpg",
+        "concept_tags": [
+          "User Journey",
+          "Customer Experience"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User journey maps visualizing the end-to-end experience for customers using the Virgin Travelstore website.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_9.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_9.jpg",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Documentation and guidelines for a consistent design system and reusable UI components.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_10.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_10.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_10.jpg",
+        "concept_tags": [
+          "Accessibility",
+          "Inclusive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Accessibility considerations and guidelines for ensuring an inclusive user experience.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "virgin-travel-group_11.jpg",
+        "path": "portfolio_images/virgin-travel-group/virgin-travel-group_11.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/virgin-travel-group/virgin-travel-group_11.jpg",
+        "concept_tags": [
+          "Responsive Design",
+          "Cross-Device Experience"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Mockups and designs showcasing a responsive and consistent experience across different devices and screen sizes.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "toyota": {
+    "title": "toyota",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Automotive UX"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Iterative Design",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Designed a comprehensive UX solution for Toyota's in-vehicle infotainment system and connected car services."
+    },
+    "images": [
+      {
+        "filename": "toyota_1.jpg",
+        "path": "portfolio_images/toyota/toyota_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_1.jpg",
+        "concept_tags": [
+          "User Personas",
+          "User Journeys",
+          "Empathy Mapping"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User research artifacts like personas, journey maps, and empathy maps to understand the target users and their needs.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_2.jpg",
+        "path": "portfolio_images/toyota/toyota_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_2.jpg",
+        "concept_tags": [
+          "Information Architecture",
+          "Navigation Design",
+          "Content Strategy"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframes and information architecture diagrams for the in-vehicle infotainment system, showing the content structure and navigation flow.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_3.jpg",
+        "path": "portfolio_images/toyota/toyota_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_3.jpg",
+        "concept_tags": [
+          "Interface Design",
+          "Visual Design",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockups and UI designs for the in-vehicle infotainment system, showcasing the visual design and branding elements.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_4.jpg",
+        "path": "portfolio_images/toyota/toyota_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_4.jpg",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback",
+          "Iterative Design"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Usability testing sessions with participants, gathering feedback and insights to iterate and improve the design.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_5.jpg",
+        "path": "portfolio_images/toyota/toyota_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_5.jpg",
+        "concept_tags": [
+          "Connected Car Services",
+          "IoT",
+          "Smart Mobility"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Conceptual designs and wireframes for connected car services, integrating IoT and smart mobility features.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_6.jpg",
+        "path": "portfolio_images/toyota/toyota_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_6.jpg",
+        "concept_tags": [
+          "Design Systems",
+          "UI Libraries",
+          "Consistency"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Documentation and examples of a design system and UI component library, ensuring visual and interaction consistency across the product.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "toyota_7.jpg",
+        "path": "portfolio_images/toyota/toyota_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/toyota/toyota_7.jpg",
+        "concept_tags": [
+          "Prototyping",
+          "Interactive Design",
+          "User Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Interactive prototypes used for user testing and validating the design concepts with real users.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "careoregon": {
+    "title": "careoregon",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Information Architecture"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing",
+        "Persona Development",
+        "Wireframing",
+        "Content Mapping"
+      ],
+      "key_outcomes": "The redesigned website saw significant improvements in user engagement metrics like increased new visits, reduced bounce rate, more time spent on site, and more pages viewed per user."
+    },
+    "images": [
+      {
+        "filename": "careoregon_1.jpg",
+        "path": "portfolio_images/careoregon/careoregon_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_1.jpg",
+        "concept_tags": [
+          "User Persona",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona representing a target audience segment",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_2.png",
+        "path": "portfolio_images/careoregon/careoregon_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_2.png",
+        "concept_tags": [
+          "Sitemap",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Website sitemap showing the structure and hierarchy of content",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_3.png",
+        "path": "portfolio_images/careoregon/careoregon_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_3.png",
+        "concept_tags": [
+          "Wireframe",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Low-fidelity wireframe for a web page layout",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_4.png",
+        "path": "portfolio_images/careoregon/careoregon_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_4.png",
+        "concept_tags": [
+          "Branding",
+          "Visual Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand style guide showing color palette and typography",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_5.png",
+        "path": "portfolio_images/careoregon/careoregon_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_5.png",
+        "concept_tags": [
+          "User Interface",
+          "Responsive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Responsive web design showing the interface on different devices",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_6.png",
+        "path": "portfolio_images/careoregon/careoregon_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_6.png",
+        "concept_tags": [
+          "User Testing",
+          "Usability"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing session to evaluate the usability of the design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_7.png",
+        "path": "portfolio_images/careoregon/careoregon_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_7.png",
+        "concept_tags": [
+          "Analytics",
+          "User Engagement"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Website analytics data showing improvements in user engagement metrics",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_8.png",
+        "path": "portfolio_images/careoregon/careoregon_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_8.png",
+        "concept_tags": [
+          "Content Strategy",
+          "Editorial"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Content mapping and editorial planning for website content",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_9.png",
+        "path": "portfolio_images/careoregon/careoregon_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_9.png",
+        "concept_tags": [
+          "User Journey",
+          "User Flow"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User journey map illustrating the steps and touchpoints in the user experience",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_10.png",
+        "path": "portfolio_images/careoregon/careoregon_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_10.png",
+        "concept_tags": [
+          "Accessibility",
+          "Inclusive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Accessibility guidelines and considerations for inclusive design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "careoregon_11.png",
+        "path": "portfolio_images/careoregon/careoregon_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/careoregon/careoregon_11.png",
+        "concept_tags": [
+          "Design System",
+          "UI Components"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Reusable UI components and design system for consistent user experience",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "washington-state-employment-security-department": {
+    "title": "washington-state-employment-security-department",
+    "summary": {
+      "primary_concepts": [
+        "Information Architecture",
+        "User Experience Design"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing",
+        "Wireframing",
+        "Interface Design"
+      ],
+      "key_outcomes": "The redesigned website showed a two-fold improvement in success rates and time to complete tasks, and won the Best Government Site award by eRepublic in 2012."
+    },
+    "images": [
+      {
+        "filename": "washington-state-employment-security-department_1.jpg",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_1.jpg",
+        "concept_tags": [
+          "Wireframes",
+          "User Flows"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe sketches showing different page layouts and user flows.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_2.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_2.png",
+        "concept_tags": [
+          "Wireframes",
+          "Navigation"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe showing the main navigation structure and page layout.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_3.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_3.png",
+        "concept_tags": [
+          "Wireframes",
+          "Content Structure"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe illustrating the content structure and hierarchy.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_4.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_4.png",
+        "concept_tags": [
+          "Wireframes",
+          "User Flows"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe showing user flows and interactions for a specific feature.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_5.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_5.png",
+        "concept_tags": [
+          "Wireframes",
+          "Page Layout"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe detailing the layout and components of a specific page.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_6.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_6.png",
+        "concept_tags": [
+          "Wireframes",
+          "User Flows"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe illustrating user flows and interactions for another feature.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_7.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_7.png",
+        "concept_tags": [
+          "Wireframes",
+          "Content Structure"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe showing the content structure and hierarchy for a different section.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_8.jpg",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_8.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_8.jpg",
+        "concept_tags": [
+          "User Research",
+          "Personas"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona profiles developed through research.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_9.jpg",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_9.jpg",
+        "concept_tags": [
+          "User Research",
+          "Journey Maps"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User journey maps illustrating different scenarios and pain points.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_10.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_10.png",
+        "concept_tags": [
+          "Visual Design",
+          "Style Guide"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Visual style guide showing typography, colors, and UI components.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_11.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_11.png",
+        "concept_tags": [
+          "Visual Design",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockup of the website's homepage design.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_12.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_12.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_12.png",
+        "concept_tags": [
+          "Visual Design",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockup of an interior page design.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_13.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_13.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_13.png",
+        "concept_tags": [
+          "Visual Design",
+          "Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockup of another interior page design.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_14.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_14.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_14.png",
+        "concept_tags": [
+          "Usability Testing",
+          "User Flows"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Documentation of usability testing scenarios and user flows.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_15.png",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_15.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_15.png",
+        "concept_tags": [
+          "Usability Testing",
+          "Findings"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Summary of usability testing findings and recommendations.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_16.jpg",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_16.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_16.jpg",
+        "concept_tags": [
+          "Presentation",
+          "Project Overview"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Slide from a project presentation providing an overview of the redesign.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "washington-state-employment-security-department_17.jpg",
+        "path": "portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_17.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/washington-state-employment-security-department/washington-state-employment-security-department_17.jpg",
+        "concept_tags": [
+          "Presentation",
+          "Design Process"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Slide from a project presentation illustrating the design process.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "sealaska": {
+    "title": "sealaska",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "Cultural Preservation"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Brand Strategy",
+        "Content Strategy"
+      ],
+      "key_outcomes": "Developed a brand strategy and visual identity to communicate Sealaska's vision of sustaining a vibrant tribal culture within their community."
+    },
+    "images": [
+      {
+        "filename": "sealaska_1.jpg",
+        "path": "portfolio_images/sealaska/sealaska_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_1.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_2.jpg",
+        "path": "portfolio_images/sealaska/sealaska_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_2.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_3.jpg",
+        "path": "portfolio_images/sealaska/sealaska_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_3.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_4.jpg",
+        "path": "portfolio_images/sealaska/sealaska_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_4.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_5.jpg",
+        "path": "portfolio_images/sealaska/sealaska_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_5.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_6.jpg",
+        "path": "portfolio_images/sealaska/sealaska_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_6.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_7.jpg",
+        "path": "portfolio_images/sealaska/sealaska_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_7.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_8.jpg",
+        "path": "portfolio_images/sealaska/sealaska_8.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_8.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_9.jpg",
+        "path": "portfolio_images/sealaska/sealaska_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_9.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_10.jpg",
+        "path": "portfolio_images/sealaska/sealaska_10.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_10.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "sealaska_11.jpg",
+        "path": "portfolio_images/sealaska/sealaska_11.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/sealaska/sealaska_11.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Slide Deck"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A slide from the brand strategy presentation",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "seattle-university": {
+    "title": "seattle-university",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "User Experience Design"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Heuristic Analysis",
+        "Wireframing",
+        "Visual Design"
+      ],
+      "key_outcomes": "Rebranded the Matteo Ricci College with a new name, logo, tagline, and brand identity. Designed a new website and brochure collateral aligned with the new brand."
+    },
+    "images": [
+      {
+        "filename": "seattle-university_1.png",
+        "path": "portfolio_images/seattle-university/seattle-university_1.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_1.png",
+        "concept_tags": [
+          "Logo Design",
+          "Brand Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "The new logo design for the rebranded Matteo Ricci College.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_2.gif",
+        "path": "portfolio_images/seattle-university/seattle-university_2.gif",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_2.gif",
+        "concept_tags": [
+          "Website Design",
+          "User Interface"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "An animated GIF showcasing the website design for the rebranded college.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_3.png",
+        "path": "portfolio_images/seattle-university/seattle-university_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_3.png",
+        "concept_tags": [
+          "Brochure Design",
+          "Print Collateral"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A brochure design incorporating the new brand identity.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_4.png",
+        "path": "portfolio_images/seattle-university/seattle-university_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_4.png",
+        "concept_tags": [
+          "User Personas",
+          "User Research"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User personas developed based on research and interviews with faculty and students.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_5.png",
+        "path": "portfolio_images/seattle-university/seattle-university_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_5.png",
+        "concept_tags": [
+          "Heuristic Analysis",
+          "Usability Evaluation"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "A heuristic analysis of the existing website to identify usability issues.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_6.gif",
+        "path": "portfolio_images/seattle-university/seattle-university_6.gif",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_6.gif",
+        "concept_tags": [
+          "Website Design",
+          "User Interface"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another animated GIF showcasing the website design for the rebranded college.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_7.png",
+        "path": "portfolio_images/seattle-university/seattle-university_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_7.png",
+        "concept_tags": [
+          "Sitemap",
+          "Information Architecture"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "A sitemap outlining the information architecture and structure of the new website.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_8.png",
+        "path": "portfolio_images/seattle-university/seattle-university_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_8.png",
+        "concept_tags": [
+          "Wireframes",
+          "User Interface Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe designs for the new website, focusing on layout and user experience.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "seattle-university_9.png",
+        "path": "portfolio_images/seattle-university/seattle-university_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/seattle-university/seattle-university_9.png",
+        "concept_tags": [
+          "Brand Guidelines",
+          "Visual Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand guidelines or style guide for the new visual identity of the rebranded college.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "jewish-family-service": {
+    "title": "jewish-family-service",
+    "summary": {
+      "primary_concepts": [
+        "Information Architecture",
+        "Branding & Identity"
+      ],
+      "methodologies_used": [
+        "User Research Methods",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Improved user engagement metrics like increased time on site, decreased bounce rate, and increased page views."
+    },
+    "images": [
+      {
+        "filename": "jewish-family-service_1.jpg",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_1.jpg",
+        "concept_tags": [
+          "Community",
+          "Diversity",
+          "Inclusivity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Website design showing diverse community imagery",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_2.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_2.png",
+        "concept_tags": [
+          "Navigation",
+          "Information Architecture",
+          "User Experience"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Website navigation and information architecture design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_3.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_3.png",
+        "concept_tags": [
+          "Typography",
+          "Branding",
+          "Visual Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Website typography and branding design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_4.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_4.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_4.png",
+        "concept_tags": [
+          "User Interface",
+          "Responsive Design",
+          "Mobile Experience"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Responsive website user interface design for mobile devices",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_5.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_5.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_5.png",
+        "concept_tags": [
+          "User Research",
+          "Personas",
+          "Target Audience"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User research and persona definition for target audience",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_6.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_6.png",
+        "concept_tags": [
+          "Usability Testing",
+          "User Feedback",
+          "Iteration"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Usability testing and gathering user feedback for design iteration",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_7.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_7.png",
+        "concept_tags": [
+          "Design System",
+          "Style Guide",
+          "Consistency"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Establishing a consistent design system and style guide",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_8.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_8.png",
+        "concept_tags": [
+          "Accessibility",
+          "Inclusive Design",
+          "Universal Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Ensuring accessibility and inclusive design principles",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_9.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_9.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_9.png",
+        "concept_tags": [
+          "Content Strategy",
+          "Storytelling",
+          "Messaging"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Developing a content strategy and messaging for effective storytelling",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_10.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_10.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_10.png",
+        "concept_tags": [
+          "Analytics",
+          "Data-Driven Design",
+          "Metrics"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Analyzing user engagement metrics and data-driven design decisions",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_11.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_11.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_11.png",
+        "concept_tags": [
+          "Collaboration",
+          "Teamwork",
+          "Stakeholder Management"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Collaborative process and stakeholder management",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_12.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_12.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_12.png",
+        "concept_tags": [
+          "Prototyping",
+          "Wireframing",
+          "Iterative Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Prototyping and wireframing for iterative design process",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "jewish-family-service_13.png",
+        "path": "portfolio_images/jewish-family-service/jewish-family-service_13.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/jewish-family-service/jewish-family-service_13.png",
+        "concept_tags": [
+          "Visual Design",
+          "User Experience",
+          "Aesthetics"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Visual design and aesthetics for enhanced user experience",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "flutter": {
+    "title": "flutter",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Cross-Cultural Design"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Iterative Design",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Redesigned interface increased market share from 8% to over 30% in less than three months."
+    },
+    "images": [
+      {
+        "filename": "flutter_1.jpg",
+        "path": "portfolio_images/flutter/flutter_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_1.jpg",
+        "concept_tags": [
+          "Interface Design",
+          "User Flow",
+          "Wireframes"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframe sketches showing the redesigned user flow for the Flutter betting interface.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_2.jpg",
+        "path": "portfolio_images/flutter/flutter_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_2.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Visual Design",
+          "Responsive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "High-fidelity mockups of the redesigned Flutter interface for different screen sizes.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_3.jpg",
+        "path": "portfolio_images/flutter/flutter_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_3.jpg",
+        "concept_tags": [
+          "User Testing",
+          "Usability Evaluation",
+          "Feedback"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing session with participants providing feedback on the redesigned Flutter interface.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_4.jpg",
+        "path": "portfolio_images/flutter/flutter_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_4.jpg",
+        "concept_tags": [
+          "Persona Development",
+          "User Research",
+          "Cross-Cultural Design"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Persona profiles representing different user groups in the Chinese market for the Flutter app.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_5.jpg",
+        "path": "portfolio_images/flutter/flutter_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_5.jpg",
+        "concept_tags": [
+          "Information Architecture",
+          "User Flow",
+          "Task Analysis"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Diagrams and flowcharts showing the redesigned information architecture and user flows for the Flutter interface.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_6.jpg",
+        "path": "portfolio_images/flutter/flutter_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_6.jpg",
+        "concept_tags": [
+          "Design Iteration",
+          "Prototyping",
+          "Usability Testing"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Low-fidelity prototypes used for iterative design and usability testing of the Flutter interface.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "flutter_7.jpg",
+        "path": "portfolio_images/flutter/flutter_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/flutter/flutter_7.jpg",
+        "concept_tags": [
+          "Design System",
+          "UI Components",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Style guide and design system documentation for the redesigned Flutter interface, including UI components and branding guidelines.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "getty-images": {
+    "title": "getty-images",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "Interface Design"
+      ],
+      "methodologies_used": [
+        "Visual Design"
+      ],
+      "key_outcomes": "Created vibrant and punchy email designs aligned with Getty Images' new brand system."
+    },
+    "images": [
+      {
+        "filename": "getty-images_1.jpg",
+        "path": "portfolio_images/getty-images/getty-images_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_1.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Typography"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design with bold typography and vibrant colors",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_2.jpg",
+        "path": "portfolio_images/getty-images/getty-images_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_2.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Imagery"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design featuring a large hero image and colorful accents",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_3.jpg",
+        "path": "portfolio_images/getty-images/getty-images_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_3.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Layout"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design with a clean layout and use of white space",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_4.jpg",
+        "path": "portfolio_images/getty-images/getty-images_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_4.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Calls-to-Action"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design with prominent calls-to-action buttons",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_5.jpg",
+        "path": "portfolio_images/getty-images/getty-images_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_5.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design showcasing Getty Images' branding elements",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_6.jpg",
+        "path": "portfolio_images/getty-images/getty-images_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_6.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "Responsive Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design optimized for different screen sizes",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "getty-images_7.jpg",
+        "path": "portfolio_images/getty-images/getty-images_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/getty-images/getty-images_7.jpg",
+        "concept_tags": [
+          "Email Marketing",
+          "Visual Design",
+          "User Experience"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Email design with a focus on user experience and engagement",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "snap-village": {
+    "title": "snap-village",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "Interface Design"
+      ],
+      "methodologies_used": [
+        "User Research Methods"
+      ],
+      "key_outcomes": "Created a distinctive brand mark and interface designs for Corbis' SnapVillage web 2.0 brand."
+    },
+    "images": [
+      {
+        "filename": "snap-village_1.jpg",
+        "path": "portfolio_images/snap-village/snap-village_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_1.jpg",
+        "concept_tags": [
+          "Logo Design",
+          "Brand Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "The SnapVillage brand mark with warm colors and high contrast.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_2.jpg",
+        "path": "portfolio_images/snap-village/snap-village_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_2.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_3.jpg",
+        "path": "portfolio_images/snap-village/snap-village_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_3.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_4.jpg",
+        "path": "portfolio_images/snap-village/snap-village_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_4.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_5.jpg",
+        "path": "portfolio_images/snap-village/snap-village_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_5.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_6.jpg",
+        "path": "portfolio_images/snap-village/snap-village_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_6.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "snap-village_7.jpg",
+        "path": "portfolio_images/snap-village/snap-village_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/snap-village/snap-village_7.jpg",
+        "concept_tags": [
+          "User Interface",
+          "Web Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Another interface design for the SnapVillage website or application.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "township-110": {
+    "title": "township-110",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "Information Architecture"
+      ],
+      "methodologies_used": [
+        "User Research Methods",
+        "Persona Definition"
+      ],
+      "key_outcomes": "Developed a cohesive brand identity and website architecture to showcase exurban retirement/second home living communities."
+    },
+    "images": [
+      {
+        "filename": "township-110_1.jpg",
+        "path": "portfolio_images/township-110/township-110_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_1.jpg",
+        "concept_tags": [
+          "Logo Design",
+          "Brand Identity"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Township110 logo and branding elements",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_2.jpg",
+        "path": "portfolio_images/township-110/township-110_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_2.jpg",
+        "concept_tags": [
+          "Website Design",
+          "User Interface"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Township110 website homepage design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_3.jpg",
+        "path": "portfolio_images/township-110/township-110_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_3.jpg",
+        "concept_tags": [
+          "Website Design",
+          "User Interface",
+          "Interactive Elements"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Township110 website with interactive Flash animation elements",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_4.jpg",
+        "path": "portfolio_images/township-110/township-110_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_4.jpg",
+        "concept_tags": [
+          "User Research",
+          "Persona Development"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "User persona research and definition for Township110 target audience",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_5.jpg",
+        "path": "portfolio_images/township-110/township-110_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_5.jpg",
+        "concept_tags": [
+          "Information Architecture",
+          "Site Map"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Website information architecture and site map for Township110",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_6.jpg",
+        "path": "portfolio_images/township-110/township-110_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_6.jpg",
+        "concept_tags": [
+          "Brand Guidelines",
+          "Style Guide"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Township110 brand guidelines and style guide",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "township-110_7.jpg",
+        "path": "portfolio_images/township-110/township-110_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/township-110/township-110_7.jpg",
+        "concept_tags": [
+          "User Testing",
+          "Usability Evaluation"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "Usability testing and evaluation of Township110 website",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "wild-tangent": {
+    "title": "wild-tangent",
+    "summary": {
+      "primary_concepts": [
+        "Interface Design",
+        "Branding & Identity"
+      ],
+      "methodologies_used": [
+        "User Research",
+        "Usability Testing"
+      ],
+      "key_outcomes": "Created a dynamic and exciting homepage design for a casual game company that could present different views based on user profiles and featured games."
+    },
+    "images": [
+      {
+        "filename": "wild-tangent_1.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_1.jpg",
+        "concept_tags": [
+          "Homepage Design",
+          "Web Design",
+          "Gaming"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Homepage design for Wild Tangent featuring a large game spot extending beyond the page frame with saturated colors and movement to represent excitement.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_2.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_2.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_2.jpg",
+        "concept_tags": [
+          "Homepage Design",
+          "Web Design",
+          "Gaming"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Alternative homepage design for Wild Tangent with a different featured game and color scheme.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_3.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_3.jpg",
+        "concept_tags": [
+          "Branding",
+          "Identity Design",
+          "Agency Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Branding and identity design for an in-house design team with a 'secret agent' motif.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_4.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_4.jpg",
+        "concept_tags": [
+          "Branding",
+          "Identity Design",
+          "Agency Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Branding and identity design for an in-house design team with a 'secret agent' motif, showing various brand elements.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_5.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_5.jpg",
+        "concept_tags": [
+          "Branding",
+          "Identity Design",
+          "Agency Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Branding and identity design for an in-house design team with a 'secret agent' motif, showing brand guidelines.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_6.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_6.jpg",
+        "concept_tags": [
+          "Branding",
+          "Identity Design",
+          "Agency Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Branding and identity design for an in-house design team with a 'secret agent' motif, showing brand applications.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "wild-tangent_7.jpg",
+        "path": "portfolio_images/wild-tangent/wild-tangent_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/wild-tangent/wild-tangent_7.jpg",
+        "concept_tags": [
+          "Branding",
+          "Identity Design",
+          "Agency Branding"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Branding and identity design for an in-house design team with a 'secret agent' motif, showing brand applications.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "inner-agency": {
+    "title": "inner-agency",
+    "summary": {
+      "primary_concepts": [
+        "Branding & Identity",
+        "Information Architecture"
+      ],
+      "methodologies_used": [
+        "User Research Methods",
+        "Design Systems"
+      ],
+      "key_outcomes": "Developed a brand strategy and visual identity for an in-house design team, enabling them to extend their reach and capabilities. Collaborated with Allrecipes.com on various applications and monetization strategies, extending their brand through effective information architecture and interface design."
+    },
+    "images": [
+      {
+        "filename": "inner-agency_1.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_1.jpg",
+        "concept_tags": [
+          "Brand Identity",
+          "Visual Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand identity and visual design elements for the Inner Agency project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_2.png",
+        "path": "portfolio_images/inner-agency/inner-agency_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_2.png",
+        "concept_tags": [
+          "Brand Guidelines",
+          "Style Guide"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand guidelines and style guide for the Inner Agency project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_3.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_3.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_3.jpg",
+        "concept_tags": [
+          "Brand Collateral",
+          "Print Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Brand collateral and print design materials for the Inner Agency project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_4.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_4.jpg",
+        "concept_tags": [
+          "Brand Presentation",
+          "Mood Board"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Brand presentation and mood board for the Inner Agency project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_5.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_5.jpg",
+        "concept_tags": [
+          "Brand Concept",
+          "Visual Metaphor"
+        ],
+        "phase": "research",
+        "methodology": "",
+        "description": "Brand concept and visual metaphor exploration for the Inner Agency project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_6.png",
+        "path": "portfolio_images/inner-agency/inner-agency_6.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_6.png",
+        "concept_tags": [
+          "User Interface Design",
+          "Application Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "User interface and application design for the Allrecipes.com project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_7.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_7.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_7.jpg",
+        "concept_tags": [
+          "Information Architecture",
+          "User Flow"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Information architecture and user flow diagrams for the Allrecipes.com project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_8.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_8.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_8.jpg",
+        "concept_tags": [
+          "Wireframes",
+          "Prototyping"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Wireframes and prototypes for the Allrecipes.com project.",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "inner-agency_9.jpg",
+        "path": "portfolio_images/inner-agency/inner-agency_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/inner-agency/inner-agency_9.jpg",
+        "concept_tags": [
+          "User Testing",
+          "Usability Evaluation"
+        ],
+        "phase": "testing",
+        "methodology": "",
+        "description": "User testing and usability evaluation for the Allrecipes.com project.",
+        "teaching_concepts": []
+      }
+    ]
+  },
+  "all-recipes": {
+    "title": "all-recipes",
+    "summary": {
+      "primary_concepts": [
+        "User Experience Design",
+        "Brand Identity"
+      ],
+      "methodologies_used": [
+        "Information Architecture",
+        "User Research",
+        "Usability Testing",
+        "Interface Design"
+      ],
+      "key_outcomes": "Redesigned website and brand identity for CareOregon to improve user experience and align with their vision."
+    },
+    "images": [
+      {
+        "filename": "all-recipes_1.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_1.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_1.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_2.png",
+        "path": "portfolio_images/all-recipes/all-recipes_2.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_2.png",
+        "concept_tags": [
+          "User Interface",
+          "Party Planner",
+          "Web Application"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Party planner web application interface",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_3.png",
+        "path": "portfolio_images/all-recipes/all-recipes_3.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_3.png",
+        "concept_tags": [
+          "User Interface",
+          "Party Planner",
+          "Web Application"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Party planner web application interface",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_4.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_4.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_4.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_5.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_5.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_5.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_6.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_6.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_6.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_7.png",
+        "path": "portfolio_images/all-recipes/all-recipes_7.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_7.png",
+        "concept_tags": [
+          "User Interface",
+          "Party Planner",
+          "Web Application"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Party planner web application interface",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_8.png",
+        "path": "portfolio_images/all-recipes/all-recipes_8.png",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_8.png",
+        "concept_tags": [
+          "User Interface",
+          "Party Planner",
+          "Web Application"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Party planner web application interface",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_9.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_9.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_9.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_10.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_10.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_10.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      },
+      {
+        "filename": "all-recipes_11.jpg",
+        "path": "portfolio_images/all-recipes/all-recipes_11.jpg",
+        "s3_url": "https://lecture-transcripts-427791004700.s3.amazonaws.com/portfolio_images/all-recipes/all-recipes_11.jpg",
+        "concept_tags": [
+          "Print Ad",
+          "Toyota Corolla",
+          "Campaign Design"
+        ],
+        "phase": "design",
+        "methodology": "",
+        "description": "Toyota Corolla print ad design",
+        "teaching_concepts": []
+      }
+    ],
+    "lecture_mentions": [
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "ement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixels\n, merged with Ramp Group- a leading UX and Development f",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of work showcasing design experience",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting their professional design experience by mentioning a project they worked on (All Recipes) as part of their portfolio.",
+          "relevance_score": 0.6
+        }
+      },
+      {
+        "lecture_file": "page_about-the-instructor.txt",
+        "context": "ement, and revenue metrics. He currently leads User Experience for Internet of Things at AWS.\nHis portfolio of work includes Virgin, Vodafone, Microsoft, T-Mobile, Premera Blue Cross, ABC Television, All Recipes, Trulia, Dex, the State of Washington Employment Security Department, and Match.com. In October of 2010, Jason\u2019s design studio,\nPerfect Pixels\n, merged with Ramp Group- a leading UX and Development f",
+        "analysis": {
+          "aspect": "design",
+          "teaching_concept": "portfolio of work showcasing experience",
+          "mention_type": "brief",
+          "key_takeaway": "The lecturer is highlighting the speaker's professional experience and design portfolio to establish their credibility and expertise in user experience design.",
+          "relevance_score": 0.8
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "version": "1.0",
+  "generated_from": "lecture transcripts",
+  "total_concepts": 66,
+  "total_clusters": 10,
+  "clusters": [
+    {
+      "cluster_id": "user_research",
+      "central_concept": "User Research",
+      "concepts": [
+        "user interviews",
+        "user testing",
+        "user needs analysis",
+        "task analysis",
+        "usability testing",
+        "A/B testing",
+        "eye tracking",
+        "user experience research"
+      ],
+      "related_clusters": [
+        "personas",
+        "user_experience_design"
+      ]
+    },
+    {
+      "cluster_id": "personas",
+      "central_concept": "Personas",
+      "concepts": [
+        "personas",
+        "journey maps",
+        "mental models",
+        "user experience strategy"
+      ],
+      "related_clusters": [
+        "user_research",
+        "information_architecture"
+      ]
+    },
+    {
+      "cluster_id": "information_architecture",
+      "central_concept": "Information Architecture",
+      "concepts": [
+        "information architecture",
+        "site maps",
+        "card sorting",
+        "navigation design",
+        "user flows"
+      ],
+      "related_clusters": [
+        "personas",
+        "interaction_design"
+      ]
+    },
+    {
+      "cluster_id": "interaction_design",
+      "central_concept": "Interaction Design",
+      "concepts": [
+        "interaction design",
+        "user interface design",
+        "user interface conventions",
+        "design patterns",
+        "responsive design",
+        "mobile design",
+        "web design"
+      ],
+      "related_clusters": [
+        "information_architecture",
+        "visual_design"
+      ]
+    },
+    {
+      "cluster_id": "visual_design",
+      "central_concept": "Visual Design",
+      "concepts": [
+        "visual design",
+        "information design",
+        "content strategy"
+      ],
+      "related_clusters": [
+        "interaction_design",
+        "design_systems"
+      ]
+    },
+    {
+      "cluster_id": "design_systems",
+      "central_concept": "Design Systems",
+      "concepts": [
+        "design systems",
+        "design operations",
+        "design documentation",
+        "design specifications",
+        "design handoff"
+      ],
+      "related_clusters": [
+        "visual_design",
+        "design_process"
+      ]
+    },
+    {
+      "cluster_id": "design_process",
+      "central_concept": "Design Process",
+      "concepts": [
+        "user-centered design",
+        "design thinking",
+        "design sprints",
+        "lean UX",
+        "agile UX",
+        "design process",
+        "design methodology",
+        "design tools",
+        "design software"
+      ],
+      "related_clusters": [
+        "design_systems",
+        "design_evaluation"
+      ]
+    },
+    {
+      "cluster_id": "design_evaluation",
+      "central_concept": "Design Evaluation",
+      "concepts": [
+        "usability",
+        "user interface evaluation",
+        "heuristic evaluation",
+        "design iteration",
+        "design critique",
+        "user experience evaluation",
+        "user experience metrics"
+      ],
+      "related_clusters": [
+        "design_process",
+        "accessibility"
+      ]
+    },
+    {
+      "cluster_id": "accessibility",
+      "central_concept": "Accessibility",
+      "concepts": [
+        "accessibility",
+        "accessibility guidelines",
+        "inclusive design",
+        "universal design"
+      ],
+      "related_clusters": [
+        "design_evaluation",
+        "design_collaboration"
+      ]
+    },
+    {
+      "cluster_id": "design_collaboration",
+      "central_concept": "Design Collaboration",
+      "concepts": [
+        "design collaboration",
+        "design communication",
+        "design facilitation",
+        "design leadership",
+        "design management"
+      ],
+      "related_clusters": [
+        "accessibility",
+        "user_research"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+Course Page: about-your-course-3
+
+About Your Course
+Your course has default settings that should be helpful for many UW instructors. It also includes the
+Instructors: START HERE
+Module which contains:
+Information about the course
+A guide to the basic features of Canvas
+Tips for increasing the accessibility of your course
+How to get help with Canvas
+A Technology Support and Resources page you can tailor and share with students
+The
+Instructors: START HERE
+Module and all of its contents are unpublished and are not visible to students. You can choose to leave the module unpublished for your reference, or remove it entirely using the instructions below (under Editing or Removing the Instructors: START HERE Module).
+COURSE SETTINGS
+Grade Book Settings
+The
+Grade Posting Policy
+for the course has been set to
+Manually Post Grades
+. This means that
+g
+rades are hidden by default
+and will not be visible to students until you choose to make them available.
+You can
+change your Grade Posting Policy
+to
+Automatically Post Grades if you want
+assignment grades to be visible to students as soon as they are entered.
+Course Settings
+To prevent students from viewing course summary statistics and figuring out each others’ grades, the
+Hide grade distribution graphs from students
+setting has been selected to hide grade distribution graphs.
+If you want students to have access to this course data,
+you can
+change this setting
+.
+Course Navigation Settings
+The following items have been hidden/disabled to streamline the course navigation:
+Attendance
+Files
+BigBlueButton
+Outcomes
+Rubrics
+You can hide, show, and reorder course navigation links
+.
+Changing Settings
+You can change any of the default settings listed above by referring to the linked guides.
+Be aware that resetting your course removes
+ALL content
+and changes the URL of the course to a new URL.
+Resetting the course
+will not reset the default settings or remove the
+For Instructors: START HERE
+Module. The only way to change the default settings is to use the instructions above.
+EDITING OR REMOVING THE INSTRUCTORS: START HERE MODULE
+The
+Instructors: START HERE
+Module and all of its contents are unpublished and are not visible to students. If you'd like to delete the Module or any of its contents:
+Remove items from modules
+. Click the three dot menu
+to the right of any content item in a module to open a context menu where you can select
+Remove
+. This option removes the content from the module but not the course. The pages will still appear in the Pages section of the course unless you delete them there.
+Delete a module
+. Similar to removing items from a module, click the three dot menu in the upper right-hand corner of the module and select
+Delete
+from the menu. This deletes the module from the Modules page, but any content it contained can still be found in the corresponding area of the course (such as Pages.)
+If you plan to share the
+Technology Support and Resources
+page with students, either
+move
+or
+copy
+the page to another Module and
+edit
+it to personalize the information for your course.
+Module updated March 2023

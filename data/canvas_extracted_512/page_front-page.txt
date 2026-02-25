@@ -1,0 +1,32 @@
+Course Page: front-page
+
+Front Page
+UW MCDM Design + Usability
+Winter Quarter 2015
+THURSDAYS 6:00-9:50pm, CMU 302
+Instructor: Jason Levine
+Office Hours (by appointment only): CMU 129
+Email:
+Levine13@uw.edu
+Website:
+http://www.perfectpixels.com
+Twitter
+@perfectpixels
+Overview
+The Interactive Design & Web Usability course is designed to understand what makes a website successful from a user perspective. Students will learn how to conduct various methods for evaluating user interfaces. However, the course also practices skills with broader application: to address and solve usability issues through user research and applying HCI (Human Computer Interface) conventions.
+This course focuses on the design, implementation, and evaluation of user interfaces from a usability perspective. The aim of the course is to study concepts, methods, and techniques of usability engineering, with a focus on the artifacts where user experience is essential. Historically, usability has covered aspects of efficiency, learnability, and ease of use. Today, a large number of other measures for success rely on elements such as playability, engagement, entertainment, immersion, and aesthetics.
+Learning Objectives
+The following concepts will be detailed with the expectation that by the end of the quarter, students will recognize the aspects of each of the following deliverables within Interface Design and User Research.
+At the completion of this course, students will have portfolio-ready, end-to-end work examples. The work examples are designed for students to demonstrate they can:
+Understand basic principles of user interface design, implementation and evaluation
+Design and conduct usability studies
+Select an appropriate evaluation method and articulating its advantages and disadvantages
+Establish useful test objectives
+Prepare reports and presenting results
+The overarching goal is to give students a holistic understanding of the interactive space in order to provide perspective in any endeavor or role you will have in the future. After having completed the course you will be able to:
+Engage engineers, designers, and project managers with knowledge and perspective to advocate for user-centered design principles
+Assess and provide prescriptive solutions to usability issues
+Evaluate the quality of usability evaluations from both a theoretical perspective of evaluation methods and ones’ own experience of evaluation
+Independently plan, perform, and make a report about both an expert evaluation and an empirical usability evaluation
+About the Instructor
+Recommended Materials
