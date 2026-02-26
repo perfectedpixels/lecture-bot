@@ -645,7 +645,7 @@ if not st.session_state.chat_history:
     st.markdown("""
     <div class="welcome-text">
         <h2>Welcome to Lecture Bot!</h2>
-        <p>I'm Professor Levine's AI assistant. I can help you with:</p>
+        <p>I'm Professor Levine's AI assistant, based on 100+ hours of lecture material. I can help you with:</p>
         <ul>
             <li>Course content and lecture materials</li>
             <li>UX design principles and methodologies</li>
