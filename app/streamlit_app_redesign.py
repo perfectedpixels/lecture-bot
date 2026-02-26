@@ -145,6 +145,10 @@ data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
 if not os.path.exists(data_dir):
     data_dir = 'data'  # Streamlit Cloud path
 
+print(f"Looking for images in: {data_dir}")
+print(f"Background exists: {os.path.exists(os.path.join(data_dir, 'uw-background.png'))}")
+print(f"Logo exists: {os.path.exists(os.path.join(data_dir, 'uw-logo.png'))}")
+
 bg_image = get_base64_image(os.path.join(data_dir, "uw-background.png"))
 logo_image = get_base64_image(os.path.join(data_dir, "uw-logo.png"))
 
