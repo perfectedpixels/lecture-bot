@@ -383,23 +383,29 @@ st.markdown("""
     
     /* Welcome message */
     .welcome-text {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 12px;
         padding: 30px;
-        margin: 40px 0;
-        text-align: center;
+        margin: 40px auto;
+        text-align: center !important;
         backdrop-filter: blur(10px);
+        max-width: 800px;
     }
     
     .welcome-text h2 {
         margin-bottom: 15px;
+        text-align: center !important;
+    }
+    
+    .welcome-text p {
+        text-align: center !important;
     }
     
     .welcome-text ul {
         text-align: left;
         display: inline-block;
-        margin: 15px 0;
+        margin: 15px auto;
     }
     
     /* Expander styling */
