@@ -146,7 +146,7 @@ st.markdown(f"""
     }}
     
     .main .block-container {{
-        padding-top: 120px !important;
+        padding-top: 40px !important;
         max-width: 1200px !important;
         margin: 0 auto;
     }}
@@ -161,44 +161,7 @@ st.markdown(f"""
         color: white !important;
     }}
     
-    /* Sticky Navigation Bar */
-    .top-nav {{
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #34006f;
-        padding: 12px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 9999;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }}
-    
-    .nav-logo {{
-        height: 45px;
-        transition: height 0.3s ease;
-    }}
-    
-    .nav-controls {{
-        display: flex;
-        gap: 25px;
-        align-items: center;
-        font-size: 16px;
-        color: white;
-    }}
-    
-    .nav-controls span {{
-        cursor: pointer;
-        transition: opacity 0.2s;
-    }}
-    
-    .nav-controls span:hover {{
-        opacity: 0.8;
-    }}
-    
-    /* Logo Container (initial centered position) */
+    /* Logo Container (centered position) */
     .logo-container {{
         text-align: center;
         margin: 40px 0 30px 0;
@@ -212,30 +175,8 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# Top Navigation Bar
-if logo_image:
-    st.markdown(f"""
-    <div class="top-nav">
-        <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
-        <div class="nav-controls">
-            <span id="audio-toggle">🔊 Audio</span>
-            <span id="settings-btn">⚙️ Settings</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-    <div class="top-nav">
-        <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
-        <div class="nav-controls">
-            <span id="audio-toggle">🔊 Audio</span>
-            <span id="settings-btn">⚙️ Settings</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Centered Logo (will be hidden on scroll in future enhancement)
-if logo_image:
+# Centered Logo (only show before chat starts)
+if not st.session_state.chat_history and logo_image:
     st.markdown(f"""
     <div class="logo-container">
         <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
@@ -244,11 +185,7 @@ if logo_image:
 
 st.markdown("""
 <style>
-    
-    /* Header styling */
-    .header-container {
-    
-    /* Button styling */
+    /* Button styling - fixed to prevent white boxes */
     .stButton button {
         background: rgba(255, 255, 255, 0.15) !important;
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
@@ -256,25 +193,23 @@ st.markdown("""
         border-radius: 8px !important;
         padding: 8px 16px !important;
         transition: all 0.2s !important;
+        box-shadow: none !important;
     }
     
     .stButton button:hover {
         background: rgba(255, 255, 255, 0.25) !important;
         border-color: rgba(255, 255, 255, 0.5) !important;
+        box-shadow: none !important;
     }
     
     .stButton button:active,
-    .stButton button:focus {
-        background: rgba(255, 255, 255, 0.30) !important;
-        border-color: rgba(255, 255, 255, 0.6) !important;
-        box-shadow: none !important;
-    }
-    
-    /* Override Streamlit's default button focus/active states */
-    .stButton > button:focus:not(:active) {
+    .stButton button:focus,
+    .stButton button:focus:not(:active),
+    .stButton button:focus-visible {
         background: rgba(255, 255, 255, 0.25) !important;
         border-color: rgba(255, 255, 255, 0.5) !important;
         box-shadow: none !important;
+        outline: none !important;
     }
     
     /* Input styling */
@@ -289,49 +224,27 @@ st.markdown("""
         color: rgba(255, 255, 255, 0.5) !important;
     }
     
-    /* Chat input footer - transparent/invisible, floating text box */
-    .stChatInputContainer,
-    [data-testid="stChatInput"],
-    [data-testid="stBottom"],
+    /* Chat input footer - transparent background */
     section[data-testid="stBottom"],
-    .stBottom,
-    div[class*="stChatInput"],
-    footer,
-    section[data-testid="stChatFloatingInputContainer"],
     .stChatFloatingInputContainer {
         background: transparent !important;
         background-color: transparent !important;
-        padding: 20px !important;
     }
     
-    /* Target the input field itself - white border, semi-transparent dark background */
-    [data-testid="stChatInput"] input,
-    .stChatInput input,
-    input[type="text"] {
+    /* Chat input field - white border, dark background, proper padding */
+    [data-testid="stChatInput"] textarea,
+    [data-testid="stChatInput"] input {
         background: rgba(40, 40, 40, 0.85) !important;
         border: 2px solid white !important;
         border-radius: 24px !important;
         color: white !important;
-        padding: 12px 20px 12px 50px !important;
+        padding: 12px 20px !important;
         backdrop-filter: blur(10px);
-        position: relative;
+        caret-color: white !important;
     }
     
-    /* Purple triangle indicator to the left */
-    [data-testid="stChatInput"]::before {
-        content: "▶";
-        position: absolute;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #7B2FFF;
-        font-size: 20px;
-        z-index: 10;
-    }
-    
-    [data-testid="stChatInput"] input::placeholder,
-    .stChatInput input::placeholder,
-    input[type="text"]::placeholder {
+    [data-testid="stChatInput"] textarea::placeholder,
+    [data-testid="stChatInput"] input::placeholder {
         color: rgba(255, 255, 255, 0.7) !important;
     }
     
@@ -461,6 +374,8 @@ st.markdown("""
         border-top: 2px solid rgba(255, 255, 255, 0.4);
         margin: 10px 0 20px 0;
     }
+    
+    .concept-item {
         background: rgba(255, 255, 255, 0.08);
         border-radius: 8px;
         border-left: 3px solid #9D4EDD;
@@ -755,37 +670,6 @@ if st.session_state.pending_question:
     st.rerun()
 
 # Chat input
-# Add CSS to make footer transparent and add purple triangle
-st.markdown("""
-<style>
-    /* Transparent footer - let purple background show through */
-    section[data-testid="stBottom"] {
-        background-color: transparent !important;
-        background: transparent !important;
-    }
-    
-    /* Floating text box with white border */
-    [data-testid="stChatInput"] input {
-        border: 2px solid white !important;
-        background: rgba(40, 40, 40, 0.85) !important;
-        backdrop-filter: blur(10px);
-        padding-left: 50px !important;
-    }
-    
-    /* Purple triangle to the left */
-    [data-testid="stChatInput"]::before {
-        content: "▶";
-        position: absolute;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #7B2FFF;
-        font-size: 20px;
-        z-index: 10;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 question = st.chat_input("Ask Professor Levine...")
 
 if question and st.session_state.bot:
