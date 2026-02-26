@@ -146,7 +146,7 @@ st.markdown(f"""
     }}
     
     .main .block-container {{
-        padding-top: 40px !important;
+        padding-top: 100px !important;
         max-width: 1200px !important;
         margin: 0 auto;
     }}
@@ -161,16 +161,45 @@ st.markdown(f"""
         color: white !important;
     }}
     
-    /* Logo Container (centered position) */
-    .logo-container {{
-        text-align: center;
-        margin: 40px 0 30px 0;
+    /* Sticky Navigation Bar */
+    .top-nav {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #34006f;
+        padding: 12px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }}
     
-    .logo-container img {{
-        max-width: 500px;
-        width: 100%;
-        transition: all 0.3s ease;
+    .nav-logo {{
+        height: 50px;
+    }}
+    
+    .nav-controls {{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }}
+    
+    .nav-btn {{
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+    }}
+    
+    .nav-btn:hover {{
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -503,11 +532,28 @@ if st.session_state.bot is None and HAS_PERSONA_BOT:
     except:
         pass
 
-# Centered Logo (only show before chat starts)
-if not st.session_state.chat_history and logo_image:
+# Top Navigation Bar - Always visible
+audio_icon = "🔊" if st.session_state.audio_autoplay else "🔇"
+audio_text = "On" if st.session_state.audio_autoplay else "Off"
+
+if logo_image:
     st.markdown(f"""
-    <div class="logo-container">
-        <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
+    <div class="top-nav">
+        <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
+        <div class="nav-controls">
+            <span class="nav-btn">{audio_icon} Audio: {audio_text}</span>
+            <span class="nav-btn">⚙️ Settings</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown(f"""
+    <div class="top-nav">
+        <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
+        <div class="nav-controls">
+            <span class="nav-btn">{audio_icon} Audio: {audio_text}</span>
+            <span class="nav-btn">⚙️ Settings</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
