@@ -307,9 +307,9 @@ st.markdown("""
         border-radius: 8px !important;
     }
     
-    /* User message bubble - lighter purple */
+    /* User message bubble - purple gradient matching palette */
     .user-message {
-        background: linear-gradient(135deg, #7B2FFF 0%, #9D4EDD 100%);
+        background: linear-gradient(135deg, #8938f6 0%, #a855f7 100%);
         color: white;
         padding: 12px 16px;
         border-radius: 18px;
@@ -321,9 +321,9 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     
-    /* Bot message bubble - BLACK background */
+    /* Bot message bubble - BLACK with subtle gradient */
     .bot-message {
-        background: rgba(20, 20, 20, 0.95);
+        background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
         color: white;
         padding: 16px;
         border-radius: 18px;
@@ -339,7 +339,7 @@ st.markdown("""
     /* Audio player - styled to match bot bubble */
     .bot-message + div .stAudio,
     div:has(> .bot-message) + div .stAudio {
-        background: rgba(20, 20, 20, 0.95);
+        background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
         padding: 12px 16px;
         border-radius: 18px;
         margin: 0 0 8px 0;
