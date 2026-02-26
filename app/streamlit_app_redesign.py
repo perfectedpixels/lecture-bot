@@ -22,25 +22,7 @@ except ImportError:
     HAS_PORTFOLIO_IMAGES = False
 
 
-def render_skeleton_loading():
-    """Render skeleton loading animation while cards are being generated"""
-    st.markdown("""
-    <div class="learning-cards-container loading-cards">
-        <div class="skeleton skeleton-title"></div>
-        
-        <div class="skeleton skeleton-card"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text-short"></div>
-        
-        <div class="skeleton skeleton-card" style="margin-top: 20px;"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text-short"></div>
-        
-        <div class="skeleton skeleton-card" style="margin-top: 20px;"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text-short"></div>
-    </div>
-    """, unsafe_allow_html=True)
+# Skeleton loading removed - was causing white box hover issue
 
 
 def render_learning_cards(cards: dict, message_idx: int):
@@ -442,70 +424,23 @@ st.markdown("""
         margin: 5px 0;
     }
     
-    /* Skeleton Loading Animation */
-    .skeleton {
-        background: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.08) 25%,
-            rgba(255, 255, 255, 0.15) 50%,
-            rgba(255, 255, 255, 0.08) 75%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-        border-radius: 6px;
-    }
-    
-    @keyframes shimmer {
-        0% {
-            background-position: 200% 0;
-        }
-        100% {
-            background-position: -200% 0;
-        }
-    }
-    
-    .skeleton-title {
-        height: 24px;
-        width: 60%;
-        margin-bottom: 15px;
-    }
-    
-    .skeleton-card {
-        height: 80px;
-        margin: 10px 0;
-    }
-    
-    .skeleton-text {
-        height: 16px;
-        width: 100%;
-        margin: 8px 0;
-    }
-    
-    .skeleton-text-short {
-        height: 16px;
-        width: 70%;
-        margin: 8px 0;
-    }
-    
-    .loading-cards {
-        padding: 20px;
-    }
-    
     .learning-cards-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 15px;
+        font-size: 20px;
+        font-weight: bold;
         color: white;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        margin: 20px 0 15px 0;
+        text-align: center;
     }
     
     .card-section {
-        margin: 15px 0;
-        padding: 15px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.20);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
         border: 1px solid rgba(255, 255, 255, 0.15);
     }
     
@@ -624,6 +559,8 @@ if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
     st.session_state.voice_enabled = True
+if 'audio_autoplay' not in st.session_state:
+    st.session_state.audio_autoplay = True
 if 'verbosity' not in st.session_state:
     st.session_state.verbosity = "normal"
 if 'voice_generator' not in st.session_state:
@@ -680,6 +617,9 @@ with st.sidebar:
     voice_enabled = st.toggle("Enable Voice", value=st.session_state.voice_enabled, key="voice_toggle")
     st.session_state.voice_enabled = voice_enabled
     
+    audio_autoplay = st.toggle("🔊 Auto-play Audio", value=st.session_state.get('audio_autoplay', True), key="audio_autoplay_toggle")
+    st.session_state.audio_autoplay = audio_autoplay
+    
     st.markdown("### Response Length")
     st.caption("Controls how detailed responses are")
     
@@ -727,12 +667,12 @@ for idx, chat in enumerate(st.session_state.chat_history):
     # Bot message
     st.markdown(f'<div class="bot-message">{chat["answer"]}</div>', unsafe_allow_html=True)
     
-    # Audio player (visible with controls so user can stop it)
+    # Audio player (visible with controls, autoplay based on setting)
     if st.session_state.voice_enabled and chat.get('audio_base64'):
         st.audio(
             f"data:audio/mpeg;base64,{chat['audio_base64']}",
             format="audio/mpeg",
-            autoplay=True
+            autoplay=st.session_state.audio_autoplay
         )
     
     # Learning Cards (only for most recent message)
@@ -788,16 +728,12 @@ if st.session_state.pending_question:
             
             modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
             
-            # Show skeleton loading for cards
-            with cards_placeholder:
-                render_skeleton_loading()
-            
+            # Query bot
             result = st.session_state.bot.query(modified_question, use_persona=True)
             result['question'] = question
             
-            # Clear skeleton and show actual response
+            # Show response
             bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
-            cards_placeholder.empty()
             
             # Generate audio if voice is enabled
             if st.session_state.voice_enabled and st.session_state.voice_generator:
@@ -868,16 +804,12 @@ if question and st.session_state.bot:
             
             modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
             
-            # Show skeleton loading for cards
-            with cards_placeholder:
-                render_skeleton_loading()
-            
+            # Query bot
             result = st.session_state.bot.query(modified_question, use_persona=True)
             result['question'] = question
             
-            # Clear skeleton and show actual response
+            # Show response
             bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
-            cards_placeholder.empty()
             
             # Generate audio if voice is enabled
             if st.session_state.voice_enabled and st.session_state.voice_generator:
