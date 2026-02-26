@@ -29,9 +29,11 @@ def get_base64_image(image_path):
     """Convert image to base64 for embedding in CSS/HTML"""
     try:
         with open(image_path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
+            data = base64.b64encode(f.read()).decode()
+            print(f"✓ Loaded image: {image_path}")
+            return data
     except Exception as e:
-        print(f"Error loading image {image_path}: {e}")
+        print(f"✗ Error loading image {image_path}: {e}")
         return ""
 
 
@@ -124,14 +126,20 @@ st.set_page_config(
 )
 
 # Load images as base64
-bg_image = get_base64_image("../data/uw-background.png")
-logo_image = get_base64_image("../data/uw-logo.png")
+# Try multiple paths for local vs Streamlit Cloud
+import os
+data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+if not os.path.exists(data_dir):
+    data_dir = 'data'  # Streamlit Cloud path
+
+bg_image = get_base64_image(os.path.join(data_dir, "uw-background.png"))
+logo_image = get_base64_image(os.path.join(data_dir, "uw-logo.png"))
 
 st.markdown(f"""
 <style>
     /* New UW Background */
     .stApp {{
-        background-image: url('data:image/png;base64,{bg_image}');
+        {"background-image: url('data:image/png;base64," + bg_image + "');" if bg_image else "background: linear-gradient(135deg, #4b2e83 0%, #2f1654 100%);"}
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -205,22 +213,34 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Top Navigation Bar
-st.markdown(f"""
-<div class="top-nav">
-    <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
-    <div class="nav-controls">
-        <span id="audio-toggle">🔊 Audio</span>
-        <span id="settings-btn">⚙️ Settings</span>
+if logo_image:
+    st.markdown(f"""
+    <div class="top-nav">
+        <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
+        <div class="nav-controls">
+            <span id="audio-toggle">🔊 Audio</span>
+            <span id="settings-btn">⚙️ Settings</span>
+        </div>
     </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <div class="top-nav">
+        <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
+        <div class="nav-controls">
+            <span id="audio-toggle">🔊 Audio</span>
+            <span id="settings-btn">⚙️ Settings</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Centered Logo (will be hidden on scroll in future enhancement)
-st.markdown(f"""
-<div class="logo-container">
-    <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
-</div>
-""", unsafe_allow_html=True)
+if logo_image:
+    st.markdown(f"""
+    <div class="logo-container">
+        <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
 <style>
