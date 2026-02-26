@@ -44,34 +44,32 @@ def render_skeleton_loading():
 
 
 def render_learning_cards(cards: dict, message_idx: int):
-    """Render all three types of learning cards"""
+    """Render all three types of learning cards in a compact side-by-side layout"""
     if not cards or not any(cards.values()):
         return
     
     st.markdown("""
-    <div class="learning-cards-container">
-        <div class="learning-cards-title">
-            💡 Explore Related Topics
-        </div>
+    <div class="learning-cards-title">
+        💡 Explore Related Topics
+    </div>
     """, unsafe_allow_html=True)
     
-    # 1. Teaching Concepts Card
-    if cards.get('teaching_concepts'):
-        render_teaching_concepts_card(cards['teaching_concepts'], message_idx)
+    # Create two columns for side-by-side cards
+    col1, col2 = st.columns(2)
     
-    # 2. Related Concepts Card
-    if cards.get('related_concepts'):
-        render_related_concepts_card(cards['related_concepts'], message_idx)
+    with col1:
+        # Core Teaching Concepts Card
+        if cards.get('teaching_concepts'):
+            render_teaching_concepts_card(cards['teaching_concepts'], message_idx)
     
-    # 3. Portfolio Examples Card
-    if cards.get('portfolio_examples'):
-        render_portfolio_card(cards['portfolio_examples'], message_idx)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    with col2:
+        # See It in Practice Card
+        if cards.get('portfolio_examples'):
+            render_portfolio_card(cards['portfolio_examples'], message_idx)
 
 
 def render_teaching_concepts_card(concepts: list, message_idx: int):
-    """Render the teaching concepts card"""
+    """Render the teaching concepts card with clickable topics"""
     if not concepts:
         return
     
@@ -87,24 +85,14 @@ def render_teaching_concepts_card(concepts: list, message_idx: int):
         if concept_key not in st.session_state:
             st.session_state[concept_key] = False
         
-        # Concept item
-        st.markdown(f"""
-        <div class="concept-item">
-            <div class="concept-name">{concept['concept']}</div>
-            <div class="concept-description">{concept['relevance']}</div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Expandable content
-        col1, col2 = st.columns([1, 4])
-        with col1:
-            if st.button("Learn more", key=f"expand_{concept_key}", use_container_width=True):
-                st.session_state[concept_key] = not st.session_state[concept_key]
-        
-        with col2:
-            if st.button("Ask Professor Levine", key=f"ask_{concept_key}", use_container_width=True):
-                st.session_state.pending_question = f"Can you explain {concept['concept']} in more detail?"
-                st.rerun()
+        # Clickable concept button
+        if st.button(
+            f"📖 {concept['concept']}", 
+            key=f"concept_btn_{concept_key}",
+            use_container_width=True,
+            help=concept['relevance']
+        ):
+            st.session_state[concept_key] = not st.session_state[concept_key]
         
         # Show expanded content
         if st.session_state[concept_key]:
@@ -121,35 +109,9 @@ def render_teaching_concepts_card(concepts: list, message_idx: int):
     st.markdown("</div>", unsafe_allow_html=True)
 
 
-def render_related_concepts_card(concepts: list, message_idx: int):
-    """Render the related concepts card"""
-    if not concepts:
-        return
-    
-    st.markdown("""
-    <div class="card-section">
-        <div class="card-section-title">🔗 Related Concepts</div>
-    """, unsafe_allow_html=True)
-    
-    for i, concept in enumerate(concepts[:5]):
-        concept_key = f"related_{message_idx}_{i}"
-        
-        st.markdown(f"""
-        <div class="concept-item">
-            <div class="concept-name">{concept['concept']}</div>
-            <div class="concept-description">From: {concept['cluster']}</div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("Ask about this", key=f"ask_{concept_key}", use_container_width=True):
-            st.session_state.pending_question = f"Tell me about {concept['concept']}"
-            st.rerun()
-    
-    st.markdown("</div>", unsafe_allow_html=True)
-
 
 def render_portfolio_card(projects: list, message_idx: int):
-    """Render the portfolio examples card"""
+    """Render the portfolio examples card with summaries and lecture context"""
     if not projects:
         return
     
@@ -165,35 +127,32 @@ def render_portfolio_card(projects: list, message_idx: int):
         if project_key not in st.session_state:
             st.session_state[project_key] = False
         
-        st.markdown(f"""
-        <div class="portfolio-project">
-            <div class="portfolio-title">{project['title'].replace('-', ' ').title()}</div>
-            <div class="portfolio-reason">💡 {' • '.join(project['reasons'][:2])}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        # Generate 10-word summary
+        project_name = project['title'].replace('-', ' ').title()
+        reasons = project.get('reasons', [])
+        summary = ' '.join(reasons[0].split()[:10]) if reasons else "Real-world application example"
         
-        # Show/hide images button
+        # Clickable project button with summary
         if st.button(
-            "Show examples" if not st.session_state[project_key] else "Hide examples",
-            key=f"toggle_{project_key}",
-            use_container_width=True
+            f"🏢 {project_name}",
+            key=f"project_btn_{project_key}",
+            use_container_width=True,
+            help=summary
         ):
             st.session_state[project_key] = not st.session_state[project_key]
         
-        # Display images if expanded
-        if st.session_state[project_key] and project.get('images'):
-            st.markdown('<div class="portfolio-images">', unsafe_allow_html=True)
-            
-            cols = st.columns(min(len(project['images']), 3))
-            for idx, img in enumerate(project['images'][:3]):
-                with cols[idx]:
-                    if img.get('s3_url'):
-                        st.image(img['s3_url'], caption=img.get('description', ''), use_container_width=True)
-                    else:
-                        st.caption(f"📷 {img.get('description', 'Image')}")
-                        st.caption(f"Phase: {img.get('phase', 'unknown')}")
-            
-            st.markdown('</div>', unsafe_allow_html=True)
+        # Display lecture context if expanded
+        if st.session_state[project_key]:
+            st.markdown(f"""
+            <div class="expanded-content">
+                <strong>Summary:</strong> {summary}<br><br>
+                <strong>Relevant to:</strong>
+                <ul>
+                    {''.join([f'<li>{reason}</li>' for reason in reasons[:3]])}
+                </ul>
+                <em>This example was discussed in lecture to demonstrate these concepts in practice.</em>
+            </div>
+            """, unsafe_allow_html=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -423,13 +382,50 @@ st.markdown("""
     }
     
     /* Learning Cards Styling */
-    .learning-cards-container {
-        margin: 20px 0;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    .learning-cards-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        margin: 20px 0 15px 0;
+        text-align: center;
+    }
+    
+    .card-section {
+        background: rgba(255, 255, 255, 0.20);
+        border: 1px solid rgba(255, 255, 255, 0.35);
         border-radius: 12px;
-        backdrop-filter: blur(10px);
+        padding: 20px;
+        margin-bottom: 15px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-section-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .expanded-content {
+        background: rgba(0, 0, 0, 0.25);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        color: white;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .expanded-content ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+    
+    .expanded-content li {
+        margin: 5px 0;
     }
     
     /* Skeleton Loading Animation */
