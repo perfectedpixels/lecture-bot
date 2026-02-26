@@ -242,7 +242,7 @@ Return ONLY valid JSON:
         - Concept tags
         - Teaching concepts
         - Lecture mentions
-        Returns top 1-3 projects with images.
+        Returns top 1-3 projects with images and confidence scores.
         """
         if not self.portfolio_metadata:
             return []
@@ -278,10 +278,15 @@ Return ONLY valid JSON:
                 reasons.append(f"Referenced in {len(lecture_mentions)} lecture(s)")
             
             if score > 0:
+                # Calculate confidence (normalize score to 0-1 range)
+                # Max realistic score is ~15, so normalize
+                confidence = min(score / 15.0, 1.0)
+                
                 project_scores.append({
                     'project_key': project_key,
                     'project_data': project_data,
                     'score': score,
+                    'confidence': confidence,
                     'reasons': reasons[:2]  # Top 2 reasons
                 })
         
@@ -307,10 +312,63 @@ Return ONLY valid JSON:
                 'title': project_data.get('title', item['project_key']),
                 'reasons': item['reasons'],
                 'images': images,
-                'lecture_mentions': len(project_data.get('lecture_mentions', []))
+                'lecture_mentions': len(project_data.get('lecture_mentions', [])),
+                'confidence': item['confidence']
             })
         
         return results
+    
+    def get_smart_follow_ups(self, cards: Dict, min_confidence: float = 0.80, max_items: int = 3) -> List[Dict]:
+        """
+        Get top follow-up topics with 80%+ confidence, mixing both types.
+        
+        Returns list of:
+        {
+            'type': 'concept' or 'example',
+            'title': 'Display title',
+            'summary': 'Short summary (max 10 words)',
+            'prompt': 'Auto-submit prompt text',
+            'confidence': 0.0-1.0
+        }
+        """
+        all_topics = []
+        
+        # Add teaching concepts
+        for concept in cards.get('teaching_concepts', []):
+            if concept.get('confidence', 0) >= min_confidence:
+                # Create 10-word summary from relevance
+                summary_words = concept.get('relevance', '').split()[:10]
+                summary = ' '.join(summary_words)
+                
+                all_topics.append({
+                    'type': 'concept',
+                    'title': concept['concept'],
+                    'summary': summary,
+                    'prompt': f"Can you explain {concept['concept']} in more detail?",
+                    'confidence': concept.get('confidence', 0.85)
+                })
+        
+        # Add portfolio examples
+        for project in cards.get('portfolio_examples', []):
+            if project.get('confidence', 0) >= min_confidence:
+                project_name = project['title'].replace('-', ' ').title()
+                
+                # Create 10-word summary from reasons
+                reasons = project.get('reasons', [])
+                summary_words = ' '.join(reasons).split()[:10] if reasons else "Real-world application example".split()
+                summary = ' '.join(summary_words)
+                
+                all_topics.append({
+                    'type': 'example',
+                    'title': f"{project_name} work example",
+                    'summary': summary,
+                    'prompt': f"Tell me more about the {project_name} example and how it demonstrates these concepts",
+                    'confidence': project.get('confidence', 0.80)
+                })
+        
+        # Sort by confidence and return top N
+        all_topics.sort(key=lambda x: x['confidence'], reverse=True)
+        return all_topics[:max_items]
     
     def get_inline_content(self, concept: str, max_length: int = 500) -> Optional[str]:
         """

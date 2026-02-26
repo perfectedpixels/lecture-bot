@@ -22,121 +22,85 @@ except ImportError:
     HAS_PORTFOLIO_IMAGES = False
 
 
-# Skeleton loading removed - was causing white box hover issue
+# Removed - replaced with render_smart_follow_ups
 
 
-def render_learning_cards(cards: dict, message_idx: int):
-    """Render all three types of learning cards in a compact side-by-side layout"""
-    if not cards or not any(cards.values()):
+def render_smart_follow_ups(cards: dict, message_idx: int):
+    """Render top 3 most relevant follow-up topics (80%+ confidence) with new format"""
+    if not cards:
         return
     
+    # Get smart follow-ups from card generator
+    # For now, manually filter and mix (will integrate with generator later)
+    all_topics = []
+    
+    # Add teaching concepts with 80%+ confidence
+    for concept in cards.get('teaching_concepts', []):
+        if concept.get('confidence', 0) >= 0.80:
+            summary_words = concept.get('relevance', '').split()[:10]
+            summary = ' '.join(summary_words)
+            
+            all_topics.append({
+                'type': 'concept',
+                'title': concept['concept'],
+                'summary': summary,
+                'prompt': f"Can you explain {concept['concept']} in more detail?",
+                'confidence': concept.get('confidence', 0.85)
+            })
+    
+    # Add portfolio examples with 80%+ confidence
+    for project in cards.get('portfolio_examples', []):
+        if project.get('confidence', 0) >= 0.80:
+            project_name = project['title'].replace('-', ' ').title()
+            reasons = project.get('reasons', [])
+            summary_words = ' '.join(reasons).split()[:10] if reasons else "Real-world application example".split()
+            summary = ' '.join(summary_words)
+            
+            all_topics.append({
+                'type': 'example',
+                'title': f"{project_name} work example",
+                'summary': summary,
+                'prompt': f"Tell me more about the {project_name} example",
+                'confidence': project.get('confidence', 0.80)
+            })
+    
+    # Sort by confidence and get top 3
+    all_topics.sort(key=lambda x: x['confidence'], reverse=True)
+    top_3 = all_topics[:3]
+    
+    if not top_3:
+        return
+    
+    # Render new format
     st.markdown("""
-    <div class="learning-cards-title">
-        💡 Explore Related Topics
+    <div class="follow-up-section">
+        <div class="follow-up-title"><strong>Explore Related Topics:</strong></div>
+        <hr class="follow-up-divider">
     </div>
     """, unsafe_allow_html=True)
     
-    # Create two columns for side-by-side cards
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # Core Teaching Concepts Card
-        if cards.get('teaching_concepts'):
-            render_teaching_concepts_card(cards['teaching_concepts'], message_idx)
-    
-    with col2:
-        # See It in Practice Card
-        if cards.get('portfolio_examples'):
-            render_portfolio_card(cards['portfolio_examples'], message_idx)
+    # Create buttons in columns
+    cols = st.columns(len(top_3))
+    for idx, topic in enumerate(top_3):
+        with cols[idx]:
+            button_label = f"**{topic['title']}**\n\n{topic['summary']}"
+            if st.button(
+                button_label,
+                key=f"followup_{message_idx}_{idx}",
+                use_container_width=True,
+                help=f"Confidence: {topic['confidence']:.0%}"
+            ):
+                # Store prompt for auto-submit
+                st.session_state.pending_question = topic['prompt']
+                st.rerun()
 
 
-def render_teaching_concepts_card(concepts: list, message_idx: int):
-    """Render the teaching concepts card with clickable topics"""
-    if not concepts:
-        return
-    
-    st.markdown("""
-    <div class="card-section">
-        <div class="card-section-title">📚 Core Teaching Concepts</div>
-    """, unsafe_allow_html=True)
-    
-    for i, concept in enumerate(concepts[:3]):
-        concept_key = f"teaching_{message_idx}_{i}"
-        
-        # Initialize expansion state
-        if concept_key not in st.session_state:
-            st.session_state[concept_key] = False
-        
-        # Clickable concept button
-        if st.button(
-            f"📖 {concept['concept']}", 
-            key=f"concept_btn_{concept_key}",
-            use_container_width=True,
-            help=concept['relevance']
-        ):
-            st.session_state[concept_key] = not st.session_state[concept_key]
-        
-        # Show expanded content
-        if st.session_state[concept_key]:
-            st.markdown(f"""
-            <div class="expanded-content">
-                <strong>Definition:</strong> {concept.get('definition', 'N/A')}<br><br>
-                <strong>Key Principles:</strong>
-                <ul>
-                    {''.join([f'<li>{p}</li>' for p in concept.get('key_principles', [])[:3]])}
-                </ul>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+def render_learning_cards(cards: dict, message_idx: int):
+    """Render smart follow-ups only (replaced old card system)"""
+    render_smart_follow_ups(cards, message_idx)
 
 
-
-def render_portfolio_card(projects: list, message_idx: int):
-    """Render the portfolio examples card with summaries and lecture context"""
-    if not projects:
-        return
-    
-    st.markdown("""
-    <div class="card-section">
-        <div class="card-section-title">🎨 See It in Practice</div>
-    """, unsafe_allow_html=True)
-    
-    for i, project in enumerate(projects[:3]):
-        project_key = f"portfolio_{message_idx}_{i}"
-        
-        # Initialize expansion state
-        if project_key not in st.session_state:
-            st.session_state[project_key] = False
-        
-        # Generate 10-word summary
-        project_name = project['title'].replace('-', ' ').title()
-        reasons = project.get('reasons', [])
-        summary = ' '.join(reasons[0].split()[:10]) if reasons else "Real-world application example"
-        
-        # Clickable project button with summary
-        if st.button(
-            f"🏢 {project_name}",
-            key=f"project_btn_{project_key}",
-            use_container_width=True,
-            help=summary
-        ):
-            st.session_state[project_key] = not st.session_state[project_key]
-        
-        # Display lecture context if expanded
-        if st.session_state[project_key]:
-            st.markdown(f"""
-            <div class="expanded-content">
-                <strong>Summary:</strong> {summary}<br><br>
-                <strong>Relevant to:</strong>
-                <ul>
-                    {''.join([f'<li>{reason}</li>' for reason in reasons[:3]])}
-                </ul>
-                <em>This example was discussed in lecture to demonstrate these concepts in practice.</em>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+# Old card rendering functions removed - replaced with smart follow-ups
 
 
 st.set_page_config(
@@ -377,83 +341,23 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Learning Cards Styling */
-    .learning-cards-title {
-        font-size: 20px;
-        font-weight: bold;
+    /* Follow-up Topics Styling */
+    .follow-up-section {
+        margin: 25px 0 15px 0;
+    }
+    
+    .follow-up-title {
+        font-size: 18px;
         color: white;
-        margin: 20px 0 15px 0;
+        margin-bottom: 10px;
         text-align: center;
     }
     
-    .card-section {
-        background: rgba(255, 255, 255, 0.20);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 15px;
-        backdrop-filter: blur(15px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    .follow-up-divider {
+        border: none;
+        border-top: 2px solid rgba(255, 255, 255, 0.4);
+        margin: 10px 0 20px 0;
     }
-    
-    .card-section-title {
-        font-size: 16px;
-        font-weight: bold;
-        color: white;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .expanded-content {
-        background: rgba(0, 0, 0, 0.25);
-        padding: 15px;
-        border-radius: 8px;
-        margin: 10px 0;
-        color: white;
-        font-size: 14px;
-        line-height: 1.6;
-    }
-    
-    .expanded-content ul {
-        margin: 10px 0;
-        padding-left: 20px;
-    }
-    
-    .expanded-content li {
-        margin: 5px 0;
-    }
-    
-    .learning-cards-title {
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-        margin: 20px 0 15px 0;
-        text-align: center;
-    }
-    
-    .card-section {
-        background: rgba(255, 255, 255, 0.20);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 15px;
-        backdrop-filter: blur(15px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-        border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .card-section-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: #E0B0FF;
-    }
-    
-    .concept-item {
-        padding: 10px 12px;
-        margin: 8px 0;
         background: rgba(255, 255, 255, 0.08);
         border-radius: 8px;
         border-left: 3px solid #9D4EDD;
