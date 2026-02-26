@@ -52,8 +52,12 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
     # Add teaching concepts with 80%+ confidence
     for concept in cards.get('teaching_concepts', []):
         if concept.get('confidence', 0) >= 0.80:
-            summary_words = concept.get('relevance', '').split()[:10]
+            # Create clean 10-word summary
+            relevance = concept.get('relevance', '')
+            summary_words = relevance.split()[:10]
             summary = ' '.join(summary_words)
+            if len(relevance.split()) > 10:
+                summary += '...'
             
             all_topics.append({
                 'type': 'concept',
@@ -68,12 +72,20 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
         if project.get('confidence', 0) >= 0.80:
             project_name = project['title'].replace('-', ' ').title()
             reasons = project.get('reasons', [])
-            summary_words = ' '.join(reasons).split()[:10] if reasons else "Real-world application example".split()
-            summary = ' '.join(summary_words)
+            
+            # Create clean 10-word summary
+            if reasons:
+                summary_text = ' '.join(reasons)
+                summary_words = summary_text.split()[:10]
+                summary = ' '.join(summary_words)
+                if len(summary_text.split()) > 10:
+                    summary += '...'
+            else:
+                summary = "Real-world application example"
             
             all_topics.append({
                 'type': 'example',
-                'title': f"{project_name} work example",
+                'title': f"{project_name} example",
                 'summary': summary,
                 'prompt': f"Tell me more about the {project_name} example",
                 'confidence': project.get('confidence', 0.80)
@@ -98,7 +110,8 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
     cols = st.columns(len(top_3))
     for idx, topic in enumerate(top_3):
         with cols[idx]:
-            button_label = f"**{topic['title']}**\n\n{topic['summary']}"
+            # Clean button label without markdown, with proper line break
+            button_label = f"{topic['title']}\n{topic['summary']}"
             if st.button(
                 button_label,
                 key=f"followup_{message_idx}_{idx}",
@@ -253,10 +266,11 @@ st.markdown("""
         color: rgba(255, 255, 255, 0.7) !important;
     }
     
-    /* Audio player styling - integrate with bot bubble */
+    /* Audio player styling - integrate with bot bubble, limit width */
     .stAudio {
         margin: 12px 0 0 0 !important;
         background: transparent !important;
+        max-width: 25% !important;
     }
     
     audio {
@@ -531,23 +545,17 @@ if st.session_state.bot is None and HAS_PERSONA_BOT:
     except:
         pass
 
-# Top Navigation Bar - Always visible with simplified text
+# Top Navigation Bar - Clean and minimal
 if logo_image:
     st.markdown(f"""
     <div class="top-nav">
         <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
-        <div class="nav-controls">
-            <span style="color: rgba(255,255,255,0.7); font-size: 13px;">Settings in sidebar →</span>
-        </div>
     </div>
     """, unsafe_allow_html=True)
 else:
     st.markdown("""
     <div class="top-nav">
         <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
-        <div class="nav-controls">
-            <span style="color: rgba(255,255,255,0.7); font-size: 13px;">Settings in sidebar →</span>
-        </div>
     </div>
     """, unsafe_allow_html=True)
 
