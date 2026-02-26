@@ -660,11 +660,7 @@ for idx, chat in enumerate(st.session_state.chat_history):
     if idx == len(st.session_state.chat_history) - 1 and chat.get('learning_cards'):
         render_learning_cards(chat['learning_cards'], idx)
     
-    # Sources
-    if chat.get('sources'):
-        with st.expander("📎 Sources", expanded=False):
-            for source in chat['sources']:
-                st.caption(source)
+    # Sources section removed per user request
     
     # Follow-up prompts (only for last message) - REMOVED, replaced by learning cards
     # if idx == len(st.session_state.chat_history) - 1 and not chat.get('safety_triggered'):
