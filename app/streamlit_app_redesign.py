@@ -281,37 +281,31 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     
-    /* Bot message bubble container - BLACK to contain text and audio */
-    .bot-message-container {
+    /* Bot message bubble - BLACK background */
+    .bot-message {
         background: rgba(20, 20, 20, 0.95);
+        color: white;
         padding: 16px;
         border-radius: 18px;
-        margin: 8px 0;
+        margin: 8px 0 4px 0;
         max-width: 70%;
         margin-right: auto;
         margin-left: 0;
+        word-wrap: break-word;
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     
-    /* Bot message text inside container */
-    .bot-message {
-        background: transparent !important;
-        color: white;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        margin: 0 !important;
-        max-width: 100% !important;
-        word-wrap: break-word;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Audio player inside bot bubble container */
-    .bot-message-container .stAudio {
-        margin-top: 12px !important;
-        padding-top: 12px !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Audio player - styled to match bot bubble */
+    .bot-message + div .stAudio,
+    div:has(> .bot-message) + div .stAudio {
+        background: rgba(20, 20, 20, 0.95);
+        padding: 12px 16px;
+        border-radius: 18px;
+        margin: 0 0 8px 0;
+        max-width: 70%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     
     /* Follow-up prompt buttons */
@@ -537,13 +531,13 @@ if st.session_state.bot is None and HAS_PERSONA_BOT:
     except:
         pass
 
-# Top Navigation Bar - Always visible with simplified text-only controls
+# Top Navigation Bar - Always visible with simplified text
 if logo_image:
     st.markdown(f"""
     <div class="top-nav">
         <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
         <div class="nav-controls">
-            <span style="color: white; font-size: 14px; opacity: 0.9;">Audio & Settings in sidebar →</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 13px;">Settings in sidebar →</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -552,31 +546,10 @@ else:
     <div class="top-nav">
         <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
         <div class="nav-controls">
-            <span style="color: white; font-size: 14px; opacity: 0.9;">Audio & Settings in sidebar →</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 13px;">Settings in sidebar →</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
-
-# Quick controls bar (functional)
-control_col1, control_col2, control_col3 = st.columns([6, 2, 1])
-
-with control_col2:
-    # Audio toggle
-    audio_toggle = st.toggle(
-        "🔊 Auto-play Audio",
-        value=st.session_state.audio_autoplay,
-        key="audio_quick_toggle",
-        help="Toggle audio autoplay"
-    )
-    if audio_toggle != st.session_state.audio_autoplay:
-        st.session_state.audio_autoplay = audio_toggle
-        st.rerun()
-
-with control_col3:
-    # Settings button
-    if st.button("⚙️", key="settings_quick_btn", help="Open settings sidebar"):
-        st.session_state.show_sidebar = True
-        st.rerun()
 
 # Sidebar Settings
 with st.sidebar:
@@ -653,19 +626,16 @@ for idx, chat in enumerate(st.session_state.chat_history):
     # User message
     st.markdown(f'<div class="user-message">{chat["question"]}</div>', unsafe_allow_html=True)
     
-    # Bot message bubble container
-    st.markdown('<div class="bot-message-container">', unsafe_allow_html=True)
+    # Bot message
     st.markdown(f'<div class="bot-message">{chat["answer"]}</div>', unsafe_allow_html=True)
     
-    # Audio player inside bot bubble
+    # Audio player (will be styled to look integrated)
     if st.session_state.voice_enabled and chat.get('audio_base64'):
         st.audio(
             f"data:audio/mpeg;base64,{chat['audio_base64']}",
             format="audio/mpeg",
             autoplay=st.session_state.audio_autoplay
         )
-    
-    st.markdown('</div>', unsafe_allow_html=True)
     
     # Learning Cards (only for most recent message)
     if idx == len(st.session_state.chat_history) - 1 and chat.get('learning_cards'):
