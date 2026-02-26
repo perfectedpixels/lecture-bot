@@ -207,17 +207,31 @@ st.markdown("""
     
     /* Button styling */
     .stButton button {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
         color: white !important;
-        border-radius: 8px;
-        padding: 8px 16px;
-        transition: all 0.2s;
+        border-radius: 8px !important;
+        padding: 8px 16px !important;
+        transition: all 0.2s !important;
     }
     
     .stButton button:hover {
-        background: rgba(255, 255, 255, 0.25);
-        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+    
+    .stButton button:active,
+    .stButton button:focus {
+        background: rgba(255, 255, 255, 0.30) !important;
+        border-color: rgba(255, 255, 255, 0.6) !important;
+        box-shadow: none !important;
+    }
+    
+    /* Override Streamlit's default button focus/active states */
+    .stButton > button:focus:not(:active) {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+        box-shadow: none !important;
     }
     
     /* Input styling */
