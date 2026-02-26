@@ -74,9 +74,13 @@ class LearningCardGenerator:
     def generate_cards(self, 
                       question: str, 
                       answer: str, 
-                      relevant_concepts: List[str] = None) -> Dict:
+                      relevant_concepts: List[str] = None,
+                      exclude_projects: List[str] = None) -> Dict:
         """
         Generate all three types of learning cards for a Q&A pair.
+        
+        Args:
+            exclude_projects: List of project_keys to exclude from portfolio examples
         
         Returns:
         {
@@ -89,7 +93,7 @@ class LearningCardGenerator:
             cards = {
                 'related_concepts': self.analyze_related_concepts(question, answer, relevant_concepts),
                 'teaching_concepts': self.identify_teaching_concepts(question, answer),
-                'portfolio_examples': self.find_portfolio_examples(question, answer, relevant_concepts)
+                'portfolio_examples': self.find_portfolio_examples(question, answer, relevant_concepts, exclude_projects)
             }
             return cards
         
@@ -236,9 +240,13 @@ Return ONLY valid JSON:
     def find_portfolio_examples(self, 
                                question: str, 
                                answer: str, 
-                               relevant_concepts: List[str] = None) -> List[Dict]:
+                               relevant_concepts: List[str] = None,
+                               exclude_projects: List[str] = None) -> List[Dict]:
         """
         Find relevant portfolio examples based on semantic similarity with the answer.
+        
+        Args:
+            exclude_projects: List of project_keys to exclude (prevents doom loops)
         
         Scoring prioritizes:
         1. Semantic overlap between answer and project descriptions (HIGH weight)
@@ -251,6 +259,9 @@ Return ONLY valid JSON:
         if not self.portfolio_metadata:
             return []
         
+        if exclude_projects is None:
+            exclude_projects = []
+        
         # Extract key terms from answer for semantic matching
         answer_lower = answer.lower()
         answer_words = set(answer_lower.split())
@@ -259,6 +270,10 @@ Return ONLY valid JSON:
         project_scores = []
         
         for project_key, project_data in self.portfolio_metadata.items():
+            # Skip if this project was recently shown
+            if project_key in exclude_projects:
+                continue
+            
             score = 0
             reasons = []
             

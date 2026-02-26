@@ -259,9 +259,12 @@ Your response:"""
 
         return persona_prompt
     
-    def query(self, question: str, max_results: int = 5, use_persona: bool = True) -> dict:
+    def query(self, question: str, max_results: int = 5, use_persona: bool = True, exclude_projects: List[str] = None) -> dict:
         """
         Query with safety checks, persona, and affinity-based context.
+        
+        Args:
+            exclude_projects: List of project_keys to exclude from portfolio examples (prevents loops)
         """
         
         # SAFETY CHECK FIRST
@@ -338,7 +341,8 @@ Your response:"""
                 learning_cards = self.card_generator.generate_cards(
                     question=question,
                     answer=answer,
-                    relevant_concepts=relevant_concepts
+                    relevant_concepts=relevant_concepts,
+                    exclude_projects=exclude_projects or []
                 )
             except Exception as e:
                 print(f"Error generating learning cards: {e}")

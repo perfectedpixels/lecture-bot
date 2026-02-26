@@ -516,6 +516,8 @@ if 'voice_generator' not in st.session_state:
         st.session_state.voice_generator = None
 if 'pending_question' not in st.session_state:
     st.session_state.pending_question = None
+if 'shown_projects' not in st.session_state:
+    st.session_state.shown_projects = []  # Track recently shown portfolio examples
 if 'portfolio_handler' not in st.session_state:
     if HAS_PORTFOLIO_IMAGES:
         try:
@@ -692,9 +694,23 @@ if st.session_state.pending_question:
             
             modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
             
-            # Query bot
-            result = st.session_state.bot.query(modified_question, use_persona=True)
+            # Query bot with exclude list to prevent doom loops
+            result = st.session_state.bot.query(
+                modified_question, 
+                use_persona=True,
+                exclude_projects=st.session_state.shown_projects
+            )
             result['question'] = question
+            
+            # Track shown portfolio examples
+            if result.get('learning_cards', {}).get('portfolio_examples'):
+                for project in result['learning_cards']['portfolio_examples']:
+                    project_key = project.get('project_key')
+                    if project_key and project_key not in st.session_state.shown_projects:
+                        st.session_state.shown_projects.append(project_key)
+                        # Keep only last 5 to allow eventual reuse
+                        if len(st.session_state.shown_projects) > 5:
+                            st.session_state.shown_projects.pop(0)
             
             # Show response
             bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
@@ -737,9 +753,23 @@ if question and st.session_state.bot:
             
             modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
             
-            # Query bot
-            result = st.session_state.bot.query(modified_question, use_persona=True)
+            # Query bot with exclude list to prevent doom loops
+            result = st.session_state.bot.query(
+                modified_question, 
+                use_persona=True,
+                exclude_projects=st.session_state.shown_projects
+            )
             result['question'] = question
+            
+            # Track shown portfolio examples
+            if result.get('learning_cards', {}).get('portfolio_examples'):
+                for project in result['learning_cards']['portfolio_examples']:
+                    project_key = project.get('project_key')
+                    if project_key and project_key not in st.session_state.shown_projects:
+                        st.session_state.shown_projects.append(project_key)
+                        # Keep only last 5 to allow eventual reuse
+                        if len(st.session_state.shown_projects) > 5:
+                            st.session_state.shown_projects.pop(0)
             
             # Show response
             bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
