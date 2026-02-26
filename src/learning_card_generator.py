@@ -178,22 +178,23 @@ class LearningCardGenerator:
             for name, data in self.teaching_concepts.items()
         }
         
-        prompt = f"""Analyze this Q&A exchange and identify relevant high-level teaching concepts.
+        prompt = f"""Analyze this Q&A exchange and identify relevant high-level teaching concepts based primarily on what was discussed in the ANSWER.
 
 Question: {question}
-Answer: {answer[:500]}
+Answer: {answer[:800]}
 
 Available Teaching Concepts:
 {json.dumps(concept_summary, indent=2)}
 
-Identify the 3-5 most relevant teaching concepts that relate to this discussion.
-For each, explain WHY it's relevant in one sentence.
+Identify the 3-5 most relevant teaching concepts that relate to the topics actually discussed in the answer.
+Focus on concepts that were explained or demonstrated in the response, not just mentioned in the question.
+For each, explain WHY it's relevant based on the answer content in one sentence.
 
 Return ONLY valid JSON:
 [
   {{
     "concept": "concept name",
-    "relevance": "why it's relevant",
+    "relevance": "why it's relevant based on the answer",
     "confidence": 0.0-1.0
   }}
 ]
@@ -237,15 +238,22 @@ Return ONLY valid JSON:
                                answer: str, 
                                relevant_concepts: List[str] = None) -> List[Dict]:
         """
-        Find relevant portfolio examples.
-        Matches based on:
-        - Concept tags
-        - Teaching concepts
-        - Lecture mentions
+        Find relevant portfolio examples based on semantic similarity with the answer.
+        
+        Scoring prioritizes:
+        1. Semantic overlap between answer and project descriptions (HIGH weight)
+        2. Concept tag matches from answer content (MEDIUM weight)
+        3. Teaching concept matches (MEDIUM weight)
+        4. Lecture mentions as tiebreaker (LOW weight)
+        
         Returns top 1-3 projects with images and confidence scores.
         """
         if not self.portfolio_metadata:
             return []
+        
+        # Extract key terms from answer for semantic matching
+        answer_lower = answer.lower()
+        answer_words = set(answer_lower.split())
         
         # Score each project
         project_scores = []
@@ -254,33 +262,63 @@ Return ONLY valid JSON:
             score = 0
             reasons = []
             
-            # Check concept tag matches
+            # 1. SEMANTIC SIMILARITY - Check if answer discusses this project/company
+            project_title = project_data.get('title', '').lower()
+            project_name = project_key.lower()
+            
+            # Direct mention of project/company in answer (HIGHEST weight)
+            if project_name in answer_lower or project_title in answer_lower:
+                score += 10
+                reasons.append(f"Directly relevant to your question")
+            
+            # 2. ANSWER-BASED CONCEPT MATCHING - Check project descriptions against answer
+            project_description = project_data.get('summary', {}).get('description', '').lower()
+            primary_concepts = [pc.lower() for pc in project_data.get('summary', {}).get('primary_concepts', [])]
+            
+            # Check if project concepts appear in the answer
+            concept_matches = []
+            for concept in primary_concepts:
+                concept_words = set(concept.split())
+                # Check for word overlap between concept and answer
+                overlap = concept_words.intersection(answer_words)
+                if len(overlap) >= 2 or concept in answer_lower:  # At least 2 words match or full phrase
+                    score += 5
+                    concept_matches.append(concept)
+            
+            if concept_matches:
+                reasons.append(f"Demonstrates {', '.join(concept_matches[:2])}")
+            
+            # 3. IMAGE CONCEPT TAG MATCHING - Check image tags against answer
             for img in project_data.get('images', []):
                 img_concepts = [c.lower() for c in img.get('concept_tags', [])]
-                if relevant_concepts:
-                    matches = [c for c in relevant_concepts if c.lower() in img_concepts]
-                    if matches:
-                        score += len(matches) * 2
-                        reasons.append(f"Demonstrates {', '.join(matches[:2])}")
+                for img_concept in img_concepts:
+                    # Check if this concept appears in the answer
+                    if img_concept in answer_lower or any(word in answer_words for word in img_concept.split()):
+                        score += 3
+                        if f"Shows {img_concept}" not in reasons:
+                            reasons.append(f"Shows {img_concept}")
+                        break  # Only count once per image
             
-            # Check teaching concept matches
-            primary_concepts = project_data.get('summary', {}).get('primary_concepts', [])
+            # 4. RELEVANT_CONCEPTS MATCHING (from question context) - REDUCED weight
             if relevant_concepts:
                 for concept in relevant_concepts:
-                    if any(concept.lower() in pc.lower() for pc in primary_concepts):
-                        score += 3
-                        reasons.append(f"Example of {concept}")
+                    concept_lower = concept.lower()
+                    # Only count if concept also appears in answer (ensures relevance)
+                    if concept_lower in answer_lower:
+                        if any(concept_lower in pc for pc in primary_concepts):
+                            score += 2
+                            if f"Example of {concept}" not in reasons:
+                                reasons.append(f"Example of {concept}")
             
-            # Check lecture mentions
+            # 5. LECTURE MENTIONS - TIEBREAKER ONLY (minimal weight)
             lecture_mentions = project_data.get('lecture_mentions', [])
-            if lecture_mentions:
-                score += len(lecture_mentions)
-                reasons.append(f"Referenced in {len(lecture_mentions)} lecture(s)")
+            if lecture_mentions and score > 0:  # Only add if already relevant
+                score += min(len(lecture_mentions) * 0.5, 2)  # Cap at +2 points
             
             if score > 0:
                 # Calculate confidence (normalize score to 0-1 range)
-                # Max realistic score is ~15, so normalize
-                confidence = min(score / 15.0, 1.0)
+                # Max realistic score is now ~25, so normalize accordingly
+                confidence = min(score / 20.0, 1.0)
                 
                 project_scores.append({
                     'project_key': project_key,
