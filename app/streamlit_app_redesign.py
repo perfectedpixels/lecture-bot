@@ -175,14 +175,6 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# Centered Logo (only show before chat starts)
-if not st.session_state.chat_history and logo_image:
-    st.markdown(f"""
-    <div class="logo-container">
-        <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
-    </div>
-    """, unsafe_allow_html=True)
-
 st.markdown("""
 <style>
     /* Button styling - fixed to prevent white boxes */
@@ -510,6 +502,14 @@ if st.session_state.bot is None and HAS_PERSONA_BOT:
         st.session_state.bot = PersonaBot(st.session_state.kb_id, "anthropic.claude-3-sonnet-20240229-v1:0")
     except:
         pass
+
+# Centered Logo (only show before chat starts)
+if not st.session_state.chat_history and logo_image:
+    st.markdown(f"""
+    <div class="logo-container">
+        <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
+    </div>
+    """, unsafe_allow_html=True)
 
 # Sidebar Settings
 with st.sidebar:
