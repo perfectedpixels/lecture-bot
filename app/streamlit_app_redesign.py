@@ -203,8 +203,11 @@ st.markdown(f"""
 
 st.markdown("""
 <style>
-    /* Button styling - fixed to prevent white boxes */
-    .stButton button {
+    /* Button styling - AGGRESSIVE override to prevent white boxes */
+    .stButton > button,
+    .stButton button,
+    button[kind="secondary"],
+    button[kind="primary"] {
         background: rgba(255, 255, 255, 0.15) !important;
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
         color: white !important;
@@ -214,20 +217,43 @@ st.markdown("""
         box-shadow: none !important;
     }
     
-    .stButton button:hover {
+    .stButton > button:hover,
+    .stButton button:hover,
+    button[kind="secondary"]:hover,
+    button[kind="primary"]:hover {
         background: rgba(255, 255, 255, 0.25) !important;
         border-color: rgba(255, 255, 255, 0.5) !important;
         box-shadow: none !important;
     }
     
+    .stButton > button:active,
+    .stButton > button:focus,
+    .stButton > button:focus:not(:active),
+    .stButton > button:focus-visible,
     .stButton button:active,
     .stButton button:focus,
     .stButton button:focus:not(:active),
-    .stButton button:focus-visible {
+    .stButton button:focus-visible,
+    button[kind="secondary"]:active,
+    button[kind="secondary"]:focus,
+    button[kind="secondary"]:focus-visible,
+    button[kind="primary"]:active,
+    button[kind="primary"]:focus,
+    button[kind="primary"]:focus-visible {
         background: rgba(255, 255, 255, 0.25) !important;
         border-color: rgba(255, 255, 255, 0.5) !important;
         box-shadow: none !important;
         outline: none !important;
+    }
+    
+    /* Kill any pseudo-elements that might create white boxes */
+    .stButton > button::before,
+    .stButton > button::after,
+    .stButton button::before,
+    .stButton button::after {
+        display: none !important;
+        content: none !important;
+    }
     }
     
     /* Input styling */
