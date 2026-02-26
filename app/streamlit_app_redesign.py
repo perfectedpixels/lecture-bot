@@ -1,6 +1,9 @@
 import streamlit as st
 import sys
 import os
+import base64
+from pathlib import Path
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
@@ -20,6 +23,16 @@ try:
     HAS_PORTFOLIO_IMAGES = True
 except ImportError:
     HAS_PORTFOLIO_IMAGES = False
+
+
+def get_base64_image(image_path):
+    """Convert image to base64 for embedding in CSS/HTML"""
+    try:
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    except Exception as e:
+        print(f"Error loading image {image_path}: {e}")
+        return ""
 
 
 # Removed - replaced with render_smart_follow_ups
@@ -104,52 +117,116 @@ def render_learning_cards(cards: dict, message_idx: int):
 
 
 st.set_page_config(
-    page_title="Lecture Bot",
+    page_title="UW Lecture Bot",
     page_icon="🎓",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-st.markdown("""
+# Load images as base64
+bg_image = get_base64_image("../data/uw-background.png")
+logo_image = get_base64_image("../data/uw-logo.png")
+
+st.markdown(f"""
 <style>
-    /* UW Purple Diagonal Background */
-    .stApp {
-        background-image: url('https://cdn.uconnectlabs.com/wp-content/uploads/sites/25/2021/01/UWBrand-PurpleDiagonal.jpg');
+    /* New UW Background */
+    .stApp {{
+        background-image: url('data:image/png;base64,{bg_image}');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }
+    }}
     
-    .main .block-container {
-        padding-top: 1rem !important;
+    .main .block-container {{
+        padding-top: 120px !important;
         max-width: 1200px !important;
         margin: 0 auto;
-    }
+    }}
     
     /* Hide Streamlit branding */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
+    #MainMenu {{visibility: hidden;}}
+    footer {{visibility: hidden;}}
+    header {{visibility: hidden;}}
     
     /* White text over purple background */
-    .stApp, .stMarkdown, p, span, div, label, h1, h2, h3 {
+    .stApp, .stMarkdown, p, span, div, label, h1, h2, h3 {{
         color: white !important;
-    }
+    }}
     
-    /* Header styling */
-    .header-container {
+    /* Sticky Navigation Bar */
+    .top-nav {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #34006f;
+        padding: 12px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 20px;
-        margin-bottom: 20px;
-    }
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }}
     
-    .header-title {
-        font-size: 28px;
-        font-weight: bold;
+    .nav-logo {{
+        height: 45px;
+        transition: height 0.3s ease;
+    }}
+    
+    .nav-controls {{
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        font-size: 16px;
         color: white;
-    }
+    }}
+    
+    .nav-controls span {{
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }}
+    
+    .nav-controls span:hover {{
+        opacity: 0.8;
+    }}
+    
+    /* Logo Container (initial centered position) */
+    .logo-container {{
+        text-align: center;
+        margin: 40px 0 30px 0;
+    }}
+    
+    .logo-container img {{
+        max-width: 500px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }}
+</style>
+""", unsafe_allow_html=True)
+
+# Top Navigation Bar
+st.markdown(f"""
+<div class="top-nav">
+    <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
+    <div class="nav-controls">
+        <span id="audio-toggle">🔊 Audio</span>
+        <span id="settings-btn">⚙️ Settings</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Centered Logo (will be hidden on scroll in future enhancement)
+st.markdown(f"""
+<div class="logo-container">
+    <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+    
+    /* Header styling */
+    .header-container {
     
     /* Button styling */
     .stButton button {
