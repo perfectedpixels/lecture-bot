@@ -309,7 +309,7 @@ st.markdown("""
     
     /* User message bubble - purple gradient matching palette */
     .user-message {
-        background: linear-gradient(135deg, #8938f6 0%, #a855f7 100%);
+        background: linear-gradient(135deg, #8938f6 0%, #b565ff 100%);
         color: white;
         padding: 12px 16px;
         border-radius: 18px;
@@ -323,7 +323,7 @@ st.markdown("""
     
     /* Bot message bubble - BLACK with subtle gradient */
     .bot-message {
-        background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
         color: white;
         padding: 16px;
         border-radius: 18px;
@@ -339,7 +339,7 @@ st.markdown("""
     /* Audio player - styled to match bot bubble */
     .bot-message + div .stAudio,
     div:has(> .bot-message) + div .stAudio {
-        background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
         padding: 12px 16px;
         border-radius: 18px;
         margin: 0 0 8px 0;
