@@ -257,6 +257,19 @@ st.markdown("""
     .stButton button::after {
         display: none !important;
         content: none !important;
+        background: none !important;
+        opacity: 0 !important;
+    }
+    
+    /* Override any Streamlit base styles */
+    button[data-baseweb="button"],
+    button[data-testid*="button"] {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+    }
+    
+    button[data-baseweb="button"]:hover,
+    button[data-testid*="button"]:hover {
+        background-color: rgba(255, 255, 255, 0.25) !important;
     }
     }
     
