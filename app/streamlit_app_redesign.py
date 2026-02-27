@@ -106,19 +106,26 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
     </div>
     """, unsafe_allow_html=True)
     
-    # Create buttons in columns
+    # Create clickable cards using HTML instead of st.button
     cols = st.columns(len(top_3))
     for idx, topic in enumerate(top_3):
         with cols[idx]:
-            # Clean button label without markdown, with proper line break
-            button_label = f"{topic['title']}\n{topic['summary']}"
+            # Use HTML button-style div with onclick
+            card_html = f"""
+            <div class="topic-card" onclick="document.getElementById('topic-input-{message_idx}-{idx}').click()">
+                <div class="topic-title">{topic['title']}</div>
+                <div class="topic-summary">{topic['summary']}</div>
+            </div>
+            """
+            st.markdown(card_html, unsafe_allow_html=True)
+            
+            # Hidden button for actual functionality
             if st.button(
-                button_label,
-                key=f"followup_{message_idx}_{idx}",
-                use_container_width=True,
-                help=f"Confidence: {topic['confidence']:.0%}"
+                "hidden",
+                key=f"topic-input-{message_idx}-{idx}",
+                help=f"Confidence: {topic['confidence']:.0%}",
+                type="secondary"
             ):
-                # Store prompt for auto-submit
                 st.session_state.pending_question = topic['prompt']
                 st.rerun()
 
@@ -273,6 +280,34 @@ st.markdown("""
     button[data-baseweb="button"]:hover,
     button[data-testid*="button"]:hover {
         background-color: rgba(255, 255, 255, 0.25) !important;
+    }
+    
+    /* Custom topic cards - no Streamlit button issues */
+    .topic-card {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        padding: 16px;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+        min-height: 100px;
+    }
+    
+    .topic-card:hover {
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .topic-title {
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .topic-summary {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+        line-height: 1.4;
     }
     }
     
