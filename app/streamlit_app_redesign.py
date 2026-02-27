@@ -206,7 +206,7 @@ st.markdown(f"""
 
 st.markdown("""
 <style>
-    /* Button styling - NO HOVER EFFECTS AT ALL */
+    /* Button styling - Simple text underline on hover */
     .stButton > button,
     .stButton button,
     button[kind="secondary"],
@@ -220,6 +220,7 @@ st.markdown("""
         transform: none !important;
         transition: none !important;
         pointer-events: auto !important;
+        text-decoration: none !important;
     }
     
     .stButton > button:hover,
@@ -230,6 +231,7 @@ st.markdown("""
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
         box-shadow: none !important;
         transform: none !important;
+        text-decoration: underline !important;
     }
     
     .stButton > button:active,
@@ -251,6 +253,7 @@ st.markdown("""
         box-shadow: none !important;
         outline: none !important;
         transform: none !important;
+        text-decoration: none !important;
     }
     
     /* Kill any pseudo-elements that might create white boxes */
