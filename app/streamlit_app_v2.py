@@ -202,6 +202,28 @@ st.markdown(f"""
         background-color: rgba(255, 255, 255, 0.25) !important;
     }
     
+    /* Kill tooltips and overlays that cause layout shift */
+    [role="tooltip"],
+    .stTooltipIcon,
+    [data-testid="stTooltipHoverTarget"],
+    [data-baseweb="tooltip"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Prevent layout shift on hover */
+    .stButton,
+    .stButton > button {
+        position: relative !important;
+    }
+    
+    .stButton:hover,
+    .stButton > button:hover {
+        transform: none !important;
+    }
+    
     /* Chat input */
     [data-testid="stChatInput"] input {{
         background: rgba(40, 40, 40, 0.85) !important;
