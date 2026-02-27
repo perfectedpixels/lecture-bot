@@ -207,27 +207,29 @@ st.markdown(f"""
 
 st.markdown("""
 <style>
-    /* Button styling - AGGRESSIVE override to prevent white boxes */
+    /* Button styling - Simple border highlight on hover */
     .stButton > button,
     .stButton button,
     button[kind="secondary"],
     button[kind="primary"] {
         background: rgba(255, 255, 255, 0.15) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
         color: white !important;
         border-radius: 8px !important;
         padding: 8px 16px !important;
-        transition: all 0.2s !important;
+        transition: border-color 0.2s ease !important;
         box-shadow: none !important;
+        transform: none !important;
     }
     
     .stButton > button:hover,
     .stButton button:hover,
     button[kind="secondary"]:hover,
     button[kind="primary"]:hover {
-        background: rgba(255, 255, 255, 0.25) !important;
-        border-color: rgba(255, 255, 255, 0.5) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
         box-shadow: none !important;
+        transform: none !important;
     }
     
     .stButton > button:active,
@@ -244,10 +246,11 @@ st.markdown("""
     button[kind="primary"]:active,
     button[kind="primary"]:focus,
     button[kind="primary"]:focus-visible {
-        background: rgba(255, 255, 255, 0.25) !important;
-        border-color: rgba(255, 255, 255, 0.5) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
         box-shadow: none !important;
         outline: none !important;
+        transform: none !important;
     }
     
     /* Kill any pseudo-elements that might create white boxes */

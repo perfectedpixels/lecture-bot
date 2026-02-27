@@ -158,31 +158,33 @@ st.markdown(f"""
         width: 100%;
     }}
     
-    /* Button styling - NO WHITE OVERLAY */
+    /* Button styling - Simple border highlight on hover */
     .stButton button {
         background: rgba(255, 255, 255, 0.15) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
         color: white !important;
         border-radius: 8px !important;
         padding: 12px 16px !important;
-        transition: all 0.2s !important;
+        transition: border-color 0.2s ease !important;
         text-align: left !important;
         box-shadow: none !important;
+        transform: none !important;
     }
     
     .stButton button:hover {
-        background: rgba(255, 255, 255, 0.25) !important;
-        border-color: rgba(255, 255, 255, 0.5) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
+        box-shadow: none !important;
+        transform: none !important;
     }
     
     .stButton button:active,
     .stButton button:focus {
-        background: rgba(255, 255, 255, 0.30) !important;
-        border-color: rgba(255, 255, 255, 0.6) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
         box-shadow: none !important;
         outline: none !important;
+        transform: none !important;
     }
     
     /* Remove any white overlays or pseudo-elements */
