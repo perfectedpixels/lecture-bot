@@ -20,5 +20,5 @@ else
     source venv/bin/activate
 fi
 
-# Run Streamlit
-streamlit run streamlit_app.py
+# Run Streamlit (customer UI with UW branding; use streamlit_app.py for admin/dev UI)
+streamlit run streamlit_app_redesign.py

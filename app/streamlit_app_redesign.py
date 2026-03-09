@@ -7,6 +7,13 @@ from pathlib import Path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
+    from persona_bot_fast import FastPersonaBot
+    from response_cache import CachedPersonaBot
+    HAS_FAST_BOT = True
+except ImportError:
+    HAS_FAST_BOT = False
+
+try:
     from persona_bot_safe import PersonaBot
     HAS_PERSONA_BOT = True
 except ImportError:
@@ -558,7 +565,7 @@ st.markdown("""
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = "1TTBVE6MG2"
+    st.session_state.kb_id = "SSIRB24COT"  # single shared KB for lecture-bot + ppmg
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
@@ -588,12 +595,21 @@ if 'portfolio_handler' not in st.session_state:
     else:
         st.session_state.portfolio_handler = None
 
-# Auto-connect
-if st.session_state.bot is None and HAS_PERSONA_BOT:
+# Auto-connect (use FastPersonaBot with ppmg KB for best performance)
+if st.session_state.bot is None and HAS_FAST_BOT:
     try:
-        st.session_state.bot = PersonaBot(st.session_state.kb_id, "anthropic.claude-3-sonnet-20240229-v1:0")
-    except:
-        pass
+        fast_bot = FastPersonaBot(
+            st.session_state.kb_id,
+            "us.anthropic.claude-sonnet-4-20250514-v1:0",
+            persona_name="Professor Levine",
+        )
+        st.session_state.bot = CachedPersonaBot(fast_bot, cache_ttl_hours=24)
+    except Exception as e:
+        if HAS_PERSONA_BOT:
+            try:
+                st.session_state.bot = PersonaBot(st.session_state.kb_id, "anthropic.claude-3-sonnet-20240229-v1:0")
+            except:
+                pass
 
 # Top Navigation Bar - Clean and minimal
 if logo_image:
@@ -621,10 +637,15 @@ with st.sidebar:
         label_visibility="collapsed"
     )
     
+    st.markdown("### Knowledge Base")
+    st.caption("SSIRB24COT (shared)")
+    st.session_state.kb_id = "SSIRB24COT"
+
     st.markdown("### Model")
     model_id = st.selectbox(
         "Select Model",
         [
+            "us.anthropic.claude-sonnet-4-20250514-v1:0",
             "anthropic.claude-3-sonnet-20240229-v1:0",
             "anthropic.claude-3-haiku-20240307-v1:0",
             "anthropic.claude-3-5-sonnet-20240620-v1:0"
@@ -657,10 +678,93 @@ with st.sidebar:
     st.divider()
     
     if st.button("Reconnect Bot", type="primary", use_container_width=True):
-        if HAS_PERSONA_BOT:
+        if HAS_FAST_BOT:
+            try:
+                fast_bot = FastPersonaBot(
+                    st.session_state.kb_id, model_id,
+                    persona_name="Professor Levine",
+                    use_haiku=(model_id and "haiku" in model_id.lower())
+                )
+                st.session_state.bot = CachedPersonaBot(fast_bot, cache_ttl_hours=24)
+                st.success("✓ Connected!")
+            except Exception as e:
+                if HAS_PERSONA_BOT:
+                    try:
+                        st.session_state.bot = PersonaBot(st.session_state.kb_id, model_id)
+                        st.success("✓ Connected (fallback bot)")
+                    except Exception as e2:
+                        st.error(f"Error: {e2}")
+                else:
+                    st.error(f"Error: {e}")
+        elif HAS_PERSONA_BOT:
             try:
                 st.session_state.bot = PersonaBot(st.session_state.kb_id, model_id)
                 st.success("✓ Connected!")
+            except Exception as e:
+                st.error(f"Error: {e}")
+
+# Process chat input BEFORE display (avoids st.rerun() which clears chat in Streamlit 1.35+)
+question = st.chat_input("Ask Professor Levine...")
+
+if question and st.session_state.bot:
+    with st.spinner("Professor Levine is thinking..."):
+        try:
+            verbosity_prompts = {
+                "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
+                "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
+                "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
+            }
+            modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
+            result = st.session_state.bot.query(modified_question, use_persona=True)
+            result['question'] = question
+            if result.get('learning_cards', {}).get('portfolio_examples'):
+                for project in result['learning_cards']['portfolio_examples']:
+                    project_key = project.get('project_key')
+                    if project_key and project_key not in st.session_state.shown_projects:
+                        st.session_state.shown_projects.append(project_key)
+                        if len(st.session_state.shown_projects) > 5:
+                            st.session_state.shown_projects.pop(0)
+            if st.session_state.voice_enabled and st.session_state.voice_generator:
+                try:
+                    result['audio_base64'] = st.session_state.voice_generator.generate_audio_base64(
+                        result['answer'], voice="chris"
+                    )
+                except Exception:
+                    pass
+            st.session_state.chat_history.append(result)
+        except Exception as e:
+            st.error(f"Error: {e}")
+
+# Handle pending question from follow-up button (before display)
+if st.session_state.pending_question:
+    q = st.session_state.pending_question
+    st.session_state.pending_question = None
+    if st.session_state.bot:
+        with st.spinner("Professor Levine is thinking..."):
+            try:
+                verbosity_prompts = {
+                    "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
+                    "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
+                    "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
+                }
+                modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {q}"
+                result = st.session_state.bot.query(modified_question, use_persona=True)
+                result['question'] = q
+                if result.get('learning_cards', {}).get('portfolio_examples'):
+                    for project in result['learning_cards']['portfolio_examples']:
+                        project_key = project.get('project_key')
+                        if project_key and project_key not in st.session_state.shown_projects:
+                            st.session_state.shown_projects.append(project_key)
+                            if len(st.session_state.shown_projects) > 5:
+                                st.session_state.shown_projects.pop(0)
+                if st.session_state.voice_enabled and st.session_state.voice_generator:
+                    try:
+                        result['audio_base64'] = st.session_state.voice_generator.generate_audio_base64(
+                            result['answer'], voice="chris"
+                        )
+                    except Exception:
+                        pass
+                st.session_state.chat_history.append(result)
             except Exception as e:
                 st.error(f"Error: {e}")
 
@@ -698,146 +802,6 @@ for idx, chat in enumerate(st.session_state.chat_history):
     # Learning Cards (only for most recent message)
     if idx == len(st.session_state.chat_history) - 1 and chat.get('learning_cards'):
         render_learning_cards(chat['learning_cards'], idx)
-    
-    # Sources section removed per user request
-    
-    # Follow-up prompts (only for last message) - REMOVED, replaced by learning cards
-    # if idx == len(st.session_state.chat_history) - 1 and not chat.get('safety_triggered'):
-    #     st.markdown("##### 💡 Dive deeper:")
-    #     col1, col2, col3 = st.columns(3)
-    #     
-    #     with col1:
-    #         if st.button("🏢 Real-world example", key=f"example_{idx}", use_container_width=True):
-    #             st.session_state.pending_question = f"Can you share a real-world example from your professional experience related to: {chat['question']}"
-    #             st.rerun()
-    #     
-    #     with col2:
-    #         if st.button("📖 Explain more", key=f"explain_{idx}", use_container_width=True):
-    #             st.session_state.pending_question = f"Can you explain this concept in more detail: {chat['question']}"
-    #             st.rerun()
-    #     
-    #     with col3:
-    #         if st.button("🔗 How does this connect?", key=f"connect_{idx}", use_container_width=True):
-    #             st.session_state.pending_question = f"How does this concept connect to other topics we've covered: {chat['question']}"
-    #             st.rerun()
 
-# Handle pending question from follow-up button
-if st.session_state.pending_question:
-    question = st.session_state.pending_question
-    st.session_state.pending_question = None
-    
-    # User message
-    st.markdown(f'<div class="user-message">{question}</div>', unsafe_allow_html=True)
-    
-    # Bot message placeholder
-    bot_placeholder = st.empty()
-    cards_placeholder = st.empty()
-    
-    with st.spinner("Professor Levine is thinking..."):
-        try:
-            # Apply verbosity
-            verbosity_prompts = {
-                "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
-                "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
-                "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
-            }
-            
-            modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
-            
-            # Query bot with exclude list to prevent doom loops
-            result = st.session_state.bot.query(
-                modified_question, 
-                use_persona=True,
-                exclude_projects=st.session_state.shown_projects
-            )
-            result['question'] = question
-            
-            # Track shown portfolio examples
-            if result.get('learning_cards', {}).get('portfolio_examples'):
-                for project in result['learning_cards']['portfolio_examples']:
-                    project_key = project.get('project_key')
-                    if project_key and project_key not in st.session_state.shown_projects:
-                        st.session_state.shown_projects.append(project_key)
-                        # Keep only last 5 to allow eventual reuse
-                        if len(st.session_state.shown_projects) > 5:
-                            st.session_state.shown_projects.pop(0)
-            
-            # Show response
-            bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
-            
-            # Generate audio if voice is enabled
-            if st.session_state.voice_enabled and st.session_state.voice_generator:
-                try:
-                    audio_base64 = st.session_state.voice_generator.generate_audio_base64(
-                        result['answer'], 
-                        voice="chris"
-                    )
-                    result['audio_base64'] = audio_base64
-                except Exception as e:
-                    pass  # Silently fail
-            
-            st.session_state.chat_history.append(result)
-        except Exception as e:
-            st.error(f"Error: {e}")
-    st.rerun()
-
-# Chat input
-question = st.chat_input("Ask Professor Levine...")
-
-if question and st.session_state.bot:
-    # User message
-    st.markdown(f'<div class="user-message">{question}</div>', unsafe_allow_html=True)
-    
-    # Placeholders for bot response and cards
-    bot_placeholder = st.empty()
-    cards_placeholder = st.empty()
-    
-    with st.spinner("Professor Levine is thinking..."):
-        try:
-            # Apply verbosity
-            verbosity_prompts = {
-                "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
-                "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
-                "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
-            }
-            
-            modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
-            
-            # Query bot with exclude list to prevent doom loops
-            result = st.session_state.bot.query(
-                modified_question, 
-                use_persona=True,
-                exclude_projects=st.session_state.shown_projects
-            )
-            result['question'] = question
-            
-            # Track shown portfolio examples
-            if result.get('learning_cards', {}).get('portfolio_examples'):
-                for project in result['learning_cards']['portfolio_examples']:
-                    project_key = project.get('project_key')
-                    if project_key and project_key not in st.session_state.shown_projects:
-                        st.session_state.shown_projects.append(project_key)
-                        # Keep only last 5 to allow eventual reuse
-                        if len(st.session_state.shown_projects) > 5:
-                            st.session_state.shown_projects.pop(0)
-            
-            # Show response
-            bot_placeholder.markdown(f'<div class="bot-message">{result["answer"]}</div>', unsafe_allow_html=True)
-            
-            # Generate audio if voice is enabled
-            if st.session_state.voice_enabled and st.session_state.voice_generator:
-                try:
-                    audio_base64 = st.session_state.voice_generator.generate_audio_base64(
-                        result['answer'], 
-                        voice="chris"
-                    )
-                    result['audio_base64'] = audio_base64
-                except Exception as e:
-                    pass  # Silently fail
-            
-            st.session_state.chat_history.append(result)
-        except Exception as e:
-            st.error(f"Error: {e}")
-    st.rerun()
-elif question and not st.session_state.bot:
+if question and not st.session_state.bot:
     st.error("Please connect to the bot in the sidebar settings first!")

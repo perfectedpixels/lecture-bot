@@ -10,9 +10,9 @@ import json
 import argparse
 from pathlib import Path
 
-from transcript_cleaner import TranscriptCleaner
-from concept_extractor import ConceptExtractor, TaggedSegment
-from affinity_mapper import AffinityMapper
+from .transcript_cleaner import TranscriptCleaner
+from .concept_extractor import ConceptExtractor, TaggedSegment
+from .affinity_mapper import AffinityMapper
 
 class LecturePreprocessingPipeline:
     """
@@ -191,6 +191,9 @@ class LecturePreprocessingPipeline:
             'tagged_segments': all_tagged_segments,
             'summaries': all_summaries
         }
+
+
+PreprocessingPipeline = LecturePreprocessingPipeline  # alias for streamlit_app
 
 
 def main():

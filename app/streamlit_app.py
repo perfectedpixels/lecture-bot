@@ -3,7 +3,9 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from persona_bot import PersonaBot
+from persona_bot import PersonaLectureBot
+from persona_bot_fast import FastPersonaBot
+from response_cache import CachedPersonaBot
 from preprocessing.transcript_cleaner import TranscriptCleaner
 from preprocessing.concept_extractor import ConceptExtractor
 from preprocessing.affinity_mapper import AffinityMapper
@@ -44,15 +46,23 @@ if 'affinity_map' not in st.session_state:
 with st.sidebar:
     st.title("⚙️ Configuration")
     
+    use_fast_bot = st.checkbox(
+        "Use optimized bot (ppmg KB, faster retrieval, caching)",
+        value=st.session_state.get("use_fast_bot", True),
+        help="Uses shared knowledge base (SSIRB24COT) with retry, reranking, and 24h cache"
+    )
+    st.session_state.use_fast_bot = use_fast_bot
+
     kb_id = st.text_input(
         "Knowledge Base ID",
-        value=st.session_state.kb_id or "",
-        help="Enter your AWS Bedrock Knowledge Base ID"
+        value=st.session_state.kb_id or ("SSIRB24COT" if use_fast_bot else ""),
+        help="AWS Bedrock Knowledge Base ID (SSIRB24COT for shared ppmg/lecture-bot KB)"
     )
     
     model_id = st.selectbox(
         "Model",
         [
+            "us.anthropic.claude-sonnet-4-20250514-v1:0",
             "anthropic.claude-3-sonnet-20240229-v1:0",
             "anthropic.claude-3-haiku-20240307-v1:0",
             "anthropic.claude-3-5-sonnet-20240620-v1:0"
@@ -92,13 +102,24 @@ with st.sidebar:
     if st.button("Connect", type="primary"):
         if kb_id:
             st.session_state.kb_id = kb_id
-            st.session_state.bot = PersonaBot(
-                kb_id, 
-                model_id,
-                st.session_state.affinity_map,
-                persona_name
-            )
-            st.success("Connected!")
+            try:
+                if use_fast_bot:
+                    fast_bot = FastPersonaBot(
+                        kb_id, model_id,
+                        persona_name=persona_name,
+                        use_haiku=(model_id and "haiku" in model_id.lower())
+                    )
+                    st.session_state.bot = CachedPersonaBot(fast_bot, cache_ttl_hours=24)
+                else:
+                    st.session_state.bot = PersonaLectureBot(
+                        kb_id,
+                        st.session_state.affinity_map,
+                        model_id,
+                        persona_name
+                    )
+                st.success("Connected!")
+            except Exception as e:
+                st.error(f"Connection failed: {e}")
         else:
             st.error("Please enter a Knowledge Base ID")
     

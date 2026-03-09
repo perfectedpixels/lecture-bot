@@ -195,7 +195,7 @@ Available clusters:
 {json.dumps([{
     'cluster_id': c.cluster_id,
     'central_concept': c.central_concept,
-    'concepts': c.concepts[:5]  # Show first 5 concepts
+    'concepts': c.concepts[:5]
 } for c in clusters], indent=2)}
 
 Return ONLY a JSON array of cluster_ids ranked by relevance (most relevant first):
