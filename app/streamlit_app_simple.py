@@ -233,6 +233,8 @@ if 'voice_enabled' not in st.session_state:
     st.session_state.voice_enabled = True  # Enable by default
 if 'audio_playing' not in st.session_state:
     st.session_state.audio_playing = False  # Track if audio is currently playing
+if 'audio_autoplay' not in st.session_state:
+    st.session_state.audio_autoplay = True  # Enable autoplay by default
 if 'voice_generator' not in st.session_state:
     if HAS_VOICE:
         try:
@@ -251,6 +253,39 @@ if 'portfolio_handler' not in st.session_state:
             print(f"Portfolio images disabled: {e}")
     else:
         st.session_state.portfolio_handler = None
+if 'ui_language' not in st.session_state:
+    st.session_state.ui_language = "en"
+
+
+def _run_bot_query_simple(question: str, use_persona: bool = True):
+    bot = st.session_state.bot
+    lang = st.session_state.get("ui_language", "en")
+    try:
+        return bot.query(question, use_persona=use_persona, response_language=lang)
+    except TypeError:
+        try:
+            return bot.query(question, use_persona=use_persona)
+        except TypeError:
+            return bot.query(question)
+
+
+# Voice and Autoplay controls at the very top
+col1, col2, col3, col4, col5 = st.columns([6, 1, 1, 1, 1])
+
+with col1:
+    st.markdown("## 🎓 Lecture Bot")
+
+with col3:
+    if st.session_state.voice_enabled:
+        st.caption(f"Autoplay: {'on' if st.session_state.audio_autoplay else 'off'}")
+
+with col4:
+    st.toggle("🔊", value=st.session_state.voice_enabled, key="voice_toggle_top", help="Voice")
+
+with col5:
+    st.toggle("🔈", value=st.session_state.audio_autoplay, key="autoplay_toggle_top", help="Autoplay")
+
+st.divider()
 
 # Sidebar configuration
 with st.sidebar:
@@ -292,6 +327,26 @@ with st.sidebar:
             "anthropic.claude-3-5-sonnet-20240620-v1:0"
         ]
     )
+
+    st.markdown("### Language / 语言")
+    st.caption("Reply language (you may type in either language)")
+    _sl1, _sl2 = st.columns(2)
+    with _sl1:
+        if st.button(
+            "English",
+            key="simple_lang_en",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "en" else "secondary",
+        ):
+            st.session_state.ui_language = "en"
+    with _sl2:
+        if st.button(
+            "中文",
+            key="simple_lang_zh",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "zh" else "secondary",
+        ):
+            st.session_state.ui_language = "zh"
     
     if st.button("Connect", type="primary"):
         if kb_id:
@@ -335,27 +390,6 @@ with st.sidebar:
     4. Enter KB ID above
     5. Click Connect
     """)
-
-# Main content
-st.title("🎓 Lecture Bot")
-
-# Voice control toggle at top
-if HAS_VOICE:
-    col_voice1, col_voice2 = st.columns([1, 5])
-    with col_voice1:
-        voice_toggle = st.toggle("🔊 Voice", value=st.session_state.voice_enabled, key="voice_toggle")
-        if voice_toggle != st.session_state.voice_enabled:
-            st.session_state.voice_enabled = voice_toggle
-            if voice_toggle and not st.session_state.voice_generator:
-                try:
-                    st.session_state.voice_generator = VoiceGenerator()
-                except Exception as e:
-                    st.error(f"Voice setup failed: {e}")
-                    st.session_state.voice_enabled = False
-    
-    with col_voice2:
-        if st.session_state.voice_enabled:
-            st.caption("🎙️ Chris voice • Auto-play enabled")
 
 # Waveform visualization when voice is active  
 if HAS_VOICE and st.session_state.voice_enabled:
@@ -426,8 +460,12 @@ with tab1:
     
     def process_bot_response(result):
         """Helper function to process bot response with audio and images"""
-        # Generate audio if voice is enabled
-        if st.session_state.voice_enabled and st.session_state.voice_generator:
+        # Generate audio if voice is enabled (English voice only)
+        if (
+            st.session_state.voice_enabled
+            and st.session_state.voice_generator
+            and st.session_state.get("ui_language", "en") == "en"
+        ):
             try:
                 audio_base64 = st.session_state.voice_generator.generate_audio_base64(
                     result['answer'], 
@@ -459,7 +497,7 @@ with tab1:
                 f"data:audio/mpeg;base64,{result['audio_base64']}",
                 format="audio/mpeg",
                 start_time=0,
-                autoplay=True
+                autoplay=st.session_state.audio_autoplay
             )
         
         # Portfolio images
@@ -513,12 +551,12 @@ with tab1:
             
             # Audio player if voice is enabled and audio exists
             if st.session_state.voice_enabled and chat.get('audio_base64'):
-                # Use Streamlit's audio component with autoplay
+                # Use Streamlit's audio component with conditional autoplay
                 st.audio(
                     f"data:audio/mpeg;base64,{chat['audio_base64']}",
                     format="audio/mpeg",
                     start_time=0,
-                    autoplay=True
+                    autoplay=st.session_state.audio_autoplay
                 )
             
             # Portfolio images if relevant
@@ -574,11 +612,15 @@ with tab1:
             
             with st.spinner("Professor Levine is thinking..."):
                 try:
-                    result = st.session_state.bot.query(question, use_persona=True)
+                    result = _run_bot_query_simple(question, use_persona=True)
                     result['question'] = question
                     
                     # Generate audio if voice is enabled
-                    if st.session_state.voice_enabled and st.session_state.voice_generator:
+                    if (
+                        st.session_state.voice_enabled
+                        and st.session_state.voice_generator
+                        and st.session_state.get("ui_language", "en") == "en"
+                    ):
                         try:
                             audio_base64 = st.session_state.voice_generator.generate_audio_base64(
                                 result['answer'], 
@@ -597,7 +639,7 @@ with tab1:
                             f"data:audio/mpeg;base64,{result['audio_base64']}",
                             format="audio/mpeg",
                             start_time=0,
-                            autoplay=True
+                            autoplay=st.session_state.audio_autoplay
                         )
                     
                     if result.get('safety_triggered'):
@@ -618,7 +660,12 @@ with tab1:
             st.rerun()
         
         # Chat input
-        question = st.chat_input("Ask Professor Levine about the lectures...")
+        _simp_ph = (
+            "向 Levine 教授提问课程内容…"
+            if st.session_state.ui_language == "zh"
+            else "Ask Professor Levine about the lectures..."
+        )
+        question = st.chat_input(_simp_ph)
         
         if question:
             # User message
@@ -626,11 +673,15 @@ with tab1:
             
             with st.spinner("Professor Levine is thinking..."):
                 try:
-                    result = st.session_state.bot.query(question, use_persona=True)
+                    result = _run_bot_query_simple(question, use_persona=True)
                     result['question'] = question
                     
                     # Generate audio if voice is enabled
-                    if st.session_state.voice_enabled and st.session_state.voice_generator:
+                    if (
+                        st.session_state.voice_enabled
+                        and st.session_state.voice_generator
+                        and st.session_state.get("ui_language", "en") == "en"
+                    ):
                         try:
                             audio_base64 = st.session_state.voice_generator.generate_audio_base64(
                                 result['answer'], 
@@ -649,7 +700,7 @@ with tab1:
                             f"data:audio/mpeg;base64,{result['audio_base64']}",
                             format="audio/mpeg",
                             start_time=0,
-                            autoplay=True
+                            autoplay=st.session_state.audio_autoplay
                         )
                     
                     if result.get('safety_triggered'):
@@ -702,7 +753,7 @@ with tab2:
             
             for test in good_tests:
                 if st.button(f"Test: {test}", key=f"good_{test}"):
-                    result = st.session_state.bot.query(test)
+                    result = _run_bot_query_simple(test, use_persona=True)
                     st.success("Response generated")
                     with st.expander("See response"):
                         st.write(result['answer'])
@@ -718,7 +769,7 @@ with tab2:
             
             for test in bad_tests:
                 if st.button(f"Test: {test}", key=f"bad_{test}"):
-                    result = st.session_state.bot.query(test)
+                    result = _run_bot_query_simple(test, use_persona=True)
                     if result.get('safety_triggered'):
                         st.warning("✓ Safety rule triggered (as expected)")
                     else:
@@ -731,7 +782,7 @@ with tab2:
         st.markdown("### Custom Test")
         custom_test = st.text_input("Enter your own test question:")
         if st.button("Test Custom Question") and custom_test:
-            result = st.session_state.bot.query(custom_test)
+            result = _run_bot_query_simple(custom_test, use_persona=True)
             
             if result.get('safety_triggered'):
                 st.warning("🛡️ Safety rule triggered")
@@ -802,8 +853,9 @@ with tab3:
         if st.button("Generate Report", type="primary") and topic:
             with st.spinner(f"Generating report on '{topic}'..."):
                 try:
-                    result = st.session_state.bot.query(
-                        f"Generate a comprehensive report on '{topic}' based on the lecture content. Include key concepts, examples, and applications."
+                    result = _run_bot_query_simple(
+                        f"Generate a comprehensive report on '{topic}' based on the lecture content. Include key concepts, examples, and applications.",
+                        use_persona=True,
                     )
                     
                     st.markdown("### Report")
@@ -834,8 +886,9 @@ with tab5:
             if st.button("Summarize") and topic:
                 with st.spinner("Summarizing..."):
                     try:
-                        result = st.session_state.bot.query(
-                            f"Provide a concise summary of '{topic}' from the lectures, including definition, key points, and examples."
+                        result = _run_bot_query_simple(
+                            f"Provide a concise summary of '{topic}' from the lectures, including definition, key points, and examples.",
+                            use_persona=True,
                         )
                         st.markdown(result['answer'])
                     except Exception as e:
@@ -846,8 +899,9 @@ with tab5:
             if st.button("Analyze") and assignment:
                 with st.spinner("Analyzing..."):
                     try:
-                        result = st.session_state.bot.query(
-                            f"Based on the lecture content, provide feedback and suggestions for this assignment:\n\n{assignment}"
+                        result = _run_bot_query_simple(
+                            f"Based on the lecture content, provide feedback and suggestions for this assignment:\n\n{assignment}",
+                            use_persona=True,
                         )
                         st.markdown("### Feedback")
                         st.markdown(result['answer'])
@@ -859,8 +913,9 @@ with tab5:
             if st.button("Extract") and lecture_ref:
                 with st.spinner("Extracting..."):
                     try:
-                        result = st.session_state.bot.query(
-                            f"Extract the key takeaways from lectures about '{lecture_ref}'. Format as bullet points."
+                        result = _run_bot_query_simple(
+                            f"Extract the key takeaways from lectures about '{lecture_ref}'. Format as bullet points.",
+                            use_persona=True,
                         )
                         st.markdown(result['answer'])
                     except Exception as e:
@@ -871,8 +926,9 @@ with tab5:
             if st.button("Explain") and concept:
                 with st.spinner("Explaining..."):
                     try:
-                        result = st.session_state.bot.query(
-                            f"Explain '{concept}' as taught in the lectures, including how it relates to other concepts."
+                        result = _run_bot_query_simple(
+                            f"Explain '{concept}' as taught in the lectures, including how it relates to other concepts.",
+                            use_persona=True,
                         )
                         st.markdown(result['answer'])
                     except Exception as e:

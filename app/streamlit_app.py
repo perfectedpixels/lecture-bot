@@ -41,6 +41,19 @@ if 'persona_mode' not in st.session_state:
     st.session_state.persona_mode = True
 if 'affinity_map' not in st.session_state:
     st.session_state.affinity_map = None
+if 'ui_language' not in st.session_state:
+    st.session_state.ui_language = "en"  # "en" | "zh"
+
+
+def _run_bot_query(question: str, use_persona: bool = True):
+    """Pass response_language when the bot supports it (Fast + cache / PersonaBot safe)."""
+    bot = st.session_state.bot
+    lang = st.session_state.get("ui_language", "en")
+    try:
+        return bot.query(question, use_persona=use_persona, response_language=lang)
+    except TypeError:
+        return bot.query(question, use_persona=use_persona)
+
 
 # Sidebar configuration
 with st.sidebar:
@@ -49,14 +62,14 @@ with st.sidebar:
     use_fast_bot = st.checkbox(
         "Use optimized bot (ppmg KB, faster retrieval, caching)",
         value=st.session_state.get("use_fast_bot", True),
-        help="Uses shared knowledge base (SSIRB24COT) with retry, reranking, and 24h cache"
+        help="Uses shared knowledge base (HHYCUJH32J) with retry, reranking, and 24h cache"
     )
     st.session_state.use_fast_bot = use_fast_bot
 
     kb_id = st.text_input(
         "Knowledge Base ID",
-        value=st.session_state.kb_id or ("SSIRB24COT" if use_fast_bot else ""),
-        help="AWS Bedrock Knowledge Base ID (SSIRB24COT for shared ppmg/lecture-bot KB)"
+        value=st.session_state.kb_id or ("HHYCUJH32J" if use_fast_bot else ""),
+        help="AWS Bedrock Knowledge Base ID (HHYCUJH32J for shared ppmg/lecture-bot KB)"
     )
     
     model_id = st.selectbox(
@@ -68,6 +81,26 @@ with st.sidebar:
             "anthropic.claude-3-5-sonnet-20240620-v1:0"
         ]
     )
+
+    st.markdown("### Language / 语言")
+    st.caption("Reply language (you may type in either language)")
+    _lc1, _lc2 = st.columns(2)
+    with _lc1:
+        if st.button(
+            "English",
+            key="main_lang_en",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "en" else "secondary",
+        ):
+            st.session_state.ui_language = "en"
+    with _lc2:
+        if st.button(
+            "中文",
+            key="main_lang_zh",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "zh" else "secondary",
+        ):
+            st.session_state.ui_language = "zh"
     
     # Affinity map upload
     affinity_file = st.file_uploader(
@@ -166,17 +199,23 @@ with tab1:
                             st.text(source)
         
         # Chat input
-        question = st.chat_input("Ask a question about your lectures...")
+        _q_ph = (
+            "请提问关于课程内容的问题…"
+            if st.session_state.ui_language == "zh"
+            else "Ask a question about your lectures..."
+        )
+        question = st.chat_input(_q_ph)
         
         if question:
             with st.chat_message("user"):
                 st.write(question)
             
             with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    result = st.session_state.bot.query(
-                        question, 
-                        use_persona=st.session_state.persona_mode
+                _spin = "思考中…" if st.session_state.ui_language == "zh" else "Thinking..."
+                with st.spinner(_spin):
+                    result = _run_bot_query(
+                        question,
+                        use_persona=st.session_state.persona_mode,
                     )
                     st.write(result['answer'])
                     
@@ -368,15 +407,21 @@ with tab4:
                             st.text(source)
         
         # Chat input
-        question = st.chat_input("Ask a question about your lectures...")
+        _q_ph2 = (
+            "请提问关于课程内容的问题…"
+            if st.session_state.ui_language == "zh"
+            else "Ask a question about your lectures..."
+        )
+        question = st.chat_input(_q_ph2)
         
         if question:
             with st.chat_message("user"):
                 st.write(question)
             
             with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    result = st.session_state.bot.query(question)
+                _spin2 = "思考中…" if st.session_state.ui_language == "zh" else "Thinking..."
+                with st.spinner(_spin2):
+                    result = _run_bot_query(question)
                     st.write(result['answer'])
                     
                     with st.expander("📎 Sources"):
@@ -432,7 +477,7 @@ with tab6:
             
             if st.button("Analyze") and concept:
                 with st.spinner("Analyzing..."):
-                    result = st.session_state.bot.query(
+                    result = _run_bot_query(
                         f"List all key concepts, subtopics, and relationships related to '{concept}' from the lectures. Format as a hierarchical structure."
                     )
                     
@@ -444,7 +489,7 @@ with tab6:
             
             if st.button("Summarize") and topic:
                 with st.spinner("Summarizing..."):
-                    result = st.session_state.bot.query(
+                    result = _run_bot_query(
                         f"Provide a concise summary of '{topic}' covering: definition, key points, examples, and applications mentioned in lectures."
                     )
                     
@@ -471,7 +516,7 @@ with tab6:
             
             if st.button("Extract Takeaways") and lecture_ref:
                 with st.spinner("Extracting key takeaways..."):
-                    result = st.session_state.bot.query(
+                    result = _run_bot_query(
                         f"Extract the key takeaways and most important points from lectures about '{lecture_ref}'. Format as bullet points."
                     )
                     
