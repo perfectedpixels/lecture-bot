@@ -3,11 +3,11 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from persona_bot import PersonaBot
+from persona_bot_safe import PersonaBot
 from preprocessing.transcript_cleaner import TranscriptCleaner
 from preprocessing.concept_extractor import ConceptExtractor
 from preprocessing.affinity_mapper import AffinityMapper
-from preprocessing.pipeline import PreprocessingPipeline
+from preprocessing.pipeline import LecturePreprocessingPipeline as PreprocessingPipeline
 import json
 import plotly.graph_objects as go
 import plotly.express as px
@@ -25,12 +25,8 @@ if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'persona_history' not in st.session_state:
     st.session_state.persona_history = []
-if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = None
 if 'bot' not in st.session_state:
     st.session_state.bot = None
-if 'persona_bot' not in st.session_state:
-    st.session_state.persona_bot = None
 if 'processed_transcripts' not in st.session_state:
     st.session_state.processed_transcripts = []
 if 'concept_map' not in st.session_state:
@@ -42,75 +38,49 @@ if 'affinity_map' not in st.session_state:
 
 # Sidebar configuration
 with st.sidebar:
-    st.title("⚙️ Configuration")
-    
-    kb_id = st.text_input(
-        "Knowledge Base ID",
-        value=st.session_state.kb_id or "",
-        help="Enter your AWS Bedrock Knowledge Base ID"
-    )
-    
-    model_id = st.selectbox(
-        "Model",
-        [
-            "anthropic.claude-3-sonnet-20240229-v1:0",
-            "anthropic.claude-3-haiku-20240307-v1:0",
-            "anthropic.claude-3-5-sonnet-20240620-v1:0"
-        ]
-    )
-    
-    # Affinity map upload
-    affinity_file = st.file_uploader(
-        "Affinity Map (optional)",
-        type=['json'],
-        help="Upload affinity_map.json from preprocessing"
-    )
-    
-    if affinity_file:
-        affinity_path = Path("temp_affinity_map.json")
-        affinity_path.write_bytes(affinity_file.read())
-        st.session_state.affinity_map = str(affinity_path)
-        st.success("✓ Affinity map loaded")
-    
+    st.title("Settings")
+
     # Persona settings
-    st.divider()
-    st.markdown("### 🎭 Persona Settings")
-    
+    st.markdown("### Persona Settings")
+
     persona_mode = st.checkbox(
         "Enable Persona Mode",
         value=st.session_state.persona_mode,
         help="Bot responds as the instructor"
     )
     st.session_state.persona_mode = persona_mode
-    
-    persona_name = st.text_input(
-        "Instructor Name",
-        value="Professor Levine",
-        help="How the bot should refer to itself"
+
+    # Affinity map upload
+    affinity_file = st.file_uploader(
+        "Affinity Map (optional)",
+        type=['json'],
+        help="Upload affinity_map.json from preprocessing"
     )
-    
+
+    if affinity_file:
+        affinity_path = Path("temp_affinity_map.json")
+        affinity_path.write_bytes(affinity_file.read())
+        st.session_state.affinity_map = str(affinity_path)
+        st.success("Affinity map loaded")
+
     if st.button("Connect", type="primary"):
-        if kb_id:
-            st.session_state.kb_id = kb_id
+        try:
             st.session_state.bot = PersonaBot(
-                kb_id, 
-                model_id,
-                st.session_state.affinity_map,
-                persona_name
+                affinity_map_path=st.session_state.get('affinity_map'),
             )
             st.success("Connected!")
-        else:
-            st.error("Please enter a Knowledge Base ID")
-    
+        except Exception as e:
+            st.error(f"Error: {e}")
+
     st.divider()
-    
-    st.markdown("### 📊 Features")
+
+    st.markdown("### Features")
     st.markdown("""
-    - 🎭 Persona-based responses
-    - 🧠 Concept-aware context
-    - 📚 Source attribution
-    - 📊 Affinity mapping
-    - 📝 Assignment feedback
+    - Persona-based responses
+    - Concept-aware context
+    - Source attribution
+    - Affinity mapping
+    - Assignment feedback
     """)
 
 # Main content
@@ -131,7 +101,7 @@ with tab1:
     st.subheader("Ask Questions")
     
     if not st.session_state.bot:
-        st.info("👈 Please configure and connect to your Knowledge Base in the sidebar")
+        st.info("Please connect to the bot in the sidebar")
     else:
         # Display chat history
         for chat in st.session_state.chat_history:
@@ -140,39 +110,38 @@ with tab1:
             with st.chat_message("assistant"):
                 st.write(chat['answer'])
                 if chat.get('sources'):
-                    with st.expander("📎 Sources"):
+                    with st.expander("Sources"):
                         for source in chat['sources']:
                             st.text(source)
-        
+
         # Chat input
         question = st.chat_input("Ask a question about your lectures...")
-        
+
         if question:
             with st.chat_message("user"):
                 st.write(question)
-            
+
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     result = st.session_state.bot.query(
-                        question, 
+                        question,
                         use_persona=st.session_state.persona_mode
                     )
                     st.write(result['answer'])
-                    
-                    # Show relevant concepts if available
+
                     if result.get('relevant_concepts'):
-                        with st.expander("🧠 Relevant Concepts"):
+                        with st.expander("Relevant Concepts"):
                             st.write(", ".join(result['relevant_concepts'][:10]))
-                    
-                    with st.expander("📎 Sources"):
+
+                    with st.expander("Sources"):
                         for source in result['sources']:
                             st.text(source)
-                    
+
                     st.session_state.chat_history.append(result)
 
 with tab2:
     st.subheader("🔧 Preprocess Transcripts")
-    st.markdown("Clean, chunk, and tag your lecture transcripts before uploading to S3")
+    st.markdown("Clean, chunk, and tag your lecture transcripts")
     
     # File upload
     uploaded_file = st.file_uploader("Upload Raw Transcript", type=['txt'], help="Upload a raw lecture transcript with timestamps")
@@ -267,15 +236,15 @@ with tab2:
             with st.expander(f"📄 {transcript['filename']}"):
                 st.write(f"Chunks: {len(transcript['chunks'])}")
                 st.write(f"Concepts: {len(transcript['concepts'])}")
-                if st.button(f"Upload to S3", key=f"upload_{idx}"):
-                    st.info("S3 upload feature coming soon - for now, download and use the upload script")
+                if st.button(f"Index for search", key=f"upload_{idx}"):
+                    st.info("Use scripts/ingest_to_chromadb.py to index processed transcripts")
 
 with tab3:
     st.subheader("🗺️ Concept Affinity Map")
     st.markdown("Visualize concept clusters and relationships across all lectures")
     
     if not st.session_state.bot:
-        st.info("👈 Please configure and connect to your Knowledge Base")
+        st.info("Please connect to the bot in the sidebar")
     else:
         if st.button("Generate Affinity Map", type="primary"):
             with st.spinner("Analyzing concepts across all lectures..."):
@@ -333,7 +302,7 @@ with tab4:
     st.markdown("*Standard question-answering with source attribution*")
     
     if not st.session_state.bot:
-        st.info("👈 Please configure and connect to your Knowledge Base in the sidebar")
+        st.info("Please connect to the bot in the sidebar")
     else:
         # Display chat history
         for chat in st.session_state.chat_history:
@@ -342,33 +311,33 @@ with tab4:
             with st.chat_message("assistant"):
                 st.write(chat['answer'])
                 if chat.get('sources'):
-                    with st.expander("📎 Sources"):
+                    with st.expander("Sources"):
                         for source in chat['sources']:
                             st.text(source)
-        
+
         # Chat input
         question = st.chat_input("Ask a question about your lectures...")
-        
+
         if question:
             with st.chat_message("user"):
                 st.write(question)
-            
+
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     result = st.session_state.bot.query(question)
                     st.write(result['answer'])
-                    
-                    with st.expander("📎 Sources"):
+
+                    with st.expander("Sources"):
                         for source in result['sources']:
                             st.text(source)
-                    
+
                     st.session_state.chat_history.append(result)
 
 with tab5:
     st.subheader("Generate Reports")
     
     if not st.session_state.bot:
-        st.info("👈 Please configure and connect to your Knowledge Base")
+        st.info("Please connect to the bot in the sidebar")
     else:
         col1, col2 = st.columns([3, 1])
         
@@ -399,7 +368,7 @@ with tab6:
     st.subheader("Content Analysis")
     
     if not st.session_state.bot:
-        st.info("👈 Please configure and connect to your Knowledge Base")
+        st.info("Please connect to the bot in the sidebar")
     else:
         analysis_type = st.selectbox(
             "Analysis Type",
@@ -463,6 +432,6 @@ with tab6:
 st.divider()
 st.markdown("""
 <div style='text-align: center; color: gray;'>
-    Built with Streamlit • Powered by AWS Bedrock
+    Built with Streamlit • Powered by Claude
 </div>
 """, unsafe_allow_html=True)

@@ -5,16 +5,19 @@ Extract portfolio project mentions from lecture transcripts
 """
 
 import json
-import boto3
+import os
+import sys
 from pathlib import Path
 from typing import List, Dict, Set
 import re
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+from llm_client import call_claude, DEFAULT_MODEL
 
 class LecturePortfolioCrossReferencer:
     """Cross-reference portfolio projects with lecture mentions"""
     
     def __init__(self):
-        self.bedrock = boto3.client('bedrock-runtime')
         self.portfolio_metadata = self._load_portfolio_metadata()
         self.project_names = self._extract_project_names()
     
@@ -98,17 +101,7 @@ Return ONLY valid JSON:
 """
         
         try:
-            response = self.bedrock.invoke_model(
-                modelId="anthropic.claude-3-sonnet-20240229-v1:0",
-                body=json.dumps({
-                    "anthropic_version": "bedrock-2023-05-31",
-                    "max_tokens": 500,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.3
-                })
-            )
-            
-            content = json.loads(response['body'].read())['content'][0]['text']
+            content = call_claude(prompt, max_tokens=500, temperature=0.3)
             json_start = content.find('{')
             json_end = content.rfind('}') + 1
             return json.loads(content[json_start:json_end])

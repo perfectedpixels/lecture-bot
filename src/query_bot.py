@@ -1,42 +1,31 @@
-import boto3
 import json
 from typing import Optional
 
+from llm_client import call_claude, DEFAULT_MODEL
+from vector_store import VectorStore
+
 class LectureBot:
     """
-    Query interface for the lecture bot using Bedrock Knowledge Base.
+    Query interface for the lecture bot using local vector store.
     """
-    
-    def __init__(self, knowledge_base_id: str, model_id: str = "anthropic.claude-3-sonnet-20240229-v1:0"):
-        self.bedrock_agent = boto3.client('bedrock-agent-runtime')
-        self.bedrock_runtime = boto3.client('bedrock-runtime')
-        self.knowledge_base_id = knowledge_base_id
+
+    def __init__(self, model_id: str = DEFAULT_MODEL):
+        self.vector_store = VectorStore()
         self.model_id = model_id
-    
+
     def query(self, question: str, max_results: int = 5) -> dict:
         """
         Query the knowledge base with a question.
         Returns relevant context and generated answer.
         """
-        
+
         # Retrieve relevant documents
-        response = self.bedrock_agent.retrieve(
-            knowledgeBaseId=self.knowledge_base_id,
-            retrievalQuery={'text': question},
-            retrievalConfiguration={
-                'vectorSearchConfiguration': {
-                    'numberOfResults': max_results
-                }
-            }
-        )
-        
+        results = self.vector_store.query(question, n_results=max_results)
+
         # Extract context from retrieved documents
-        context = "\n\n".join([
-            result['content']['text'] 
-            for result in response['retrievalResults']
-        ])
-        
-        # Generate answer using Bedrock model
+        context = "\n\n".join([r['text'] for r in results])
+
+        # Generate answer using Claude
         prompt = f"""Based on the following lecture content, answer the question.
 
 Context from lectures:
@@ -46,41 +35,25 @@ Question: {question}
 
 Provide a comprehensive answer based on the lecture content above."""
 
-        model_response = self.bedrock_runtime.invoke_model(
-            modelId=self.model_id,
-            body=json.dumps({
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 2000,
-                "messages": [
-                    {"role": "user", "content": prompt}
-                ]
-            })
-        )
-        
-        response_body = json.loads(model_response['body'].read())
-        answer = response_body['content'][0]['text']
-        
+        answer = call_claude(prompt, max_tokens=2000, model=self.model_id)
+
         return {
             'question': question,
             'answer': answer,
-            'sources': [r['location']['s3Location']['uri'] for r in response['retrievalResults']],
+            'sources': [r['source'] for r in results],
             'context': context
         }
-    
+
     def generate_report(self, topic: str) -> str:
-        """
-        Generate a comprehensive report on a topic from lectures.
-        """
+        """Generate a comprehensive report on a topic from lectures."""
         prompt = f"Generate a detailed report summarizing all lecture content related to: {topic}"
         return self.query(prompt)['answer']
-    
+
     def create_visualization_data(self, concept: str) -> dict:
-        """
-        Extract structured data for visualization.
-        """
-        prompt = f"""Extract key data points, relationships, and concepts related to '{concept}' 
+        """Extract structured data for visualization."""
+        prompt = f"""Extract key data points, relationships, and concepts related to '{concept}'
         from the lectures. Format as JSON with nodes and edges for visualization."""
-        
+
         result = self.query(prompt)
         return {
             'concept': concept,
@@ -90,19 +63,17 @@ Provide a comprehensive answer based on the lecture content above."""
 
 
 if __name__ == "__main__":
-    # Example usage
     import sys
-    
-    if len(sys.argv) < 3:
-        print("Usage: python query_bot.py <knowledge_base_id> <question>")
+
+    if len(sys.argv) < 2:
+        print("Usage: python query_bot.py <question>")
         sys.exit(1)
-    
-    kb_id = sys.argv[1]
-    question = sys.argv[2]
-    
-    bot = LectureBot(kb_id)
+
+    question = sys.argv[1]
+
+    bot = LectureBot()
     result = bot.query(question)
-    
+
     print(f"\nQuestion: {result['question']}")
     print(f"\nAnswer:\n{result['answer']}")
     print(f"\nSources: {', '.join(result['sources'])}")

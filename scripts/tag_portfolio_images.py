@@ -5,10 +5,13 @@ Semi-automated tagging of portfolio images with concept metadata
 """
 
 import json
-import boto3
+import os
 from pathlib import Path
 from typing import List, Dict
 import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+from llm_client import call_claude, DEFAULT_MODEL
 
 class PortfolioImageTagger:
     """Tag portfolio images with concept metadata using Claude"""
@@ -64,7 +67,7 @@ class PortfolioImageTagger:
     ]
     
     def __init__(self, image_map_path: str = "data/portfolio_image_map.json"):
-        self.bedrock = boto3.client('bedrock-runtime')
+        self.model_id = DEFAULT_MODEL
         self.image_map_path = image_map_path
         self.image_map = self._load_image_map()
         self.portfolio_content = self._load_portfolio_content()
@@ -129,17 +132,7 @@ Images in project: {[img['filename'] for img in project_data.get('images', [])]}
 """
         
         try:
-            response = self.bedrock.invoke_model(
-                modelId="anthropic.claude-3-sonnet-20240229-v1:0",
-                body=json.dumps({
-                    "anthropic_version": "bedrock-2023-05-31",
-                    "max_tokens": 2000,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.3
-                })
-            )
-            
-            content = json.loads(response['body'].read())['content'][0]['text']
+            content = call_claude(prompt, max_tokens=2000, temperature=0.3, model=self.model_id)
             # Extract JSON from response
             json_start = content.find('{')
             json_end = content.rfind('}') + 1

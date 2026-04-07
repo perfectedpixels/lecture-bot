@@ -35,6 +35,9 @@ Thumbs.db
 test_*.py
 *_test.py
 
+# ChromaDB local vector store
+data/chromadb/
+
 # Temporary
 *.tmp
 *.bak

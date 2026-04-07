@@ -5,10 +5,13 @@ Tags one project at a time with progress output
 """
 
 import json
-import boto3
+import os
+import sys
 from pathlib import Path
 from typing import List, Dict
-import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+from llm_client import call_claude, DEFAULT_MODEL
 
 # High-level teaching concepts taxonomy
 TEACHING_CONCEPTS = [
@@ -55,7 +58,7 @@ def extract_project_text(content: str, project_key: str) -> str:
         return ""
     return content[start_idx:start_idx + 1000]
 
-def analyze_project(bedrock, project_key: str, project_data: Dict, project_text: str) -> Dict:
+def analyze_project(project_key: str, project_data: Dict, project_text: str) -> Dict:
     """Use Claude to analyze project and suggest tags"""
     
     prompt = f"""Analyze this UX/design portfolio project and provide metadata tags.
@@ -88,17 +91,7 @@ Return ONLY valid JSON:
 """
     
     try:
-        response = bedrock.invoke_model(
-            modelId="anthropic.claude-3-sonnet-20240229-v1:0",
-            body=json.dumps({
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 2000,
-                "messages": [{"role": "user", "content": prompt}],
-                "temperature": 0.3
-            })
-        )
-        
-        content = json.loads(response['body'].read())['content'][0]['text']
+        content = call_claude(prompt, max_tokens=2000, temperature=0.3)
         json_start = content.find('{')
         json_end = content.rfind('}') + 1
         return json.loads(content[json_start:json_end])
@@ -114,8 +107,6 @@ def main():
     # Load data
     image_map = load_image_map()
     portfolio_content = load_portfolio_content()
-    bedrock = boto3.client('bedrock-runtime')
-    
     metadata = {}
     total_projects = len(image_map)
     
@@ -126,7 +117,7 @@ def main():
         project_text = extract_project_text(portfolio_content, project_key)
         
         # Analyze with Claude
-        analysis = analyze_project(bedrock, project_key, project_data, project_text)
+        analysis = analyze_project(project_key, project_data, project_text)
         
         if not analysis:
             print(f"  ⚠️  Skipped - analysis failed\n")

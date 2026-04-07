@@ -72,7 +72,7 @@ class LecturePreprocessingPipeline:
             
             segment_data = {
                 'text': tagged_seg.text,
-                'metadata': self.extractor.to_bedrock_metadata(tagged_seg),
+                'metadata': self.extractor.to_metadata(tagged_seg),
                 'concepts': [
                     {
                         'name': c.name,

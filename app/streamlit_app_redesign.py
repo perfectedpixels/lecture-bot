@@ -557,8 +557,6 @@ st.markdown("""
 # Initialize session state
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
-if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = "1TTBVE6MG2"
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
@@ -591,7 +589,7 @@ if 'portfolio_handler' not in st.session_state:
 # Auto-connect
 if st.session_state.bot is None and HAS_PERSONA_BOT:
     try:
-        st.session_state.bot = PersonaBot(st.session_state.kb_id, "anthropic.claude-3-sonnet-20240229-v1:0")
+        st.session_state.bot = PersonaBot()
     except:
         pass
 
@@ -625,9 +623,7 @@ with st.sidebar:
     model_id = st.selectbox(
         "Select Model",
         [
-            "anthropic.claude-3-sonnet-20240229-v1:0",
-            "anthropic.claude-3-haiku-20240307-v1:0",
-            "anthropic.claude-3-5-sonnet-20240620-v1:0"
+            "claude-sonnet-4-20250514",
         ],
         key="model",
         label_visibility="collapsed"
@@ -659,7 +655,7 @@ with st.sidebar:
     if st.button("Reconnect Bot", type="primary", use_container_width=True):
         if HAS_PERSONA_BOT:
             try:
-                st.session_state.bot = PersonaBot(st.session_state.kb_id, model_id)
+                st.session_state.bot = PersonaBot(model_id=model_id)
                 st.success("✓ Connected!")
             except Exception as e:
                 st.error(f"Error: {e}")

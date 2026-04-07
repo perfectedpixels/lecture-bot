@@ -324,8 +324,6 @@ st.markdown(f"""
 # Initialize session state
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
-if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = "1TTBVE6MG2"
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
@@ -348,7 +346,7 @@ if 'auto_submit_text' not in st.session_state:
 # Auto-connect bot
 if st.session_state.bot is None and HAS_PERSONA_BOT:
     try:
-        st.session_state.bot = PersonaBot(st.session_state.kb_id, "anthropic.claude-3-sonnet-20240229-v1:0")
+        st.session_state.bot = PersonaBot()
     except:
         pass
 
@@ -360,9 +358,7 @@ with st.sidebar:
     model_id = st.selectbox(
         "Select Claude Model",
         [
-            "anthropic.claude-3-sonnet-20240229-v1:0",
-            "anthropic.claude-3-haiku-20240307-v1:0",
-            "anthropic.claude-3-5-sonnet-20240620-v1:0"
+            "claude-sonnet-4-20250514",
         ],
         key="model"
     )
@@ -478,4 +474,4 @@ if question and st.session_state.bot:
     st.session_state.chat_history.append(msg_data)
     st.rerun()
 elif question and not st.session_state.bot:
-    st.error("Please configure AWS credentials in Streamlit Cloud secrets")
+    st.error("Please set ANTHROPIC_API_KEY in environment or Streamlit secrets")

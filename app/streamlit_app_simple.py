@@ -221,8 +221,6 @@ if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'persona_history' not in st.session_state:
     st.session_state.persona_history = []
-if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = None
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'processed_transcripts' not in st.session_state:
@@ -266,53 +264,22 @@ with st.sidebar:
         help="Choose your course to get relevant content"
     )
     
-    # Map course to Knowledge Base ID
-    # Note: Both courses use the same KB - content is separated by S3 folders
-    course_kb_map = {
-        "COMMLD 515 - Advanced User Design": "1TTBVE6MG2",
-        "COMMLD 512 - UX Research & Strategy": "1TTBVE6MG2"
-    }
-    
-    # Auto-fill KB ID based on course selection
-    kb_id = course_kb_map.get(course, "")
-    
-    # Show KB ID (read-only for students, or allow override for testing)
-    st.text_input(
-        "Knowledge Base ID",
-        value=kb_id,
-        disabled=True,
-        help="Automatically set based on your course selection"
-    )
-    
-    model_id = st.selectbox(
-        "Model",
-        [
-            "anthropic.claude-3-sonnet-20240229-v1:0",
-            "anthropic.claude-3-haiku-20240307-v1:0",
-            "anthropic.claude-3-5-sonnet-20240620-v1:0"
-        ]
-    )
-    
     if st.button("Connect", type="primary"):
-        if kb_id:
-            st.session_state.kb_id = kb_id
-            st.session_state.current_course = course
-            if HAS_PERSONA_BOT:
-                try:
-                    st.session_state.bot = PersonaBot(kb_id, model_id)
-                    st.success(f"Connected to {course}!")
-                except Exception as e:
-                    st.error(f"Error: {e}")
-            elif HAS_QUERY_BOT:
-                try:
-                    st.session_state.bot = LectureBot(kb_id, model_id)
-                    st.success(f"Connected to {course}!")
-                except Exception as e:
-                    st.error(f"Error: {e}")
-            else:
-                st.error("No bot modules available")
+        st.session_state.current_course = course
+        if HAS_PERSONA_BOT:
+            try:
+                st.session_state.bot = PersonaBot()
+                st.success(f"Connected to {course}!")
+            except Exception as e:
+                st.error(f"Error: {e}")
+        elif HAS_QUERY_BOT:
+            try:
+                st.session_state.bot = LectureBot()
+                st.success(f"Connected to {course}!")
+            except Exception as e:
+                st.error(f"Error: {e}")
         else:
-            st.error("Please select a course with a configured Knowledge Base")
+            st.error("No bot modules available")
     
     st.divider()
     
