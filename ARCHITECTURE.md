@@ -1,216 +1,211 @@
-# Architecture: Persona Lecture Bot
+# Architecture: Lecture Bot
 
 ## System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         USER INTERFACE                          │
-│                    (Streamlit Web App)                          │
-│  - Chat with persona                                            │
-│  - Generate reports                                             │
-│  - Analyze assignments                                          │
-│  - View concept clusters                                        │
+│                    (Streamlit Web App)                           │
+│  - Chat with persona         - Learning cards                   │
+│  - Generate reports          - Portfolio examples               │
+│  - Analyze assignments       - Voice output (optional)          │
 └────────────────────────┬────────────────────────────────────────┘
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      PERSONA BOT LAYER                          │
+│  - Safety checks                                                │
+│  - Concept-aware context selection (affinity map)               │
 │  - Persona prompt engineering                                   │
-│  - Concept-aware context selection                              │
-│  - Affinity map integration                                     │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   AWS BEDROCK KNOWLEDGE BASE                    │
-│  - Vector search (Titan Embeddings)                             │
-│  - Metadata filtering                                           │
-│  - Source attribution                                           │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    OPENSEARCH SERVERLESS                        │
-│  - Vector storage                                               │
-│  - Semantic search                                              │
-└─────────────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                         S3 BUCKET                               │
-│  /lectures/          - Processed text segments                  │
-│  /metadata/          - Affinity map, master index               │
-└─────────────────────────────────────────────────────────────────┘
+│  - Learning card generation                                     │
+└──────────┬─────────────────────────────────┬────────────────────┘
+           │                                 │
+           ▼                                 ▼
+┌─────────────────────────┐   ┌──────────────────────────────────┐
+│    ANTHROPIC SDK         │   │         CHROMADB                 │
+│  (Claude API)            │   │   (Local Vector Database)        │
+│  - Answer generation     │   │  - Semantic search               │
+│  - Concept extraction    │   │  - Sentence-transformer embeds   │
+│  - Affinity clustering   │   │  - Persists to data/chromadb/    │
+└─────────────────────────┘   └──────────────────────────────────┘
+                                             │
+                                             ▼
+                               ┌──────────────────────────────────┐
+                               │      LOCAL FILESYSTEM             │
+                               │  data/canvas_extracted_512/       │
+                               │  data/affinity_map.json           │
+                               │  data/portfolio_images/           │
+                               │  data/teaching_concepts.json      │
+                               └──────────────────────────────────┘
 ```
+
+## Design Principles
+
+**Local-first**: Everything runs on a single machine. No cloud infrastructure, no servers to manage, no accounts to configure beyond a single API key.
+
+**Pay-per-use**: The only external cost is Anthropic API usage (~$0.03/query). No fixed monthly costs. $0 when idle.
+
+**Minimal dependencies**: Two key libraries do the heavy lifting:
+- `anthropic` - Claude API calls
+- `chromadb` - Embedded vector database (includes its own embedding model)
 
 ## Data Flow
 
-### 1. Preprocessing Pipeline (Offline)
+### Preprocessing Pipeline (one-time, offline)
 
 ```
-Raw Transcripts
+Raw Transcripts (.txt files)
     │
-    ├─► TranscriptCleaner
-    │   - Remove timestamps
-    │   - Remove speaker labels
-    │   - Semantic segmentation
+    ├──► TranscriptCleaner
+    │    - Remove timestamps (HH:MM:SS)
+    │    - Remove speaker labels
+    │    - Semantic segmentation into chunks
     │
-    ├─► ConceptExtractor (Claude)
-    │   - Extract key concepts
-    │   - Categorize concepts
-    │   - Assign confidence scores
+    ├──► ConceptExtractor (calls Claude)
+    │    - Extract key concepts per segment
+    │    - Categorize: AI/ML, Design, UX, etc.
+    │    - Assign confidence scores
     │
-    └─► AffinityMapper (Claude)
-        - Build co-occurrence matrix
-        - Create semantic clusters
-        - Calculate affinity scores
-        │
-        ▼
-    Processed Segments + Affinity Map
+    └──► AffinityMapper (calls Claude)
+         - Build concept co-occurrence matrix
+         - Create semantic clusters
+         - Calculate affinity scores
+         │
+         ▼
+    Output files (all in data/):
+    - Processed segments (JSON per segment)
+    - affinity_map.json (concept clusters)
+    - master_index.json (overview)
 ```
 
-### 2. Query Flow (Runtime)
+### Ingestion (one-time)
+
+```
+Text files in data/
+    │
+    └──► scripts/ingest_to_chromadb.py
+         - Reads all .txt files
+         - ChromaDB generates embeddings locally
+           (sentence-transformers all-MiniLM-L6-v2)
+         - Stores in data/chromadb/ (persistent)
+```
+
+### Query Flow (runtime, per user question)
 
 ```
 User Question
     │
-    ├─► Concept Identification (Claude)
-    │   - Analyze query
-    │   - Match to concept clusters
-    │   - Get relevant concepts
+    ├──► Safety Check
+    │    - Reject personal info requests
+    │    - Reject inappropriate content
     │
-    ├─► Knowledge Base Retrieval
-    │   - Vector search
-    │   - Metadata filtering (concepts)
-    │   - Retrieve top N segments
+    ├──► Concept Identification (Claude, ~300 tokens)
+    │    - Analyze query against affinity map clusters
+    │    - Return relevant concept cluster IDs
     │
-    ├─► Context Assembly
-    │   - Combine retrieved segments
-    │   - Add concept context
-    │   - Build persona prompt
+    ├──► Vector Search (ChromaDB, local)
+    │    - Semantic similarity search
+    │    - Return top N matching lecture segments
+    │    - No network call - runs in-process
     │
-    └─► Answer Generation (Claude)
-        - Apply persona instructions
-        - Generate response
-        - Include source attribution
-        │
-        ▼
-    Persona-based Answer + Sources + Concepts
+    ├──► Context Assembly
+    │    - Combine retrieved segments
+    │    - Add relevant concepts from affinity map
+    │    - Build persona prompt with safety rules
+    │
+    ├──► Answer Generation (Claude, ~800 tokens)
+    │    - Respond as instructor persona
+    │    - Reference specific lectures
+    │    - Maintain teaching style
+    │
+    └──► Learning Cards (Claude, ~800 tokens)
+         - Identify related teaching concepts
+         - Find matching portfolio examples
+         - Generate follow-up suggestions
+         │
+         ▼
+    Response: answer + sources + concepts + learning cards
 ```
 
 ## Key Components
 
-### 1. Preprocessing Pipeline
+### src/llm_client.py
 
-**Location:** `src/preprocessing/`
+Thin wrapper around the Anthropic Python SDK. All Claude API calls in the project go through `call_claude()`. This centralizes:
+- API key management (env var or Streamlit secrets)
+- Default model selection
+- Response parsing
 
-**Components:**
-- `transcript_cleaner.py` - Removes noise from transcripts
-- `concept_extractor.py` - Extracts and tags concepts using Claude
-- `affinity_mapper.py` - Creates concept clusters and relationships
-- `pipeline.py` - Orchestrates the full preprocessing workflow
+### src/vector_store.py
 
-**Input:** Raw lecture transcripts (.txt)
-**Output:** 
-- Cleaned segments (JSON)
-- Affinity map (JSON)
-- Master index (JSON)
+Wrapper around ChromaDB's PersistentClient. Provides:
+- `ingest(documents, metadatas, ids)` - add documents
+- `query(text, n_results)` - semantic search, returns `[{text, source, metadata, score}]`
 
-### 2. Persona Bot
+ChromaDB runs fully embedded (no server process). It uses the `all-MiniLM-L6-v2` sentence-transformer model for embeddings, which downloads once (~80MB) and runs locally.
 
-**Location:** `src/persona_bot.py`
+### src/persona_bot_safe.py
 
-**Features:**
-- Concept-aware context selection
-- Persona prompt engineering
-- Affinity map integration
-- Assignment analysis
-- Report generation
+The main bot used in production. Features:
+- Safety guardrails (rejects personal info requests, inappropriate content)
+- Professional context injection (instructor background)
+- Affinity-map-aware concept identification
+- Integration with LearningCardGenerator
+- Concise, teaching-focused response style
 
-**Key Methods:**
-- `query()` - Main Q&A with persona
-- `analyze_assignment()` - Provide instructor feedback
-- `explain_concept()` - Teach in instructor's style
-- `generate_report()` - Create comprehensive reports
+### src/learning_card_generator.py
 
-### 3. Web Interface
-
-**Location:** `app/streamlit_app.py`
-
-**Features:**
-- Chat interface with history
-- Report generation
-- Assignment analysis
-- Concept exploration
-- Source browsing
-
-**Configuration:**
-- Knowledge Base ID
-- Affinity map upload
-- Persona settings
-- Model selection
-
-### 4. AWS Infrastructure
-
-**Location:** `infrastructure/lib/lecture-bot-stack.ts`
-
-**Resources:**
-- S3 bucket (versioned, encrypted)
-- Lambda function (transcript processing)
-- IAM roles (Bedrock access)
-- CloudFormation outputs
+Generates contextual follow-up content after each response:
+1. **Related Concepts** - from the affinity map (same/related clusters)
+2. **Teaching Concepts** - high-level concepts matched via Claude
+3. **Portfolio Examples** - relevant project images scored by semantic similarity
 
 ## Data Structures
 
-### Processed Segment
-
-```json
-{
-  "text": "cleaned lecture content...",
-  "metadata": {
-    "primary_category": "AI/Machine Learning",
-    "concepts": "neural networks, deep learning",
-    "categories": "AI/Machine Learning, Theory/Concepts",
-    "concept_count": "3",
-    "lecture": "Introduction to AI",
-    "date": "Feb 10, 2026"
-  },
-  "concepts": [
-    {
-      "name": "neural networks",
-      "category": "AI/Machine Learning",
-      "confidence": 0.95
-    }
-  ]
-}
-```
-
-### Affinity Map
+### Affinity Map (`data/affinity_map.json`)
 
 ```json
 {
   "clusters": [
     {
-      "cluster_id": "ml_fundamentals",
-      "concepts": ["neural networks", "deep learning"],
-      "central_concept": "neural networks",
-      "categories": ["AI/Machine Learning"],
+      "cluster_id": "research_methods",
+      "concepts": ["user interviews", "surveys", "usability testing"],
+      "central_concept": "User Research",
+      "categories": ["User Experience"],
       "segment_count": 15,
-      "affinity_score": 8.5
+      "affinity_score": 8.5,
+      "related_clusters": ["personas", "data_analysis"]
     }
   ],
   "concept_relationships": {
-    "neural networks": {
-      "deep learning": 12,
-      "backpropagation": 8
-    }
+    "user interviews": { "surveys": 12, "personas": 8 }
   }
 }
 ```
 
+### ChromaDB Collection
+
+- **Collection name**: `lecture_segments`
+- **Embedding model**: `all-MiniLM-L6-v2` (384 dimensions)
+- **Distance metric**: cosine
+- **Metadata per document**: `source` (filename), `path` (full path)
+- **Persistence**: `data/chromadb/`
+
+## Cost Breakdown (per query)
+
+| Step | Model | Input tokens | Output tokens | Cost |
+|------|-------|-------------|---------------|------|
+| Concept identification | Sonnet | ~800 | ~200 | ~$0.005 |
+| Answer generation | Sonnet | ~3,000 | ~500 | ~$0.017 |
+| Teaching concepts | Sonnet | ~1,500 | ~300 | ~$0.009 |
+| **Total per query** | | | | **~$0.03** |
+
+Vector search (ChromaDB) is free - it runs locally.
+
 ## Concept Categories
 
-Default categories (customizable):
+Default categories used by the concept extractor (customizable):
+
 - AI/Machine Learning
 - Design
 - User Experience
@@ -221,62 +216,3 @@ Default categories (customizable):
 - Theory/Concepts
 - Tools/Software
 - Business/Strategy
-
-## Persona Prompt Structure
-
-```
-You are {persona_name}, responding to a student's question.
-
-INSTRUCTIONS:
-- Respond in first person
-- Reference your lectures
-- Use your teaching style
-- Provide practical examples
-
-CONTEXT:
-{retrieved_lecture_segments}
-
-RELEVANT CONCEPTS:
-{concepts_from_affinity_map}
-
-QUESTION:
-{user_question}
-```
-
-## Scalability Considerations
-
-### Current Limits
-- ~1000 lectures (OpenSearch Serverless)
-- ~10MB per lecture transcript
-- ~100 queries/day (cost-optimized)
-
-### Scaling Options
-1. **More lectures:** Increase OpenSearch capacity
-2. **More queries:** Use caching layer (Redis)
-3. **Faster responses:** Use Claude Haiku for concept extraction
-4. **Lower costs:** Batch preprocessing, cache affinity maps
-
-## Security
-
-- S3 bucket: Private, encrypted at rest
-- IAM roles: Least privilege access
-- Bedrock: Regional isolation
-- No PII in transcripts (cleaned during preprocessing)
-
-## Monitoring
-
-Key metrics to track:
-- Query latency
-- Concept match accuracy
-- User satisfaction (feedback)
-- Cost per query
-- Knowledge Base sync time
-
-## Future Enhancements
-
-1. **Real-time transcription** - AWS Transcribe integration
-2. **Multi-modal** - Support for lecture videos/slides
-3. **Collaborative** - Multiple instructors
-4. **Analytics** - Student learning insights
-5. **Mobile app** - Native iOS/Android
-6. **Voice interface** - Alexa/Google Assistant

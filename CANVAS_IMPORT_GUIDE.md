@@ -51,37 +51,14 @@ ls -lh data/canvas_extracted/
 head -20 data/canvas_extracted/page_week1_intro.txt
 ```
 
-## Step 5: Upload to S3
-
-### Option A: Upload All at Once
+## Step 5: Index for Search
 
 ```bash
-# Upload all extracted content
-aws s3 sync data/canvas_extracted/ s3://lecture-transcripts-427791004700/canvas/ \
-  --metadata "source=canvas,course=UX_Design"
+# Index all extracted content into ChromaDB
+python scripts/ingest_to_chromadb.py data/canvas_extracted/
 ```
 
-### Option B: Upload Selectively
-
-```bash
-# Upload only assignments
-aws s3 sync data/canvas_extracted/ s3://lecture-transcripts-427791004700/assignments/ \
-  --exclude "*" --include "assignment_*"
-
-# Upload only course pages
-aws s3 sync data/canvas_extracted/ s3://lecture-transcripts-427791004700/lectures/ \
-  --exclude "*" --include "page_*"
-```
-
-## Step 6: Sync Knowledge Base
-
-1. Go to Bedrock Console → Knowledge Bases
-2. Select `LectureBotStack-KB`
-3. Go to "Data sources" tab
-4. Click "Sync"
-5. Wait 2-5 minutes
-
-## Step 7: Test
+## Step 6: Test
 
 Ask the bot:
 - "What's covered in week 1?"
@@ -167,7 +144,7 @@ fdupes -r data/canvas_extracted/
 
 1. **Review before uploading** - Check extracted files make sense
 2. **Organize by type** - Separate assignments, lectures, discussions
-3. **Add metadata** - Use S3 metadata for better organization
+3. **Add metadata** - Organize files with clear naming
 4. **Test incrementally** - Upload a few files first, test, then upload all
 5. **Keep originals** - Don't delete the Canvas export
 
@@ -176,7 +153,6 @@ fdupes -r data/canvas_extracted/
 ## Next Steps
 
 After importing Canvas content:
-1. Upload lecture transcripts (if separate)
-2. Build affinity map for concept clustering
+1. Add lecture transcripts (if separate) and re-run ingestion
+2. Build affinity map: `python scripts/generate_affinity_map.py`
 3. Test bot with course-specific questions
-4. Deploy to EC2 for student access

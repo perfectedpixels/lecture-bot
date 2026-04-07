@@ -87,7 +87,7 @@ The persona bot responds as Jason Levine, drawing from lecture content and authe
 
 ### 4. Authenticity
 **ENFORCES**: Only shares verified information
-- Lecture content from Knowledge Base
+- Lecture content from vector search
 - Known professional background from CV
 - Public portfolio information
 
@@ -147,7 +147,7 @@ The persona bot responds as Jason Levine, drawing from lecture content and authe
 
 ### Components
 1. **Safety Checker** - Pre-processes all questions
-2. **Context Retrieval** - Pulls relevant lecture content from Knowledge Base
+2. **Context Retrieval** - Pulls relevant lecture content from ChromaDB
 3. **Concept Mapper** - Identifies relevant concepts from affinity map
 4. **Persona Prompt** - Builds response with professional context
 5. **Response Generator** - Uses Claude to generate authentic answer
@@ -157,7 +157,7 @@ The persona bot responds as Jason Levine, drawing from lecture content and authe
 {
     'question': str,           # Original question
     'answer': str,             # Generated response
-    'sources': List[str],      # S3 URIs of source lectures
+    'sources': List[str],      # Source lecture filenames
     'relevant_concepts': List[str],  # Concepts from affinity map
     'context': str,            # Retrieved lecture content
     'safety_triggered': bool   # Whether safety rule activated
@@ -184,7 +184,7 @@ Use the **🧪 Test Safety** tab in the Streamlit interface to:
 ### For Instructors
 1. Review safety rule triggers periodically
 2. Update professional context as needed
-3. Add new lecture content to Knowledge Base
+3. Add new lecture content (run ingest script after adding files)
 4. Monitor for false positives/negatives
 5. Refine concept affinity mappings
 
@@ -198,13 +198,11 @@ Modify `_check_safety()` method keywords and responses
 
 ### Adding Lecture Content
 1. Process transcripts with preprocessing pipeline
-2. Upload to S3 bucket
-3. Sync Bedrock Knowledge Base
-4. Update affinity map if needed
+2. Run `python scripts/ingest_to_chromadb.py` to index new content
+3. Update affinity map if needed (`python scripts/generate_affinity_map.py`)
 
 ## Support
 
 For issues or questions:
-- Check DEPLOYMENT.md for setup
+- Check QUICKSTART.md for setup
 - Review ARCHITECTURE.md for system design
-- See COMPLETE_WORKFLOW.md for end-to-end process

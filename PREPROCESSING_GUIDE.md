@@ -160,27 +160,18 @@ self.categories = [
 ]
 ```
 
-## Upload to S3
+## Index for Search
 
-After preprocessing:
+After preprocessing, index the processed segments into ChromaDB:
 
 ```bash
-# Upload processed segments
-aws s3 sync processed_lectures/ s3://your-bucket/processed/ \
-  --exclude "*.json" \
-  --exclude "*_summary.json"
-
-# Upload affinity map separately
-aws s3 cp processed_lectures/affinity_map.json \
-  s3://your-bucket/metadata/
+python scripts/ingest_to_chromadb.py processed_lectures/
 ```
 
 ## Troubleshooting
 
 **"Error extracting concepts"**
-- Check AWS credentials: `aws sts get-caller-identity`
-- Verify Bedrock access in your region
-- Ensure Claude model is enabled in Bedrock console
+- Check that `ANTHROPIC_API_KEY` is set (env var or `.streamlit/secrets.toml`)
 
 **"No .txt files found"**
 - Check input directory path
@@ -198,5 +189,5 @@ aws s3 cp processed_lectures/affinity_map.json \
 1. Review processed segments in output directory
 2. Check `master_index.json` for overview
 3. Explore `affinity_map.json` to see concept clusters
-4. Upload to S3 and sync Bedrock Knowledge Base
-5. Update chatbot to use affinity map for context selection
+4. Run `python scripts/ingest_to_chromadb.py` to make content searchable
+5. Restart the chatbot to use the new data

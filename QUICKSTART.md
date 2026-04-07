@@ -1,120 +1,119 @@
 # Quick Start Guide
 
-Get your Lecture Bot running in 15 minutes.
+Get the Lecture Bot running on your computer in 5 minutes.
 
-## 1. Deploy Infrastructure (5 min)
+## Prerequisites
 
-```bash
-cd infrastructure
-npm install
-npm run build
-cdk bootstrap  # First time only
-cdk deploy
-```
+- **Python 3.11+** - check with `python --version`
+- **Anthropic API key** - get one at [console.anthropic.com](https://console.anthropic.com/)
 
-Save the outputs: `BucketName` and `BedrockRoleArn`
+## Setup
 
-## 2. Create Bedrock Knowledge Base (5 min)
-
-### Option A: AWS Console (Recommended for first time)
-1. Go to [AWS Bedrock Console](https://console.aws.amazon.com/bedrock/)
-2. Navigate to "Knowledge bases" → "Create knowledge base"
-3. Configure:
-   - Name: `LectureBot-KB`
-   - IAM role: Use the `BedrockRoleArn` from step 1
-4. Add data source:
-   - Type: S3
-   - S3 URI: `s3://<BucketName>/lectures/`
-   - Chunking: Default (300 tokens, 20% overlap)
-5. Configure embeddings:
-   - Model: `Titan Embeddings G1 - Text`
-   - Vector database: Create new OpenSearch Serverless collection
-6. Review and create
-7. Click "Sync" to index data
-8. Copy the Knowledge Base ID (you'll need this)
-
-### Option B: AWS CLI
-```bash
-# Coming soon - automated setup script
-```
-
-## 3. Upload Sample Lecture (2 min)
+### 1. Install dependencies
 
 ```bash
-chmod +x scripts/upload_transcript.sh
-./scripts/upload_transcript.sh data/sample_lecture.txt "ML_Intro"
+pip install -r requirements.txt
 ```
 
-Wait 1-2 minutes, then sync the Knowledge Base:
+This installs:
+- `streamlit` - web interface
+- `anthropic` - Claude API client
+- `chromadb` - local vector database (includes embedding model)
+- `elevenlabs` - voice output (optional)
+
+On first run, ChromaDB will download its embedding model (~80MB). This only happens once.
+
+### 2. Configure your API key
+
 ```bash
-aws bedrock-agent start-ingestion-job \
-  --knowledge-base-id <your-kb-id> \
-  --data-source-id <your-data-source-id>
+cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 ```
 
-## 4. Launch Interface (3 min)
+Edit `.streamlit/secrets.toml` and replace the placeholder with your actual key:
+
+```toml
+ANTHROPIC_API_KEY = "sk-ant-your-key-here"
+```
+
+This file is gitignored and will not be committed.
+
+### 3. Index the lecture data
 
 ```bash
-cd app
-chmod +x run.sh
-./run.sh
+python scripts/ingest_to_chromadb.py
 ```
 
-The app will open at `http://localhost:8501`
+This reads the lecture text files from `data/` and indexes them into a local ChromaDB vector database. It takes a few seconds and only needs to be done once (or when you add new lectures).
 
-### First Use:
-1. Enter your Knowledge Base ID in the sidebar
-2. Click "Connect"
-3. Start asking questions!
+### 4. Start the app
+
+```bash
+streamlit run app/streamlit_app_redesign.py
+```
+
+Open http://localhost:8501 in your browser. Start asking questions!
 
 ## Example Questions to Try
 
-- "What are the three types of machine learning?"
-- "Explain supervised learning with examples"
-- "What's the difference between overfitting and underfitting?"
-- "Generate a report on machine learning fundamentals"
+- "What is user research and why does it matter?"
+- "How do you approach design systems?"
+- "Explain the difference between UX and UI"
+- "What was your experience at Amazon?"
+- "Give me feedback on my assignment about information architecture"
 
-## Uploading Your Lectures
+## Adding Your Own Lectures
 
-### Text files:
+1. Place your `.txt` transcript files in a directory:
+   ```bash
+   mkdir data/my_lectures
+   # copy your .txt files there
+   ```
+
+2. Index them:
+   ```bash
+   python scripts/ingest_to_chromadb.py data/my_lectures/
+   ```
+
+3. Restart the app. The new content is now searchable.
+
+## Optional: Generate an Affinity Map
+
+The affinity map creates concept clusters that improve retrieval quality. To generate one from your lectures:
+
 ```bash
-./scripts/upload_transcript.sh path/to/lecture.txt "Lecture_Name"
+python scripts/generate_affinity_map.py
 ```
 
-### Bulk upload:
-```bash
-aws s3 sync ./my-lectures/ s3://<BucketName>/lectures/
-```
+This calls Claude to analyze your lectures and creates `data/affinity_map.json`. The bot will automatically use it if present.
 
-After uploading, sync the Knowledge Base in the AWS Console or via CLI.
+## Optional: Enable Voice
+
+1. Get an API key from [ElevenLabs](https://elevenlabs.io/)
+2. Add it to `.streamlit/secrets.toml`:
+   ```toml
+   ELEVENLABS_API_KEY = "your-elevenlabs-key"
+   ```
+3. Toggle voice on in the app sidebar
 
 ## Troubleshooting
 
-**"Knowledge Base not found"**
-- Double-check the KB ID
-- Ensure it's in the same AWS region
+**"ANTHROPIC_API_KEY not found"**
+- Check that `.streamlit/secrets.toml` exists and has the correct key
+- Or set it as an environment variable: `export ANTHROPIC_API_KEY=sk-ant-...`
 
-**"No results found"**
-- Make sure you synced the data source after uploading
-- Check that files are in the `lectures/` prefix
+**"No documents in store" or empty responses**
+- Run `python scripts/ingest_to_chromadb.py` to index the lecture data
+- Check that `data/canvas_extracted_512/` or `data/canvas_extracted/` has `.txt` files
 
-**"Access denied"**
-- Verify AWS credentials: `aws sts get-caller-identity`
-- Check IAM permissions for Bedrock
+**ChromaDB download stalls**
+- On first run, ChromaDB downloads an ~80MB embedding model. If this fails, check your internet connection and retry.
 
-## Cost Estimate
+**Port 8501 already in use**
+- Another Streamlit app is running. Stop it or use: `streamlit run app/streamlit_app_redesign.py --server.port 8502`
 
-For moderate use (100 queries/day):
-- S3: ~$0.50/month
-- Bedrock Knowledge Base: ~$5-10/month
-- OpenSearch Serverless: ~$20-30/month
-- Lambda: <$1/month
+## Cost
 
-Total: ~$25-40/month
-
-## Next Steps
-
-- Add more lectures
-- Try the Reports tab for comprehensive summaries
-- Use Analysis tab for assignment feedback
-- Customize the interface in `app/streamlit_app.py`
+The only cost is Anthropic API usage:
+- ~$0.03 per question (using Claude Sonnet)
+- $0/month when nobody is using it
+- A class of 20-30 students typically costs $10-30/month during active use
