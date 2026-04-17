@@ -21,9 +21,22 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(override=True)  # override ~/.aws with .env values
 except ImportError:
     pass
+
+# Ensure boto3 uses .env credentials, not ~/.aws/credentials
+_aws_kwargs = {}
+if os.environ.get("AWS_ACCESS_KEY_ID") and os.environ.get("AWS_SECRET_ACCESS_KEY"):
+    _aws_kwargs = {
+        "aws_access_key_id": os.environ["AWS_ACCESS_KEY_ID"],
+        "aws_secret_access_key": os.environ["AWS_SECRET_ACCESS_KEY"],
+        "region_name": os.environ.get("AWS_REGION", "us-east-1"),
+    }
+
+
+def _s3_client():
+    return boto3.client("s3", **_aws_kwargs)
 
 from scripts.ingest_transcripts import (
     scrub_transcript,
@@ -175,7 +188,7 @@ if uploaded_files:
     if push:
         out = Path(OUTPUT_DIR)
         out.mkdir(parents=True, exist_ok=True)
-        s3 = boto3.client("s3")
+        s3 = _s3_client()
         total_uploaded = 0
 
         progress = st.progress(0, text="Uploading...")
