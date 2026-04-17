@@ -1,0 +1,62 @@
+{
+  "id": 11355139,
+  "name": "Paper Prototype (2 of 2)",
+  "slug": "paper-prototype-2-of-2",
+  "due_at": "2026-04-30T00:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Build a low-fidelity paper prototype of your proposed product that demonstrates two end-to-end use cases drawn directly from your Customer Journey Map.\n\nThis assignment tests whether your concept holds together as a coherent system, not a collection of isolated screens. You should think holistically about how actions in one part of the experience inform, enable, or enhance other parts of the product.\u00a0\n\nKeep the solution simple, intentional, and connected. Be holistic in your approach and above all else, keep it simple!\n\nFidelity Expectations\n\nPrototypes should be rough and clearly low-fidelity (paper, whiteboard, or sketch-based).\n\nUse placeholders for content, but include enough detail to communicate:\n\nCore functionality\n\nAvailable actions and choices\n\nSystem responses and transitions between steps\n\nYou are not being evaluated on visual polish or drawing skill.\n\nFidelity should be placeholder rough, but enough to represent the functionality for each screen and the content and options available per step.\u00a0\n\nScreens of the proposed experience as either snapshots of your whiteboard sketches / paper-based low fidelity mockups dropped into PowerPoint, Keynote, Google Slides, PDF, or Figma (but not designed in them!). You can also download a printable template and draw using those.\n\nRequired Components\n\nYour submission must include:\n\nTwo complete, end-to-end use cases\n\nEach use case should map directly to a defined user goal or need from your Customer Journey\n\nShow all screens required to start, progress through, and complete each use case\n\nMain navigation\n\nClearly indicate the primary navigation model and how users orient themselves within the system\n\nScreen-by-screen flow\n\nInclude every necessary step (no gaps or implied jumps)\n\nDemonstrate how system state or prior actions affect later screens\n\nBrief explanation per use case\n\nWhat the user is trying to accomplish\n\nWhy the proposed features are valuable to this persona\n\nHow the flow supports your Product Objective\n\nPersona and objective alignment\n\nExplicitly connect design decisions back to:\n\nYour primary persona(s)\n\nYour product vision / Working Backwards Pitch\n\nOriginal thinking\n\nAvoid simply mirroring existing apps or familiar screen-to-screen patterns\n\nLook for distinctive interactions, shortcuts, or system intelligence that reflect your concept\n\nEngagement strategy\n\nShow how the experience encourages continued use, trust, or momentum for your persona\n\nRequired Components\n\nYour submission must include:\n\nTwo complete, end-to-end use cases\n\nEach use case should map directly to a defined user goal or need from your Customer Journey\n\nShow all screens required to start, progress through, and complete each use case\n\nMain navigation\n\nClearly indicate the primary navigation model and how users orient themselves within the system\n\nScreen-by-screen flow\n\nInclude every necessary step (no gaps or implied jumps)\n\nDemonstrate how system state or prior actions affect later screens\n\nBrief explanation per use case\n\nWhat the user is trying to accomplish\n\nWhy the proposed features are valuable to this persona\n\nHow the flow supports your Product Objective\n\nPersona and objective alignment\n\nExplicitly connect design decisions back to:\n\nYour primary persona(s)\n\nYour product vision / Working Backwards Pitch\n\nOriginal thinking\n\nAvoid simply mirroring existing apps or familiar screen-to-screen patterns\n\nLook for distinctive interactions, shortcuts, or system intelligence that reflect your concept\n\nEngagement strategy\n\nShow how the experience encourages continued use, trust, or momentum for your persona\n\nRubric\n\nCriteria\n4.0 \u2013 Excellent\n3.0 \u2013 Good\n2.0 \u2013 Marginal\n1.0 \u2013 Unsatisfactory\n\nUse Case Completion\nTwo fully end-to-end use cases with all required screens and clear outcomes\nMostly complete use cases with minor gaps\nIncomplete or uneven use cases\nFragmented or unclear flows\n\nPersona & Product Alignment\nStrong, explicit alignment to persona needs and Product Objective\nGeneral alignment with limited justification\nWeak or inconsistent alignment\nNo clear alignment\n\nSystem Thinking\nExperience functions as a connected system; actions inform other areas\nSome interrelated behavior present\nScreens largely isolated\nNo system logic\n\nFlow & Navigation\nClear, intuitive navigation and screen progression\nMostly clear with minor confusion\nNavigation unclear or inconsistent\nNavigation absent or unusable\n\nUser Engagement & Value\nThoughtful engagement strategies clearly add user value\nSome engagement consideration\nMinimal or generic engagement\nNo engagement consideration\n\nExplanation & Rationale\nClear, concise explanations tied to goals and decisions\nAdequate explanation\nVague or descriptive only\nLittle or no explanation\n\n\u00a0\n\nSample Paper Prototypes:\n\nPaper Prototype - Space Needle viewer app\n\nPaper Prototype -Elevate.pptx\n\npaper prototype Instant Payment.pdf\n\n33_smart-paper-prototype-1.jpeg\n\nAdditional Reading\n\nhttps://www.uxpin.com/studio/blog/paper-prototyping-the-practical-beginners-guide/\n\nhttps://www.nngroup.com/articles/paper-prototyping-cutout-kit/",
+  "concepts": [
+    "personas",
+    "prototyping",
+    "design-thinking",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Prototyping",
+      "score": 3,
+      "matched_keywords": [
+        "prototype",
+        "mockups",
+        "low-fidelity"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 2,
+      "matched_keywords": [
+        "screens",
+        "components"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Journey Mapping",
+      "score": 2,
+      "matched_keywords": [
+        "journey map",
+        "customer journey"
+      ],
+      "definition": "Visual representations of user experiences over time, showing touchpoints, emotions, pain points, and opportunities across the customer journey."
+    },
+    {
+      "concept": "Information Architecture",
+      "score": 1,
+      "matched_keywords": [
+        "navigation"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Interaction Design",
+      "score": 1,
+      "matched_keywords": [
+        "interactions"
+      ],
+      "definition": "The design of interactive behaviors and feedback in digital products, focusing on how users accomplish tasks and receive system responses."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355139"
+}

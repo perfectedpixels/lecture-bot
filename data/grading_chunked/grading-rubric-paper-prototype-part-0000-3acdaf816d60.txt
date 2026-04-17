@@ -1,0 +1,6 @@
+[Rubric: Assignment 4: Paper Prototype]
+[Concepts: prototyping, design-thinking]
+[Related assignments: paper-prototype-2-of-2, final-prototype]
+[Type: rubric]
+
+Assignment 4: Paper Prototype Assignment Objective: Demonstrate interaction logic. Instructor Evaluation Checklist: - Two full task flows present - Screens connected logically - Navigation clear - Screens reflect persona needs Strong Prototype Signals: - Clear entry point - Clear task completion - Minimal steps Weak Prototype Signals: - Missing screens - Confusing navigation - Screens unrelated to tasks Decision Tree: - Clear end-to-end flows = 4.0 - Mostly complete flows = 3.x - Missing major steps = 2.x

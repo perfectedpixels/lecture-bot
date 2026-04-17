@@ -1,0 +1,6 @@
+[Rubric: Assignment 6: Heuristic Evaluation]
+[Concepts: heuristics, usability]
+[Related assignments: heuristics-report]
+[Type: rubric]
+
+Assignment 6: Heuristic Evaluation Assignment Objective: Evaluate usability using established frameworks. Required frameworks: - NN/g Ten Heuristics - Material UX Writing - Laws of UX Instructor Evaluation Checklist: - Problem clearly described - Correct heuristic mapped - Severity rating appropriate - Improvement recommendation provided Strong Issue Example: Problem: Users must re-enter shipping information when returning to checkout. Heuristic: Consistency and Standards. Severity: High. Recommendation: Persist form data during session. Weak Issue Example: Problem: The interface is confusing. Heuristic: None provided.

@@ -1,0 +1,62 @@
+{
+  "id": 11355142,
+  "name": "User Persona",
+  "slug": "user-persona",
+  "due_at": "2026-04-16T00:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Build a Persona of the intended customer for your product idea and include relevant research to back your claims.\u00a0As a team,\u00a0gather insights\u00a0that apply to your target customer(s). Adapt the use cases for your target persona demographic (below) to identify how it best\u00a0applies for the Student Persona. Include Pain Points and User Goals for this persona as determined by your Working Backwards Pitch doc. You may find there are several customers with different needs or demographics.\n\nFrom your observations, identify the trends and demographics you noticed and try to bucket which ones meet the general audiences as you have identified them. Do further online research on any supplemental demographic data, research or associated articles can be found that overlaps with your identified users. Any empirical research that helps round out your understanding can be used. You will want to narrow it down to the core one or two personas that best represent your product opportunity's core needs. You will have time in class to align before submitting the assignment. I will want you to consider how your solution can leverage Generative AI in improving the frictions you identified. These should not be an open prompt chat bot, but instead assistance in synthesizing or connecting tasks.\n\n\u00a0\n\n1) Research: What insights emerged?\u00a0\u00a0\n\nLearn about process. Read: https://hci.stanford.edu/courses/dsummer/handouts/NeedFinding.pdf\n\nDo relevant web based or library-based searches to better understand your customers.\n\nPerform customer observations/contextual inquiry through interviews and/or surveys (best if as an adjunct to observations).\u00a0\n\nShare what you learned with your team\u00a0what you identified what your customer would say as the main issue they are looking to solve.\u00a0\n\nWhat to look for:\n\nIdentify consistent issues \n\nIdentify patterns of behavior\n\nFigure out which issues you are going to tackle\n\nKeep track of insights and ideas\n\n2) Persona: Who is the ideal customer(s)?\n\nCreate a 2-page document of your persona(s) defining who they are and\u00a0the core jobs to be done\n\nOutline core needs that solve in hierarchical list of importance what your project will do\n\nPick a team name/business/app name (use in title slides)\n\nProduct & Persona Definition through Goal Directed Design (Jobs to be Done)\n\nFrom those conclusions, write up the framework for your user persona which must contain:\u00a0\n\nRequired Components\n\nGeneral demographics\n\nAudience-specific criteria relevant to your product domain\n\n3\u20134 primary user goals / motivations\u00a0describing\u202fyour persona's motivation, purpose for needing and using the product and what the specific anxieties or problems they are looking to overcome.\u00a0\n\n4\u20135 high-level use cases or Jobs to Be Done\u00a0\n\nPain points and frictions, explicitly tied to your Working Backwards Pitch\n\nA representative quote capturing the core customer problem\n\nA persona photo\n\nBackground narrative, including:\n\nMotivation for using the product\n\nContext of use\n\nAnxieties, constraints, or blockers\n\nCited research and explanation of how it informed the persona\n\nYour Generative AI features that meet those needs\n\nSample Personas:\n\nPersonas-Elevate.pdf\n\nCorbis user personas.pdf\n\n\u00a0\n\n\u00a0\n\nRecommended Reading:\u00a0\n\nGuide to Building Personas\u00a0(Links to an external site.)\n\nInteraction Design Foundation article on Personas\u00a0(Links to an external site.)\n\nCreating Personas for UX\u00a0(Links to an external site.)",
+  "concepts": [
+    "personas",
+    "user-research",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 4,
+      "matched_keywords": [
+        "interviews",
+        "surveys",
+        "observation",
+        "personas"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Persona Definition",
+      "score": 3,
+      "matched_keywords": [
+        "personas",
+        "user personas",
+        "persona definition"
+      ],
+      "definition": "Research-based archetypal representations of user segments that embody goals, behaviors, and pain points to guide design decisions."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 1,
+      "matched_keywords": [
+        "components"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Interaction Design",
+      "score": 1,
+      "matched_keywords": [
+        "interaction design"
+      ],
+      "definition": "The design of interactive behaviors and feedback in digital products, focusing on how users accomplish tasks and receive system responses."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355142"
+}

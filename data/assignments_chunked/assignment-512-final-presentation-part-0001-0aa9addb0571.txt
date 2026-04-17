@@ -1,0 +1,5 @@
+[Assignment: Final Presentation]
+[Course: COMMLD-512]
+[Concepts: personas, heuristics, usability, user-research, ai-design, presentation]
+
+heuristics were a concern Highlight the top categories of issues and show examples that reinforce with examples. What was successful and worth leveraging Use Likert scoring to reinforce it Reinforce findings that illustrate the problem Fail rate or time to complete task Approval rating via Net Promoter scoring Humanize the story Give quotes or show video Make recommendations that address the initial problems cited

@@ -1,0 +1,25 @@
+{
+  "id": 10733395,
+  "name": "Target Persona & Heuristics",
+  "slug": "target-persona-heuristics",
+  "due_at": "2025-11-18T05:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "1)\u00a0Make sure you have formed final project teams. Select a use case client for your Final Project\u00a0\n\nApply for a job at Nana's Green Tea\u00a0on Indeed: \u00a0\nhttps://www.indeed.com\u00a0\n\nCreate a Stock Ticker watchlist on MSN\u00a0\nhttps://www.msn.com/\n\nOrder a Desktop Computer for home use on Dell\u00a0\nhttps://www.dell.com\n\nChoose your own\nFind a professional site or application that has enough complexity and issues to solve\n\n2)\u00a0As a team,\u00a0gather all of your heuristics findings into a single heuristics document that applies to your client. Remove any duplication and fill in any gaps as you see fit. If you choose your own client, you will need to create a lightweight heuristics document for it (+1 bonus points)\n\n3) Adapt the use case for your target persona (below) to identify how it best\u00a0applies for the Student Persona. Include Pain Points and User Goals for this persona as part of an\u00a0intro section of your new heuristics doc. You will have time in class to align before submitting the assignment.\n\n-----------------------------------------------------------------------------------------------------------\n\nNote: If you wish as your final project to select a different client and use case, you are welcome to, but you as a team will need to build out a new Heuristics Doc from scratch first as part of this assignment. (Bonus +1 to your X/4 for this assignment)\n\nRecommended Reading:\nRocket Surgery Made Easy: Chapters 1-2,4-5",
+  "concepts": [
+    "personas",
+    "heuristics",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733395"
+}

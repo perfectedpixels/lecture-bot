@@ -1,0 +1,7 @@
+[Assignment: Final Presentation]
+[Course: COMMLD 515 A]
+[Concepts: personas, prototyping, ai-design, presentation]
+[Aligned Teaching Concepts: Information Architecture, Usability Testing, Prototyping]
+[Due: 2026-06-04T01:59:00Z]
+
+Final Presentation 15-20 minute Summary Presentation The Summary Presentation deliverable makes up half of the grade you receive for the final. Make sure you have enough content for a twenty-minute presentation. Each member of the team needs to contribute to the presentation and you will need to share your time each presenting a portion of it. Prepare/Practice your final presentation inclusive of Jason/peer feedback as if you were doing a product review with a prospective VC for funding. For your presentation: Summarize in 22 minutes max (we will be timing) your project in Google, PowerPoint or Keynote and present: final product pitch idea, persona, an overview of the main customer journey(s) full end to end experience Demo your hi-fi prototype from a user’s POV and tell it like a narrative highlighting onboarding, core navigation, backstack architecture, support along the way, happy and hard paths etc. Summarize what you learned from user feedback that reveal what you learned along the way (include customer quotes and/or user feedback video). Show what you changed Summarize if you did it all over again what you would do differently. Have fun! Here is an example of a 4.0 presentation: DiaLife Final Presentation.pdf

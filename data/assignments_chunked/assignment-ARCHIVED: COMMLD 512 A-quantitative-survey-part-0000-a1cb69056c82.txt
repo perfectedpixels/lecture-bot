@@ -1,0 +1,7 @@
+[Assignment: Quantitative Survey]
+[Course: ARCHIVED: COMMLD 512 A]
+[Concepts: personas, usability, user-research, presentation]
+[Aligned Teaching Concepts: User Research Methods, Persona Definition]
+[Due: 2025-10-30T00:59:00Z]
+
+Quantitative Survey Create a survey based on the information found in your Trader Joe's Personas to select valid candidates for a usability study and to further explore customer behavior. The survey should be designed for recruiting users that match information found in your Persona criteria Include in your questions at least 5 items found in your Persona that you deem important for filtering what you consider valid candidates. Ask at least 3 market research related questions that would be used to better understand your Persona audience. These can be either items you wish to verify found in your persona or additional data points you feel would be valuable in marketing to your audience Follow the survey format referenced in this presentation for question structure and how to frame questions. You can also use the attached sample survey as a reference as well. Your assignment should be a hyperlink to your SurveyMonkey.com survey that you post

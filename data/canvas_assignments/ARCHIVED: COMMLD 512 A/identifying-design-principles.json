@@ -1,0 +1,66 @@
+{
+  "id": 10733392,
+  "name": "Identifying Design Principles",
+  "slug": "identifying-design-principles",
+  "due_at": "2025-10-14T00:55:00Z",
+  "points_possible": 4.0,
+  "description_text": "Purpose\n\nThis assignment develops your ability to see and articulate aesthetic quality in digital interfaces.\nYou will examine how effective interfaces use visual composition, brand expression, and aesthetic harmony to create clarity, coherence, and emotional resonance.\nUnlike Assignment 1, which focused on usability and user needs, this assignment centers entirely on form, visual decision-making, and interface craftsmanship\u2014the \u201clook and feel\u201d that communicates quality and brand credibility.\n\nLearning Objectives\n\nBy the end of this assignment, you will be able to:\n\nAnalyze interfaces using core aesthetic and compositional principles rather than usability metrics.\n\nApply design vocabulary (layout, hierarchy, rhythm, proportion, balance, contrast, harmony) to describe visual systems precisely.\n\nEvaluate brand and visual consistency across interface elements.\n\nReference theoretical frameworks such as Dieter Rams\u2019 Ten Principles of Good Design, Gestalt principles, and neuroaesthetic clarity to justify your evaluations.\n\nAssignment Instructions\n\nPart 1 \u2014 Strong Design Aesthetics\n\nIdentify three (3) professional websites that exemplify high-quality interface aesthetics and brand coherence.\n\nFor each site, provide five (5) concrete visual examples (15 total).\n\nEach example must include a screenshot and a short analytical explanation (2\u20133 sentences) describing how specific visual choices achieve quality.\n\nPart 2 \u2014 Weak Design Aesthetics\n\nSelect two (2) professional websites that fail to demonstrate strong aesthetic principles.\n\nIdentify four (4) examples per site (8 total) with screenshots and analytic commentary.\n\nDescribe why each violates aesthetic quality\u2014e.g., visual clutter, inconsistent alignment, poor contrast, off-brand typography, overuse of gradients, or conflicting imagery.\n\nMaintain an objective, formal tone grounded in visual design terminology (avoid \u201cI dislike this\u201d; use \u201cThe lack of visual hierarchy flattens the composition and diminishes readability.\u201d).\n\nEvaluation Framework\n\nFocus your observations on:\n\nComposition & Balance: How elements are distributed; visual rhythm and alignment.\n\nHierarchy: How scale, contrast, and spatial grouping guide perception.\n\nColor Theory: How hue, saturation, and value create mood or emphasize brand voice.\n\nTypography: How font choice, weight, and spacing express tone and readability.\n\nImagery & Iconography: Cohesion of visual language and photographic/illustrative style.\n\nBrand Consistency: Repetition of forms, color, and tone that reinforce identity.\n\nWhite Space & Proportion: How breathing room supports visual clarity and focus.\n\nUse the following principles (drawn from lectures and readings) to guide analysis:\n\nBalance & Harmony \u2013 Visual weight and rhythm create stability.\n\nHierarchy & Emphasis \u2013 Relative size, color, and contrast establish order.\n\nProportion & Scale \u2013 Relationships between elements feel intentional and pleasing.\n\nUnity & Consistency \u2013 Shared visual language builds recognition and trust.\n\nContrast & Variety \u2013 Differentiation adds energy without chaos.\n\nWhite Space & Simplicity \u2013 Restraint communicates confidence.\n\nColor Theory & Emotion \u2013 Palette selection evokes appropriate affect.\n\nTypography & Tone \u2013 Type communicates hierarchy, voice, and legibility.\n\nBrand Expression \u2013 Every aesthetic decision aligns with identity and purpose.\n\nMaking sure you are considering from our lecture, the principles of good design:\n\nAppealing through a positive experience (there is clarity of purpose and the elements of the design delight)\n\nConsistency of connection to its brand (elements support brand system)\n\nFollows the rules behind neuroesthetics (lack of clutter, easy to understand, pleasing use of imagery and color)\n\nUsing Gestalt principles (the eye is guided to core messages or calls to action)\n\nGood use of white space (shows a\u00a0focus of content or action by providing enough space around it)\n\nAppropriate and compelling content (elements of the page drive towards user goals and imagery evokes a positive association with the brand)\n\nDeft use of Size, Contrast, and Position (various content or calls to action have a hierarchy to their importance and are not competing for attention)\n\nColor Theory (utilizing to evoke an emotion value with your audience)\n\n> Aesthetic Principles Sample Assignment\n\nTry to use an analytical tone to your comments so they do not read as biased. Please use the commonly-used UI-related lexicon. A sample can be found here\u00a0Sample Lexicon.pdf\n\nPersonalization - \"Hi, Mary\" / account customization\n\nHeader (Utility/Primary/sub Navs)\n\nFooter\n\nUtility Navigation or Utility Bar\n\nPrimary/Parent Nav\n\nSub Nav\u00a0\n\nHero - main brand message\u00a0\n\nTagline - slogan\u00a0\n\nCall-to-Action\n\nHeadline - categories/types\u00a0\n\nTitles\n\nHyperlinks\u00a0\n\nLogo - brand\u00a0\n\nIcons \u00a0\n\nSide Bars/Flyout\u00a0\u00a0\n\nHamburger Menu (\u4e09)\n\nDropdown\u00a0\n\nRadio button\u00a0\n\nRollover - mouse on the item, it change the state\n\nForm\n\nMessaging\u00a0\n\nRotator/Carousel - left to right panels\u00a0\n\nPrimary and Secondary buttons\n\nComparison\u00a0of Good Design vs Bad Design:\n\nA PLUS - Home-v1.png\n\nA PLUS - Home-v2.png\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nhttps://hackernoon.com/dieter-rams-10-principles-of-good-design-e7790cc983e9\u00a0\n\nhttps://www.canva.com/learn/design-elements-principles/",
+  "concepts": [
+    "personas",
+    "heuristics",
+    "usability",
+    "ai-design",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Visual Design",
+      "score": 6,
+      "matched_keywords": [
+        "visual design",
+        "typography",
+        "color",
+        "imagery",
+        "composition",
+        "aesthetics"
+      ],
+      "definition": "The aesthetic and communicative aspects of design including typography, color, imagery, and composition to create engaging and effective interfaces."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 3,
+      "matched_keywords": [
+        "screens",
+        "interface",
+        "visual design"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 2,
+      "matched_keywords": [
+        "clarity",
+        "focus"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Information Architecture",
+      "score": 1,
+      "matched_keywords": [
+        "navigation"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "observation"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733392"
+}

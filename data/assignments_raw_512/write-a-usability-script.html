@@ -1,0 +1,187 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Assignment: Write a Usability Script</title>
+</head>
+<body>
+<p><strong>For this assignment, you will author a usability script for <a class="inline_disabled" href="https://www.amazon.com/fmc/everyday-essentials-category?node=16310101&amp;ref=ee_dsk_sn_catGrocery-ff561" target="_blank">Amazon Groceries</a></strong></p>
+<p>Amazon Groceries is a series of services that allow shoppers to order groceries for delivery or pickup. These grocery services are made up of multiple brands within Amazon, including <a class="inline_disabled" href="https://www.amazon.com/alm/storefront?almBrandId=QW1hem9uIEZyZXNo&amp;ref_=nav_em__afs_aaf_0_2_13_2" target="_blank">Amazon Fresh</a>, <a class="inline_disabled" href="https://www.amazon.com/alm/storefront?almBrandId=VUZHIFdob2xlIEZvb2Rz&amp;ref_=nav_em_navm_whole_foods_storefront_0_2_14_2" target="_blank">Whole Foods</a>, local grocers like <a class="inline_disabled" title="Link" href="https://www.amazon.com/alm/storefront?almBrandId=hJDG4SCSoK&amp;pd_rd_w=DA9Io&amp;content-id=amzn1.sym.c9420ed1-a98b-4073-9252-035e83d71e46:amzn1.sym.c9420ed1-a98b-4073-9252-035e83d71e46&amp;pf_rd_p=c9420ed1-a98b-4073-9252-035e83d71e46&amp;pf_rd_r=DE1VV52RVT1K5Q0SEZF9&amp;pd_rd_wg=jePZJ&amp;pd_rd_r=7baa69c7-fe45-4341-8d3f-3a02fd380cf0&amp;qid=1761635913&amp;ref_=sxts_snps_0_0_c9420ed1-a98b-4073-9252-035e83d71e46" target="_blank">Metropoliton Market</a>, Amazon convenience offerings like <a class="inline_disabled" href="https://www.amazon.com/s?k=subscribe+and+save+subscriptions&amp;crid=PW3TKNQZ03ZC&amp;sprefix=subsc%2Caps%2C210&amp;ref=nb_sb_ss_p13n-expert-pd-ops-ranker_1_5" target="_blank">Subscribe and Save</a>, and Amazon's standard Prime shipping; all using different delivery methods and different carts for checkout.&nbsp;</p>
+<p>There are several identified&nbsp;gaps to the service:</p>
+<ol>
+<li><strong>Discoverability:</strong> Learning the existence of the services is dependent on landing on an Amazon Fresh versus Whole Foods or Amazon Prime delivery eligible product. Searching for items that are part of the same cart can be confusing since they are not available on all items, making discoverability difficult. Based upon what you add, it can take you into a filtering only within those items available from that service (Order Beef Jerky as a Whole Foods offering may limit you to only Whole Foods options for other items added to your cart). This is further made difficult as many items are not exclusive to any particular grocery branded option.&nbsp;<br>
+<ul>
+<li>Example of an item (beef jerky) only <a class="inline_disabled" href="https://www.amazon.com/COUNTRY-ARCHER-Teriyaki-Beef-Jerky/dp/B087DLPN24/ref=sr_1_7_us_f3_0o_fs?crid=3SXE7TYYJ3U9S&amp;dib=eyJ2IjoiMSJ9.ZrepSdeDp-h3GIXI8Wf9CGnUrEXLoTIcKTdwH6K4UDs-Vx_cIPCk1Z7lcEOZqCHXAYVG41tJLnBLpgVGOVfyZaxVMnGy-0Hw8iMZJ4-gwL02vL5VOjlL3oDL9eDnTVJ6ESjY8ckUmtTWLtkMbK-OZKLTPwTIc4n1iIzi8cC8a4g6h7wF3ggdsoEKE6fGwSGHydMOKWEESDK_xzXxPGoa8bn9W5y3tDrVBnlP-LuZSpc9rBsJ7UMd-2C5jK1JHbqgSVMfVywNjgAYHdBSzTmZFy69YnRQmRtjQ8FxKAZ47x8.lBj9QPyaaanK0UAOjqzzZDZmHBGsHJhaNSDrKg7QKTk&amp;dib_tag=se&amp;keywords=archer+beef+jerky&amp;qid=1761639391&amp;refinements=p_n_alm_brand_id%3A18075438011&amp;rnid=18075436011&amp;sprefix=archer+beef+jerky%2Caps%2C241&amp;sr=8-7" target="_blank">available on Amazon Fresh</a></li>
+<li>Example of same item on available <a class="inline_disabled" href="https://www.amazon.com/COUNTRY-ARCHER-Teriyaki-Beef-Jerky/dp/B087DLPN24/ref=sr_1_1_us_f3_0o_metro?crid=3SXE7TYYJ3U9S&amp;dib=eyJ2IjoiMSJ9.QRGlsOnJwJyrQ7uq803A_zc_dwNDKq9zzUss03kNSP_H-K2mt0pv3IN1VwCLAA-_e6pY2ryMYOHGKUwsIhy7IbmXoBUzgidlQNUF_CqF5_Bx83lvJdAto6TH2sb_uWizo2fG-1m6sLq13qFuYJ99JHJCnwe8wXwpghYac7CQCXcCT4ty6hOIie1r6JC7oFs-eLbG6QbY4myS1AC7OtUMOw.lpOfPy2l8JXJEFssb0N5j2ype14cmnCxvQjxYX-Z4Wo&amp;dib_tag=se&amp;keywords=archer+beef+jerky&amp;qid=1761639439&amp;refinements=p_n_alm_brand_id%3A116007164011&amp;rnid=18075436011&amp;sprefix=archer+beef+jerky%2Caps%2C241&amp;sr=8-1" target="_blank">from Metropolitan Market</a></li>
+<li>Example again of the same item sold <a class="inline_disabled" href="https://www.amazon.com/Country-Archer-Jerky-Mango-Habanero/dp/B087K81LLX/ref=sr_1_5_us_f3_0o_wf?crid=3SXE7TYYJ3U9S&amp;dib=eyJ2IjoiMSJ9.VNhD_Bld4lNtyTJ9JvBUlwchsOAxvJUkd1yHJPKlvIvdn67PEYuU4MqlhSCoWx8AX8mrdGrAC-D_lgj8Gxd6EvNl817aJBuk5avmTzQIFWTQN_UaulVJcaRRQFy3aQ4YcoZxhz7GoKbLjvjBHPyz31PLLsqsLw6uiIoB9jdAyN-SqiSqpNMmPDH-5eM-FfJUUUViAztPW-pWZ_aEZHIanHTwzxRUt8t1Z4CwyNfn30tzIzIE7uBX0yf9itAXH6qUNwARZI7RpBiGAlUqy_hr01piEJE2sgXZbktEeZ67eKE.qDsKRDA4PCoIyHT4clEc2LDUgVsulCowYPCwqY81hUQ&amp;dib_tag=se&amp;keywords=archer%2Bbeef%2Bjerky&amp;qid=1761639479&amp;refinements=p_n_alm_brand_id%3A18075437011&amp;rnid=18075436011&amp;sprefix=archer%2Bbeef%2Bjerky%2Caps%2C241&amp;sr=8-5&amp;th=1" target="_blank">through Whole Foods</a></li>
+<li>Example with <a class="inline_disabled" title="Link" href="https://www.amazon.com/Country-Archer-Original-Teriyaki-Grass-Fed/dp/B08CJRDYLN/ref=sr_1_7?crid=3SXE7TYYJ3U9S&amp;dib=eyJ2IjoiMSJ9.Qh9kc1RxaIybsEwQ1adFzgFQoOx_POYM9t7EY_DWfVZ2pBSmn4TgB444LCSLl5c_xX6TyPECPF0BMdMpxdn2lHXT0kB_yAbKXgDHCIE-lJGGosD6Uv7L42uCXAhxPRneWJ_98WwkwYDa4IQydqC8aaCpAqQQ1rrkWZfetwDpIqIVQQvQfLQBC-LOPDp5O1Gu4zSqwCa7KmXsESwC1EvYIC2eWhQyebaXqbrL5_Smq8iewdaVXlM5QPKCgbKFcUdPjexOCHdbE9n4Ls4ZZVJbkjEPLp8UaHEpmDoHc4r99Hk._EVz4fscWqLSHq9tS0jkfvRUoppPQZnio6h6Dt0soRY&amp;dib_tag=se&amp;keywords=archer%2Bbeef%2Bjerky&amp;qid=1761639525&amp;refinements=p_n_is_sns_available%3A2617006011&amp;rnid=18075436011&amp;sprefix=archer%2Bbeef%2Bjerky%2Caps%2C241&amp;sr=8-7&amp;th=1" target="_blank">Subscribe and Save option</a> and not available from the grocery delivery services</li>
+</ul>
+</li>
+<li><strong>Ease of Use:</strong> Amazon uses a separate cart and checkout process for groceries based upon where they were ordered from, making a cart with grocery items potentially <em>not in the same cart as your other groceries </em>as they may separated, and appear instead in the standard cart/checkout, causing confusion on completing grocery ordering-related tasks.</li>
+<li><strong>Customer Value:</strong> Understanding how the service is used and its value is confusing when they all are available through the same Amazon umbrella, since users may complete their grocery shopping over a separate visit, losing the context which brand their cart is associated with. The confusion makes the value proposition hard for customers to overcome in wanting to use the service, or why the prices are different for the same items.</li>
+</ol>
+<p><strong>Use the heuristics report detailing the gaps found:</strong><br><a class="instructure_file_link instructure_scribd_file inline_disabled" title="Heuristics Report.pdf" href="$IMS-CC-FILEBASE$/Uploaded%20Media/Heuristics%20Report.pdf?canvas_=1&amp;canvas_qs_wrap=1" target="_blank" data-canvas-previewable="false" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/140727631" data-api-returntype="File">Heuristics Report.pdf</a></p>
+<p><strong>Use the attached usability template script to work from</strong>:<br><a class="instructure_file_link instructure_scribd_file inline_disabled" title="Amazon Groceries Usability script template.docx" href="$IMS-CC-FILEBASE$/Uploaded%20Media/Amazon%20Groceries%20Usability%20script%20template.docx?canvas_=1&amp;canvas_qs_wrap=1" target="_blank" data-canvas-previewable="false" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/140728162" data-api-returntype="File">Amazon Groceries Usability script template.docx</a></p>
+<p>From it, devise your usability script that provides the following:</p>
+<ul>
+<li>Create tasks that will highlight the above 3 gaps identified&nbsp;</li>
+<li>Tasks should have open-ended goals for the user to follow, while providing follow-up specific questions to determine comprehension</li>
+<li>Goal-set for tasks that will lead a user to the Fresh, and/or Whole Foods cart while also having them shop for items that are only available through the regular Amazon shopping cart<strong>&nbsp;<span style="text-decoration: underline; background-color: #ccffff;">without</span></strong> <span style="background-color: #ccffff;">explicitly telling the user of the service or how to find it</span></li>
+<li>Track the ease of use for each task&nbsp;</li>
+<li>Follow up questions to determine customer satisfaction&nbsp;</li>
+<li>Identify what additional metrics you wish to track per task&nbsp;(success rate, number of attempts, time to complete, comprehension, etc.)</li>
+</ul>
+<p>Leverage questions in your script from the <a class="instructure_file_link instructure_scribd_file" title="Usability Question Pointers.pdf" href="$IMS-CC-FILEBASE$/Materials/Usability%20Question%20Pointers.pdf?canvas_download=1&amp;canvas_qs_wrap=1" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/139015036" data-api-returntype="File">Usability Question Pointers.pdf</a> and you are using the following structure:</p>
+<ul>
+<li>Introducing the Task</li>
+<li>Open-Ended Task</li>
+<li>Evaluating User Expectation</li>
+<li>Identifying Success</li>
+<li>Measuring Satisfaction/Ease of Use</li>
+<li>Follow up evaluation</li>
+<li>Provide 2 matrix ratings questions</li>
+<li>2 Closed Ended questions</li>
+</ul>
+<p>&nbsp;</p>
+<h3 data-start="1621" data-end="1647">Students must demonstrate:</h3>
+<ul data-start="1648" data-end="2140">
+<li data-start="1648" data-end="1704">
+<p data-start="1650" data-end="1704"><strong data-start="1650" data-end="1669">Neutral framing</strong> – no leading or loaded phrasing.</p>
+</li>
+<li data-start="1705" data-end="1784">
+<p data-start="1707" data-end="1784"><strong data-start="1707" data-end="1730">Brevity and clarity</strong> – one idea per question; avoid jargon or negatives.</p>
+</li>
+<li data-start="1785" data-end="1848">
+<p data-start="1787" data-end="1848"><strong data-start="1787" data-end="1803">Logical flow</strong> – warm-up → topic → demographic → closing.</p>
+</li>
+<li data-start="1849" data-end="2030">
+<p data-start="1851" data-end="1896"><strong data-start="1851" data-end="1882">Proper quantitative variety</strong> – at least:</p>
+<ul data-start="1899" data-end="2030">
+<li data-start="1899" data-end="1926">
+<p data-start="1901" data-end="1926">2 matrix/ordinal scales</p>
+</li>
+<li data-start="1929" data-end="1953">
+<p data-start="1931" data-end="1953">2 closed-ended items</p>
+</li>
+<li data-start="1956" data-end="2030">
+<p data-start="1958" data-end="2030">several open-ended probes (“Why is that?” “Tell me what you expect…”).</p>
+</li>
+</ul>
+</li>
+<li data-start="2031" data-end="2140">
+<p data-start="2033" data-end="2140"><strong data-start="2033" data-end="2058">Measurement inclusion</strong> – time / accuracy / success / satisfaction / intention metrics explicitly listed.</p>
+</li>
+</ul>
+<h3>Tips on what to avoid:</h3>
+<ul>
+<li data-start="2827" data-end="2891">
+<p data-start="2829" data-end="2891">Leading participants (“Click on Amazon Fresh and tell me…”).</p>
+</li>
+<li data-start="2892" data-end="2940">
+<p data-start="2894" data-end="2940">Failing to list measurable success criteria.</p>
+</li>
+<li data-start="2941" data-end="2987">
+<p data-start="2943" data-end="2987">Asking <em data-start="2950" data-end="2960">compound</em> or <em data-start="2964" data-end="2974">yes-bias</em> questions.</p>
+</li>
+<li data-start="2988" data-end="3054">
+<p data-start="2990" data-end="3054">Overly specific tasks that test navigation, not comprehension.</p>
+</li>
+<li data-start="3055" data-end="3113">
+<p data-start="3057" data-end="3113">Neglecting satisfaction metrics or follow-up evaluation.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Rubric</h3>
+<table style="width: 49.581395%;">
+<tbody>
+<tr>
+<td style="width: 43.016547%;"><strong data-start="2302" data-end="2323">Category</strong></td>
+<td style="width: 56.983453%;"><strong>Criteria</strong></td>
+</tr>
+<tr data-start="2300" data-end="2382">
+<td style="width: 43.016547%;" data-start="2300" data-end="2324" data-col-size="sm"><strong data-start="2302" data-end="2323">Comprehensiveness</strong></td>
+<td style="width: 56.983453%;" data-col-size="md" data-start="2324" data-end="2382">Covers all 3 gaps + measurement criteria + follow-ups.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr data-start="2383" data-end="2487">
+<td data-start="2383" data-end="2419" data-col-size="sm"><strong data-start="2385" data-end="2418">Cognitive Walkthrough Quality</strong></td>
+<td data-col-size="md" data-start="2419" data-end="2487">Open tasks reveal discoverability and mental-model misalignment.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 70.046512%;">
+<tbody>
+<tr data-start="2488" data-end="2605">
+<td style="width: 29.912619%;" data-start="2488" data-end="2518" data-col-size="sm"><strong data-start="2490" data-end="2517">Question Design Quality</strong></td>
+<td style="width: 70.087381%;" data-col-size="md" data-start="2518" data-end="2605">Uses neutral, brief, well-sequenced prompts (per Qualtrics guidelines in Pointers).</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 40.55814%;">
+<tbody>
+<tr data-start="2606" data-end="2678">
+<td style="width: 52.594116%;" data-start="2606" data-end="2631" data-col-size="sm"><strong data-start="2608" data-end="2630">Metrics Definition</strong></td>
+<td style="width: 47.405884%;" data-col-size="md" data-start="2631" data-end="2678">Quant + qual data clearly tracked per task.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 60.55814%;">
+<tbody>
+<tr data-start="2679" data-end="2781">
+<td style="width: 34.441451%;" data-start="2679" data-end="2705" data-col-size="sm"><strong data-start="2681" data-end="2704">Professional Polish</strong></td>
+<td style="width: 65.558549%;" data-col-size="md" data-start="2705" data-end="2781">Readable, replicable script using proper moderator language and closure.</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3>Tips on what to avoid:</h3>
+<ul>
+<li data-start="2827" data-end="2891">
+<p data-start="2829" data-end="2891">Leading participants (“Click on Amazon Fresh and tell me…”).</p>
+</li>
+<li data-start="2892" data-end="2940">
+<p data-start="2894" data-end="2940">Failing to list measurable success criteria.</p>
+</li>
+<li data-start="2941" data-end="2987">
+<p data-start="2943" data-end="2987">Asking <em data-start="2950" data-end="2960">compound</em> or <em data-start="2964" data-end="2974">yes-bias</em> questions.</p>
+</li>
+<li data-start="2988" data-end="3054">
+<p data-start="2990" data-end="3054">Overly specific tasks that test navigation, not comprehension.</p>
+</li>
+<li data-start="3055" data-end="3113">
+<p data-start="3057" data-end="3113">Neglecting satisfaction metrics or follow-up evaluation.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>Reference Materials:</h3>
+<p>For reference watch the following demo usability tests:</p>
+<p><iframe src="//www.youtube.com/embed/Xn0wmXdckuI" width="110" height="62" loading="lazy" allowfullscreen="allowfullscreen"></iframe></p>
+<p><a href="https://www.youtube.com/watch?v=VTW1yYUqBm8">https://www.youtube.com/watch?v=VTW1yYUqBm8</a></p>
+<p>and review the following sample usability scripts:</p>
+<ul>
+<li><a href="$IMS-CC-FILEBASE$/Materials/artizone%20Usability%20Test%20Script%20v1.4.docx?canvas_download=1" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/139014834" data-api-returntype="File">Artizone usability script</a></li>
+<li><a class="instructure_file_link instructure_scribd_file" title="artizone Usability Test Script v1.4.docx" href="$IMS-CC-FILEBASE$/Materials/artizone%20Usability%20Test%20Script%20v1.4.docx?canvas_download=1&amp;canvas_qs_wrap=1" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/139014834" data-api-returntype="File"></a><a class="instructure_file_link instructure_scribd_file" title="WorkforceExplorerUsability_SCRIPT_2010_11_04_2010_V1.docx" href="$IMS-CC-FILEBASE$/Materials/WorkforceExplorerUsability_SCRIPT_2010_11_04_2010_V1.docx?canvas_download=1&amp;canvas_qs_wrap=1" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/139014954" data-api-returntype="File">Workforce Explorer Usability script</a></li>
+</ul>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<td style="width: 750px;">
+<p><span style="font-size: 10pt;"><strong>&nbsp; &nbsp;Recommended Reading:&nbsp;</strong></span></p>
+</td>
+</tr>
+<tr>
+<td style="width: 750px;">
+<p><span style="font-size: 10pt;"><em>Rocket Surgery Made Easy: </em>Chapters 6-8</span></p>
+<p><span style="font-size: 10pt;"><a href="$IMS-CC-FILEBASE$/Presentation%20Slides/UX%20Research%20Week%206.pdf?canvas_download=1" data-api-endpoint="https://canvas.uw.edu/api/v1/courses/1828126/files/139014936" data-api-returntype="File">UX Research Week 6.pdf</a></span></p>
+<p><a href="https://usabilitygeek.com/tips-for-writing-usability-test-script/"><span style="font-size: 10pt;">Tips for writing a better usability test</span></a></p>
+<p><a href="https://measuringu.com/sus/%20"><span style="font-size: small;">Using System Usability Scale</span></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

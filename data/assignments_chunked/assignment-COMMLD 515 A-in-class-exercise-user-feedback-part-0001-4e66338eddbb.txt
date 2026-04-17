@@ -1,0 +1,7 @@
+[Assignment: In Class Exercise: User Feedback]
+[Course: COMMLD 515 A]
+[Concepts: personas, user-research, prototyping, ai-design, presentation]
+[Aligned Teaching Concepts: Usability Testing, User Research Methods, Interface Design]
+[Due: 2026-04-30T06:59:00Z]
+
+(not minor nits) of your UI or flow, update your existing sketches with those changes and submit as part of this assignment. NOTE: Since this is an in-class exercise designed to improve your final product, you will not be graded against a rubric on the quality of the assignment deliverables, only that you have completed it. Helpful Material Validating Ideas Through Concept Testing by Method How to Survive a Critique.pdf How to Survive a Critique2.pdf

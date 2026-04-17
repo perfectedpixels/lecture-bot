@@ -1,0 +1,56 @@
+{
+  "id": 10733387,
+  "name": "Detecting User Issues",
+  "slug": "detecting-user-issues",
+  "due_at": "2025-10-07T01:00:00Z",
+  "points_possible": 4.0,
+  "description_text": "Describe what you see as the main issues with the existing grading process / UI. Prioritize the issues and provide recommendations for how best to solve them.\n\nAmazon reviews all products that are returned to determine the quality level of each item before it is re-sold under the Warehouse Deals name. Your assignment is to review how the Grading Associate interacts with the grading software and to determine what issues around the UI or procedures hamper quality or yield:\u00a0\n\nReview all the observation videos posted below\n\nWrite down what you see as the key pain points and the negative outcomes that come from those issues\n\nProvide Recommendations that help solve for the key issues identified\n\nBased on viewing all the videos, use the two categories below, plus determine your own third Category (as the example below represents).\n\nFor each category, complete 5 to 8 findings, outcomes, and solutions per category. I have included a sample entry for the first category.\u00a0For any questions about the assignment or the videos, please post at the Q&A Class Assignments Discussion Board.\u00a0\n\nThoughtful consideration of the following will determine your grade:\n\nWhat would improve efficiency?\n\nHow do you solve for accuracy issues?\n\nWhat is missing from the existing process that you would recommend?\n\nWhat changes would improve the overall customer experience?\n\n\u00a0\n\nIssue Category 1: Grading Quality\n\nAssociates face a disadvantage in taking time to be accurate in their evaluation of an item. The time spent by associates to problem-solve what might be a flaw in the quality of an item they are reviewing impacts their hourly efficiency quota, disincentivizing assuring that flaws are identified.\u00a0\n\n?\n\n?\n\n?\n\n?\n\n?\n\nThis can lead to unhappy customers due to receiving an evaluated product that improperly rated the item's quality by undermining trust in Amazon's used items. If occurrences of purchasing items from Amazon's used inventory are more than an anomaly for customers, this can lead to broader frustration in undermining customer loyalty in general.\u00a0\n\n?\n\n?\n\n?\n\nProduce a KPI (key performance indicator) that tracks for evaluation accuracy. If Amazon validates instead for the accuracy of grading (Like New is evaluated by a second associate also as Like New) versus the existing validation of tracking if the item was properly marked as 'rejected' or 'sellable', it can positively impact user needs of having confidence in the expectations of the quality in what they are buying. The additional advantage of tracking a more specific evaluation quality level versus the more binary one, is that it would incentivize associates to take the additional time to assure their evaluation is accurate.\u00a0\n\n?\n\n?\n\nFindings\n\nOutcomes\n\nSolutions\n\nIssue Category \u00a02: Employee Morale\n\nFindings\n\n?\n\n?\n\nOutcomes\n\n?\n\n?\n\nSolutions\n\n?\n\n?\n\n?\n\nIssue Category \u00a03: ?\n\n\u00a0\n\nVIDEOS:\n\nRubric\n\nCriterion\nWhat It Assesses\nWeight\n\n1. Insight & Systems Thinking\nHow well the student interprets the observed behaviors or process breakdowns. Looks for nuanced understanding of why issues happen (human, systemic, incentive, or data causes).\n1.2 pts\n\n2. Relevance & Prioritization of Issues\nWhether the issues identified are meaningful and high-impact vs surface-level. Prioritization should reflect real UX judgment (customer, business, operations).\n1.0 pt\n\n3. Quality of Recommendations\nDo proposed fixes show design maturity \u2014 balancing feasibility, scale, and ethical/user implications? Goes beyond \u201cadd a button\u201d to \u201cchange how performance is defined.\u201d\n1.2 pts\n\n4. Clarity & Communication\nIs it concise, coherent, and persuasive? Would this hold up in a stakeholder readout?\n0.6 pt\n\nTotal: 4.0 pts\n\n4.0 (Excellent): Sophisticated systems thinking; clear link from human problem \u2192 organizational cause \u2192 design or policy remedy. Shows empathy for multiple stakeholders (employees, customers, management).\n\n3.0\u20133.5 (Proficient): Clear logic and actionable recs but lacks some strategic depth or misses secondary implications.\n\n2.0\u20132.5 (Developing): Surface observations or generic solutions (\u201cimprove UI,\u201d \u201ctrain employees\u201d).\n\n1.0\u20131.5 (Beginning): Limited insight; mainly descriptive or repeating known examples.\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nDon\u2019t Make Me Think\u00a0 Chapters 1 - 4\n\n\u00a0UX Research Week 1 Presentation Slides.pdf",
+  "concepts": [
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Workflow Automation",
+      "score": 2,
+      "matched_keywords": [
+        "AI",
+        "efficiency"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    },
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "observation"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 1,
+      "matched_keywords": [
+        "evaluation"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Design Thinking",
+      "score": 1,
+      "matched_keywords": [
+        "empathy"
+      ],
+      "definition": "Human-centered problem-solving methodology emphasizing empathy, ideation, prototyping, and testing to create innovative solutions."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 1,
+      "matched_keywords": [
+        "clarity"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733387"
+}

@@ -1,0 +1,5 @@
+[Assignment: Buddy Tv User Interviews]
+[Course: COMMLD-512]
+[Concepts: personas, user-research, prototyping, design-thinking, ai-design, presentation]
+
+grounded in insights. Idea fits assignment but feels generic or under-explained. Concept missing or not based on user findings. Persona & Presentation Quality(10%) Persona reflects culture and habits of the fan base; slides are cohesive and polished. Persona and slides clear but not deeply tied to insights. Persona surface-level; presentation uneven. Missing persona or incomplete presentation. Scenario Thinking(5%) Demonstrates awareness of how fans would use the feature (happy and edge cases). Mentions typical use; light edge-case awareness. Touches on flow but lacks depth. No scenario thinking shown. Recommended Reading: Rocket Surgery Made Easy: Chapters 1-2, 4-5 UX Research Week 4.pdf Facebook vs. Snapchat discussion

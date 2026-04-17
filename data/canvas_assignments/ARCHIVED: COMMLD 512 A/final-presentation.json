@@ -1,0 +1,52 @@
+{
+  "id": 10733389,
+  "name": "Final Presentation",
+  "slug": "final-presentation",
+  "due_at": "2025-12-09T01:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "The Summary Presentation deliverable makes up half of the grade you receive for the final. Make sure you have enough content for a twenty-minute presentation. Each member of the team needs to contribute to the presentation and you will need to share your time each presenting a portion of it. You will want to include the following elements in your presentation for your Final Project .\n\nShort Summary of the client and the goal of your test\n\nYour Persona's pain points and goals\n\nSummary slide describing who you tested (e.g. 4 females and 2 males, 3 were heavy users of the site, etc.) and any additional data you learned from surveys\n\nWhat tasks you tested\n\nThe main failings of the site that did not perform well and key responses you heard. Include charts or other forms of visualization of your data that backs up your claim of what failed (Number of fails, number of wrong paths, number of responses that ranked the experience low, the time it took to complete, ratings given by respondents, etc.) and what was successful.\n\nYour suggestions on how you would fix the problem. Sample suggestions are to include low-fidelity to high-fidelity design treatment, layout and position changes, suggested labeling, functionality improvements, etc.\nThis is the most important part of your presentation as I am looking for your understanding of what you discovered and your analysis for what would improve it.\n\nPresentations need to be 20 minutes long with 5 minutes for questions. You are free to provide video samples of user commentary as part of your presentation.\n\nStudent Final Project Example\n\nAdditional samples of professional presentations: \u00a0\n\nArtizone usability report.pdf\n\nAmazon Warehouse Deals-3.pptx\n\nWorkforceExplorer_UsabilityBaseline_3Dec2010_V12FINAL-1.pptx\n\nTanooki Usability Test Results.pdf\n\nMTG-Usability_Report-FINAL.pdf\n\nNot necessarily a format to follow, but a brilliant example of usability research done on\u00a0Tiktok\n\nRecommended Reading:\nDon\u2019t Make Me Think Chapters 11-12\nRocket Surgery Made Easy: Chapter 13\u00a0\nhttps://growth.design/psychology/\u00a0\nAdditional Reading I recommend\n\nImportant Tips:\n\nDefine who you tested and why\n\nDescribe the problem\n\nWhat are the major inhibitors for success?\u00a0\n\nDemonstrate through examples the pain point with screenshots, data points, or video\n\nWhat main heuristics were a concern\n\nHighlight the top categories of issues and show examples that reinforce with examples.\n\nWhat was successful and worth leveraging\n\nUse Likert scoring to reinforce it\n\nReinforce findings that illustrate the problem\n\nFail rate or time to complete task\n\nApproval rating \u00a0via Net Promoter scoring\n\nHumanize the story\n\nGive quotes or show video\n\nMake recommendations that address the initial problems cited",
+  "concepts": [
+    "personas",
+    "heuristics",
+    "usability",
+    "user-research",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Prototyping",
+      "score": 2,
+      "matched_keywords": [
+        "low-fidelity",
+        "high-fidelity"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "surveys"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 1,
+      "matched_keywords": [
+        "screens"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733389"
+}

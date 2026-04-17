@@ -1,0 +1,59 @@
+{
+  "id": 10733385,
+  "name": "Building User Personas",
+  "slug": "building-user-personas",
+  "due_at": "2025-10-21T00:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Listen to:\u00a0Freakanomics Podcast on Trader Joe's\n\nCreate two Personas; The Loyal Foodie and The Distracted Urbanite\u00a0that best describe the ideal customer who would be interested in an online delivery service offered by Trader Joe's, an artisan grocery chain. You can also consider in-store innovations as well.\u00a0\n\nTrader Joe's Business Goals for the online experience is to:\n\nGain a new customer segment that can be enticed by online shopping, but still stays true to its brand\n\nIncrease frequency of customers purchasing by optimizing for user needs\n\nIncrease the average quantity of items purchased by hyper-efficient suggestion model and ease of use\n\nInspire customers to experiment with new foods\n\nCreate a unique branded experience that is authentic to Trader Joe's\n\nTarget their identified audiences:\u00a0Loyal Foodie & Distracted Urbanite. \n\nThe Distracted Urbanite\u00a0enjoys the convenience of the ready made and easy to cook, with a small number of cart items.\n\nThe Loyal Foodie They loyally shop for supplemental items for their family seeking out items that are unique to Trader Joe's that they can't get from their regular grocery shopping, with a larger cart of items.\n\nFor each personas, you will need to:\n\nVisit a Trader Joe's and observe customers. Take notes to identify trends:\n\nHow do they dress?\n\nHow old are they?\n\nWhat kinds of things are they buying?\n\nWhat are they driving (or not)?\n\nWho are they with when they are shopping?\n\nWhat are they talking about?\n\nAre there similarities between any kind of demographics?\n\nWhat is the brand connection with the persona?\n\nWhat are their food habits and shopping cart size and food choices?\n\nWhat type of grocery or recipe related apps are they using, if any?\n\nHow long do they stay in the store? Do they meander or hone in on specific things?\n\nFor each persona, your should:\n\nWhat to look for:\n\nIdentify consistent issues\u00a0\n\nIdentify patterns of behavior\n\nFigure out which issues you are going to tackle\n\nKeep track of insights and ideas\n\nFrom your observations, identify the trends and demographics you noticed and try to bucket which ones meet the general audiences as you have identified them. Do further online research on any supplemental demographic data, research or associated articles can be found that overlaps with your identified users. Any empirical research that helps round out your understanding can be used.\n\nIf you find that the differences break differently than by generation and are based on some other factor (ideology, locale, socioeconomic conditions, etc.) you are welcome to change the criteria of your personas to reflect that.\n\nFind a photo to represent your target Personas\u00a0and give them names.\n\nInclude a two paragraph narrative to represent their daily routine when it comes to food at home, and the differentiators of each persona and their relationship to Trader Joe's within that routine. Avoid \u201cmini short stories\u201d that over-personalize a persona, losing elasticity and representativeness. In professional UX practice, the persona narrative should describe archetypal behavior patterns, not singular life events. A well-written day-in-the-life vignette should illuminate repeatable motivations and contextual triggers, not idiosyncratic routines.\n\nInclude\u00a0Demographics (marital status, household\u00a0size and\u00a0income, age, etc.) and associated interests: Favorite TV Show, Car they Drive, Hobby, job title,\u00a0how often\u00a0they spend time food shopping, cooking food or watching a TV.\n\nBased on your research, provide additional statistics that you identify about your persona's makeup like political affiliation, race breakdown, suburban vs urban ratio, discretionary income\u00a0spending, largest and smallest concerns, etc.\n\nWrite 4 User Pain Points / User Needs and the solutions Trader Joe's can provide, comprising of in-store and online that support the hypothesis in your findings and from the articles. Make sure they speak to Trader Joe's, and not just generic grocery shopping and are specific to each persona.\n\nList up to 5 Content, or Services that are most important to them on a daily basis (Facetiming, reading news articles, hustling for cash, binge watching, health checks, exercising, etc.)\n\nInclude three references for additional resources of where you made your decision about this user. As long as you seek one data source that describes that Persona, you should be on the right track.\u00a0\n\nYou are not required to make it look designed\u00a0\n\n\u00a0\n\nGrading Rubric (4.0 Scale)\n\nCategory\n4.0 (Excellent)\n3.0 (Proficient)\n2.0 (Developing)\n1.0 (Needs Work)\n\nField Observation & Patterns (20%)\nClear, specific, and pattern-based; directly tied to persona traits and insights.\nSome concrete notes; partial link to insights.\nMinimal or generic notes; unclear link to personas.\nMissing or vague field data.\n\nResearch Integration (15%)\nMultiple credible sources support demographics and behaviors; cited correctly.\nSome data used; limited citation depth.\nMinimal or outdated research; unclear sources.\nNo supporting research.\n\nPersona Clarity & Differentiation(20%)\nPersonas are vivid, distinct, realistic, and non-stereotyped.\nClear personas with some overlap or simplification.\nBasic demographic sketches; limited differentiation.\nUnclear or implausible personas.\n\nNarrative & Brand Connection(15%)\nStrong daily routine and Trader Joe\u2019s relationship; authentic to brand tone.\nRoutine described but weak\u00a0\nBasic description; mostly generic grocery context.\nMissing or off-brand.\n\nPain Points & TJ-Specific Solutions(20%)\nFour clear needs with actionable, on-brand solutions (online & in-store).\nNeeds identified; partial relevance.\nGeneric or weakly linked solutions.\nFew or missing needs; no clear solutions.\n\nExample Personas:\n\nA+ Personas - shell.pdf\n\nA+Whiteboard.JPG\n\nESD personas.pdf\n\nCorbis user personas.pdf\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nGuide to Building Personas\n\nInteraction Design Foundation article on Personas\n\nCreating Personas for UX",
+  "concepts": [
+    "personas",
+    "ai-design",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 2,
+      "matched_keywords": [
+        "observation",
+        "personas"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Persona Definition",
+      "score": 2,
+      "matched_keywords": [
+        "personas",
+        "user personas"
+      ],
+      "definition": "Research-based archetypal representations of user segments that embody goals, behaviors, and pain points to guide design decisions."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 2,
+      "matched_keywords": [
+        "simplification",
+        "clarity"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Interaction Design",
+      "score": 1,
+      "matched_keywords": [
+        "interaction design"
+      ],
+      "definition": "The design of interactive behaviors and feedback in digital products, focusing on how users accomplish tasks and receive system responses."
+    },
+    {
+      "concept": "Design Thinking",
+      "score": 1,
+      "matched_keywords": [
+        "innovation"
+      ],
+      "definition": "Human-centered problem-solving methodology emphasizing empathy, ideation, prototyping, and testing to create innovative solutions."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733385"
+}

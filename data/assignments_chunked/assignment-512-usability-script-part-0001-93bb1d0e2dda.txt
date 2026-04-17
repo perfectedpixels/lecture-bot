@@ -1,0 +1,5 @@
+[Assignment: Usability Script]
+[Course: COMMLD-512]
+[Concepts: personas, heuristics, usability, user-research, prototyping, presentation]
+
+question types are: Needs from the software/online service Value proposition of the software/online service Findability of elements Expectations set by navigation elements Gap between expectations and reality Comprehension of text Intention to perform a given action Ease of performing a task Friction points in performing a task Improvements they feel should be made Motivators/facilitators to continuing Inhibitors/barriers to continuing Preference between options The aesthetic appeal The trust in the system The perceived speed, responsiveness Memory for a previous stimulus Learning along the flow Sample Usability Scripts: Artizone Usability Test Script v1.4.docx Facultyresourcecenter Interview Script .docx WorkforceExplorerUsability_SCRIPT_2010_11_04_2010_V1.docx Tanooki Usability Script Recommended Reading: Rocket Surgery Made Easy: Chapters 6-8 UX Research Week 8.pdf

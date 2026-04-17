@@ -1,0 +1,5 @@
+[Assignment: Ai Agent Persona 1 Of 2]
+[Course: COMMLD-515]
+[Concepts: personas, heuristics, design-thinking, ai-design, presentation]
+
+Encourages over-reliance Disconnects users from the human experience Creates real risk, not just bad UX If the agent “decides on its own,” the design has failed.

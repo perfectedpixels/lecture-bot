@@ -1,0 +1,34 @@
+{
+  "id": 10733398,
+  "name": "User Survey",
+  "slug": "user-survey",
+  "due_at": "2025-11-25T07:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Create a survey based on your preliminary Persona to select valid candidates for a usability study\u00a0 for your Final Project\u00a0\n\nThe survey should be designed for recruiting users that match information found in your Persona criteria\n\nInclude in your questions at least 5 items found in your Persona that you deem necessary for filtering what you consider valid candidates.\n\nAsk at least 3 market research related questions that would be used to understand your Persona audience better. These can be either items you wish to verify found in the demographics of your persona or additional data points you feel would be valuable in marketing to your audience\u00a0\n\nInclude at least 4\u00a0questions that allow you to verify your assumptions about user behavior from your use case Goals and Pain Points\n\nFollow the survey format referenced in the attached for question structure and how to frame questions here:\u00a0\nQuestion Types.pdf. You can also use the sample surveys below as a reference.\n\nYour assignment should be a hyperlink to your survey using either Survey Monkey,\u00a0Poll Everywhere, or Google Forms\n\n\u00a0\n\nSamples Surveys:\n\nSurvey Monkey Sample- Customer Shopping experience\n\nSurvey Monkey Sample - Competitor Research\n\nRecommended Reading\n\nhttps://www.nngroup.com/articles/qualitative-surveys/\u00a0\nhttps://uxmastery.com/better-user-research-through-surveys/",
+  "concepts": [
+    "personas",
+    "usability",
+    "user-research",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "surveys"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733398"
+}

@@ -1,0 +1,57 @@
+{
+  "id": 11355134,
+  "name": "Final Presentation",
+  "slug": "final-presentation",
+  "due_at": "2026-06-04T01:59:00Z",
+  "points_possible": 2.0,
+  "description_text": "15-20 minute Summary Presentation\u00a0\nThe Summary Presentation deliverable makes up half of the grade you receive for the final. Make sure you have enough content for a twenty-minute presentation. Each member of the team needs to contribute to the presentation and you will need to share your time each presenting a portion of it.\u00a0Prepare/Practice your final presentation\u00a0inclusive of Jason/peer feedback\u00a0as if you were doing a product review with a prospective VC for funding.\n\nFor your presentation:\n\nSummarize in 22 minutes max (we will be timing)\u00a0your project in Google, PowerPoint or Keynote and present:\n\nfinal product pitch idea,\n\npersona,\n\nan overview of the main customer journey(s)\n\nfull end to end experience\n\nDemo your hi-fi prototype from a user\u2019s POV and tell it like a narrative highlighting onboarding, core navigation, backstack architecture, support along the way, happy and hard paths etc.\n\nSummarize what you learned from user feedback that reveal what you learned along the way (include customer quotes and/or user feedback video).\n\nShow what you changed\n\nSummarize if you did it all over again what you would do differently.\u00a0\n\nHave fun!\n\nHere is an example of a 4.0 presentation: DiaLife Final Presentation.pdf",
+  "concepts": [
+    "personas",
+    "prototyping",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Information Architecture",
+      "score": 1,
+      "matched_keywords": [
+        "navigation"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 1,
+      "matched_keywords": [
+        "feedback"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 1,
+      "matched_keywords": [
+        "prototype"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Journey Mapping",
+      "score": 1,
+      "matched_keywords": [
+        "customer journey"
+      ],
+      "definition": "Visual representations of user experiences over time, showing touchpoints, emotions, pain points, and opportunities across the customer journey."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355134"
+}

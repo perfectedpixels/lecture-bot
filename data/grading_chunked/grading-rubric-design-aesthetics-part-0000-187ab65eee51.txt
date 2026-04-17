@@ -1,0 +1,6 @@
+[Rubric: Assignment 2: Design Aesthetics Evaluation]
+[Concepts: heuristics, design-thinking]
+[Related assignments: identifying-design-principles]
+[Type: rubric]
+
+Assignment 2: Design Aesthetics Evaluation Assignment Objective: Analyze interface aesthetics using design theory. Required Analytical Elements - students must connect UI elements to: - Gestalt principles - Visual hierarchy - Perception and cognition Strong Example: The use of proximity groups related product categories, reducing scanning time and cognitive load. Weak Example: The layout looks clean and modern. Decision Tree: - Theory + analysis + examples = 4.0 - Some theory but shallow explanation = 3.x - Description without analysis = 2.x

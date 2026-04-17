@@ -1,0 +1,59 @@
+{
+  "id": 10733384,
+  "name": "Buddy TV User Interviews",
+  "slug": "buddy-tv-user-interviews",
+  "due_at": "2025-11-12T07:00:00Z",
+  "points_possible": 4.0,
+  "description_text": "Imagine you are hired by Buddy TV (a TV news site to follow television shows) to build a fan site for a cult-following show. Buddy TV wants a sub-site that is compelling and unique to that show. Your objective is to uncover a unique set of offerings for BuddyTV that serves the show\u2019s dedicated fans, increases user engagement with the content you create, and leverages social media.\n\nYou will be placed into a team, assigned to one of the cult-following shows below:\n\nKpop Demon Hunters\n\nStranger Things\n\nQueer Eye\n\nSquid Game\n\nThe Voice\n\nFollow these steps:\n\nIndividually, research the subject matter for the show you are assigned.\n\nWrite a list of interview questions (approx. 10 questions per person) that uncover more about your target audience, using the techniques outlined in our class discussion. They are also available to reference in the slides here. UX Research Week 6.pdf\n\nAs a group, interview 2-3 people that are fans of that show and discuss why the show is interesting to them. It is up to you to find those fans- they can even be other students from the class not in your group. Your Interview goal\u00a0is to find out what a typical fan would want as information, entertainment, and content to support their interest in the show. Uncover what makes the show compelling and what kind of content BuddyTV should build for their fansite.\n\nBased on those learnings, come up with what offerings and features you would recommend for that audience that are contextual to that audience.\n\nBrainstorm and sketch\u00a0ideas (one per team member), that you feel would be compelling for fans of that show, based on what you heard in your interviews, writing a 1-2 sentence justification how the idea is based on your users.\n\n\u00a0\n\nBased on your interview, your presentation includes:\n\n1. Audience Proto-Persona (1 slide). What are the types of\u00a0interests\u00a0your interviewees are interested in that relate\u00a0to the\u00a0topic/genre/culture\u00a0of the show, as well as the age group you see would be that target audience.\n\n2. Product Objective (1 to 2 slides)\n\nWhat is the core opportunity? Describe what would be valuable to this fan base that would deliver higher engagement with Buddy TV.\n\nWhy is it important to your customer? Explain what it is about your user experience that is\u00a0specific to that fan community.\n\n3. Proposal of\u00a01 applets / featurettes / games / contests / etc. for the fan site per team member.\u00a0Consider ways to build momentum for your show through social media-driven\u00a0marketing or\u00a0user-generated content. Include:\n\nScreens of the proposed experience as either snapshots of your whiteboard sketches, paper sketches, or low fidelity mockups using Google Slides, PowerPoint, Figma,\u00a0Sketch, or Balsamiq. You can also leverage an LLM to improve the fidelity of your idea, but include the original sketch if you do.\n\nShort explanation for each concept and justification based on the interviews\n\nFor each, explain why your proposed features would be valuable to this audience and how it maps back to your Product Objective\n\n4. Your individual Contributions\n\nResearch found\n\nInterview questions\n\nInterview Notes\u00a0\n\nRubric\n\nCriteria\n4.0 (Exceeds)\n3.7 (Strong)\n3.3 (Meets)\n3.0 (Below)\n\nInterview Quality(25%)\nInterview questions are open-ended, neutral, and dig into whyfans care. Notes show active listening and genuine insight.\nQuestions are clear and conversational but probe lightly. Some missed opportunities to ask \u201cwhy.\u201d\nQuestions gather useful info but stay surface-level. Little evidence of deeper probing.\nQuestions are leading or minimal; limited insight gained.\n\nSuperfan Focus & Opportunity(20%)\nTargets true superfans; defines a clear, insight-driven opportunity based on what motivates them.\nFocused on relevant fans with mostly clear opportunity framing.\nAudience identified but opportunity feels general or assumption-based.\nWeak connection to fan motivations; unclear or missing opportunity.\n\nProduct Objective(15%)\nStates what Buddy TV can uniquely offer and why it matters to this audience. Connects to fan behaviors and goals.\nClear objective but not fully tied to user evidence or lacks specificity.\nObjective present but broad or generic.\nObjective unclear or unrelated to research.\n\nConcept Idea & Justification(25%)\nOne concept per member; each idea clearly links to interview insights and the Product Objective; creative and show-specific.\nConcept is thoughtful and connected but could be more tightly grounded in insights.\nIdea fits assignment but feels generic or under-explained.\nConcept missing or not based on user findings.\n\nPersona & Presentation Quality(10%)\nPersona reflects culture and habits of the fan base; slides are cohesive and polished.\nPersona and slides clear but not deeply tied to insights.\nPersona surface-level; presentation uneven.\nMissing persona or incomplete presentation.\n\nScenario Thinking(5%)\nDemonstrates awareness of how fans would use the feature (happy and edge cases).\nMentions typical use; light edge-case awareness.\nTouches on flow but lacks depth.\nNo scenario thinking shown.\n\n\u00a0\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nRocket Surgery Made Easy: Chapters 1-2, 4-5\n\nUX Research Week 4.pdf\nFacebook vs. Snapchat discussion",
+  "concepts": [
+    "personas",
+    "user-research",
+    "prototyping",
+    "design-thinking",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "interviews"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 1,
+      "matched_keywords": [
+        "screens"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 1,
+      "matched_keywords": [
+        "mockups"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 1,
+      "matched_keywords": [
+        "focus"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733384"
+}

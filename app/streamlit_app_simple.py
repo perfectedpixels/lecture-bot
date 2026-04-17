@@ -15,7 +15,13 @@ try:
     HAS_QUERY_BOT = True
 except ImportError:
     HAS_QUERY_BOT = False
-    st.warning("query_bot module not found - some features disabled")
+
+try:
+    from persona_bot_fast import FastPersonaBot
+    from response_cache import CachedPersonaBot
+    HAS_FAST_BOT = True
+except ImportError:
+    HAS_FAST_BOT = False
 
 try:
     from persona_bot_safe import PersonaBot
@@ -234,7 +240,7 @@ if 'voice_enabled' not in st.session_state:
 if 'audio_playing' not in st.session_state:
     st.session_state.audio_playing = False  # Track if audio is currently playing
 if 'audio_autoplay' not in st.session_state:
-    st.session_state.audio_autoplay = True  # Enable autoplay by default
+    st.session_state.audio_autoplay = False  # Off by default — students opt in
 if 'voice_generator' not in st.session_state:
     if HAS_VOICE:
         try:
@@ -280,10 +286,12 @@ with col3:
         st.caption(f"Autoplay: {'on' if st.session_state.audio_autoplay else 'off'}")
 
 with col4:
-    st.toggle("🔊", value=st.session_state.voice_enabled, key="voice_toggle_top", help="Voice")
+    _voice_val = st.toggle("🔊", value=st.session_state.voice_enabled, key="voice_toggle_top", help="Voice")
+    st.session_state.voice_enabled = _voice_val
 
 with col5:
-    st.toggle("🔈", value=st.session_state.audio_autoplay, key="autoplay_toggle_top", help="Autoplay")
+    _autoplay_val = st.toggle("🔈", value=st.session_state.audio_autoplay, key="autoplay_toggle_top", help="Autoplay")
+    st.session_state.audio_autoplay = _autoplay_val
 
 st.divider()
 
@@ -302,10 +310,10 @@ with st.sidebar:
     )
     
     # Map course to Knowledge Base ID
-    # Note: Both courses use the same KB - content is separated by S3 folders
+    # Both courses use the shared ppmg/lecture-bot KB
     course_kb_map = {
-        "COMMLD 515 - Advanced User Design": "1TTBVE6MG2",
-        "COMMLD 512 - UX Research & Strategy": "1TTBVE6MG2"
+        "COMMLD 515 - Advanced User Design": "HHYCUJH32J",
+        "COMMLD 512 - UX Research & Strategy": "HHYCUJH32J"
     }
     
     # Auto-fill KB ID based on course selection
@@ -322,6 +330,7 @@ with st.sidebar:
     model_id = st.selectbox(
         "Model",
         [
+            "us.anthropic.claude-sonnet-4-20250514-v1:0",
             "anthropic.claude-3-sonnet-20240229-v1:0",
             "anthropic.claude-3-haiku-20240307-v1:0",
             "anthropic.claude-3-5-sonnet-20240620-v1:0"
@@ -352,7 +361,17 @@ with st.sidebar:
         if kb_id:
             st.session_state.kb_id = kb_id
             st.session_state.current_course = course
-            if HAS_PERSONA_BOT:
+            if HAS_FAST_BOT:
+                try:
+                    fast_bot = FastPersonaBot(
+                        kb_id, model_id,
+                        persona_name="Professor Levine",
+                    )
+                    st.session_state.bot = CachedPersonaBot(fast_bot, cache_ttl_hours=24)
+                    st.success(f"Connected to {course}!")
+                except Exception as e:
+                    st.error(f"Error: {e}")
+            elif HAS_PERSONA_BOT:
                 try:
                     st.session_state.bot = PersonaBot(kb_id, model_id)
                     st.success(f"Connected to {course}!")
@@ -584,22 +603,35 @@ with tab1:
             
             # Follow-up suggestions (only for last message)
             if idx == len(st.session_state.chat_history) - 1 and not chat.get('safety_triggered'):
-                st.markdown("##### 💡 Dive deeper:")
+                _is_zh = st.session_state.ui_language == "zh"
+                st.markdown("##### 💡 深入了解：" if _is_zh else "##### 💡 Dive deeper:")
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    if st.button("🏢 Real-world example", key=f"example_{idx}", use_container_width=True):
-                        st.session_state.pending_question = f"Can you share a real-world example from your professional experience related to: {chat['question']}"
+                    _btn1 = "🏢 实际案例" if _is_zh else "🏢 Real-world example"
+                    if st.button(_btn1, key=f"example_{idx}", use_container_width=True):
+                        if _is_zh:
+                            st.session_state.pending_question = f"能分享一个与此相关的实际工作案例吗：{chat['question']}"
+                        else:
+                            st.session_state.pending_question = f"Can you share a real-world example from your professional experience related to: {chat['question']}"
                         st.rerun()
                 
                 with col2:
-                    if st.button("📖 Explain more", key=f"explain_{idx}", use_container_width=True):
-                        st.session_state.pending_question = f"Can you explain this concept in more detail: {chat['question']}"
+                    _btn2 = "📖 详细解释" if _is_zh else "📖 Explain more"
+                    if st.button(_btn2, key=f"explain_{idx}", use_container_width=True):
+                        if _is_zh:
+                            st.session_state.pending_question = f"能更详细地解释这个概念吗：{chat['question']}"
+                        else:
+                            st.session_state.pending_question = f"Can you explain this concept in more detail: {chat['question']}"
                         st.rerun()
                 
                 with col3:
-                    if st.button("🔗 How does this connect?", key=f"connect_{idx}", use_container_width=True):
-                        st.session_state.pending_question = f"How does this concept connect to other topics we've covered: {chat['question']}"
+                    _btn3 = "🔗 如何关联？" if _is_zh else "🔗 How does this connect?"
+                    if st.button(_btn3, key=f"connect_{idx}", use_container_width=True):
+                        if _is_zh:
+                            st.session_state.pending_question = f"这个概念与我们学过的其他内容有什么联系：{chat['question']}"
+                        else:
+                            st.session_state.pending_question = f"How does this concept connect to other topics we've covered: {chat['question']}"
                         st.rerun()
         
         # Handle pending question from button click
@@ -610,7 +642,8 @@ with tab1:
             # User message
             st.markdown(f'<div class="user-message">{question}</div>', unsafe_allow_html=True)
             
-            with st.spinner("Professor Levine is thinking..."):
+            _sp1 = "教授正在思考…" if st.session_state.ui_language == "zh" else "Professor Levine is thinking..."
+            with st.spinner(_sp1):
                 try:
                     result = _run_bot_query_simple(question, use_persona=True)
                     result['question'] = question
@@ -671,7 +704,8 @@ with tab1:
             # User message
             st.markdown(f'<div class="user-message">{question}</div>', unsafe_allow_html=True)
             
-            with st.spinner("Professor Levine is thinking..."):
+            _sp2 = "教授正在思考…" if st.session_state.ui_language == "zh" else "Professor Levine is thinking..."
+            with st.spinner(_sp2):
                 try:
                     result = _run_bot_query_simple(question, use_persona=True)
                     result['question'] = question

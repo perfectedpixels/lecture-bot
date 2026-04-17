@@ -1,0 +1,7 @@
+[Assignment: AI Agent Persona (1 of 2)]
+[Course: COMMLD 515 A]
+[Concepts: personas, heuristics, design-thinking, ai-design, presentation, branding]
+[Aligned Teaching Concepts: Usability Testing, Journey Mapping, AI Ethics]
+[Due: 2026-04-30T06:59:00Z]
+
+A bad AI agent: Breaks trust Encourages over-reliance Disconnects users from the human experience Creates real risk, not just bad UX If the agent “decides on its own,” the design has failed.

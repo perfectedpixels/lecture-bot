@@ -1,181 +1,85 @@
-# Deploy to Streamlit Cloud (Easiest Option)
+# Deploy Lecture Bot to Streamlit Cloud
 
 ## Why Streamlit Cloud?
-- ✅ **Free** for public apps
-- ✅ **No firewall issues** - runs on Streamlit's infrastructure
-- ✅ **Auto-deploys** from GitHub
-- ✅ **Public URL** instantly (e.g., `lecture-bot.streamlit.app`)
-- ✅ **No server management** - just push code
-- ⚠️ Still needs AWS credentials for Bedrock API
+- Free hosting
+- Deploys directly from GitHub
+- No EC2 or security group issues
+- No corporate AWS account needed
+- Students access via a streamlit.app URL
 
 ## Prerequisites
-- GitHub account
-- Streamlit Cloud account (free at https://streamlit.io/cloud)
-- AWS credentials (for Bedrock API access)
+1. GitHub account
+2. This repo pushed to GitHub (can be private)
+3. AWS credentials (from your personal account)
 
----
+## Step 1: Push to GitHub
 
-## Step 1: Push Code to GitHub (5 minutes)
-
-### Create GitHub Repo
 ```bash
-# Initialize git if not already
+# Create a new GitHub repo (or use existing)
 git init
-
-# Create .gitignore
-cat > .gitignore << 'EOF'
-*.pyc
-__pycache__/
-.DS_Store
-*.pem
-.env
-app/.streamlit/secrets.toml
-venv/
-*.log
-EOF
-
-# Add files
 git add .
-git commit -m "Initial commit - Learning Cards feature"
-
-# Create repo on GitHub (via web interface)
-# Then push:
+git commit -m "Lecture bot app"
 git remote add origin https://github.com/YOUR_USERNAME/lecture-bot.git
-git branch -M main
 git push -u origin main
 ```
 
----
+Make sure `.env` is in `.gitignore` so credentials aren't pushed.
 
-## Step 2: Create Streamlit Cloud App (3 minutes)
+## Step 2: Deploy on Streamlit Cloud
 
-1. Go to: https://share.streamlit.io/
-2. Click "New app"
-3. Connect your GitHub account
-4. Select:
-   - **Repository**: `YOUR_USERNAME/lecture-bot`
-   - **Branch**: `main`
-   - **Main file path**: `app/streamlit_app_redesign.py`
+1. Go to https://share.streamlit.io
+2. Sign in with GitHub
+3. Click "New app"
+4. Select your repo, branch (`main`), and main file (`app/streamlit_app.py`)
 5. Click "Deploy"
 
----
+## Step 3: Add Secrets
 
-## Step 3: Add Secrets (2 minutes)
-
-In Streamlit Cloud dashboard:
-
-1. Click on your app
-2. Click "Settings" (⚙️)
-3. Click "Secrets"
-4. Add this TOML:
+In Streamlit Cloud, go to your app → Settings → Secrets, and add:
 
 ```toml
-# AWS Credentials (from your personal AWS account)
-AWS_ACCESS_KEY_ID = "YOUR_ACCESS_KEY"
-AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_KEY"
-AWS_DEFAULT_REGION = "us-east-1"
-
-# ElevenLabs
-ELEVENLABS_API_KEY = "sk_056db134bc26b4a70766c7b9442e5d5b27805389213bdcfb"
-
-# Knowledge Base (you'll need to create this in personal AWS)
-KB_ID_515 = "YOUR_KB_ID"
-KB_ID_512 = "YOUR_KB_ID"
+AWS_ACCESS_KEY_ID = "your_aws_access_key_here"
+AWS_SECRET_ACCESS_KEY = "your_aws_secret_key_here"
+AWS_REGION = "us-east-1"
+KNOWLEDGE_BASE_ID = "HHYCUJH32J"
 ```
 
-5. Click "Save"
+## Step 4: Verify
 
----
-
-## Step 4: Create Requirements File
-
-Create `app/requirements.txt`:
-
-```txt
-streamlit>=1.28.0
-boto3>=1.28.0
-anthropic>=0.3.0
-elevenlabs>=0.2.0
+Your app will be available at:
+```
+https://YOUR_APP_NAME.streamlit.app
 ```
 
-Commit and push:
-```bash
-git add app/requirements.txt
-git commit -m "Add requirements"
-git push
+Share this URL with students.
+
+## Step 5: Close Corporate Account Resources
+
+After verifying the Streamlit Cloud deployment works:
+
+1. Terminate EC2 instance `i-063c08f998f8cf2da` on corporate account
+2. Delete security group `sg-074bba325998cc1db` (after instance is terminated)
+3. Remove any other resources on the corporate account
+4. Reply to the security ticket confirming the instance has been terminated
+
+## Security Ticket Response Template
+
+```
+Hi team,
+
+The exposed Streamlit instance at 54.90.155.67 has been terminated.
+- EC2 instance i-063c08f998f8cf2da: TERMINATED
+- Security group sg-074bba325998cc1db: DELETED
+- No replacement instance on this account
+
+The application has been migrated to Streamlit Cloud (streamlit.app)
+which is not hosted on this AWS account.
+
+Please confirm this resolves the issue.
 ```
 
-Streamlit Cloud will auto-redeploy.
-
----
-
-## Step 5: Move AWS Resources to Personal Account
-
-You'll need to recreate in your personal AWS account:
-
-### A. Create S3 Bucket
-```bash
-# Use your personal AWS credentials
-aws s3 mb s3://lecture-bot-personal-YOURNAME
-
-# Upload data
-aws s3 cp data/ s3://lecture-bot-personal-YOURNAME/data/ --recursive
-aws s3 cp data/portfolio_images/ s3://lecture-bot-personal-YOURNAME/portfolio_images/ --recursive
-```
-
-### B. Create Bedrock Knowledge Base
-1. Go to Bedrock Console in personal account
-2. Enable Claude models
-3. Create Knowledge Base pointing to your S3 bucket
-4. Sync data
-5. Copy the Knowledge Base ID
-
-### C. Update Secrets in Streamlit Cloud
-Update the `KB_ID_515` with your new Knowledge Base ID.
-
----
-
-## Pros & Cons
-
-### ✅ Pros
-- No firewall issues
-- Free hosting
-- Auto-deploys from GitHub
-- Public URL
-- No server management
-- SSL/HTTPS included
-
-### ⚠️ Cons
-- App goes to sleep after inactivity (wakes on first request)
-- Limited to 1GB RAM on free tier
-- Still need AWS account for Bedrock
-- Public by default (can make private on paid plan)
-
----
-
-## Alternative: Personal AWS Account
-
-If you want full control, create a personal AWS account and deploy there.
-
-**Cost**: ~$30-50/month for EC2 + Bedrock usage
-
----
-
-## Recommended Approach
-
-1. **Quick test**: Use Streamlit Cloud (10 minutes)
-2. **Production**: Move to personal AWS account if you need:
-   - More resources
-   - Private deployment
-   - Custom domain
-   - No sleep mode
-
----
-
-## Next Steps
-
-Choose your path:
-- **Path A**: Streamlit Cloud (follow steps above)
-- **Path B**: Personal AWS account (I'll create migration guide)
-
-Which would you prefer?
+## Notes
+- Streamlit Cloud free tier allows 1 private app
+- If you need auth, Streamlit Cloud supports GitHub-based auth
+- All AWS resources (Knowledge Base, S3) remain on personal account 427791004700
+- No corporate AWS resources are used

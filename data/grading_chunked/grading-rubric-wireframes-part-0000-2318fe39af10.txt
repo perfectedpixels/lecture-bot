@@ -1,0 +1,6 @@
+[Rubric: Assignment 5: Wireframes]
+[Concepts: prototyping, design-thinking]
+[Related assignments: wireframes]
+[Type: rubric]
+
+Assignment 5: Wireframes Assignment Objective: Define interface architecture. Instructor Evaluation Checklist: - Information hierarchy clear - Components consistent - Interaction flows preserved Strong Submission Signals: - Consistent navigation - Logical content grouping - Clear interaction affordances Weak Signals: - Screens disconnected from flows - Inconsistent components - Over-styled design hiding weak structure

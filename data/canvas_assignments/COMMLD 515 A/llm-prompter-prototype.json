@@ -1,0 +1,61 @@
+{
+  "id": 11355138,
+  "name": "LLM Prompter Prototype",
+  "slug": "llm-prompter-prototype",
+  "due_at": "2026-05-28T02:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Note: This is an individual assignment\n\nYou will operationalize your team\u2019s Agent Persona into a working LLM-based prototype (prompt + instructions + tool configuration) that delivers your Pitch value proposition, executes the Journey Map moments that matter, and supports the needs/constraints of your User Persona(s). This is not a generic chatbot. It is a purpose-built agent that can be tested, measured, and iterated.\n\nInputs You Must Use (from prior assignments)\n\nYou are required to directly incorporate the following artifacts into your prototype:\n\nWorking Backwards Pitch (problem, customer, promise, key differentiators, success criteria)\n\nUser Persona(s) (goals, constraints, behaviors, context of use, accessibility considerations)\n\nAgent Persona (agent role, responsibilities, boundaries, decision style, tone, escalation rules)\n\nWhat You Will Build\n\nA prototype LLM agent configuration using one of the following:\n\nGoogle Gemini\u00a0\n\nChatGPT (Custom GPT or structured prompt pack)\n\nClaude Code (project + system prompt + test set)\n\nCursor (application prototype)\n\nKiro (or any equivalent \u201cagent builder\u201d tool your team can access)\n\nYour prototype must demonstrate at least one end-to-end \u201chappy path\u201d from your journey map, plus failure handling for common edge cases.\n\nTo do this, use this tool I built to assist you:\n\nhttps://agentmaker.perfectpixels.com/\u00a0\n\nHere\u2019s a summary you can reuse as a handout, README section, or internal doc.\n\nAgent Behavior Maker \u2014 summary\n\nWhat the tool does\n\nAgent Behavior Maker\u00a0is a workflow tool for designing and stress-testing how an LLM-powered agent should behave for a specific product. You feed in structured inputs about the product, the end user, and the agent you want to build. The app uses AWS Bedrock (Claude) to:\n\nExtract\u00a0structured insights from your documents (product, persona, agent framework).\n\nGenerate\u00a0multiple conversation\u00a0scenarios\u00a0that fit your domain.\n\nSimulate\u00a0multi-turn chats between\u00a0PersonaUser\u00a0(your user) and\u00a0AgentLLM\u00a0(your agent).\n\nLet you\u00a0tune behavior\u00a0with controls (tone, formality, verbosity, empathy, proactivity, creativity, technical depth) and\u00a0regenerate\u00a0the simulated conversation so you can see the effect.\n\nOptionally\u00a0continue\u00a0the simulation by typing your own messages (user interrupt).\n\nExport\u00a0downloadable artifacts that encode what you learned.\n\nIt does\u00a0not\u00a0replace production deployment; it helps you\u00a0iterate on persona and steering\u00a0before you wire them into your real system.\n\nWhat the output is\n\nOutput\nDescription\n\nOn screen\nScenarios\u00a0(clickable cards) and\u00a0simulated conversations\u00a0(alternating user/agent messages) that reflect your documents and current control settings.\n\nExport\nA ZIP file with two Markdown files:\u00a0updated-persona.md\u00a0\u2014 persona-oriented summary (demographics, goals, pain points, product context,\u00a0interaction preferences\u00a0derived from your tested conversations and current sliders).\u00a0ai-persona-steering.md\u00a0\u2014 steering-style doc (identity, behavior rules mapped from controls, example dialogue snippet, export metadata).\n\nUse the steering file as a starting point for system prompts, internal guidelines, or handoff to engineering.\n\nStep-by-step instructions\n\nOpen the app\u00a0(e.g. hosted URL or local dev).\n\nPhase A \u2014 Submit materials\n\nProvide\u00a0three\u00a0inputs:\u00a0Product proposal\u00a0(Who / What / Why / How style is fine), Your User persona, and Agent framework docs\n\nYou can\u00a0paste text, upload\u00a0.txt, or use a\u00a0Google Doc URL\u00a0(if supported in your build).\n\nOptional:\u00a0Try Demo \u2014 Museum Tour Guide\u00a0loads sample content so you can explore the flow without writing docs from scratch.\n\nClick\u00a0Generate Scenarios\u00a0and wait for processing to finish.\n\nPhase B \u2014 Conversation playground\n\nThe tool will analyze your docs and build sample scenarios. Review\u00a0suggested scenarios\u00a0and\u00a0click one\u00a0to generate a simulated\u00a0five-turn\u00a0conversation.\u00a0\n\nReview the\u00a0PersonaUser\u00a0/\u00a0AgentLLM\u00a0exchange\n\nOptional: type a\u00a0custom user message\u00a0and send it to\u00a0extend\u00a0the thread (within limits).\n\nPhase C \u2014 Agent controls\n\nAfter documents are submitted, adjust\u00a0Tone\u00a0(dropdown) and the\u00a0dials\u00a0(formality, verbosity, empathy, proactivity, creativity, technical).\n\nWhen you change controls, the app\u00a0debounces\u00a0and\u00a0refreshes\u00a0the latest simulated conversation so behavior tracks your settings.\n\nChange documents or controls, regenerate scenarios or conversations, and export again as needed.\n\nExport\n\nClick\u00a0Export Framework\u00a0when you\u2019re satisfied.\n\nSave the ZIP and open the two\u00a0.md\u00a0files for persona and steering content.\n\nLoad the md as steering content into your LLM tool development tool of choice from above. Instruct it to create a chat bot using your outputted steering doc, and tweak as necessary to improve context and outcomes.\n\nOnce you are happy, screen record the interaction with Quicktime or other application.",
+  "concepts": [
+    "personas",
+    "prototyping",
+    "design-thinking",
+    "ai-design",
+    "presentation",
+    "branding",
+    "accessibility"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Workflow Automation",
+      "score": 2,
+      "matched_keywords": [
+        "workflow",
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 1,
+      "matched_keywords": [
+        "testing"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 1,
+      "matched_keywords": [
+        "prototype"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Journey Mapping",
+      "score": 1,
+      "matched_keywords": [
+        "journey map"
+      ],
+      "definition": "Visual representations of user experiences over time, showing touchpoints, emotions, pain points, and opportunities across the customer journey."
+    },
+    {
+      "concept": "Accessibility",
+      "score": 1,
+      "matched_keywords": [
+        "accessibility"
+      ],
+      "definition": "Designing products that are usable by people with diverse abilities, following WCAG guidelines and inclusive design principles."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355138"
+}

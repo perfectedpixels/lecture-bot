@@ -1,0 +1,62 @@
+{
+  "id": 11355132,
+  "name": "AI Agent Persona (1 of 2)",
+  "slug": "ai-agent-persona-1-of-2",
+  "due_at": "2026-04-30T06:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Create a persona for your AI Agent experience. Base the AI Agent Persona on the following criteria by describing your AI Agent with the key points covered in our lecture:\n\nName of your Agent\n\nPurpose & Value Proposition\n\nWhat specific value does the agent provide to the user and product?\n\nRole Archetype\n\nThe agent\u2019s personality, tone, and communication style\n\n(e.g., supportive guide, expert assistant, operational co-pilot)\n\nInitiative Level\n\nHow proactive the agent is\n\nWhen it suggests, acts, or waits for user input\n\nCapabilities\n\nExact tasks the agent can perform\n\nData sources or inputs it can access\n\nInteraction Context\n\nModes of interaction (text, voice, visual, system-triggered, etc.)\n\nMemory Behavior\n\nWhat the agent remembers\n\nHow personalization is balanced with privacy and security\n\nTools Used\n\nSystems, services, or components the agent integrates with\n\nExplainability & Transparency\n\nHow users understand why the agent made a decision or suggestion\n\nBoundaries & Constraints\n\nClear limits on agent authority and behavior\n\nSafeguards against misuse or overreach\n\nRisks & Open Questions\n\nPotential failure modes, ethical risks, or unintended consequences\n\nSuccess Metrics\n\nHow you will measure whether the agent is effective\n\n(e.g., task completion, error reduction, trust signals)\n\n\u00a0\n\nSample Assignment\u00a0\n\n\u00a0\n\nAI Design Principles\n\nPurpose:\nThis document defines the\u00a0non-negotiable principles\u00a0students must follow when designing AI agents in this course. These principles are not philosophical\u2014they are\u00a0design constraints.\n\n1. Agent behavior is a design artifact\n\nThe behavior of an AI agent is as much a UX artifact as a persona, journey map, or information architecture.\n\nAgents must have defined roles, boundaries, tone, and escalation logic.\n\n\u201cPrompting\u201d is not interaction design;behavioral specification is.\n\nAn agent that behaves inconsistently or opaquely is a design failure.\n\n2. Assistance, not ownership\n\nAI agents may\u00a0support human decision-making, but must not replace it.\n\nThe agent should guide, frame, summarize, and surface options.\n\nThe agent must not decidefor\u00a0the user in high-impact contexts.\n\nHuman-in-the-loop is a success criterion, not a feature request.\n\n3. Context determines risk\n\nThe same AI capability can be benign or harmful depending on where it appears in the user journey.\n\nLow-consequence contexts tolerate exploration and error.\n\nHigh-consequence contexts (health, mental well-being, safety, identity) require strict constraints.\n\nAgents must adapt behavior based on journey moment, not just user intent.\n\n4. Constraint is a feature, not a limitation\n\nUnconstrained agents are irresponsible agents.\n\nAgents must explicitly refuse, redirect, or escalate when outside scope.\n\n\u201cThe model decided on its own\u201d is not an acceptable explanation.\n\nSafety, privacy, and ethical boundaries must be designed, not assumed.\n\n5. Failure is a design signal\n\nInitial AI outputs will be wrong. This is expected.\n\nDesigners are responsible for shaping outcomes through iteration.\n\nTesting, failure analysis, and refinement are core deliverables.\n\nA system that cannot fail safely is not ready to exist.\n\n6. The user must remain connected to the human experience\n\nAI should reduce friction, not agency.\n\nAgents should reinforce user understanding, confidence, and control.\n\nEmotional dependency, over-trust, or false authority are design risks.\n\nUX quality includes what the agentdoes not\u00a0\n\nWhat we are listening for:\n\nDoes the agent\u2019s behavior clearly derive from the user persona and journey?\n\nAre different journey moments treated with different levels of caution and control?\n\nIs the agent\u2019s value proposition aligned with user goals, not technical capability?\n\nRed flags:\n\nGeneric assistant behavior\n\nPersona reduced to tone only\n\nNo distinction between low- and high-risk moments\n\n\u00a0\n\n\u00a0\n\nWhat a Bad AI Agent Looks Like\n\n(And Why It\u2019s a UX Failure)\n\n\ud83d\udeab Signs of a Poorly Designed AI Agent\n\n Takes ownership instead of assisting\n\nMakes decisions\u00a0for\u00a0the user rather than guiding them\n\nOptimizes for \u201cgetting to an answer\u201d instead of supporting understanding\n\nRemoves human judgment from high-impact moments\n\n Has no clear boundaries\n\nAttempts to answer everything\n\nLacks refusal or escalation behavior\n\n\u201cSolves\u201d problems it should never touch\n\n Ignores context and risk\n\nBehaves the same in low- and high-consequence situations\n\nTreats all user requests as equal\n\nFails to recognize vulnerable or sensitive states\n\n Is unconstrained by persona or journey\n\nSounds generic regardless of user, brand, or moment\n\nTone is cosmetic, not behavioral\n\nCannot explain\u00a0why\u00a0it responds the way it does\n\n Cannot fail safely\n\nOverconfident responses\n\nHallucinates certainty\n\nNo recovery path when information is missing or conflicting\n\n\u26a0\ufe0f Why This Matters\n\nA bad AI agent:\n\nBreaks trust\n\nEncourages over-reliance\n\nDisconnects users from the human experience\n\nCreates real risk, not just bad UX\n\nIf the agent \u201cdecides on its own,\u201d the design has failed.",
+  "concepts": [
+    "personas",
+    "heuristics",
+    "design-thinking",
+    "ai-design",
+    "presentation",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Usability Testing",
+      "score": 2,
+      "matched_keywords": [
+        "testing",
+        "iteration"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Journey Mapping",
+      "score": 2,
+      "matched_keywords": [
+        "journey map",
+        "user journey"
+      ],
+      "definition": "Visual representations of user experiences over time, showing touchpoints, emotions, pain points, and opportunities across the customer journey."
+    },
+    {
+      "concept": "AI Ethics",
+      "score": 2,
+      "matched_keywords": [
+        "transparency",
+        "privacy"
+      ],
+      "definition": "Ethical considerations in designing AI-powered products, including fairness, transparency, privacy, accountability, and human agency."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 1,
+      "matched_keywords": [
+        "components"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Interaction Design",
+      "score": 1,
+      "matched_keywords": [
+        "interaction design"
+      ],
+      "definition": "The design of interactive behaviors and feedback in digital products, focusing on how users accomplish tasks and receive system responses."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355132"
+}

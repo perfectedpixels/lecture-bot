@@ -1,0 +1,63 @@
+{
+  "id": 11355141,
+  "name": "Qualitative Study",
+  "slug": "qualitative-study",
+  "due_at": "2026-05-21T06:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Perform a 10 to 15 minute qualitative study (informal usability interview) with at least 4 test subjects (in total for the team) leveraging your Interview Script. You can choose to either conduct moderated tests over Zoom OR\u00a0unmoderated via UserTesting.com.\u00a0\n\nYour test subjects cannot be people on your team. Your goal is to identify ways to improve your prototype, so focus your script on specifically uncovering what you look to improve as well as validating your wireframe meet your\u00a0intended mental model. Look at ways ways to improve the labeling, functionality, layout, the efficiency in completing steps, etc. You can choose to either update your existing script from last work or modify it as you see fit.\n\nYou will need to turn in your usability notes from your study on what you learned from the test subjects.\u00a0\n\nWatch the following qualitative study demo:\n\u00a0\n\nThings to consider:\n\nHow do they stack up to your persona?\u00a0Ask at least 3 market research related questions that would be used to better understand your Persona audience. These can be either items you wish to verify found in your persona or additional data points you feel would be valuable in understanding the background of\u00a0your audience and document their answer.\n\nWhat was their experience like? Ask questions related to their actual experience that helps for them to describe to you the anxiety / business objective that you are trying to solve.\n\nShare. Once you have spoken to them about their experience, feel free to share with them your existing mockups and listen to their feedback about how this would effect that analog experience they had previously described to you.\n\nWhat was bad? Document in brief summary form what\u00a0functionality, use cases, labeling, organization, instructions\u00a0and/or\u00a0user flow changes you would change\u00a0based on what you had heard from your interview subject.\u00a0\n\nWhat was good? Document in brief summary form what elements from your mockups\u00a0your interview helped to confirm are inline with your intended experience\u00a0\n\nHow can it improve? Document in brief summary what suggestions your customer would want to see to improve their overall customer journey.\u00a0\n\nTrack Results. Create charts tracking customer scoring with how closely their needs are met with your product solution:\u00a0\n\nOn a score of 1 to 5 stars, 5 being best, rate how likely you are to use this experience if it were available?\n\nOn a score of 1 to 5 stars, 5 being best, rate how likely you would recommend it to someone who was <needing your product offering>?\n\nOn a score of 1 to 5 stars, 5 being best, rate how easy <the product> seems to use for your needs?\n\nOnce conducted, Feed the new interview recording transcripts into your original LLM from In Class Exercise: User Feedback. \n\nYour assignement deliverable is to ask the LLM the following questions to answer and post the answers:\n\nWhat is new that we learned with the new interviews?\n\nWhat was reinforced from the previous paper prototype interviews?\n\nWhat are the biggest issues to resolve and what are your recommendations?\n\nTell me the reasoning\n\nUsability Script Tips (optional):\nIf you choose to update your script, ideal script should walk through at least two of the top tasks outlined in your persona(s). The script should take around 10-15 minutes to complete per usability subject. You will want to ask as many of the types of questions outlined in the sample scripts below that you feel are appropriate for that task to narrow down what you see as potential issues with the site.\u00a0\n\nYour questions should try to cover the following topics:\n\nDoes it have the appropriate functionality?\n\nDoes the content support the user goals?\n\nAre the actions the user looking to do findable, intuitive and provide good usability?\u00a0\n\nExample question types are:\n\nNeeds from the software/online service\n\nValue proposition of the software/online service\n\nFindability of elements\n\nExpectations set by navigation elements\n\nGap between expectations and reality\n\nComprehension of text\n\nIntention to perform a given action\n\nEase of performing a task\n\nFriction points in performing a task\n\nImprovements they feel should be made\n\nMotivators/facilitators to continuing\n\nInhibitors/barriers to continuing\n\nPreference between options\n\nMemory for a previous stimulus\n\nLearning along the flow\n\nReferences:\n\nUsability Question Pointers.pdf\n\nhttps://www.nngroup.com/articles/usability-testing-101.\u00a0\n\nhttps://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/\n\nNOTE: Since\u00a0this is an exercise designed to improve your final product, you will not be graded against a rubric on the quality of the assignment deliverables, only that you\u00a0have completed it.",
+  "concepts": [
+    "personas",
+    "usability",
+    "user-research",
+    "prototyping",
+    "ai-design",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Information Architecture",
+      "score": 2,
+      "matched_keywords": [
+        "navigation",
+        "findability"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 2,
+      "matched_keywords": [
+        "testing",
+        "feedback"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 2,
+      "matched_keywords": [
+        "prototype",
+        "mockups"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 2,
+      "matched_keywords": [
+        "AI",
+        "efficiency"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    },
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "interviews"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355141"
+}

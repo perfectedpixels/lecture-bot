@@ -1,0 +1,6 @@
+[Rubric: Assignment 2.1: Persona Development]
+[Concepts: personas, user-research]
+[Related assignments: user-persona, building-user-personas, ai-agent-persona-1-of-2]
+[Type: rubric]
+
+Assignment 2.1: Persona Development Assignment Objective: Translate research insights into a goal-driven behavioral model of a user. Instructor Evaluation Checklist: - Persona goals clearly articulated - Pain points specific - Persona tied to product opportunity - Evidence of research Annotated Example - Strong Persona: Goal: Track medication adherence while managing a complex treatment schedule. Pain Point: Current reminders are generic and fail to account for shifting daily routines. Why this works: Specific goal, concrete behavioral need, clear product opportunity. Annotated Example - Weak Persona: Goal: Be productive. Pain Point: Technology is sometimes frustrating. Why this fails: Generic, no behavioral insight, no design implications. Decision Tree: - Behavioral insight + research = 4.0 - Clear persona but weak research = 3.x - Demographic description only = 2.x

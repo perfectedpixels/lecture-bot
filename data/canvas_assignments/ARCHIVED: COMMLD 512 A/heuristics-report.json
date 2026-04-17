@@ -1,0 +1,58 @@
+{
+  "id": 10733391,
+  "name": "Heuristics Report",
+  "slug": "heuristics-report",
+  "due_at": "2025-10-28T01:30:00Z",
+  "points_possible": 4.0,
+  "description_text": "Perform an analysis using ONE OF the following use cases: \u00a0\n\nApply for a job as a Barista hosted on Indeed with a saved resume: \u00a0\nhttps://www.indeed.com\n\nCreate a Stock Ticker watchlist on MSN\u00a0\nhttps://www.msn.com/\n\nOrder a touchscreen laptop on Dell\nhttp://www.dell.com/\n\nGrocery shopping on Amazon\u00a0\nhttps://www.amazon.com/fmc/learn-more?ref_=nav_cs_groceries\n\nChoose your own.\u00a0\nSelect a site or application that has a number of issues in completing tasks or flaws in its ease of use.\n\nComplete each of the 3 categories from any one of the use cases using the attached Template:\u00a0\n\nHeuristics Report Template-1.docx\n\nSituational Awareness (6 entries)\n\nSupport Mental Models (5 entries)\n\nSupport User Goals (5 entries)\n\nYou can use any combination of use cases from any site listed above to complete each category. (e.g. Dell for Situational Awareness, Indeed for Mental Models, etc.)\n\nPer category, identify\u00a0for each line item what Heuristic you see either being successfully\u00a0used or fails. Include the 10 from Heuristics, plus responsiveness and accessibility.\n\nRefer to the lecture and Jakob Nielson's heuristic that reinforces your point of view.\u00a0\n\nScreenshots should be showing the specific area on the page you are highlighting for your example.\n\nMake sure you have at least one example per line item in the template.\n\n\u00a0Use as the baseline use cases: \u00a0\n\nFindability of specific topics a user is looking for \u00a0\n\nDiscoverability of content previously unknown to user \u00a0\n\nHow does the search and navigation assist or hinder the user\n\nUse the attached template for marking your results. You will need to reference at least one example\u00a0with an explanation\u00a0for each rating score. Examples should justify why something scored well or poorly.\u00a0\n\n\u00a0\n\nOnce you complete your analysis, provide a 2 paragraph synopsis in the intro as an overview of what you found as the overarching issue(s). You can use the sample Heuristic Report as guidance for this.\n\nYour work will be graded on:\n\nAccuracy of heuristic identification\n\nStrength of evidence and explanation\n\nCorrectness and consistency of scoring\n\nIntegration of lecture concepts (situational awareness, mental models, user goals)\n\nClarity of writing\n\nQuality and relevance of screenshots\n\nDepth of synthesis in the intro\n\n\u26a0 As with all assignments in this course, submissions that read as technically perfect but lacking original synthesis (e.g. verbatim ChatGPT) \u00a0may receive a deduction.\n\n\u00a0\n\nReference Materials\n\nthe sample project\u00a0ESD Heuristics Report.docx\n\n10 Usability Heuristics\n\nhttps://www.nngroup.com/articles/ten-usability-heuristics/\n\nhttps://m3.material.io/foundations/content-design/style-guide/ux-writing-best-practices\n\nOn a Mac, (CTRL-CMD-SHFT-4) will copy what you select to the clipboard, (CMD-SHFT-4) will create a screenshot file on your desktop\n\nOn a PC, you can use the Snipping Tool found in the Utilities folder.\n\nHave your assignment in either Microsoft Word or Google Docs. Please make sure your grammar and spelling are impeccable.\u00a0\n\n\u00a0\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\n\u00a0 Don\u2019t Make Me Think\u00a0 Chapters 6 & 7\n\u00a0 \u00a0Laws of UX Reference Site",
+  "concepts": [
+    "heuristics",
+    "usability",
+    "ai-design",
+    "accessibility"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Information Architecture",
+      "score": 2,
+      "matched_keywords": [
+        "navigation",
+        "findability"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 1,
+      "matched_keywords": [
+        "screens"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    },
+    {
+      "concept": "Accessibility",
+      "score": 1,
+      "matched_keywords": [
+        "accessibility"
+      ],
+      "definition": "Designing products that are usable by people with diverse abilities, following WCAG guidelines and inclusive design principles."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 1,
+      "matched_keywords": [
+        "clarity"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733391"
+}

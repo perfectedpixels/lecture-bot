@@ -1,0 +1,7 @@
+[Assignment: Qualitative Study]
+[Course: COMMLD 515 A]
+[Concepts: personas, usability, user-research, prototyping, ai-design, presentation]
+[Aligned Teaching Concepts: Information Architecture, Usability Testing, Prototyping]
+[Due: 2026-05-21T06:59:00Z]
+
+Usability Question Pointers.pdf https://www.nngroup.com/articles/usability-testing-101. https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/ NOTE: Since this is an exercise designed to improve your final product, you will not be graded against a rubric on the quality of the assignment deliverables, only that you have completed it.

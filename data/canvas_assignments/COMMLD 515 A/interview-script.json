@@ -1,0 +1,43 @@
+{
+  "id": 11355137,
+  "name": "Interview Script",
+  "slug": "interview-script",
+  "due_at": "2026-05-21T06:59:00Z",
+  "points_possible": 2.0,
+  "description_text": "The goal of this interview script is to write down a number of questions to validate your ideas and to generate important insights to improve it. It\u00a0doesn't need to be perfect, but should cover the main concerns you have about whether your concept provides value to the customer and meets their needs. You will use this script on with others in your class to receive their feedback, but you are welcome to use it on others prior. You should prepare no more than 10 questions.\n\nPrepare your interview script to include the following:\u00a0\n\nQuestions that help refine or verify your assumptions for your persona.\u00a0\n\nQuestions that are based on what you heard in the class critique exercise.\u00a0\n\nAt least one IDEO user\u202fresearch\u202ftechnique that is most appropriate for your project and user. Go through the\u202fIDEO Method Cards.\n\nActions\u00a0\n\nAuthor a script for receiving Feedback for a prototype walk-through that at least covers these specifics:\u00a0\n\nTrack accuracy of user expectations:\u202fFor example, \"From this page, how would you...\" \u202for \"From this screen, what do you think this service/application is for?\"\u00a0\n\nUsability of prototype:\u202fFor example, \"From a star rating of 1-5, 5 being best, how easy would you rate this experience\"\u202f\u00a0\n\nValue and brand halo of experience:\u202fFor example, \"From a star rating of 1-5, 5 being best, how likely would you be to using this tool / service?\"\u00a0\n\nYou will not be graded on the quality of your questions, only that you have completed this step.\n\nReferences\n\nUser Interview Question Types\n\nInterviewing customers: idea generation or validation?\u00a0by Andrea Hill\n\nHow to: Validate Your Product Idea by Jens Otto Lange",
+  "concepts": [
+    "personas",
+    "usability",
+    "user-research",
+    "prototyping",
+    "ai-design",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Usability Testing",
+      "score": 1,
+      "matched_keywords": [
+        "feedback"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 1,
+      "matched_keywords": [
+        "prototype"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355137"
+}

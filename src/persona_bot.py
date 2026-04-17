@@ -102,20 +102,19 @@ Return ONLY a JSON array of relevant cluster IDs:
         persona_prompt = f"""You are {self.persona_name}, responding to a student's question based on your lectures.
 
 IMPORTANT INSTRUCTIONS:
-- Respond as if you are the instructor, using first person ("In my lectures, I discussed...")
+- Respond naturally in first person ("In my lectures, I discussed...")
 - Draw from the lecture content provided below
 - Use your teaching style: clear, engaging, with practical examples
 - If the question relates to concepts you've taught, reference those lectures
 - If you don't have information in the lectures, say so honestly
 - Be conversational but authoritative
+- Do NOT say "Speaking as" or "Respond as" - just answer naturally
 
 Lecture content:
 {context}
 {concept_context}
 
-Student's question: {question}
-
-Respond as {self.persona_name}:"""
+Student's question: {question}"""
 
         return persona_prompt
     
@@ -193,6 +192,9 @@ Respond as {self.persona_name}:"""
         response_body = json.loads(model_response['body'].read())
         answer = response_body['content'][0]['text']
         
+        # Remove meta-phrases if they appear
+        answer = self._clean_response(answer)
+        
         return {
             'question': question,
             'answer': answer,
@@ -200,6 +202,23 @@ Respond as {self.persona_name}:"""
             'relevant_concepts': relevant_concepts,
             'context': context
         }
+    
+    def _clean_response(self, answer: str) -> str:
+        """Remove meta-phrases from response"""
+        import re
+        
+        # Remove patterns like "*Speaking as...*" or "Speaking as..." at the start
+        patterns = [
+            r'^\*?Speaking as [^*\n]+\*?\s*',
+            r'^\*?As [^*\n]+\*?\s*',
+            r'^\*?Responding as [^*\n]+\*?\s*',
+            r'^\*?In my role as [^*\n]+\*?\s*'
+        ]
+        
+        for pattern in patterns:
+            answer = re.sub(pattern, '', answer, flags=re.IGNORECASE)
+        
+        return answer.strip()
     
     def generate_report(self, topic: str) -> str:
         """Generate a comprehensive report as the instructor."""

@@ -1,0 +1,7 @@
+[Assignment: Heuristics Report]
+[Course: ARCHIVED: COMMLD 512 A]
+[Concepts: heuristics, usability, ai-design, accessibility]
+[Aligned Teaching Concepts: Information Architecture, Interface Design, Accessibility]
+[Due: 2025-10-28T01:30:00Z]
+
+all assignments in this course, submissions that read as technically perfect but lacking original synthesis (e.g. verbatim ChatGPT) may receive a deduction. Reference Materials the sample project ESD Heuristics Report.docx 10 Usability Heuristics https://www.nngroup.com/articles/ten-usability-heuristics/ https://m3.material.io/foundations/content-design/style-guide/ux-writing-best-practices On a Mac, (CTRL-CMD-SHFT-4) will copy what you select to the clipboard, (CMD-SHFT-4) will create a screenshot file on your desktop On a PC, you can use the Snipping Tool found in the Utilities folder. Have your assignment in either Microsoft Word or Google Docs. Please make sure your grammar and spelling are impeccable. Recommended Reading: Don’t Make Me Think Chapters 6 & 7 Laws of UX Reference Site

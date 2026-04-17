@@ -1,0 +1,264 @@
+UX Research & Strategy
+Master Grading Handbook (Instructor Edition)
+Internal document for instructors and teaching assistants.
+Purpose: ensure consistent evaluation, fast grading, and calibrated expectations across all course assignments.
+
+1. Course Evaluation Philosophy
+
+The course uses a studio pipeline model. Each assignment builds on previous artifacts and contributes to a final product concept.
+
+Students are evaluated primarily on:
+1. Quality of reasoning
+2. Evidence of synthesis
+3. Ability to apply UX frameworks
+4. Iteration across assignments
+
+Visual polish alone should never determine grade level.
+Strong submissions demonstrate that the student understands why a design decision matters.
+
+2. The Artifact Pipeline
+
+Assignments build progressively.
+
+Stage | Assignment | Focus
+Discovery | Persona | Understanding the user
+Context | Journey Map | Understanding the experience ecosystem
+Concept | Paper Prototype | Designing interaction flows
+Structure | Wireframes | Interface architecture
+Critique | Aesthetic Analysis | Visual design reasoning
+Evaluation | Heuristic Evaluation | Usability analysis
+
+Instructors should check continuity between artifacts.
+Example: Persona > Journey > Prototype > Wireframe decisions
+If assignments appear disconnected, the work likely lacks synthesis.
+
+3. Performance Scale
+
+Score | Interpretation
+4.0 | Demonstrates synthesis, strong reasoning, and clear framework use
+3.7-3.9 | Very strong work with minor gaps
+3.3-3.6 | Competent work but limited depth
+2.7-3.2 | Partial understanding
+2.0-2.6 | Significant conceptual gaps
+Below 2.0 | Incomplete or fundamentally flawed
+
+4. Instructor Fast-Grading Method
+
+To grade efficiently, instructors should evaluate submissions using three questions:
+1. Does the artifact clearly demonstrate the assignment objective?
+2. Does it show synthesis rather than description?
+3. Does it connect to previous artifacts?
+
+If the answer to all three is yes = 4.0 range.
+If one dimension is weak = 3.x range.
+If multiple dimensions are weak = 2.x range.
+
+5. Grading Decision Tree
+
+Use this when determining the final score.
+
+Step 1 - Artifact Completion
+Does the submission include all required elements?
+If no = cap at 3.0
+
+Step 2 - Design Reasoning
+Does the student explain why their design decisions matter?
+If reasoning is minimal = 3.x or below
+
+Step 3 - Framework Application
+Does the work correctly apply the course frameworks?
+If frameworks are missing or misapplied = 3.x
+
+Step 4 - Insight Quality
+Does the work show original insight or synthesis?
+If yes = 4.0 candidate
+
+6. Rapid Grading Template (90-Second Method)
+
+Each assignment can be evaluated with the following template.
+Instructor notes format:
+Strengths: ...
+Opportunities: ...
+Score: X.X
+
+Typical feedback length should be 3-6 sentences.
+This keeps grading scalable for large classes.
+
+7. AI-Assisted Work Detection
+
+AI assistance is permitted for writing support, but students must demonstrate synthesis.
+
+Indicators of over-templated or AI-generated work include:
+
+Linguistic Signals:
+- Perfect grammar but vague ideas
+- Generic phrases repeated across submissions
+- Lack of product-specific detail
+
+Example:
+Weak AI-style statement: Users value efficiency and want a seamless experience.
+Stronger student reasoning: Students commuting to campus need to complete tasks quickly between classes, which creates pressure for simplified navigation.
+
+Structural Signals:
+AI-heavy submissions often show:
+- overly symmetrical formatting
+- identical paragraph length
+- no concrete examples
+
+Required Instructor Annotation if detected:
+"Reads as technically perfect but low on original synthesis (possible AI or over-templated phrasing)."
+
+--- ASSIGNMENT RUBRICS ---
+
+Assignment 2.1: Persona Development
+
+Assignment Objective: Translate research insights into a goal-driven behavioral model of a user.
+
+Instructor Evaluation Checklist:
+- Persona goals clearly articulated
+- Pain points specific
+- Persona tied to product opportunity
+- Evidence of research
+
+Annotated Example - Strong Persona:
+Goal: Track medication adherence while managing a complex treatment schedule.
+Pain Point: Current reminders are generic and fail to account for shifting daily routines.
+Why this works: Specific goal, concrete behavioral need, clear product opportunity.
+
+Annotated Example - Weak Persona:
+Goal: Be productive.
+Pain Point: Technology is sometimes frustrating.
+Why this fails: Generic, no behavioral insight, no design implications.
+
+Decision Tree:
+- Behavioral insight + research = 4.0
+- Clear persona but weak research = 3.x
+- Demographic description only = 2.x
+
+Assignment 3: Customer Journey Map
+
+Assignment Objective: Demonstrate understanding of how experiences unfold across time.
+
+Instructor Evaluation Checklist:
+- Journey stages defined
+- Pain points identified
+- Emotional trajectory visible
+- Product intervention points clear
+
+Example of Strong Insight:
+Pain point: Students often abandon the process when required documents must be uploaded from different devices.
+Opportunity: Integrate cross-device document capture through camera upload.
+
+Decision Tree:
+- Clear journey narrative = 4.0
+- Journey structure but shallow insight = 3.x
+- Interface flow masquerading as journey = 2.x
+
+Assignment 4: Paper Prototype
+
+Assignment Objective: Demonstrate interaction logic.
+
+Instructor Evaluation Checklist:
+- Two full task flows present
+- Screens connected logically
+- Navigation clear
+- Screens reflect persona needs
+
+Strong Prototype Signals:
+- Clear entry point
+- Clear task completion
+- Minimal steps
+
+Weak Prototype Signals:
+- Missing screens
+- Confusing navigation
+- Screens unrelated to tasks
+
+Decision Tree:
+- Clear end-to-end flows = 4.0
+- Mostly complete flows = 3.x
+- Missing major steps = 2.x
+
+Assignment 5: Wireframes
+
+Assignment Objective: Define interface architecture.
+
+Instructor Evaluation Checklist:
+- Information hierarchy clear
+- Components consistent
+- Interaction flows preserved
+
+Strong Submission Signals:
+- Consistent navigation
+- Logical content grouping
+- Clear interaction affordances
+
+Weak Signals:
+- Screens disconnected from flows
+- Inconsistent components
+- Over-styled design hiding weak structure
+
+Assignment 2: Design Aesthetics Evaluation
+
+Assignment Objective: Analyze interface aesthetics using design theory.
+
+Required Analytical Elements - students must connect UI elements to:
+- Gestalt principles
+- Visual hierarchy
+- Perception and cognition
+
+Strong Example: The use of proximity groups related product categories, reducing scanning time and cognitive load.
+Weak Example: The layout looks clean and modern.
+
+Decision Tree:
+- Theory + analysis + examples = 4.0
+- Some theory but shallow explanation = 3.x
+- Description without analysis = 2.x
+
+Assignment 6: Heuristic Evaluation
+
+Assignment Objective: Evaluate usability using established frameworks.
+
+Required frameworks:
+- NN/g Ten Heuristics
+- Material UX Writing
+- Laws of UX
+
+Instructor Evaluation Checklist:
+- Problem clearly described
+- Correct heuristic mapped
+- Severity rating appropriate
+- Improvement recommendation provided
+
+Strong Issue Example:
+Problem: Users must re-enter shipping information when returning to checkout.
+Heuristic: Consistency and Standards.
+Severity: High.
+Recommendation: Persist form data during session.
+
+Weak Issue Example:
+Problem: The interface is confusing.
+Heuristic: None provided.
+
+--- INSTRUCTOR NOTES ---
+
+TA Calibration Process:
+Before grading begins, instructors should:
+1. Review 3 example submissions
+2. Assign preliminary scores
+3. Compare grading decisions
+4. Align on rubric interpretation
+This prevents grade drift.
+
+Recommended Grading Workflow:
+For each assignment:
+1. Skim submission (20 seconds)
+2. Identify strongest insight
+3. Identify major gap
+4. Assign score using decision tree
+5. Write 3-5 sentence feedback
+Target grading time: 60-90 seconds per submission
+
+Focus feedback on: reasoning, synthesis, connection between artifacts.
+Avoid focusing primarily on: visual polish, formatting.
+Students should leave the course understanding how UX professionals reason about design problems.

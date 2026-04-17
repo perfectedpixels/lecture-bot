@@ -31,6 +31,35 @@ try:
 except ImportError:
     HAS_PORTFOLIO_IMAGES = False
 
+try:
+    from canvas_assignments import get_upcoming_assignment, build_homework_help_prompt
+    HAS_CANVAS = True
+except ImportError:
+    HAS_CANVAS = False
+
+# Canvas course ID mapping
+CANVAS_COURSE_MAP = {
+    "COMMLD 515 - Advanced User Design": os.environ.get("CANVAS_COURSE_ID_515", "1892213"),
+    "COMMLD 512 - UX Research & Strategy": os.environ.get("CANVAS_COURSE_ID_512", "1828126"),
+}
+
+
+def _verbosity_instruction(verbosity: str, lang: str) -> str:
+    """Prepended to student message; lang is 'en' or 'zh'."""
+    if lang == "zh":
+        m = {
+            "brief": "请用简短、精炼的中文回答（约2-3句）。直接具体。",
+            "normal": "请用清晰、口语化的中文作答，并结合课程材料中的实例。",
+            "detailed": "请用中文全面作答，包含具体例子、方法论，并引用课程材料与作品集相关内容。",
+        }
+    else:
+        m = {
+            "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
+            "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
+            "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work.",
+        }
+    return m.get(verbosity, m["normal"])
+
 
 def get_base64_image(image_path):
     """Convert image to base64 for embedding in CSS/HTML"""
@@ -47,10 +76,28 @@ def get_base64_image(image_path):
 # Removed - replaced with render_smart_follow_ups
 
 
+def _clean_relevance(text: str) -> str:
+    """Strip meta-phrases from relevance to get a clean topic statement."""
+    if not text:
+        return ""
+    # Remove common meta-prefixes
+    for prefix in (
+        "The answer discusses ", "The entire answer is focused on ",
+        "This relates to ", "The answer explains ", "The response covers ",
+        "The answer covers ", "This concept is relevant because "
+    ):
+        if text.lower().startswith(prefix.lower()):
+            text = text[len(prefix):].strip()
+            break
+    return text[:80].strip()
+
+
 def render_smart_follow_ups(cards: dict, message_idx: int):
     """Render top 3 most relevant follow-up topics (80%+ confidence) with new format"""
     if not cards:
         return
+
+    lang = st.session_state.get("ui_language", "en")
     
     # Get smart follow-ups from card generator
     # For now, manually filter and mix (will integrate with generator later)
@@ -59,18 +106,19 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
     # Add teaching concepts with 80%+ confidence
     for concept in cards.get('teaching_concepts', []):
         if concept.get('confidence', 0) >= 0.80:
-            # Create clean 10-word summary
-            relevance = concept.get('relevance', '')
-            summary_words = relevance.split()[:10]
-            summary = ' '.join(summary_words)
-            if len(relevance.split()) > 10:
-                summary += '...'
+            # Use statement (new) or clean relevance (legacy): topic + short direct statement
+            statement = concept.get('statement') or _clean_relevance(concept.get('relevance', ''))
+            statement = (statement[:80] + '...') if len(statement) > 80 else statement
+            if lang == "zh":
+                fq = f"请更详细地讲解「{concept['concept']}」。"
+            else:
+                fq = f"Can you explain {concept['concept']} in more detail?"
             
             all_topics.append({
                 'type': 'concept',
                 'title': concept['concept'],
-                'summary': summary,
-                'prompt': f"Can you explain {concept['concept']} in more detail?",
+                'summary': statement,
+                'prompt': fq,
                 'confidence': concept.get('confidence', 0.85)
             })
     
@@ -78,23 +126,26 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
     for project in cards.get('portfolio_examples', []):
         if project.get('confidence', 0) >= 0.80:
             project_name = project['title'].replace('-', ' ').title()
-            reasons = project.get('reasons', [])
-            
-            # Create clean 10-word summary
-            if reasons:
-                summary_text = ' '.join(reasons)
-                summary_words = summary_text.split()[:10]
-                summary = ' '.join(summary_words)
-                if len(summary_text.split()) > 10:
-                    summary += '...'
+            # Use pre-built statement from generator, or derive from reasons
+            summary = project.get('statement')
+            if not summary:
+                reasons = project.get('reasons', [])
+                best = next((r for r in reasons if "demonstrates" in r.lower() or "shows" in r.lower() or "example of" in r.lower()), reasons[0] if reasons else "")
+                summary = (best if len(best) <= 60 else best[:57] + "...") if best else "Real-world application example"
+            if lang == "zh":
+                pq = f"请多介绍一下「{project_name}」这个案例。"
+                ptitle = f"{project_name} 案例"
+                if summary == "Real-world application example":
+                    summary = "实际应用示例"
             else:
-                summary = "Real-world application example"
+                pq = f"Tell me more about the {project_name} example"
+                ptitle = f"{project_name} example"
             
             all_topics.append({
                 'type': 'example',
-                'title': f"{project_name} example",
+                'title': ptitle,
                 'summary': summary,
-                'prompt': f"Tell me more about the {project_name} example",
+                'prompt': pq,
                 'confidence': project.get('confidence', 0.80)
             })
     
@@ -106,9 +157,10 @@ def render_smart_follow_ups(cards: dict, message_idx: int):
         return
     
     # Render new format
-    st.markdown("""
+    _rel_title = "相关拓展：" if lang == "zh" else "Explore Related Topics:"
+    st.markdown(f"""
     <div class="follow-up-section">
-        <div class="follow-up-title"><strong>Explore Related Topics:</strong></div>
+        <div class="follow-up-title"><strong>{_rel_title}</strong></div>
         <hr class="follow-up-divider">
     </div>
     """, unsafe_allow_html=True)
@@ -565,15 +617,17 @@ st.markdown("""
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = "SSIRB24COT"  # single shared KB for lecture-bot + ppmg
+    st.session_state.kb_id = "HHYCUJH32J"  # single shared KB for lecture-bot + ppmg
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
     st.session_state.voice_enabled = True
 if 'audio_autoplay' not in st.session_state:
-    st.session_state.audio_autoplay = True
+    st.session_state.audio_autoplay = False
 if 'verbosity' not in st.session_state:
     st.session_state.verbosity = "normal"
+if 'ui_language' not in st.session_state:
+    st.session_state.ui_language = "en"  # "en" | "zh" — response + UI hints
 if 'voice_generator' not in st.session_state:
     if HAS_VOICE:
         try:
@@ -586,6 +640,10 @@ if 'pending_question' not in st.session_state:
     st.session_state.pending_question = None
 if 'shown_projects' not in st.session_state:
     st.session_state.shown_projects = []  # Track recently shown portfolio examples
+if 'upcoming_assignment' not in st.session_state:
+    st.session_state.upcoming_assignment = None
+if 'homework_help_mode' not in st.session_state:
+    st.session_state.homework_help_mode = False
 if 'portfolio_handler' not in st.session_state:
     if HAS_PORTFOLIO_IMAGES:
         try:
@@ -638,8 +696,28 @@ with st.sidebar:
     )
     
     st.markdown("### Knowledge Base")
-    st.caption("SSIRB24COT (shared)")
-    st.session_state.kb_id = "SSIRB24COT"
+    st.caption("HHYCUJH32J (shared)")
+    st.session_state.kb_id = "HHYCUJH32J"
+
+    st.markdown("### Language / 语言")
+    st.caption("Reply language (you may type in either language)")
+    lc1, lc2 = st.columns(2)
+    with lc1:
+        if st.button(
+            "English",
+            key="lang_en",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "en" else "secondary",
+        ):
+            st.session_state.ui_language = "en"
+    with lc2:
+        if st.button(
+            "中文",
+            key="lang_zh",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "zh" else "secondary",
+        ):
+            st.session_state.ui_language = "zh"
 
     st.markdown("### Model")
     model_id = st.selectbox(
@@ -658,7 +736,7 @@ with st.sidebar:
     voice_enabled = st.toggle("Enable Voice", value=st.session_state.voice_enabled, key="voice_toggle")
     st.session_state.voice_enabled = voice_enabled
     
-    audio_autoplay = st.toggle("🔊 Auto-play Audio", value=st.session_state.get('audio_autoplay', True), key="audio_autoplay_toggle")
+    audio_autoplay = st.toggle("🔊 Auto-play Audio", value=st.session_state.get('audio_autoplay', False), key="audio_autoplay_toggle")
     st.session_state.audio_autoplay = audio_autoplay
     
     st.markdown("### Response Length")
@@ -704,18 +782,55 @@ with st.sidebar:
                 st.error(f"Error: {e}")
 
 # Process chat input BEFORE display (avoids st.rerun() which clears chat in Streamlit 1.35+)
-question = st.chat_input("Ask Professor Levine...")
+
+# --- Fetch upcoming assignment from Canvas ---
+if HAS_CANVAS and 'course' in st.session_state:
+    _canvas_course_id = CANVAS_COURSE_MAP.get(st.session_state.get("course", ""), "")
+    if _canvas_course_id and st.session_state.upcoming_assignment is None:
+        try:
+            st.session_state.upcoming_assignment = get_upcoming_assignment(_canvas_course_id)
+        except Exception as e:
+            print(f"⚠ Canvas fetch failed: {e}")
+            st.session_state.upcoming_assignment = False  # sentinel: tried and failed
+
+_chat_placeholder = (
+    "向 Levine 教授提问…"
+    if st.session_state.ui_language == "zh"
+    else "Ask Professor Levine..."
+)
+question = st.chat_input(_chat_placeholder)
 
 if question and st.session_state.bot:
-    with st.spinner("Professor Levine is thinking..."):
+    _think = (
+        "教授正在思考…"
+        if st.session_state.ui_language == "zh"
+        else "Professor Levine is thinking..."
+    )
+    with st.spinner(_think):
         try:
-            verbosity_prompts = {
-                "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
-                "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
-                "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
-            }
-            modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {question}"
-            result = st.session_state.bot.query(modified_question, use_persona=True)
+            _upcoming = st.session_state.get("upcoming_assignment")
+            _hw_mode = st.session_state.get("homework_help_mode", False)
+
+            if _hw_mode and _upcoming and isinstance(_upcoming, dict) and HAS_CANVAS:
+                # Homework help mode: use rubric-grounded prompt
+                hw_prompt = build_homework_help_prompt(
+                    _upcoming, question, st.session_state.ui_language
+                )
+                result = st.session_state.bot.query(
+                    hw_prompt,
+                    use_persona=True,
+                    response_language=st.session_state.ui_language,
+                )
+            else:
+                _verb = _verbosity_instruction(
+                    st.session_state.verbosity, st.session_state.ui_language
+                )
+                modified_question = f"{_verb} {question}"
+                result = st.session_state.bot.query(
+                    modified_question,
+                    use_persona=True,
+                    response_language=st.session_state.ui_language,
+                )
             result['question'] = question
             if result.get('learning_cards', {}).get('portfolio_examples'):
                 for project in result['learning_cards']['portfolio_examples']:
@@ -724,7 +839,12 @@ if question and st.session_state.bot:
                         st.session_state.shown_projects.append(project_key)
                         if len(st.session_state.shown_projects) > 5:
                             st.session_state.shown_projects.pop(0)
-            if st.session_state.voice_enabled and st.session_state.voice_generator:
+            # English voice model; skip TTS for Chinese answers
+            if (
+                st.session_state.ui_language == "en"
+                and st.session_state.voice_enabled
+                and st.session_state.voice_generator
+            ):
                 try:
                     result['audio_base64'] = st.session_state.voice_generator.generate_audio_base64(
                         result['answer'], voice="chris"
@@ -740,15 +860,35 @@ if st.session_state.pending_question:
     q = st.session_state.pending_question
     st.session_state.pending_question = None
     if st.session_state.bot:
-        with st.spinner("Professor Levine is thinking..."):
+        _think2 = (
+            "教授正在思考…"
+            if st.session_state.ui_language == "zh"
+            else "Professor Levine is thinking..."
+        )
+        with st.spinner(_think2):
             try:
-                verbosity_prompts = {
-                    "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
-                    "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
-                    "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work."
-                }
-                modified_question = f"{verbosity_prompts[st.session_state.verbosity]} {q}"
-                result = st.session_state.bot.query(modified_question, use_persona=True)
+                _upcoming2 = st.session_state.get("upcoming_assignment")
+                _hw_mode2 = st.session_state.get("homework_help_mode", False)
+
+                if _hw_mode2 and _upcoming2 and isinstance(_upcoming2, dict) and HAS_CANVAS:
+                    hw_prompt2 = build_homework_help_prompt(
+                        _upcoming2, q, st.session_state.ui_language
+                    )
+                    result = st.session_state.bot.query(
+                        hw_prompt2,
+                        use_persona=True,
+                        response_language=st.session_state.ui_language,
+                    )
+                else:
+                    _verb2 = _verbosity_instruction(
+                        st.session_state.verbosity, st.session_state.ui_language
+                    )
+                    modified_question = f"{_verb2} {q}"
+                    result = st.session_state.bot.query(
+                        modified_question,
+                        use_persona=True,
+                        response_language=st.session_state.ui_language,
+                    )
                 result['question'] = q
                 if result.get('learning_cards', {}).get('portfolio_examples'):
                     for project in result['learning_cards']['portfolio_examples']:
@@ -757,7 +897,11 @@ if st.session_state.pending_question:
                             st.session_state.shown_projects.append(project_key)
                             if len(st.session_state.shown_projects) > 5:
                                 st.session_state.shown_projects.pop(0)
-                if st.session_state.voice_enabled and st.session_state.voice_generator:
+                if (
+                    st.session_state.ui_language == "en"
+                    and st.session_state.voice_enabled
+                    and st.session_state.voice_generator
+                ):
                     try:
                         result['audio_base64'] = st.session_state.voice_generator.generate_audio_base64(
                             result['answer'], voice="chris"
@@ -770,6 +914,34 @@ if st.session_state.pending_question:
 
 # Welcome message if no chat history
 if not st.session_state.chat_history:
+    # --- Homework Help button for upcoming assignment ---
+    _upcoming = st.session_state.get("upcoming_assignment")
+    if _upcoming and isinstance(_upcoming, dict):
+        _hw_label = (
+            f"📝 {_upcoming['name']} 作业帮助"
+            if st.session_state.ui_language == "zh"
+            else f"📝 {_upcoming['name']} Homework Help"
+        )
+        _hw_due = (
+            f"截止：{_upcoming['due_display']}"
+            if st.session_state.ui_language == "zh"
+            else f"Due: {_upcoming['due_display']}"
+        )
+        st.markdown(f"""
+        <div class="welcome-text" style="padding: 20px; margin-bottom: 10px;">
+            <h3 style="margin: 0 0 6px 0;">📝 Upcoming Assignment</h3>
+            <p style="margin: 0; font-size: 18px; font-weight: 600;">{_upcoming['name']}</p>
+            <p style="margin: 4px 0 12px 0; opacity: 0.8; font-size: 14px;">{_hw_due} · {_upcoming['points']} pts</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button(_hw_label, key="hw_help_btn", use_container_width=True, type="primary"):
+            st.session_state.homework_help_mode = True
+            if st.session_state.ui_language == "zh":
+                st.session_state.pending_question = f"我正在做「{_upcoming['name']}」这个作业。请帮我理解评分标准以及如何拿到高分。"
+            else:
+                st.session_state.pending_question = f"I'm working on the {_upcoming['name']} assignment. Can you help me understand the rubric and what I need to do to get a top score?"
+            st.rerun()
+
     st.markdown("""
     <div class="welcome-text">
         <h2>Welcome to Lecture Bot!</h2>
@@ -804,4 +976,7 @@ for idx, chat in enumerate(st.session_state.chat_history):
         render_learning_cards(chat['learning_cards'], idx)
 
 if question and not st.session_state.bot:
-    st.error("Please connect to the bot in the sidebar settings first!")
+    if st.session_state.ui_language == "zh":
+        st.error("请先在侧边栏设置中连接机器人。")
+    else:
+        st.error("Please connect to the bot in the sidebar settings first!")

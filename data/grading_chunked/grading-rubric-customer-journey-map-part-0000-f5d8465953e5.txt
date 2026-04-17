@@ -1,0 +1,6 @@
+[Rubric: Assignment 3: Customer Journey Map]
+[Concepts: personas, design-thinking, user-research]
+[Related assignments: customer-journey-map-and-product-experience-storyboard]
+[Type: rubric]
+
+Assignment 3: Customer Journey Map Assignment Objective: Demonstrate understanding of how experiences unfold across time. Instructor Evaluation Checklist: - Journey stages defined - Pain points identified - Emotional trajectory visible - Product intervention points clear Example of Strong Insight: Pain point: Students often abandon the process when required documents must be uploaded from different devices. Opportunity: Integrate cross-device document capture through camera upload. Decision Tree: - Clear journey narrative = 4.0 - Journey structure but shallow insight = 3.x - Interface flow masquerading as journey = 2.x

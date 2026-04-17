@@ -1,0 +1,58 @@
+{
+  "id": 10733399,
+  "name": "Write a Usability Script",
+  "slug": "write-a-usability-script",
+  "due_at": "2025-11-04T07:00:00Z",
+  "points_possible": 4.0,
+  "description_text": "For this assignment, you will author a usability script for Amazon Groceries\n\nAmazon Groceries is a series of services that allow shoppers to order groceries for delivery or pickup. These grocery services are made up of multiple brands within Amazon, including Amazon Fresh, Whole Foods, local grocers like Metropoliton Market, Amazon convenience offerings like Subscribe and Save, and Amazon's standard Prime shipping; all using different delivery methods and different carts for checkout.\u00a0\n\nThere are several identified\u00a0gaps to the service:\n\nDiscoverability: Learning the existence of the services is dependent on landing on an Amazon Fresh versus Whole Foods or Amazon Prime delivery eligible product. Searching for items that are part of the same cart can be confusing since they are not available on all items, making discoverability difficult. Based upon what you add, it can take you into a filtering only within those items available from that service (Order Beef Jerky as a Whole Foods offering may limit you to only Whole Foods options for other items added to your cart). This is further made difficult as many items are not exclusive to any particular grocery branded option.\u00a0\n\nExample of an item (beef jerky) only available on Amazon Fresh\n\nExample of same item on available from Metropolitan Market\n\nExample again of the same item sold through Whole Foods\n\nExample with Subscribe and Save option and not available from the grocery delivery services\n\nEase of Use: Amazon uses a separate cart and checkout process for groceries based upon where they were ordered from, making a cart with grocery items potentially not in the same cart as your other groceries as they may separated, and appear instead in the standard cart/checkout, causing confusion on completing grocery ordering-related tasks.\n\nCustomer Value: Understanding how the service is used and its value is confusing when they all are available through the same Amazon umbrella, since users may complete their grocery shopping over a separate visit, losing the context which brand their cart is associated with. The confusion makes the value proposition hard for customers to overcome in wanting to use the service, or why the prices are different for the same items.\n\nUse the heuristics report detailing the gaps found:\nHeuristics Report.pdf\n\nUse the attached usability template script to work from:\nAmazon Groceries Usability script template.docx\n\nFrom it, devise your usability script that provides the following:\n\nCreate tasks that will highlight the above 3 gaps identified\u00a0\n\nTasks should have open-ended goals for the user to follow, while providing follow-up specific questions to determine comprehension\n\nGoal-set for tasks that will lead a user to the Fresh, and/or Whole Foods cart while also having them shop for items that are only available through the regular Amazon shopping cart\u00a0without explicitly telling the user of the service or how to find it\n\nTrack the ease of use for each task\u00a0\n\nFollow up questions to determine customer satisfaction\u00a0\n\nIdentify what additional metrics you wish to track per task\u00a0(success rate, number of attempts, time to complete, comprehension, etc.)\n\nLeverage questions in your script from the Usability Question Pointers.pdf and you are using the following structure:\n\nIntroducing the Task\n\nOpen-Ended Task\n\nEvaluating User Expectation\n\nIdentifying Success\n\nMeasuring Satisfaction/Ease of Use\n\nFollow up evaluation\n\nProvide 2 matrix ratings questions\n\n2 Closed Ended questions\n\n\u00a0\n\nStudents must demonstrate:\n\nNeutral framing \u2013 no leading or loaded phrasing.\n\nBrevity and clarity \u2013 one idea per question; avoid jargon or negatives.\n\nLogical flow \u2013 warm-up \u2192 topic \u2192 demographic \u2192 closing.\n\nProper quantitative variety \u2013 at least:\n\n2 matrix/ordinal scales\n\n2 closed-ended items\n\nseveral open-ended probes (\u201cWhy is that?\u201d \u201cTell me what you expect\u2026\u201d).\n\nMeasurement inclusion \u2013 time / accuracy / success / satisfaction / intention metrics explicitly listed.\n\nTips on what to avoid:\n\nLeading participants (\u201cClick on Amazon Fresh and tell me\u2026\u201d).\n\nFailing to list measurable success criteria.\n\nAsking compound or yes-bias questions.\n\nOverly specific tasks that test navigation, not comprehension.\n\nNeglecting satisfaction metrics or follow-up evaluation.\n\n\u00a0\n\nRubric\n\nCategory\nCriteria\n\nComprehensiveness\nCovers all 3 gaps + measurement criteria + follow-ups.\n\nCognitive Walkthrough Quality\nOpen tasks reveal discoverability and mental-model misalignment.\n\nQuestion Design Quality\nUses neutral, brief, well-sequenced prompts (per Qualtrics guidelines in Pointers).\n\nMetrics Definition\nQuant + qual data clearly tracked per task.\n\nProfessional Polish\nReadable, replicable script using proper moderator language and closure.\n\n\u00a0\n\nTips on what to avoid:\n\nLeading participants (\u201cClick on Amazon Fresh and tell me\u2026\u201d).\n\nFailing to list measurable success criteria.\n\nAsking compound or yes-bias questions.\n\nOverly specific tasks that test navigation, not comprehension.\n\nNeglecting satisfaction metrics or follow-up evaluation.\n\n\u00a0\n\n\u00a0\n\nReference Materials:\n\nFor reference watch the following demo usability tests:\n\nhttps://www.youtube.com/watch?v=VTW1yYUqBm8\n\nand review the following sample usability scripts:\n\nArtizone usability script\n\nWorkforce Explorer Usability script\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nRocket Surgery Made Easy: Chapters 6-8\n\nUX Research Week 6.pdf\n\nTips for writing a better usability test\n\nUsing System Usability Scale",
+  "concepts": [
+    "heuristics",
+    "usability",
+    "user-research",
+    "ai-design",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Information Architecture",
+      "score": 1,
+      "matched_keywords": [
+        "navigation"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 1,
+      "matched_keywords": [
+        "evaluation"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Data-Driven Design",
+      "score": 1,
+      "matched_keywords": [
+        "metrics"
+      ],
+      "definition": "Using quantitative and qualitative data to inform design decisions, measure success, and optimize user experiences."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 1,
+      "matched_keywords": [
+        "clarity"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 1,
+      "matched_keywords": [
+        "AI"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733399"
+}

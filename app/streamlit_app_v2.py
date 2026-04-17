@@ -89,7 +89,8 @@ st.set_page_config(
     page_title="UW Lecture Bot",
     page_icon="🎓",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    # Expanded so Language / settings are visible (was collapsed — easy to miss sidebar)
+    initial_sidebar_state="expanded",
 )
 
 # Get base64 encoded images
@@ -325,7 +326,7 @@ st.markdown(f"""
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'kb_id' not in st.session_state:
-    st.session_state.kb_id = "1TTBVE6MG2"
+    st.session_state.kb_id = "HHYCUJH32J"
 if 'bot' not in st.session_state:
     st.session_state.bot = None
 if 'voice_enabled' not in st.session_state:
@@ -344,6 +345,8 @@ if 'voice_generator' not in st.session_state:
         st.session_state.voice_generator = None
 if 'auto_submit_text' not in st.session_state:
     st.session_state.auto_submit_text = None
+if 'ui_language' not in st.session_state:
+    st.session_state.ui_language = "en"
 
 # Auto-connect bot
 if st.session_state.bot is None and HAS_PERSONA_BOT:
@@ -355,6 +358,26 @@ if st.session_state.bot is None and HAS_PERSONA_BOT:
 # Sidebar Settings
 with st.sidebar:
     st.title("Settings")
+
+    st.markdown("### Language / 语言")
+    st.caption("Reply language (type in English or 中文)")
+    _v2lc1, _v2lc2 = st.columns(2)
+    with _v2lc1:
+        if st.button(
+            "English",
+            key="v2_sidebar_lang_en",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "en" else "secondary",
+        ):
+            st.session_state.ui_language = "en"
+    with _v2lc2:
+        if st.button(
+            "中文",
+            key="v2_sidebar_lang_zh",
+            use_container_width=True,
+            type="primary" if st.session_state.ui_language == "zh" else "secondary",
+        ):
+            st.session_state.ui_language = "zh"
     
     st.markdown("### Model")
     model_id = st.selectbox(
@@ -388,6 +411,26 @@ st.markdown(f"""
     <img src="data:image/png;base64,{logo_image}" alt="University of Washington">
 </div>
 """, unsafe_allow_html=True)
+
+# Language row (main page — visible even if sidebar is collapsed)
+st.caption("Language / 语言 — reply language")
+_lm1, _lm2 = st.columns(2)
+with _lm1:
+    if st.button(
+        "English",
+        key="v2_main_lang_en",
+        use_container_width=True,
+        type="primary" if st.session_state.ui_language == "en" else "secondary",
+    ):
+        st.session_state.ui_language = "en"
+with _lm2:
+    if st.button(
+        "中文",
+        key="v2_main_lang_zh",
+        use_container_width=True,
+        type="primary" if st.session_state.ui_language == "zh" else "secondary",
+    ):
+        st.session_state.ui_language = "zh"
 
 # Welcome message
 if not st.session_state.chat_history:
@@ -426,20 +469,25 @@ if st.session_state.auto_submit_text:
     if st.session_state.bot:
         st.session_state.chat_history.append({"role": "user", "content": question})
         
-        with st.spinner("Thinking..."):
+        _spin = "思考中…" if st.session_state.ui_language == "zh" else "Thinking..."
+        with st.spinner(_spin):
             response = st.session_state.bot.query(
                 question,
-                verbosity=st.session_state.verbosity
+                response_language=st.session_state.ui_language,
             )
         
         msg_data = {"role": "assistant", "content": response['answer']}
         
-        # Generate audio
-        if st.session_state.voice_enabled and st.session_state.voice_generator:
+        # Generate audio (English voice only)
+        if (
+            st.session_state.voice_enabled
+            and st.session_state.voice_generator
+            and st.session_state.ui_language == "en"
+        ):
             try:
                 audio_data = st.session_state.voice_generator.generate(response['answer'])
                 msg_data['audio'] = audio_data
-            except:
+            except Exception:
                 pass
         
         # Add cards
@@ -450,25 +498,35 @@ if st.session_state.auto_submit_text:
         st.rerun()
 
 # Chat input
-question = st.chat_input("Ask Professor Levine...")
+_chat_ph = (
+    "向 Levine 教授提问…"
+    if st.session_state.ui_language == "zh"
+    else "Ask Professor Levine..."
+)
+question = st.chat_input(_chat_ph)
 
 if question and st.session_state.bot:
     st.session_state.chat_history.append({"role": "user", "content": question})
     
-    with st.spinner("Thinking..."):
+    _spin2 = "思考中…" if st.session_state.ui_language == "zh" else "Thinking..."
+    with st.spinner(_spin2):
         response = st.session_state.bot.query(
             question,
-            verbosity=st.session_state.verbosity
+            response_language=st.session_state.ui_language,
         )
     
     msg_data = {"role": "assistant", "content": response['answer']}
     
-    # Generate audio
-    if st.session_state.voice_enabled and st.session_state.voice_generator:
+    # Generate audio (English voice only)
+    if (
+        st.session_state.voice_enabled
+        and st.session_state.voice_generator
+        and st.session_state.ui_language == "en"
+    ):
         try:
             audio_data = st.session_state.voice_generator.generate(response['answer'])
             msg_data['audio'] = audio_data
-        except:
+        except Exception:
             pass
     
     # Add cards

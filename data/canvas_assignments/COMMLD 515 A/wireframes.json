@@ -1,0 +1,69 @@
+{
+  "id": 11355143,
+  "name": "Wireframes",
+  "slug": "wireframes",
+  "due_at": "2026-05-07T00:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Translate your indexed UX frameworks into clickable, low-fidelity digital wireframes that operationalize your product concept.\n\nYour wireframes should demonstrate how your persona, user goals, pain points, and Working Backwards Pitch come together as a coherent interaction system. This is the point in the project where your abstract thinking (frameworks, journeys, and prototypes) is stress-tested through real interaction flow. Your wireframes should not simply recreate your paper prototype. Your wireframes should demonstrate how an AI-assisted or agent-mediated system supports user goals over time\u2014through guidance, automation, recommendations, or decision support\u2014rather than relying solely on manual user input.\n\nRequirements\n\n1. Screen Coverage (Framework Alignment)\n\nInclude all screens from your paper prototype, plus any necessary intermediary screens or sub-steps required to complete your defined user goals.\n\nEach primary use case must be completable end-to-end.\n\nScreens and flows should clearly map back to:\n\nPersona needs\n\nIdentified pain points\n\nProduct objective\n\n2. Clickable Interaction (From Intent to Action)\n\nAll controls required to complete the happy paths must be clickable (buttons, links, selections, confirmations).\n\nNot every screen must be interactive, but there must be clear click-through flows that demonstrate:\n\nDecision points\n\nProgression\n\nCompletion\n\nFocus on primary flows, not edge cases.\n\nDemonstrate where the AI agent exists in the experience\n\nWhat the agent does vs. what the user does\n\nHow the agent meaningfully reduces effort, friction, or cognitive load\n\nIf the agent were removed, the experience should clearly degrade.\n\n3. Fidelity & Constraint\n\nMaintain low-fidelity wireframes:\n\nNo visual polish, branding, or final UI design\n\nUse placeholders, basic shapes, and simple labels\n\nThis stage prioritizes:\n\nInformation hierarchy\n\nInteraction logic\n\nSystem consistency\n\nHigher fidelity will come later. Over-design at this stage will work against you.\n\n4. System Thinking & Improvement\n\nCompared to your paper prototype, your wireframes should demonstrate improvement in:\n\nFlow efficiency\n\nStructural clarity\n\nReduction of unnecessary steps\n\nConsistency across navigation, layout, and controls\n\nThis is where we assess whether your system thinking is holding up.\n\nTools\n\nWireframing must be completed in Figma Make or Google Stitch\n\nUse of any other tool requires explicit instructor approval.\n\nAll screens must live in a single, organized file.\n\nUsability & Framework Tenets\n\nYour wireframes should demonstrate the following class tenets, derived from our shared UX frameworks:\n\nEasy Discoverability\nUsers can immediately understand where to start.\n\nQuick Findability\nKey actions and information are surfaced without cognitive searching.\n\nCognitive Recognition\nLabels, patterns, and interactions align with established user mental models.\n\nContinuity\nScreens connect logically across time, state, and task progression.\n\nIntuitive Simplicity\nThe experience is as simple as possible while still accomplishing the user goal.\n\nNatural Feedback\nUser actions produce clear, expected responses.\n\nThese tenets should be visible in the wireframes themselves\u2014not just described.\n\nIn-Class Walkthrough\n\nYou will present a 10-minute walkthrough of your wireframes.\n\nBe prepared to:\n\nWalk through your primary use cases\n\nExplain how key screens map back to your frameworks\n\nCall out where and why the wireframes improve upon your paper prototype\n\nWireframe Examples:\n\nwireframe example 1.pdf\n\nwireframe example 2.pdf\n\nWireframe Example 3.pdf\n\nRubric\n\n4.0 \u2014 Excellent\n3.0 \u2014 Good\n2.0 \u2014 Marginal\n1.0 \u2014 Unsatisfactory\n\nWireframes clearly operationalize the indexed UX frameworks and product objective; the AI agent plays a meaningful, non-decorative role that reduces user effort or improves continuity; primary use cases are fully clickable end-to-end (including clear human \u2194 agent interactions); the system is consistent and intuitive; class tenets (discoverability, findability, recognition, continuity, simplicity, feedback) are strongly embodied; and fidelity is appropriately low with clear improvement over the paper prototype.\nFramework alignment and agent presence are evident but uneven; core flows are mostly clickable with minor gaps; the system is generally understandable but has small inconsistencies; tenets are addressed but not fully reinforced; fidelity is mostly appropriate.\nPartial or superficial application of frameworks and AI agent value; limited or confusing click-through flows; noticeable inconsistencies; weak embodiment of UX tenets; fidelity choices distract from interaction logic.\nMinimal alignment to frameworks; unclear or absent AI agent value; nonfunctional or missing click-through flows; poor system coherence; tenets largely unmet; fidelity obscures intent.\n\n\u00a0 \u00a0Recommended Reading:\u00a0\n\nTop 10 Wireframing Essentials\n\nDon\u2019t Make Me Think\u00a0 Chapters 6 - 7\n\nFigma Design Pattern Community Library\n\nHow to Prototype in Figma (Use the prototype feature to make your wireframes clickable)",
+  "concepts": [
+    "personas",
+    "usability",
+    "prototyping",
+    "ai-design",
+    "presentation",
+    "branding"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "Information Architecture",
+      "score": 4,
+      "matched_keywords": [
+        "navigation",
+        "findability",
+        "wireframes",
+        "information hierarchy"
+      ],
+      "definition": "The structural design of information environments to support usability and findability through organized, labeled, and navigable content systems."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 3,
+      "matched_keywords": [
+        "prototype",
+        "wireframes",
+        "low-fidelity"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    },
+    {
+      "concept": "Simplification & Clarity",
+      "score": 3,
+      "matched_keywords": [
+        "clarity",
+        "focus",
+        "reduction"
+      ],
+      "definition": "The practice of reducing complexity, removing unnecessary elements, and creating clear, focused experiences that help users accomplish goals efficiently."
+    },
+    {
+      "concept": "Workflow Automation",
+      "score": 3,
+      "matched_keywords": [
+        "automation",
+        "AI",
+        "efficiency"
+      ],
+      "definition": "Designing systems and processes that automate repetitive tasks, reduce manual effort, and improve efficiency through intelligent orchestration."
+    },
+    {
+      "concept": "Interface Design",
+      "score": 2,
+      "matched_keywords": [
+        "UI design",
+        "screens"
+      ],
+      "definition": "The design of user interfaces for software and digital products, focusing on visual hierarchy, interaction patterns, and user-centered layouts."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355143"
+}

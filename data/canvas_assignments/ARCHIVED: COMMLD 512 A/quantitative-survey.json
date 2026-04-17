@@ -1,0 +1,33 @@
+{
+  "id": 10733394,
+  "name": "Quantitative Survey",
+  "slug": "quantitative-survey",
+  "due_at": "2025-10-30T00:59:00Z",
+  "points_possible": 0.0,
+  "description_text": "Create a survey based on the information found in your Trader Joe's Personas to select valid candidates for a usability study and to further explore customer behavior.\n\nThe survey should be designed for recruiting users that match information found in your Persona criteria\n\nInclude in your questions at least 5 items found in your Persona that you deem important for filtering what you consider valid candidates.\n\nAsk at least 3 market research related questions that would be used to better understand your Persona audience. These can be either items you wish to verify found in your persona or additional data points you feel would be valuable in marketing to your audience\u00a0\n\nFollow the survey format referenced in this presentation for question structure and how to frame questions. You can also use the attached sample survey as a reference as well.\n\nYour assignment should be a hyperlink to your SurveyMonkey.com survey that you post",
+  "concepts": [
+    "personas",
+    "usability",
+    "user-research",
+    "presentation"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 1,
+      "matched_keywords": [
+        "personas"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Persona Definition",
+      "score": 1,
+      "matched_keywords": [
+        "personas"
+      ],
+      "definition": "Research-based archetypal representations of user segments that embody goals, behaviors, and pain points to guide design decisions."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1828126/assignments/10733394"
+}

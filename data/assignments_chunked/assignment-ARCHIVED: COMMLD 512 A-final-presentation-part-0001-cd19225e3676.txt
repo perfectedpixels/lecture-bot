@@ -1,0 +1,7 @@
+[Assignment: Final Presentation]
+[Course: ARCHIVED: COMMLD 512 A]
+[Concepts: personas, heuristics, usability, user-research, ai-design, presentation]
+[Aligned Teaching Concepts: Prototyping, User Research Methods, Interface Design]
+[Due: 2025-12-09T01:59:00Z]
+
+What main heuristics were a concern Highlight the top categories of issues and show examples that reinforce with examples. What was successful and worth leveraging Use Likert scoring to reinforce it Reinforce findings that illustrate the problem Fail rate or time to complete task Approval rating via Net Promoter scoring Humanize the story Give quotes or show video Make recommendations that address the initial problems cited

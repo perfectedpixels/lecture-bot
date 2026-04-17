@@ -1,0 +1,1224 @@
+[
+  {
+    "course_id": "1892213",
+    "course_name": "COMMLD 515 (Levine) Advanced User Design",
+    "course_code": "COMMLD 515 A",
+    "assignments": [
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Product Pitch",
+        "slug": "product-pitch",
+        "due_at": "2026-04-09T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "prototyping",
+          "ai-design",
+          "presentation",
+          "accessibility"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 2,
+            "keywords": [
+              "workflow",
+              "AI"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "interface"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 1,
+            "keywords": [
+              "clarity"
+            ]
+          },
+          {
+            "concept": "AI Ethics",
+            "score": 1,
+            "keywords": [
+              "transparency"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "User Persona",
+        "slug": "user-persona",
+        "due_at": "2026-04-16T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "user-research",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 4,
+            "keywords": [
+              "interviews",
+              "surveys",
+              "observation",
+              "personas"
+            ]
+          },
+          {
+            "concept": "Persona Definition",
+            "score": 3,
+            "keywords": [
+              "personas",
+              "user personas",
+              "persona definition"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "components"
+            ]
+          },
+          {
+            "concept": "Interaction Design",
+            "score": 1,
+            "keywords": [
+              "interaction design"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Customer Journey Map & Product Experience Storyboard",
+        "slug": "customer-journey-map-product-experience-storyboard",
+        "due_at": "2026-04-23T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "design-thinking",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Journey Mapping",
+            "score": 4,
+            "keywords": [
+              "journey map",
+              "customer journey",
+              "user journey",
+              "touchpoints"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 2,
+            "keywords": [
+              "automation",
+              "AI"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "empathy mapping"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "screens"
+            ]
+          },
+          {
+            "concept": "Persona Definition",
+            "score": 1,
+            "keywords": [
+              "empathy mapping"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Paper Prototype (2 of 2)",
+        "slug": "paper-prototype-2-of-2",
+        "due_at": "2026-04-30T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "prototyping",
+          "design-thinking",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Prototyping",
+            "score": 3,
+            "keywords": [
+              "prototype",
+              "mockups",
+              "low-fidelity"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 2,
+            "keywords": [
+              "screens",
+              "components"
+            ]
+          },
+          {
+            "concept": "Journey Mapping",
+            "score": 2,
+            "keywords": [
+              "journey map",
+              "customer journey"
+            ]
+          },
+          {
+            "concept": "Information Architecture",
+            "score": 1,
+            "keywords": [
+              "navigation"
+            ]
+          },
+          {
+            "concept": "Interaction Design",
+            "score": 1,
+            "keywords": [
+              "interactions"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "AI Agent Persona (1 of 2)",
+        "slug": "ai-agent-persona-1-of-2",
+        "due_at": "2026-04-30T06:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "design-thinking",
+          "ai-design",
+          "presentation",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Usability Testing",
+            "score": 2,
+            "keywords": [
+              "testing",
+              "iteration"
+            ]
+          },
+          {
+            "concept": "Journey Mapping",
+            "score": 2,
+            "keywords": [
+              "journey map",
+              "user journey"
+            ]
+          },
+          {
+            "concept": "AI Ethics",
+            "score": 2,
+            "keywords": [
+              "transparency",
+              "privacy"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "components"
+            ]
+          },
+          {
+            "concept": "Interaction Design",
+            "score": 1,
+            "keywords": [
+              "interaction design"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "In Class Exercise: User Feedback",
+        "slug": "in-class-exercise-user-feedback",
+        "due_at": "2026-04-30T06:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "user-research",
+          "prototyping",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Usability Testing",
+            "score": 2,
+            "keywords": [
+              "testing",
+              "feedback"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "interviews"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "screens"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          },
+          {
+            "concept": "Interaction Design",
+            "score": 1,
+            "keywords": [
+              "interactions"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Wireframes",
+        "slug": "wireframes",
+        "due_at": "2026-05-07T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "prototyping",
+          "ai-design",
+          "presentation",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 4,
+            "keywords": [
+              "navigation",
+              "findability",
+              "wireframes",
+              "information hierarchy"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 3,
+            "keywords": [
+              "prototype",
+              "wireframes",
+              "low-fidelity"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 3,
+            "keywords": [
+              "clarity",
+              "focus",
+              "reduction"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 3,
+            "keywords": [
+              "automation",
+              "AI",
+              "efficiency"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 2,
+            "keywords": [
+              "UI design",
+              "screens"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Interview Script",
+        "slug": "interview-script",
+        "due_at": "2026-05-21T06:59:00Z",
+        "points": 2.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "user-research",
+          "prototyping",
+          "ai-design",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "feedback"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Qualitative Study",
+        "slug": "qualitative-study",
+        "due_at": "2026-05-21T06:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "user-research",
+          "prototyping",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 2,
+            "keywords": [
+              "navigation",
+              "findability"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 2,
+            "keywords": [
+              "testing",
+              "feedback"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 2,
+            "keywords": [
+              "prototype",
+              "mockups"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 2,
+            "keywords": [
+              "AI",
+              "efficiency"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "interviews"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "LLM Prompter Prototype",
+        "slug": "llm-prompter-prototype",
+        "due_at": "2026-05-28T02:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "prototyping",
+          "design-thinking",
+          "ai-design",
+          "presentation",
+          "branding",
+          "accessibility"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 2,
+            "keywords": [
+              "workflow",
+              "AI"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "testing"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          },
+          {
+            "concept": "Journey Mapping",
+            "score": 1,
+            "keywords": [
+              "journey map"
+            ]
+          },
+          {
+            "concept": "Accessibility",
+            "score": 1,
+            "keywords": [
+              "accessibility"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Final Presentation",
+        "slug": "final-presentation",
+        "due_at": "2026-06-04T01:59:00Z",
+        "points": 2.0,
+        "concepts": [
+          "personas",
+          "prototyping",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 1,
+            "keywords": [
+              "navigation"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "feedback"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          },
+          {
+            "concept": "Journey Mapping",
+            "score": 1,
+            "keywords": [
+              "customer journey"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "COMMLD 515 A",
+        "assignment": "Final Prototype",
+        "slug": "final-prototype",
+        "due_at": "2026-06-04T01:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "usability",
+          "user-research",
+          "prototyping"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 3,
+            "keywords": [
+              "interviews",
+              "usability testing",
+              "personas"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 3,
+            "keywords": [
+              "usability testing",
+              "testing",
+              "feedback"
+            ]
+          },
+          {
+            "concept": "Persona Definition",
+            "score": 1,
+            "keywords": [
+              "personas"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "course_id": "1828126",
+    "course_name": "ARCHIVED: COMMLD 512 (Levine) UX Research & Strategy (Autumn 25)",
+    "course_code": "ARCHIVED: COMMLD 512 A",
+    "assignments": [
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Detecting User Issues",
+        "slug": "detecting-user-issues",
+        "due_at": "2025-10-07T01:00:00Z",
+        "points": 4.0,
+        "concepts": [
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 2,
+            "keywords": [
+              "AI",
+              "efficiency"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "observation"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "evaluation"
+            ]
+          },
+          {
+            "concept": "Design Thinking",
+            "score": 1,
+            "keywords": [
+              "empathy"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 1,
+            "keywords": [
+              "clarity"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Identifying Design Principles",
+        "slug": "identifying-design-principles",
+        "due_at": "2025-10-14T00:55:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "usability",
+          "ai-design",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Visual Design",
+            "score": 6,
+            "keywords": [
+              "visual design",
+              "typography",
+              "color",
+              "imagery",
+              "composition",
+              "aesthetics"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 3,
+            "keywords": [
+              "screens",
+              "interface",
+              "visual design"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 2,
+            "keywords": [
+              "clarity",
+              "focus"
+            ]
+          },
+          {
+            "concept": "Information Architecture",
+            "score": 1,
+            "keywords": [
+              "navigation"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "observation"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Building User Personas",
+        "slug": "building-user-personas",
+        "due_at": "2025-10-21T00:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "ai-design",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 2,
+            "keywords": [
+              "observation",
+              "personas"
+            ]
+          },
+          {
+            "concept": "Persona Definition",
+            "score": 2,
+            "keywords": [
+              "personas",
+              "user personas"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 2,
+            "keywords": [
+              "simplification",
+              "clarity"
+            ]
+          },
+          {
+            "concept": "Interaction Design",
+            "score": 1,
+            "keywords": [
+              "interaction design"
+            ]
+          },
+          {
+            "concept": "Design Thinking",
+            "score": 1,
+            "keywords": [
+              "innovation"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Heuristics Report",
+        "slug": "heuristics-report",
+        "due_at": "2025-10-28T01:30:00Z",
+        "points": 4.0,
+        "concepts": [
+          "heuristics",
+          "usability",
+          "ai-design",
+          "accessibility"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 2,
+            "keywords": [
+              "navigation",
+              "findability"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "screens"
+            ]
+          },
+          {
+            "concept": "Accessibility",
+            "score": 1,
+            "keywords": [
+              "accessibility"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 1,
+            "keywords": [
+              "clarity"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Cognitive Walkthrough",
+        "slug": "cognitive-walkthrough",
+        "due_at": "2025-10-30T00:59:00Z",
+        "points": 0.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "ai-design"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Quantitative Survey",
+        "slug": "quantitative-survey",
+        "due_at": "2025-10-30T00:59:00Z",
+        "points": 0.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "user-research",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "personas"
+            ]
+          },
+          {
+            "concept": "Persona Definition",
+            "score": 1,
+            "keywords": [
+              "personas"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Write a Usability Script",
+        "slug": "write-a-usability-script",
+        "due_at": "2025-11-04T07:00:00Z",
+        "points": 4.0,
+        "concepts": [
+          "heuristics",
+          "usability",
+          "user-research",
+          "ai-design",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 1,
+            "keywords": [
+              "navigation"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "evaluation"
+            ]
+          },
+          {
+            "concept": "Data-Driven Design",
+            "score": 1,
+            "keywords": [
+              "metrics"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 1,
+            "keywords": [
+              "clarity"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Buddy TV User Interviews",
+        "slug": "buddy-tv-user-interviews",
+        "due_at": "2025-11-12T07:00:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "user-research",
+          "prototyping",
+          "design-thinking",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "interviews"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "screens"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "mockups"
+            ]
+          },
+          {
+            "concept": "Simplification & Clarity",
+            "score": 1,
+            "keywords": [
+              "focus"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 3
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Target Persona & Heuristics",
+        "slug": "target-persona-heuristics",
+        "due_at": "2025-11-18T05:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Usability Script",
+        "slug": "usability-script",
+        "due_at": "2025-11-25T07:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "usability",
+          "user-research",
+          "prototyping",
+          "presentation",
+          "branding"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Information Architecture",
+            "score": 2,
+            "keywords": [
+              "navigation",
+              "findability"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "interviews"
+            ]
+          },
+          {
+            "concept": "Usability Testing",
+            "score": 1,
+            "keywords": [
+              "feedback"
+            ]
+          },
+          {
+            "concept": "Branding & Identity",
+            "score": 1,
+            "keywords": [
+              "branding"
+            ]
+          },
+          {
+            "concept": "Prototyping",
+            "score": 1,
+            "keywords": [
+              "prototype"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "User Survey",
+        "slug": "user-survey",
+        "due_at": "2025-11-25T07:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "usability",
+          "user-research",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "surveys"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 1
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Usability Test Responses",
+        "slug": "usability-test-responses",
+        "due_at": "2025-12-02T01:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "usability",
+          "user-research"
+        ],
+        "top_lecture_alignments": [],
+        "chunk_count": 1
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Final Presentation",
+        "slug": "final-presentation",
+        "due_at": "2025-12-09T01:59:00Z",
+        "points": 4.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "usability",
+          "user-research",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Prototyping",
+            "score": 2,
+            "keywords": [
+              "low-fidelity",
+              "high-fidelity"
+            ]
+          },
+          {
+            "concept": "User Research Methods",
+            "score": 1,
+            "keywords": [
+              "surveys"
+            ]
+          },
+          {
+            "concept": "Interface Design",
+            "score": 1,
+            "keywords": [
+              "screens"
+            ]
+          },
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      },
+      {
+        "course": "ARCHIVED: COMMLD 512 A",
+        "assignment": "Final Project Kick Off ",
+        "slug": "final-project-kick-off",
+        "due_at": null,
+        "points": 0.0,
+        "concepts": [
+          "personas",
+          "heuristics",
+          "usability",
+          "user-research",
+          "ai-design",
+          "presentation"
+        ],
+        "top_lecture_alignments": [
+          {
+            "concept": "Workflow Automation",
+            "score": 1,
+            "keywords": [
+              "AI"
+            ]
+          }
+        ],
+        "chunk_count": 2
+      }
+    ]
+  }
+]

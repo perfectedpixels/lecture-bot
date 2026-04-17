@@ -1,0 +1,7 @@
+[Assignment: Customer Journey Map & Product Experience Storyboard]
+[Course: COMMLD 515 A]
+[Concepts: personas, design-thinking, ai-design, presentation]
+[Aligned Teaching Concepts: Journey Mapping, Workflow Automation, User Research Methods]
+[Due: 2026-04-23T00:59:00Z]
+
+Sample Journey Maps: Customer Journey Map_SushiTrain.pdf Example here: https://uxpressia.com/page-cjm/templates/Bespoke-manufacturing-in-healthcare-CJM-large.png References: What is a Customer Journey Storyboarding in UX Design Flexcar customer journey voting sample https://uxpressia.com/customer-journey-map-online-tool

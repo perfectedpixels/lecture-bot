@@ -1,0 +1,7 @@
+[Assignment: User Persona]
+[Course: COMMLD 515 A]
+[Concepts: personas, user-research, ai-design, presentation]
+[Aligned Teaching Concepts: User Research Methods, Persona Definition, Interface Design]
+[Due: 2026-04-16T00:59:00Z]
+
+through Goal Directed Design (Jobs to be Done) From those conclusions, write up the framework for your user persona which must contain: Required Components General demographics Audience-specific criteria relevant to your product domain 3–4 primary user goals / motivations describing your persona's motivation, purpose for needing and using the product and what the specific anxieties or problems they are looking to overcome. 4–5 high-level use cases or Jobs to Be Done Pain points and frictions, explicitly tied to your Working Backwards Pitch A representative quote capturing the core customer problem A persona photo Background narrative, including: Motivation for using the product Context of use Anxieties, constraints, or blockers Cited research and explanation of how it informed the persona Your Generative AI features that meet those needs Sample Personas: Personas-Elevate.pdf Corbis user personas.pdf Recommended Reading: Guide to Building Personas (Links to an external site.) Interaction Design Foundation article on Personas (Links to an external site.) Creating Personas for UX (Links to an external site.)

@@ -1,0 +1,5 @@
+[Assignment: Heuristics Report]
+[Course: COMMLD-512]
+[Concepts: heuristics, usability, ai-design]
+
+in this course, submissions that read as technically perfect but lacking original synthesis (e.g. verbatim ChatGPT) may receive a deduction. Reference Materials the sample project ESD Heuristics Report.docx 10 Usability Heuristics https://www.nngroup.com/articles/ten-usability-heuristics/ https://m3.material.io/foundations/content-design/style-guide/ux-writing-best-practices On a Mac, (CTRL-CMD-SHFT-4) will copy what you select to the clipboard, (CMD-SHFT-4) will create a screenshot file on your desktop On a PC, you can use the Snipping Tool found in the Utilities folder. Have your assignment in either Microsoft Word or Google Docs. Please make sure your grammar and spelling are impeccable. Recommended Reading: Don’t Make Me Think Chapters 6 & 7 Laws of UX Reference Site

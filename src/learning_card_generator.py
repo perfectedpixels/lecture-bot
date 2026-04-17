@@ -192,13 +192,17 @@ Available Teaching Concepts:
 
 Identify the 3-5 most relevant teaching concepts that relate to the topics actually discussed in the answer.
 Focus on concepts that were explained or demonstrated in the response, not just mentioned in the question.
-For each, explain WHY it's relevant based on the answer content in one sentence.
+
+For each concept, provide:
+- "concept": the concept name
+- "statement": ONE short sentence (max 12 words) describing what the concept is or why it matters. Write a direct statement about the topic. Do NOT start with "The answer discusses", "This relates to", or "The entire answer is focused on". Examples: "Core method for evaluating interfaces with real users" or "Framework for understanding user needs and pain points"
+- "confidence": 0.0-1.0
 
 Return ONLY valid JSON:
 [
   {{
     "concept": "concept name",
-    "relevance": "why it's relevant based on the answer",
+    "statement": "one short direct statement about the concept (max 12 words)",
     "confidence": 0.0-1.0
   }}
 ]
@@ -220,13 +224,15 @@ Return ONLY valid JSON:
             json_end = content.rfind(']') + 1
             concepts = json.loads(content[json_start:json_end])
             
-            # Enrich with full concept data
+            # Enrich with full concept data; use statement or fall back to relevance
             enriched = []
             for item in concepts:
                 concept_name = item['concept']
                 if concept_name in self.teaching_concepts:
+                    stmt = item.get('statement') or item.get('relevance', '')
                     enriched.append({
                         **item,
+                        'statement': stmt,
                         'definition': self.teaching_concepts[concept_name].get('definition', ''),
                         'key_principles': self.teaching_concepts[concept_name].get('key_principles', [])[:3]
                     })
@@ -360,10 +366,19 @@ Return ONLY valid JSON:
                     'phase': img.get('phase', 'unknown')
                 })
             
+            # Build single display statement from reasons
+            reasons = item['reasons']
+            if reasons:
+                best = next((r for r in reasons if 'demonstrates' in r.lower() or 'shows' in r.lower() or 'example of' in r.lower()), reasons[0])
+                statement = best if len(best) <= 60 else best[:57] + "..."
+            else:
+                statement = "Real-world application example"
+            
             results.append({
                 'project_key': item['project_key'],
                 'title': project_data.get('title', item['project_key']),
-                'reasons': item['reasons'],
+                'reasons': reasons,
+                'statement': statement,
                 'images': images,
                 'lecture_mentions': len(project_data.get('lecture_mentions', [])),
                 'confidence': item['confidence']
@@ -389,9 +404,8 @@ Return ONLY valid JSON:
         # Add teaching concepts
         for concept in cards.get('teaching_concepts', []):
             if concept.get('confidence', 0) >= min_confidence:
-                # Create 10-word summary from relevance
-                summary_words = concept.get('relevance', '').split()[:10]
-                summary = ' '.join(summary_words)
+                # Use statement (preferred) or relevance
+                summary = (concept.get('statement') or concept.get('relevance', ''))[:80]
                 
                 all_topics.append({
                     'type': 'concept',

@@ -1,0 +1,54 @@
+{
+  "id": 11355135,
+  "name": "Final Prototype",
+  "slug": "final-prototype",
+  "due_at": "2026-06-04T01:59:00Z",
+  "points_possible": 4.0,
+  "description_text": "Final Clickable Prototype. This should be as fully realized as possible with no no dead clicks (key parts to the experience not wired up), and full completion of all use cases and scenarios already outlined. You DO NOT need to show every element per page or all content to be clickable.\n\nChange Log. A document listing what you changed based on usability testing and feedback, \u00a0and your Justifications/Reasoning for your solutions\n\nPersona Revisions. Any learnings from interviews or other anecdotes that informed changing\u00a0the original personas you received.\u00a0\n\nYour\u00a0final prototype will be graded for the level of quality of the work you produce. Specifically, you will be scrutinized for the simplicity of the design, solving correctly and elegantly your use cases and resolving any heuristic or aesthetic problems. Check out these UI Pattens as inspiration\n\nNote: To help with receiving feedback from classmates or from the instructor outside class hours. record your walkthrough, and use this tool: https://annotator.perfectpixels.com/\u00a0 (optional)\n\n\u00a0\n\nExample of a 4.0 final prototype:\nhttps://www.figma.com/proto/47zvdA4cniSbuonFgjnb18/Figma-Fidelities-Design?page-id=962%3A22902&type=design&node-id=962-26195&viewport=-1459%2C1277%2C0.55&scaling=scale-down&starting-point-node-id=962%3A26195",
+  "concepts": [
+    "personas",
+    "heuristics",
+    "usability",
+    "user-research",
+    "prototyping"
+  ],
+  "lecture_alignment": [
+    {
+      "concept": "User Research Methods",
+      "score": 3,
+      "matched_keywords": [
+        "interviews",
+        "usability testing",
+        "personas"
+      ],
+      "definition": "Systematic investigation of users, their needs, behaviors, and contexts to inform design decisions through qualitative and quantitative methods."
+    },
+    {
+      "concept": "Usability Testing",
+      "score": 3,
+      "matched_keywords": [
+        "usability testing",
+        "testing",
+        "feedback"
+      ],
+      "definition": "Evaluative research method where representative users attempt tasks with a product to identify usability issues and measure performance."
+    },
+    {
+      "concept": "Persona Definition",
+      "score": 1,
+      "matched_keywords": [
+        "personas"
+      ],
+      "definition": "Research-based archetypal representations of user segments that embody goals, behaviors, and pain points to guide design decisions."
+    },
+    {
+      "concept": "Prototyping",
+      "score": 1,
+      "matched_keywords": [
+        "prototype"
+      ],
+      "definition": "Creating interactive representations of designs at varying levels of fidelity to test concepts, gather feedback, and communicate ideas."
+    }
+  ],
+  "html_url": "https://canvas.uw.edu/courses/1892213/assignments/11355135"
+}

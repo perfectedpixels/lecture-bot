@@ -76,12 +76,9 @@ def chunk_text(text: str, chunk_size: int, overlap: int) -> List[str]:
 
 
 def target_key(prefix: str, source_key: str, part_idx: int) -> str:
-    basename = source_key.split("/")[-1]
+    """Short keys to avoid S3 Vectors 2048-byte filterable metadata limit."""
     src_hash = hashlib.sha1(source_key.encode("utf-8")).hexdigest()[:12]
-    safe_name = "".join(
-        ch if ch.isalnum() else "-" for ch in basename.lower()
-    ).strip("-")
-    return f"{prefix.rstrip('/')}/{safe_name}-{src_hash}-part-{part_idx:04}.txt"
+    return f"{prefix.rstrip('/')}/{src_hash}-{part_idx:04}.txt"
 
 
 def main() -> None:
@@ -128,9 +125,11 @@ def main() -> None:
             continue
 
         source_out = {"key": source.key, "size": source.size, "chunks": []}
+        # Use short source ref to avoid 2048-byte filterable metadata limit
+        source_ref = source.key.split("/")[-1][:80] if "/" in source.key else source.key[:80]
         for idx, chunk in enumerate(chunks):
             key = target_key(args.target_prefix, source.key, idx)
-            body = f"Source: {source.key}\n\n{chunk}\n".encode("utf-8")
+            body = f"Source: {source_ref}\n\n{chunk}\n".encode("utf-8")
             s3.put_object(
                 Bucket=args.bucket,
                 Key=key,

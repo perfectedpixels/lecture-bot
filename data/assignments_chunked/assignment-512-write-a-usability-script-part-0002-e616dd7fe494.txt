@@ -1,0 +1,5 @@
+[Assignment: Write A Usability Script]
+[Course: COMMLD-512]
+[Concepts: heuristics, usability, user-research, ai-design]
+
+Readable, replicable script using proper moderator language and closure. Tips on what to avoid: Leading participants (“Click on Amazon Fresh and tell me…”). Failing to list measurable success criteria. Asking compound or yes-bias questions. Overly specific tasks that test navigation, not comprehension. Neglecting satisfaction metrics or follow-up evaluation. Reference Materials: For reference watch the following demo usability tests: https://www.youtube.com/watch?v=VTW1yYUqBm8 and review the following sample usability scripts: Artizone usability script Workforce Explorer Usability script Recommended Reading: Rocket Surgery Made Easy: Chapters 6-8 UX Research Week 6.pdf Tips for writing a better usability test Using System Usability Scale

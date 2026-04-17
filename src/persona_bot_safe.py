@@ -259,7 +259,14 @@ Your response:"""
 
         return persona_prompt
     
-    def query(self, question: str, max_results: int = 5, use_persona: bool = True, exclude_projects: List[str] = None) -> dict:
+    def query(
+        self,
+        question: str,
+        max_results: int = 5,
+        use_persona: bool = True,
+        exclude_projects: List[str] = None,
+        response_language: str = "en",
+    ) -> dict:
         """
         Query with safety checks, persona, and affinity-based context.
         
@@ -317,6 +324,12 @@ Your response:"""
             prompt = self._build_persona_prompt(question, context, relevant_concepts)
         else:
             prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer:"
+
+        if response_language == "zh":
+            prompt += (
+                "\n\n重要：学生可能用中文或英文提问。请用简体中文（简体字）完整作答，"
+                "讲授内容原文可能是英文，请用中文解释清楚。"
+            )
         
         # Generate answer
         model_response = self.bedrock_runtime.invoke_model(

@@ -1,0 +1,7 @@
+[Assignment: Final Prototype]
+[Course: COMMLD 515 A]
+[Concepts: personas, heuristics, usability, user-research, prototyping]
+[Aligned Teaching Concepts: User Research Methods, Usability Testing, Persona Definition]
+[Due: 2026-06-04T01:59:00Z]
+
+Final Prototype Final Clickable Prototype. This should be as fully realized as possible with no no dead clicks (key parts to the experience not wired up), and full completion of all use cases and scenarios already outlined. You DO NOT need to show every element per page or all content to be clickable. Change Log. A document listing what you changed based on usability testing and feedback, and your Justifications/Reasoning for your solutions Persona Revisions. Any learnings from interviews or other anecdotes that informed changing the original personas you received. Your final prototype will be graded for the level of quality of the work you produce. Specifically, you will be scrutinized for the simplicity of the design, solving correctly and elegantly your use cases and resolving any heuristic or aesthetic problems. Check out these UI Pattens as inspiration Note: To help with receiving feedback from classmates or from the instructor outside class hours. record your walkthrough, and use this tool: https://annotator.perfectpixels.com/ (optional) Example of a 4.0 final prototype: https://www.figma.com/proto/47zvdA4cniSbuonFgjnb18/Figma-Fidelities-Design?page-id=962%3A22902&type=design&node-id=962-26195&viewport=-1459%2C1277%2C0.55&scaling=scale-down&starting-point-node-id=962%3A26195
