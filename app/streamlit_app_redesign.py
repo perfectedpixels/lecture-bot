@@ -669,40 +669,57 @@ if st.session_state.bot is None and HAS_FAST_BOT:
             except:
                 pass
 
-# Top Navigation Bar - Clean and minimal
+# Top Navigation Bar with language toggle
+_lang = st.session_state.ui_language
+_en_style = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "en" else "background:transparent;color:rgba(255,255,255,0.6);"
+_zh_style = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "zh" else "background:transparent;color:rgba(255,255,255,0.6);"
+_lang_buttons = f"""
+<div class="nav-controls">
+    <a href="?lang=en" target="_self" class="lang-btn" style="{_en_style}">EN</a>
+    <a href="?lang=zh" target="_self" class="lang-btn" style="{_zh_style}">中文</a>
+</div>
+"""
+
 if logo_image:
     st.markdown(f"""
+    <style>
+    .lang-btn {{
+        display:inline-block; padding:4px 12px; border-radius:4px;
+        font-size:12px; text-decoration:none; border:1px solid rgba(255,255,255,0.4);
+        margin-left:6px; transition:opacity 0.2s;
+    }}
+    .lang-btn:hover {{ opacity:0.8; }}
+    </style>
     <div class="top-nav">
         <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
+        {_lang_buttons}
     </div>
     """, unsafe_allow_html=True)
 else:
-    st.markdown("""
+    st.markdown(f"""
+    <style>
+    .lang-btn {{
+        display:inline-block; padding:4px 12px; border-radius:4px;
+        font-size:12px; text-decoration:none; border:1px solid rgba(255,255,255,0.4);
+        margin-left:6px; transition:opacity 0.2s;
+    }}
+    .lang-btn:hover {{ opacity:0.8; }}
+    </style>
     <div class="top-nav">
         <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
+        {_lang_buttons}
     </div>
     """, unsafe_allow_html=True)
 
-# Language toggle below the nav (always visible, not in sidebar)
-_nav_col1, _nav_col2, _nav_col3 = st.columns([8, 1, 1])
-with _nav_col2:
-    if st.button(
-        "EN",
-        key="nav_lang_en",
-        use_container_width=True,
-        type="primary" if st.session_state.ui_language == "en" else "secondary",
-    ):
-        st.session_state.ui_language = "en"
+# Handle language switch via query param
+_params = st.query_params
+if _params.get("lang") in ("en", "zh"):
+    if st.session_state.ui_language != _params["lang"]:
+        st.session_state.ui_language = _params["lang"]
+        st.query_params.clear()
         st.rerun()
-with _nav_col3:
-    if st.button(
-        "中文",
-        key="nav_lang_zh",
-        use_container_width=True,
-        type="primary" if st.session_state.ui_language == "zh" else "secondary",
-    ):
-        st.session_state.ui_language = "zh"
-        st.rerun()
+    else:
+        st.query_params.clear()
 
 # Sidebar Settings
 with st.sidebar:
@@ -915,7 +932,20 @@ if st.session_state.pending_question:
 
 # Welcome message if no chat history
 if not st.session_state.chat_history:
-    # --- Homework Help button for upcoming assignment ---
+    st.markdown("""
+    <div class="welcome-text">
+        <h2>Welcome to Lecture Bot!</h2>
+        <p>I'm Professor Levine's AI assistant, based on 100+ hours of lecture material. I can help you with:</p>
+        <ul>
+            <li>Course content and lecture materials</li>
+            <li>UX design principles and methodologies</li>
+            <li>Assignment guidance and clarification</li>
+            <li>Portfolio examples and case studies</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # --- Homework Help button for upcoming assignment (below intro) ---
     _upcoming = st.session_state.get("upcoming_assignment")
     if _upcoming and isinstance(_upcoming, dict):
         _hw_label = (
@@ -929,32 +959,20 @@ if not st.session_state.chat_history:
             else f"Due: {_upcoming['due_display']}"
         )
         st.markdown(f"""
-        <div class="welcome-text" style="padding: 20px; margin-bottom: 10px;">
-            <h3 style="margin: 0 0 6px 0;">📝 Upcoming Assignment</h3>
-            <p style="margin: 0; font-size: 18px; font-weight: 600;">{_upcoming['name']}</p>
-            <p style="margin: 4px 0 12px 0; opacity: 0.8; font-size: 14px;">{_hw_due} · {_upcoming['points']} pts</p>
+        <div style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.25);
+                    border-radius:10px; padding:12px 18px; max-width:500px; margin:10px auto;">
+            <p style="margin:0; font-size:13px; font-weight:600; color:white;">📝 Upcoming Assignment</p>
+            <p style="margin:2px 0 0; font-size:15px; font-weight:700; color:white;">{_upcoming['name']}</p>
+            <p style="margin:2px 0 8px; font-size:12px; opacity:0.7; color:white;">{_hw_due} · {_upcoming['points']} pts</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button(_hw_label, key="hw_help_btn", use_container_width=True, type="primary"):
+        if st.button(_hw_label, key="hw_help_btn", use_container_width=False):
             st.session_state.homework_help_mode = True
             if st.session_state.ui_language == "zh":
                 st.session_state.pending_question = f"我正在做「{_upcoming['name']}」这个作业。请帮我理解评分标准以及如何拿到高分。"
             else:
                 st.session_state.pending_question = f"I'm working on the {_upcoming['name']} assignment. Can you help me understand the rubric and what I need to do to get a top score?"
             st.rerun()
-
-    st.markdown("""
-    <div class="welcome-text">
-        <h2>Welcome to Lecture Bot!</h2>
-        <p>I'm Professor Levine's AI assistant, based on 100+ hours of lecture material. I can help you with:</p>
-        <ul>
-            <li>Course content and lecture materials</li>
-            <li>UX design principles and methodologies</li>
-            <li>Assignment guidance and clarification</li>
-            <li>Portfolio examples and case studies</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
 
 # Display chat history
 for idx, chat in enumerate(st.session_state.chat_history):
