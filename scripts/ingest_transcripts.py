@@ -159,6 +159,62 @@ def chunk_text(text: str, max_tokens: int = 400, overlap: int = 50) -> list:
 
 
 # ---------------------------------------------------------------------------
+# S3 duplicate check
+# ---------------------------------------------------------------------------
+
+def get_existing_lecture_names(bucket: str, prefix: str, local_dir: str = OUTPUT_DIR) -> set:
+    """
+    Find lecture names that already have chunks, checking local directories
+    first (fast, no permissions needed) then S3 as fallback.
+    """
+    existing = set()
+    _chunk_re = re.compile(r"^lecture-(.+)-part-\d{4}-[a-f0-9]+\.txt$")
+
+    # 1. Check local chunks directory (new pipeline output)
+    local_path = Path(local_dir)
+    if local_path.exists():
+        for f in local_path.glob("lecture-*.txt"):
+            m = _chunk_re.match(f.name)
+            if m:
+                existing.add(m.group(1))
+
+    # 2. Check done/ folder for previously ingested originals
+    done_path = Path(INPUT_DIR) / "done"
+    if done_path.exists():
+        for f in list(done_path.glob("*.txt")) + list(done_path.glob("*.rtf")):
+            existing.add(f.stem)
+
+    # 3. Check raw_transcripts/ (original pipeline source)
+    raw_path = Path("data/raw_transcripts")
+    if raw_path.exists():
+        for f in list(raw_path.glob("*.txt")) + list(raw_path.glob("*.rtf")):
+            existing.add(f.stem)
+
+    # 4. Check processed_transcripts/ chunk names (old pipeline output)
+    proc_path = Path("data/processed_transcripts")
+    if proc_path.exists():
+        for f in proc_path.glob("*_chunk_000.txt"):
+            # "Amazon Trade-In_chunk_000.txt" → "Amazon Trade-In"
+            existing.add(f.name.replace("_chunk_000.txt", ""))
+
+    # 5. Try S3 as additional check (may fail if ListObjects not permitted)
+    try:
+        s3 = boto3.client("s3")
+        paginator = s3.get_paginator("list_objects_v2")
+        for page in paginator.paginate(Bucket=bucket, Prefix=prefix):
+            for obj in page.get("Contents", []):
+                key = obj["Key"].split("/")[-1]
+                if key.startswith("lecture-"):
+                    m = _chunk_re.match(key)
+                    if m:
+                        existing.add(m.group(1))
+    except Exception:
+        pass  # S3 list not permitted — local checks are sufficient
+
+    return existing
+
+
+# ---------------------------------------------------------------------------
 # S3 upload
 # ---------------------------------------------------------------------------
 
@@ -176,7 +232,7 @@ def upload_chunks(output_dir: str, bucket: str, prefix: str) -> int:
 # Main pipeline
 # ---------------------------------------------------------------------------
 
-def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR):
+def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool = False):
     inp = Path(input_dir)
     out = Path(output_dir)
     inp.mkdir(parents=True, exist_ok=True)
@@ -191,10 +247,29 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR):
 
     print(f"Found {len(files)} file(s) in {input_dir}/\n")
 
+    # Check S3 for existing lectures to avoid duplicates
+    if force:
+        print("--force: skipping duplicate check\n")
+        existing_names = set()
+    else:
+        print("Checking S3 for existing lectures...")
+        existing_names = get_existing_lecture_names(S3_BUCKET, S3_PREFIX)
+        if existing_names:
+            print(f"  Found {len(existing_names)} existing lecture(s) in S3\n")
+        else:
+            print("  No existing lectures found (or S3 check skipped)\n")
+
     all_chunks = []
+    skipped_dupes = []
 
     for filepath in files:
         filename = filepath.stem
+
+        # Dedup: check if this lecture name already has chunks in S3
+        if filename in existing_names:
+            print(f"  ⏭ Skipping {filepath.name} — already in KB (use --force to re-ingest)")
+            skipped_dupes.append(filepath.name)
+            continue
 
         # Read / convert
         if filepath.suffix.lower() == ".rtf":
@@ -251,8 +326,15 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR):
     for f in files:
         f.rename(done / f.name)
     print(f"Moved originals to {done}/")
+
+    if skipped_dupes:
+        print(f"\n⏭ Skipped {len(skipped_dupes)} duplicate(s): {', '.join(skipped_dupes)}")
+        print("  Use --force to re-ingest them.")
+
     print("\nDone! Sync the Bedrock KB in the AWS console to index the new content.")
 
 
 if __name__ == "__main__":
-    ingest()
+    import sys
+    _force = "--force" in sys.argv
+    ingest(force=_force)
