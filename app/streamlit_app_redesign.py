@@ -683,6 +683,27 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
+# Language toggle below the nav (always visible, not in sidebar)
+_nav_col1, _nav_col2, _nav_col3 = st.columns([8, 1, 1])
+with _nav_col2:
+    if st.button(
+        "EN",
+        key="nav_lang_en",
+        use_container_width=True,
+        type="primary" if st.session_state.ui_language == "en" else "secondary",
+    ):
+        st.session_state.ui_language = "en"
+        st.rerun()
+with _nav_col3:
+    if st.button(
+        "中文",
+        key="nav_lang_zh",
+        use_container_width=True,
+        type="primary" if st.session_state.ui_language == "zh" else "secondary",
+    ):
+        st.session_state.ui_language = "zh"
+        st.rerun()
+
 # Sidebar Settings
 with st.sidebar:
     st.title("⚙️ Settings")
@@ -698,26 +719,6 @@ with st.sidebar:
     st.markdown("### Knowledge Base")
     st.caption("HHYCUJH32J (shared)")
     st.session_state.kb_id = "HHYCUJH32J"
-
-    st.markdown("### Language / 语言")
-    st.caption("Reply language (you may type in either language)")
-    lc1, lc2 = st.columns(2)
-    with lc1:
-        if st.button(
-            "English",
-            key="lang_en",
-            use_container_width=True,
-            type="primary" if st.session_state.ui_language == "en" else "secondary",
-        ):
-            st.session_state.ui_language = "en"
-    with lc2:
-        if st.button(
-            "中文",
-            key="lang_zh",
-            use_container_width=True,
-            type="primary" if st.session_state.ui_language == "zh" else "secondary",
-        ):
-            st.session_state.ui_language = "zh"
 
     st.markdown("### Model")
     model_id = st.selectbox(
