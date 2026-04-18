@@ -4,6 +4,20 @@ import os
 import base64
 from pathlib import Path
 
+# Ensure Streamlit Cloud secrets are available as env vars for boto3
+try:
+    _secrets = st.secrets
+    for key in ("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_REGION",
+                "AWS_DEFAULT_REGION", "CANVAS_API_TOKEN", "CANVAS_BASE_URL",
+                "CANVAS_COURSE_IDS"):
+        if key in _secrets and key not in os.environ:
+            os.environ[key] = str(_secrets[key])
+    # boto3 needs AWS_DEFAULT_REGION; copy from AWS_REGION if missing
+    if "AWS_REGION" in os.environ and "AWS_DEFAULT_REGION" not in os.environ:
+        os.environ["AWS_DEFAULT_REGION"] = os.environ["AWS_REGION"]
+except Exception:
+    pass  # Not on Streamlit Cloud or no secrets configured
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
@@ -664,8 +678,9 @@ if st.session_state.bot is None and HAS_FAST_BOT:
 
 # Top Navigation Bar with language toggle
 _lang = st.session_state.ui_language
-_en_sel = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "en" else "background:transparent;color:rgba(255,255,255,0.5);"
-_zh_sel = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "zh" else "background:transparent;color:rgba(255,255,255,0.5);"
+# Active: dark text on white pill. Inactive: faint white text, transparent.
+_en_sel = "background:#fff;color:#34006f;font-weight:700;" if _lang == "en" else "background:transparent;color:rgba(255,255,255,0.45);"
+_zh_sel = "background:#fff;color:#34006f;font-weight:700;" if _lang == "zh" else "background:transparent;color:rgba(255,255,255,0.45);"
 
 _nav_logo = f'<img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">' if logo_image else '<div style="font-size:24px;font-weight:bold;">UW Lecture Bot</div>'
 
@@ -673,31 +688,29 @@ st.markdown(f"""
 <style>
 .lang-pill {{
     display:inline-block; padding:3px 10px; border-radius:4px;
-    font-size:11px; text-decoration:none; border:1px solid rgba(255,255,255,0.35);
-    margin-left:5px; cursor:default; letter-spacing:0.3px;
+    font-size:11px; border:1px solid rgba(255,255,255,0.35);
+    margin-left:5px; cursor:pointer; letter-spacing:0.3px;
+    text-decoration:none;
 }}
+.lang-pill:hover {{ opacity:0.85; }}
 </style>
 <div class="top-nav">
     {_nav_logo}
     <div class="nav-controls">
-        <span class="lang-pill" style="{_en_sel}">EN</span>
-        <span class="lang-pill" style="{_zh_sel}">中文</span>
+        <a href="?set_lang=en" target="_self" class="lang-pill" style="{_en_sel}">EN</a>
+        <a href="?set_lang=zh" target="_self" class="lang-pill" style="{_zh_sel}">中文</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Streamlit buttons for actual toggle (small, right-aligned, below nav)
-_lc1, _lc2, _lc3 = st.columns([14, 1, 1])
-with _lc2:
-    if st.button("EN", key="nav_en", use_container_width=True,
-                 type="primary" if _lang == "en" else "secondary"):
-        st.session_state.ui_language = "en"
-        st.rerun()
-with _lc3:
-    if st.button("中文", key="nav_zh", use_container_width=True,
-                 type="primary" if _lang == "zh" else "secondary"):
-        st.session_state.ui_language = "zh"
-        st.rerun()
+# Process language switch from nav click
+_qp = st.query_params
+if "set_lang" in _qp:
+    _new_lang = _qp["set_lang"]
+    if _new_lang in ("en", "zh") and st.session_state.ui_language != _new_lang:
+        st.session_state.ui_language = _new_lang
+    st.query_params.clear()
+    st.rerun()
 
 # Sidebar Settings
 with st.sidebar:
