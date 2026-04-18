@@ -936,28 +936,24 @@ if not st.session_state.chat_history:
     </div>
     """, unsafe_allow_html=True)
 
-    # --- Homework Help button for upcoming assignment (below intro) ---
+    # --- Homework Help card for upcoming assignment (below intro) ---
     _upcoming = st.session_state.get("upcoming_assignment")
     if _upcoming and isinstance(_upcoming, dict):
-        _hw_label = (
-            f"📝 {_upcoming['name']} 作业帮助"
-            if st.session_state.ui_language == "zh"
-            else f"📝 {_upcoming['name']} Homework Help"
-        )
         _hw_due = (
             f"截止：{_upcoming['due_display']}"
             if st.session_state.ui_language == "zh"
             else f"Due: {_upcoming['due_display']}"
         )
+        _hw_cta = "点击获取作业帮助 →" if st.session_state.ui_language == "zh" else "Get homework help →"
         st.markdown(f"""
         <div style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.25);
-                    border-radius:10px; padding:12px 18px; max-width:500px; margin:10px auto;">
-            <p style="margin:0; font-size:13px; font-weight:600; color:white;">📝 Upcoming Assignment</p>
-            <p style="margin:2px 0 0; font-size:15px; font-weight:700; color:white;">{_upcoming['name']}</p>
-            <p style="margin:2px 0 8px; font-size:12px; opacity:0.7; color:white;">{_hw_due} · {_upcoming['points']} pts</p>
+                    border-radius:10px; padding:14px 18px; max-width:480px; margin:10px auto;">
+            <p style="margin:0; font-size:12px; opacity:0.7; color:white;">📝 Upcoming Assignment</p>
+            <p style="margin:3px 0 0; font-size:15px; font-weight:700; color:white;">{_upcoming['name']}</p>
+            <p style="margin:2px 0 0; font-size:12px; opacity:0.6; color:white;">{_hw_due} · {_upcoming['points']} pts</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button(_hw_label, key="hw_help_btn", use_container_width=False):
+        if st.button(_hw_cta, key="hw_help_btn", use_container_width=False):
             st.session_state.homework_help_mode = True
             if st.session_state.ui_language == "zh":
                 st.session_state.pending_question = f"我正在做「{_upcoming['name']}」这个作业。请帮我理解评分标准以及如何拿到高分。"
