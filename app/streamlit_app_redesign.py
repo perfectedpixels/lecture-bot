@@ -45,19 +45,12 @@ CANVAS_COURSE_MAP = {
 
 
 def _verbosity_instruction(verbosity: str, lang: str) -> str:
-    """Prepended to student message; lang is 'en' or 'zh'."""
-    if lang == "zh":
-        m = {
-            "brief": "请用简短、精炼的中文回答（约2-3句）。直接具体。",
-            "normal": "请用清晰、口语化的中文作答，并结合课程材料中的实例。",
-            "detailed": "请用中文全面作答，包含具体例子、方法论，并引用课程材料与作品集相关内容。",
-        }
-    else:
-        m = {
-            "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
-            "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
-            "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work.",
-        }
+    """Prepended to student message; kept in English even for zh to avoid polluting retrieval."""
+    m = {
+        "brief": "Provide a brief, concise response (2-3 sentences). Be direct and specific.",
+        "normal": "Provide a clear, conversational response with relevant examples from the course materials.",
+        "detailed": "Provide a comprehensive response with specific examples, methodologies, and references to course materials and portfolio work.",
+    }
     return m.get(verbosity, m["normal"])
 
 
@@ -671,55 +664,40 @@ if st.session_state.bot is None and HAS_FAST_BOT:
 
 # Top Navigation Bar with language toggle
 _lang = st.session_state.ui_language
-_en_style = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "en" else "background:transparent;color:rgba(255,255,255,0.6);"
-_zh_style = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "zh" else "background:transparent;color:rgba(255,255,255,0.6);"
-_lang_buttons = f"""
-<div class="nav-controls">
-    <a href="?lang=en" target="_self" class="lang-btn" style="{_en_style}">EN</a>
-    <a href="?lang=zh" target="_self" class="lang-btn" style="{_zh_style}">中文</a>
+_en_sel = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "en" else "background:transparent;color:rgba(255,255,255,0.5);"
+_zh_sel = "background:rgba(255,255,255,0.9);color:#34006f;font-weight:700;" if _lang == "zh" else "background:transparent;color:rgba(255,255,255,0.5);"
+
+_nav_logo = f'<img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">' if logo_image else '<div style="font-size:24px;font-weight:bold;">UW Lecture Bot</div>'
+
+st.markdown(f"""
+<style>
+.lang-pill {{
+    display:inline-block; padding:3px 10px; border-radius:4px;
+    font-size:11px; text-decoration:none; border:1px solid rgba(255,255,255,0.35);
+    margin-left:5px; cursor:default; letter-spacing:0.3px;
+}}
+</style>
+<div class="top-nav">
+    {_nav_logo}
+    <div class="nav-controls">
+        <span class="lang-pill" style="{_en_sel}">EN</span>
+        <span class="lang-pill" style="{_zh_sel}">中文</span>
+    </div>
 </div>
-"""
+""", unsafe_allow_html=True)
 
-if logo_image:
-    st.markdown(f"""
-    <style>
-    .lang-btn {{
-        display:inline-block; padding:4px 12px; border-radius:4px;
-        font-size:12px; text-decoration:none; border:1px solid rgba(255,255,255,0.4);
-        margin-left:6px; transition:opacity 0.2s;
-    }}
-    .lang-btn:hover {{ opacity:0.8; }}
-    </style>
-    <div class="top-nav">
-        <img src="data:image/png;base64,{logo_image}" class="nav-logo" alt="UW Logo">
-        {_lang_buttons}
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown(f"""
-    <style>
-    .lang-btn {{
-        display:inline-block; padding:4px 12px; border-radius:4px;
-        font-size:12px; text-decoration:none; border:1px solid rgba(255,255,255,0.4);
-        margin-left:6px; transition:opacity 0.2s;
-    }}
-    .lang-btn:hover {{ opacity:0.8; }}
-    </style>
-    <div class="top-nav">
-        <div style="font-size: 24px; font-weight: bold;">UW Lecture Bot</div>
-        {_lang_buttons}
-    </div>
-    """, unsafe_allow_html=True)
-
-# Handle language switch via query param
-_params = st.query_params
-if _params.get("lang") in ("en", "zh"):
-    if st.session_state.ui_language != _params["lang"]:
-        st.session_state.ui_language = _params["lang"]
-        st.query_params.clear()
+# Streamlit buttons for actual toggle (small, right-aligned, below nav)
+_lc1, _lc2, _lc3 = st.columns([14, 1, 1])
+with _lc2:
+    if st.button("EN", key="nav_en", use_container_width=True,
+                 type="primary" if _lang == "en" else "secondary"):
+        st.session_state.ui_language = "en"
         st.rerun()
-    else:
-        st.query_params.clear()
+with _lc3:
+    if st.button("中文", key="nav_zh", use_container_width=True,
+                 type="primary" if _lang == "zh" else "secondary"):
+        st.session_state.ui_language = "zh"
+        st.rerun()
 
 # Sidebar Settings
 with st.sidebar:
