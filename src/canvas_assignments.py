@@ -252,12 +252,21 @@ def _build_entry(a: dict, due_dt: datetime) -> Dict:
     if canvas_criteria_count <= 1:
         handbook_rubric = _find_handbook_rubric(name)
 
+    # Convert UTC to Pacific for display (Canvas stores all dates in UTC)
+    try:
+        from zoneinfo import ZoneInfo
+        display_dt = due_dt.astimezone(ZoneInfo("America/Los_Angeles"))
+    except ImportError:
+        # Python < 3.9 fallback: UTC-7 (PDT)
+        from datetime import timedelta as _td
+        display_dt = due_dt - _td(hours=7)
+
     return {
         "id": a["id"],
         "name": name,
         "due_at": a["due_at"],
         "due_dt": due_dt,
-        "due_display": due_dt.strftime("%A, %B %-d"),
+        "due_display": display_dt.strftime("%A, %B %-d"),
         "points": points,
         "description": desc_text,
         "rubric_text": rubric_text,
