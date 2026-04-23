@@ -46,7 +46,7 @@ except ImportError:
     HAS_PORTFOLIO_IMAGES = False
 
 try:
-    from canvas_assignments import get_upcoming_assignment, build_homework_help_prompt
+    from canvas_assignments import get_upcoming_assignment, get_next_due_assignments, build_homework_help_prompt
     HAS_CANVAS = True
 except ImportError:
     HAS_CANVAS = False
@@ -649,6 +649,8 @@ if 'shown_projects' not in st.session_state:
     st.session_state.shown_projects = []  # Track recently shown portfolio examples
 if 'upcoming_assignment' not in st.session_state:
     st.session_state.upcoming_assignment = None
+if 'upcoming_assignments' not in st.session_state:
+    st.session_state.upcoming_assignments = None
 if 'homework_help_mode' not in st.session_state:
     st.session_state.homework_help_mode = False
 if 'portfolio_handler' not in st.session_state:
@@ -792,15 +794,18 @@ with st.sidebar:
 
 # Process chat input BEFORE display (avoids st.rerun() which clears chat in Streamlit 1.35+)
 
-# --- Fetch upcoming assignment from Canvas ---
+# --- Fetch upcoming assignments from Canvas ---
 if HAS_CANVAS and 'course' in st.session_state:
     _canvas_course_id = CANVAS_COURSE_MAP.get(st.session_state.get("course", ""), "")
-    if _canvas_course_id and st.session_state.upcoming_assignment is None:
+    if _canvas_course_id and st.session_state.upcoming_assignments is None:
         try:
-            st.session_state.upcoming_assignment = get_upcoming_assignment(_canvas_course_id)
+            _all_next = get_next_due_assignments(_canvas_course_id)
+            st.session_state.upcoming_assignments = _all_next
+            st.session_state.upcoming_assignment = _all_next[0] if _all_next else False
         except Exception as e:
             print(f"⚠ Canvas fetch failed: {e}")
-            st.session_state.upcoming_assignment = False  # sentinel: tried and failed
+            st.session_state.upcoming_assignments = []
+            st.session_state.upcoming_assignment = False
 
 _chat_placeholder = (
     "向 Levine 教授提问…"
@@ -936,9 +941,11 @@ if not st.session_state.chat_history:
     </div>
     """, unsafe_allow_html=True)
 
-    # --- Homework Help for upcoming assignment (below intro) ---
-    _upcoming = st.session_state.get("upcoming_assignment")
-    if _upcoming and isinstance(_upcoming, dict):
+    # --- Homework Help for upcoming assignments (below intro) ---
+    _upcoming_list = st.session_state.get("upcoming_assignments") or []
+    for _idx, _upcoming in enumerate(_upcoming_list):
+        if not isinstance(_upcoming, dict):
+            continue
         _hw_due = (
             f"截止：{_upcoming['due_display']}"
             if st.session_state.ui_language == "zh"
@@ -949,8 +956,9 @@ if not st.session_state.chat_history:
             if st.session_state.ui_language == "zh"
             else f"📝 {_upcoming['name']}\n{_hw_due} · {_upcoming['points']} pts — Get homework help →"
         )
-        if st.button(_btn_label, key="hw_help_btn", use_container_width=False):
+        if st.button(_btn_label, key=f"hw_help_btn_{_idx}", use_container_width=False):
             st.session_state.homework_help_mode = True
+            st.session_state.upcoming_assignment = _upcoming
             if st.session_state.ui_language == "zh":
                 st.session_state.pending_question = f"我正在做「{_upcoming['name']}」这个作业。请帮我理解评分标准以及如何拿到高分。"
             else:

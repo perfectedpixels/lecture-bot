@@ -172,14 +172,24 @@ def get_upcoming_assignment(course_id: str) -> Optional[Dict]:
     Falls back to the most recently due assignment if none are upcoming.
     Includes rubric text and cleaned description.
     """
+    results = get_next_due_assignments(course_id)
+    return results[0] if results else None
+
+
+def get_next_due_assignments(course_id: str) -> List[Dict]:
+    """
+    Return ALL assignments sharing the next upcoming due date.
+    e.g. if two assignments are both due April 29, returns both.
+    Falls back to the most recent past date if nothing is upcoming.
+    """
     if not CANVAS_API_TOKEN:
-        return None
+        return []
 
     try:
         assignments = fetch_assignments(course_id)
     except Exception as e:
         print(f"⚠ Canvas API error: {e}")
-        return None
+        return []
 
     now = datetime.now(timezone.utc)
     upcoming = []
@@ -203,7 +213,13 @@ def get_upcoming_assignment(course_id: str) -> Optional[Dict]:
     upcoming.sort(key=lambda x: x["due_dt"])
     past.sort(key=lambda x: x["due_dt"], reverse=True)
 
-    return upcoming[0] if upcoming else (past[0] if past else None)
+    pool = upcoming if upcoming else past
+    if not pool:
+        return []
+
+    # Group all assignments that share the same calendar date as the first one
+    first_date = pool[0]["due_display"]
+    return [a for a in pool if a["due_display"] == first_date]
 
 
 def get_all_upcoming(course_id: str) -> List[Dict]:
