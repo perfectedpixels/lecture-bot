@@ -795,17 +795,21 @@ with st.sidebar:
 # Process chat input BEFORE display (avoids st.rerun() which clears chat in Streamlit 1.35+)
 
 # --- Fetch upcoming assignments from Canvas ---
-if HAS_CANVAS and 'course' in st.session_state:
-    _canvas_course_id = CANVAS_COURSE_MAP.get(st.session_state.get("course", ""), "")
-    if _canvas_course_id and st.session_state.upcoming_assignments is None:
-        try:
-            _all_next = get_next_due_assignments(_canvas_course_id)
-            st.session_state.upcoming_assignments = _all_next
-            st.session_state.upcoming_assignment = _all_next[0] if _all_next else False
-        except Exception as e:
-            print(f"⚠ Canvas fetch failed: {e}")
-            st.session_state.upcoming_assignments = []
-            st.session_state.upcoming_assignment = False
+# Default to 515 course if sidebar hasn't rendered yet (it's the first option)
+_course_selection = st.session_state.get("course", "COMMLD 515 - Advanced User Design")
+_canvas_course_id = CANVAS_COURSE_MAP.get(_course_selection, "")
+
+if HAS_CANVAS and _canvas_course_id and st.session_state.upcoming_assignments is None:
+    try:
+        _all_next = get_next_due_assignments(_canvas_course_id)
+        st.session_state.upcoming_assignments = _all_next
+        st.session_state.upcoming_assignment = _all_next[0] if _all_next else False
+        if not _all_next:
+            print(f"⚠ No upcoming assignments returned for course {_canvas_course_id}")
+    except Exception as e:
+        print(f"⚠ Canvas fetch failed: {e}")
+        st.session_state.upcoming_assignments = []
+        st.session_state.upcoming_assignment = False
 
 _chat_placeholder = (
     "向 Levine 教授提问…"
