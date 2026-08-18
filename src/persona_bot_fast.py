@@ -34,7 +34,11 @@ class FastPersonaBot:
         model_id: str = "us.anthropic.claude-sonnet-4-20250514-v1:0",
         persona_name: str = "Professor Levine",
         enable_learning_cards: bool = True,
+        use_haiku: bool = False,
     ):
+        # api/main.py passes use_haiku; honor it by selecting a Haiku model.
+        if use_haiku:
+            model_id = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
         # Get AWS region from environment with fallback
         aws_region = (
             os.environ.get("AWS_REGION")
@@ -376,6 +380,28 @@ class FastPersonaBot:
         self, question: str, context: str, response_language: str = "en"
     ) -> str:
         """Build prompt with lecture-bot persona (teaching/student context)."""
+
+        # Advisor mode (PERSONA_MODE=advisor): a neutral METHODOLOGY KNOWLEDGE
+        # source whose output is consumed by an orchestrator. No teaching persona,
+        # no student framing, no refusals, no Socratic deflection — just the
+        # applicable UX / design-thinking / AI-product methodology, grounded in
+        # the source material.
+        if os.environ.get("PERSONA_MODE", "").lower() == "advisor":
+            return f"""You are a UX, Design-Thinking, and AI-product METHODOLOGY reference. Extract and state the methodology that applies to the request below, grounded in the source material.
+
+OUTPUT:
+- The relevant principles, design-thinking steps, user-centered practices, AI-product methods, and risks that apply — as concrete, actionable guidance.
+- Write in neutral third person ("The standard approach is…", "A strong process would…"). Do NOT use a teaching/lecturer voice or first person ("I teach", "in my lecture", "as I covered").
+- NEVER refuse, never call this an assignment, never ask what the user has already done, never withhold help. Always produce the applicable methodology.
+- Reference concepts from at least two distinct source sections when available. Be concise and decision-focused.
+- If the sources don't cover something, briefly give best-practice methodology guidance anyway.
+
+Methodology source material:
+{context}
+
+Request: {question}
+
+State the applicable methodology guidance."""
 
         lang_block = ""
         if response_language == "zh":
