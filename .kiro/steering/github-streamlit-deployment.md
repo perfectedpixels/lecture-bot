@@ -4,7 +4,11 @@ inclusion: auto
 
 # GitHub & Streamlit Cloud Deployment Instructions
 
-This steering document contains all necessary instructions for storing code to GitHub and hosting through Streamlit Cloud.
+This steering document contains all necessary instructions for storing code to GitHub and hosting through Streamlit Cloud, which is the only supported, documented deployment path for this app today.
+
+### Note: a second, exploratory deployment path exists (not yet supported)
+
+The repo also contains an in-progress FastAPI + React + AWS App Runner path — `api/`, `frontend/`, `Dockerfile`, `deploy-apprunner.sh` — meant to expose the bot as an HTTP API for a separate portfolio project (`ux-team-kb`). As of this writing those files are **uncommitted and exploratory/on hold**: don't treat `deploy-apprunner.sh` as a working deploy script or assume the API is live. Streamlit Cloud (below) remains the real, working deployment. See [lecture-bot-integration.md](lecture-bot-integration.md) for what the API path is intended to do once it's picked back up.
 
 ---
 

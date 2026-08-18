@@ -10,6 +10,45 @@ This steering document provides context for integrating the Jason Levine Lecture
 
 This is a lecture bot system that creates a virtual persona based on Jason Levine's teaching lectures. The bot can answer questions about lecture content and Jason's professional experience as if it were Jason himself.
 
+## Two Integration Methods
+
+There are two ways to bring this bot into another app. Pick based on how tightly the consumer needs to be coupled:
+
+1. **Copy the bot files in** (recommended, current/proven) — see [Integration Checklist](#integration-checklist) below. The consumer vendors `persona_bot_fast.py` etc. directly and calls `bot.query()` in-process. This is what's documented and tested end-to-end.
+2. **Call the HTTP API** (exploratory, not yet deployed) — see [HTTP API Integration](#http-api-integration-exploratory) below. Lower coupling, but the API service isn't live yet.
+
+## HTTP API Integration (exploratory)
+
+`api/main.py` + `Dockerfile` + `deploy-apprunner.sh` package the bot as a standalone FastAPI service meant to run on AWS App Runner and be called server-to-server by `ux-team-kb`'s orchestrator, instead of vendoring bot files into that repo. **As of this writing these files are uncommitted and the service has not been deployed** — treat this as a design reference, not a live integration point, until it's picked back up.
+
+Once deployed, the intended contract is:
+
+```
+POST /api/chat
+{
+  "message": "What is design thinking?",
+  "voice_enabled": true,
+  "project_slug": null,
+  "response_language": "en"   // "en" or "zh"
+}
+
+→ 200 {
+  "answer": "...",
+  "audio_base64": "...",       // present only if voice_enabled and lang == "en"
+  "sources": [...],
+  "relevant_concepts": [...],
+  "suggested_projects": [{"slug": ..., "title": ..., "description": ...}]
+}
+
+GET /api/health?deep=false
+```
+
+Notes for whoever picks this up:
+- Rate-limited per client, 1000-char message cap, `CHAT_TIMEOUT_SECONDS` timeout → 504.
+- CORS is currently locked to `localhost:3000` and `perfectpixels.com` domains in `api/main.py` — add the real `ux-team-kb` origin before it can be called cross-origin.
+- The container pins `BEDROCK_KNOWLEDGE_BASE_ID=HHYCUJH32J` and `AWS_REGION=us-east-1` (see `Dockerfile`); `deploy-apprunner.sh` warns if run outside AWS account `582234715800`.
+- `frontend/` (React/Vite) is a separate, also-uncommitted UI intended to consume this API directly — not the Streamlit app.
+
 ## Current State (March 2026)
 
 ### Knowledge Base Configuration (Current - Shared KB)
@@ -206,9 +245,15 @@ result = cached_bot.query("What is design thinking?", max_results=3)
 - **Cause**: Query too vague or content doesn't exist
 - **Fix**: Make query more specific, add context like "In your lectures about..."
 
+## Related Specs
+
+Active `.kiro/specs/` work that touches this bot's behavior/UI — check their `requirements.md`/`tasks.md` for current status before assuming either is done:
+- `.kiro/specs/ui-refinement/` — nav, hover states, follow-up topic UI, audio toggle, settings modal. Requirements only so far, no design/tasks docs yet.
+- `.kiro/specs/contextual-learning-cards/` — replaces generic "dive deeper" buttons with related-concepts/teaching-concepts/portfolio-example cards. Has requirements, design, and a task list with some items already checked off (e.g. portfolio image tagging, teaching concepts taxonomy) and others still open (e.g. uploading generated JSON to S3) — read `tasks.md` for the current checklist state.
+
 ## Integration Checklist
 
-When integrating into portfolio app:
+When integrating into portfolio app (copy-files method):
 
 - [ ] Copy bot files: `persona_bot_fast.py`, `improved_retrieval.py`, `response_cache.py`
 - [ ] Create `.env` with AWS credentials

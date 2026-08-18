@@ -2,9 +2,20 @@
 inclusion: auto
 ---
 
-# KB Data Pipeline & S3 Vectors Metadata Fix
+# KB Data Pipeline & S3 Vectors Metadata Fix (RESOLVED)
 
-## The Problem
+## ✅ Status: confirmed fixed (verified 2026-08-17)
+
+This was an open incident when originally written; it's now resolved and kept here as a historical reference.
+
+**Verified directly against AWS** (`bedrock-agent:GetKnowledgeBase` + `s3vectors:GetIndex`):
+- `HHYCUJH32J`'s vector index is `arn:...:bucket/perfectpixels-vectors/index/bedrock-kb-index-v2`, with `metadataConfiguration.nonFilterableMetadataKeys` = `["AMAZON_BEDROCK_TEXT", "AMAZON_BEDROCK_METADATA"]` — exactly the fix below.
+- Ingestion history: the three most recent syncs (2026-03-18, 2026-04-17, 2026-04-23) all completed with **0 failures** (5942–6086 documents indexed each time). Only one earlier transitional sync (2026-03-17) still showed failures (12), from before the new index was fully in place.
+- The old KB `SSIRB24COT` referenced elsewhere no longer exists at all (`ResourceNotFoundException` on lookup) — it's not just deprecated, it's gone. If any `.env` or config still points to it, that's a live bug, not a historical detail — check `BEDROCK_KNOWLEDGE_BASE_ID` is set to `HHYCUJH32J`.
+
+No further action needed on the metadata-limit issue itself. The steps below are kept for context in case a *future* index recreation runs into the same limit.
+
+## The Problem (historical)
 
 When syncing Bedrock KB `HHYCUJH32J`, S3 Vectors rejects records with:
 `Filterable metadata must have at most 2048 bytes`
