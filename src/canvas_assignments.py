@@ -222,6 +222,30 @@ def get_next_due_assignments(course_id: str) -> List[Dict]:
     return [a for a in pool if a["due_display"] == first_date]
 
 
+def get_assignment_by_id(course_id: str, assignment_id) -> Optional[Dict]:
+    """Fetch a single assignment by id (for re-grounding a homework-help prompt
+    without trusting client-supplied rubric/description text)."""
+    if not CANVAS_API_TOKEN:
+        return None
+    try:
+        items = _api_get(
+            f"/courses/{course_id}/assignments/{assignment_id}",
+            params={"include[]": "rubric_assessment"},
+        )
+    except Exception as e:
+        print(f"⚠ Canvas API error: {e}")
+        return None
+    if not items:
+        return None
+    a = items[0]
+    due = a.get("due_at")
+    try:
+        due_dt = datetime.fromisoformat(due.replace("Z", "+00:00")) if due else datetime.now(timezone.utc)
+    except ValueError:
+        due_dt = datetime.now(timezone.utc)
+    return _build_entry(a, due_dt)
+
+
 def get_all_upcoming(course_id: str) -> List[Dict]:
     """Return all future assignments, soonest first."""
     if not CANVAS_API_TOKEN:

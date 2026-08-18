@@ -4,7 +4,7 @@ import sys
 import time
 from collections import defaultdict, deque
 from threading import Lock
-from typing import Deque, Dict, List, Optional
+from typing import Any, Deque, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -49,6 +49,31 @@ except ImportError:
     HAS_PROJECT_MAPPER = False
     print("Warning: project_mapper not available")
 
+try:
+    import explore_topic
+    HAS_EXPLORE = True
+except ImportError:
+    HAS_EXPLORE = False
+    print("Warning: explore_topic not available")
+
+try:
+    import boards_store
+    HAS_BOARDS = True
+except ImportError:
+    HAS_BOARDS = False
+    print("Warning: boards_store not available")
+
+try:
+    from canvas_assignments import (
+        get_next_due_assignments,
+        get_assignment_by_id,
+        build_homework_help_prompt,
+    )
+    HAS_CANVAS = True
+except ImportError:
+    HAS_CANVAS = False
+    print("Warning: canvas_assignments not available")
+
 app = FastAPI(title="Lecture Bot API")
 
 app.add_middleware(
@@ -57,6 +82,12 @@ app.add_middleware(
         "http://localhost:3000",
         "https://perfectpixels.com",
         "https://www.perfectpixels.com",
+        # Production frontend (CloudFront + lecturebot.perfectpixels.com). In
+        # normal operation CloudFront proxies /api/* same-origin, so the
+        # browser never actually needs CORS here — this is a safety net for
+        # testing directly against the App Runner URL or the CloudFront
+        # default *.cloudfront.net domain before the custom domain is live.
+        "https://lecturebot.perfectpixels.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -72,6 +103,19 @@ CHAT_TIMEOUT_SECONDS = float(os.environ.get("CHAT_TIMEOUT_SECONDS", "25"))
 RATE_LIMIT_REQUESTS = int(os.environ.get("RATE_LIMIT_REQUESTS", "30"))
 RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("RATE_LIMIT_WINDOW_SECONDS", "60"))
 CHAT_MAX_RESULTS = int(os.environ.get("CHAT_MAX_RESULTS", "6"))
+EXPLORE_TIMEOUT_SECONDS = float(os.environ.get("EXPLORE_TIMEOUT_SECONDS", "30"))
+EXPLORE_MAX_RESULTS = int(os.environ.get("EXPLORE_MAX_RESULTS", "6"))
+BOARD_MAX_TITLE_CHARS = int(os.environ.get("BOARD_MAX_TITLE_CHARS", "200"))
+# Single active course for the homework-help feature (see canvas_assignments.py).
+# Reuses CANVAS_COURSE_IDS (the same comma-separated var scripts/canvas_sync.py
+# reads for bulk KB ingestion) rather than a second, parallel var — this
+# feature just takes the first course in that list as "the active course."
+_CANVAS_COURSE_IDS = [
+    cid.strip()
+    for cid in os.environ.get("CANVAS_COURSE_IDS", "").split(",")
+    if cid.strip()
+]
+CANVAS_COURSE_ID = _CANVAS_COURSE_IDS[0] if _CANVAS_COURSE_IDS else "1916689"
 
 bot = None
 voice_gen = None
@@ -143,6 +187,10 @@ class ChatRequest(BaseModel):
         default="en",
         description='Reply language: "en" (English) or "zh" (简体中文).',
     )
+    assignment_id: Optional[int] = Field(
+        default=None,
+        description="When set, grounds the answer in this Canvas assignment's rubric/description (homework-help mode).",
+    )
 
 
 class ChatResponse(BaseModel):
@@ -177,15 +225,23 @@ async def chat(request: ChatRequest, http_request: Request):
         lang = request.response_language if request.response_language in ("en", "zh") else "en"
 
         def _run_query():
+            query_text = message
+            if request.assignment_id and HAS_CANVAS:
+                try:
+                    assignment = get_assignment_by_id(CANVAS_COURSE_ID, request.assignment_id)
+                    if assignment:
+                        query_text = build_homework_help_prompt(assignment, message, lang)
+                except Exception as e:
+                    print(f"⚠ Homework-help grounding failed, falling back to plain chat: {e}")
             try:
                 return bot.query(
-                    message,
+                    query_text,
                     CHAT_MAX_RESULTS,
                     True,
                     response_language=lang,
                 )
             except TypeError:
-                return bot.query(message, CHAT_MAX_RESULTS, True)
+                return bot.query(query_text, CHAT_MAX_RESULTS, True)
 
         result = await asyncio.wait_for(
             run_in_threadpool(_run_query),
@@ -232,6 +288,237 @@ async def chat(request: ChatRequest, http_request: Request):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail="Internal chat processing error")
+
+
+class AssignmentSummary(BaseModel):
+    id: int
+    name: str
+    due_display: str
+    points: float = 0
+    html_url: str = ""
+
+
+@app.get("/api/assignments/upcoming")
+async def upcoming_assignments():
+    if not HAS_CANVAS:
+        return {"assignments": []}
+    try:
+        results = await run_in_threadpool(get_next_due_assignments, CANVAS_COURSE_ID)
+    except Exception as e:
+        print(f"⚠ Canvas fetch failed: {e}")
+        return {"assignments": []}
+    return {
+        "assignments": [
+            AssignmentSummary(
+                id=a["id"],
+                name=a["name"],
+                due_display=a["due_display"],
+                points=a.get("points") or 0,
+                html_url=a.get("html_url", ""),
+            )
+            for a in results
+        ]
+    }
+
+
+def _explore_bot():
+    """The raw FastPersonaBot instance, bypassing the CachedPersonaBot wrapper
+    (which only proxies a fixed set of methods, not explore_topic.run_explore).
+    Returns None if the initialized bot isn't a FastPersonaBot (e.g. a
+    fallback bot without the private retrieval methods explore needs)."""
+    candidate = getattr(bot, "bot", bot)
+    if candidate is not None and hasattr(candidate, "_retrieve_parallel"):
+        return candidate
+    return None
+
+
+class ExploreRequest(BaseModel):
+    topic: str
+    parent_path: List[str] = []
+    allow_general_fallback: bool = True
+    skip_clarify: bool = False
+
+
+class ExploreCitation(BaseModel):
+    label: str = ""
+    excerpt: str = ""
+    snippet_index: Optional[int] = None
+    location_hint: Optional[str] = None
+
+
+class ExploreCard(BaseModel):
+    id: str
+    title: str
+    paragraph: str
+    concepts: List[str] = []
+    grounded: bool
+    citations: List[ExploreCitation] = []
+    source_note: str
+
+
+class ExploreResponse(BaseModel):
+    mode: str
+    topic: str
+    parent_path: List[str] = []
+    cards: Optional[List[ExploreCard]] = None
+    grounded: Optional[bool] = None
+    summary: Optional[str] = None
+    options: Optional[List[str]] = None
+    retrieval: Dict[str, Any] = {}
+
+
+@app.post("/api/explore", response_model=ExploreResponse)
+async def explore(request: ExploreRequest, http_request: Request):
+    explore_bot = _explore_bot() if HAS_EXPLORE else None
+    if not explore_bot:
+        raise HTTPException(status_code=503, detail="Explore is not available")
+
+    client_id = _client_id_from_request(http_request)
+    if not _check_rate_limit(f"{client_id}:explore"):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Please wait a moment before trying again.",
+        )
+
+    topic = request.topic.strip()
+    if not topic:
+        raise HTTPException(status_code=400, detail="Topic cannot be empty")
+    if len(topic) > 300:
+        raise HTTPException(status_code=400, detail="Topic too long (max 300 characters)")
+
+    parent_path = [str(p).strip()[:200] for p in request.parent_path[:8] if str(p).strip()]
+
+    try:
+        result = await asyncio.wait_for(
+            run_in_threadpool(
+                explore_topic.run_explore,
+                explore_bot,
+                topic,
+                parent_path,
+                request.allow_general_fallback,
+                request.skip_clarify,
+                EXPLORE_MAX_RESULTS,
+            ),
+            timeout=EXPLORE_TIMEOUT_SECONDS,
+        )
+        return ExploreResponse(**result)
+    except asyncio.TimeoutError:
+        raise HTTPException(
+            status_code=504,
+            detail=f"Explore request timed out after {EXPLORE_TIMEOUT_SECONDS:.0f}s",
+        )
+    except Exception:
+        raise HTTPException(status_code=500, detail="Internal explore processing error")
+
+
+class BoardCreateRequest(BaseModel):
+    title: str = "Untitled board"
+    data: Dict[str, Any]
+
+
+class BoardSummary(BaseModel):
+    board_id: str
+    title: str
+    created_at: str
+    updated_at: str
+
+
+class BoardCreateResponse(BaseModel):
+    board: BoardSummary
+    owner_token: str
+
+
+class BoardDetail(BoardSummary):
+    data: Dict[str, Any]
+
+
+class BoardSaveRequest(BaseModel):
+    owner_token: str
+    title: Optional[str] = None
+    data: Optional[Dict[str, Any]] = None
+
+
+class BoardDeleteRequest(BaseModel):
+    owner_token: str
+
+
+def _require_boards():
+    if not HAS_BOARDS:
+        raise HTTPException(status_code=503, detail="Boards are not available")
+
+
+@app.post("/api/boards", response_model=BoardCreateResponse, status_code=201)
+async def create_board(request: BoardCreateRequest, http_request: Request):
+    _require_boards()
+    client_id = _client_id_from_request(http_request)
+    if not _check_rate_limit(f"{client_id}:boards"):
+        raise HTTPException(status_code=429, detail="Rate limit exceeded. Please wait a moment before trying again.")
+
+    title = (request.title or "Untitled board").strip()[:BOARD_MAX_TITLE_CHARS]
+    try:
+        result = await run_in_threadpool(boards_store.create_board, title=title, data=request.data)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Could not create board")
+    return BoardCreateResponse(**result)
+
+
+@app.get("/api/boards/{board_id}")
+async def get_board(board_id: str):
+    _require_boards()
+    board = await run_in_threadpool(boards_store.get_board, board_id)
+    if not board:
+        raise HTTPException(status_code=404, detail="Board not found")
+    return {"board": board}
+
+
+@app.get("/api/boards")
+async def list_boards():
+    _require_boards()
+    boards = await run_in_threadpool(boards_store.list_boards)
+    return {"boards": boards}
+
+
+@app.post("/api/boards/{board_id}/save")
+async def save_board(board_id: str, request: BoardSaveRequest, http_request: Request):
+    _require_boards()
+    client_id = _client_id_from_request(http_request)
+    if not _check_rate_limit(f"{client_id}:boards"):
+        raise HTTPException(status_code=429, detail="Rate limit exceeded. Please wait a moment before trying again.")
+
+    title = request.title.strip()[:BOARD_MAX_TITLE_CHARS] if request.title is not None else None
+    try:
+        result = await run_in_threadpool(
+            boards_store.update_board,
+            board_id,
+            owner_token=request.owner_token,
+            title=title,
+            data=request.data,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Could not save board")
+    if result is None:
+        raise HTTPException(status_code=403, detail="Not authorized to modify this board")
+    return {"board": result}
+
+
+@app.post("/api/boards/{board_id}/delete")
+async def delete_board(board_id: str, request: BoardDeleteRequest, http_request: Request):
+    _require_boards()
+    client_id = _client_id_from_request(http_request)
+    if not _check_rate_limit(f"{client_id}:boards"):
+        raise HTTPException(status_code=429, detail="Rate limit exceeded. Please wait a moment before trying again.")
+
+    try:
+        deleted = await run_in_threadpool(boards_store.delete_board, board_id, owner_token=request.owner_token)
+    except Exception:
+        raise HTTPException(status_code=500, detail="Could not delete board")
+    if not deleted:
+        raise HTTPException(status_code=403, detail="Not authorized to modify this board")
+    return {"deleted": True}
 
 
 @app.get("/api/health")

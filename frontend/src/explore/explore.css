@@ -1,0 +1,46 @@
+/* Structural overrides for React Flow's own DOM (its buttons/background render
+   fixed class names we can't reach with Tailwind utility classes on our JSX).
+   Card/clarify node chrome itself is styled with Tailwind in the components. */
+
+.lb-explore .react-flow__renderer {
+  background: transparent;
+}
+
+.lb-explore .react-flow__controls {
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.lb-explore .react-flow__controls-button {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  fill: #e5d9f2;
+  color: #e5d9f2;
+}
+
+.lb-explore .react-flow__controls-button:hover {
+  background: rgba(157, 78, 221, 0.25);
+}
+
+.lb-explore .react-flow__edge-path {
+  stroke: #9D4EDD;
+  stroke-width: 1.5;
+}
+
+.lb-explore .react-flow__handle {
+  background: #9D4EDD;
+  border: none;
+  width: 8px;
+  height: 8px;
+}
+
+/* Clamp/expand for card paragraphs (Tailwind's line-clamp needs the plugin, so
+   this is done manually to avoid adding another dependency). */
+.lb-card-para.is-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
