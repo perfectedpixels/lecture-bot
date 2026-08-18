@@ -21,7 +21,12 @@ COPY data/portfolio_image_metadata.json /app/data/portfolio_image_metadata.json
 COPY data/grading/grading-handbook-512-515.txt /app/data/grading/grading-handbook-512-515.txt
 
 # KB HHYCUJH32J lives in us-east-1; pin region so boto3 targets it.
+# PYTHONUNBUFFERED: without this, Python fully buffers stdout when it isn't a
+# TTY (i.e. always, in a container) — print() diagnostics (bot init success/
+# failure, learning-card/voice degradation notices) silently vanish from
+# `docker logs`/CloudWatch until the buffer fills or the process exits.
 ENV PORT=8080 \
+    PYTHONUNBUFFERED=1 \
     AWS_DEFAULT_REGION=us-east-1 \
     AWS_REGION=us-east-1 \
     BEDROCK_KNOWLEDGE_BASE_ID=HHYCUJH32J

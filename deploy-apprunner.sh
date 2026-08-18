@@ -39,8 +39,13 @@ CANVAS_BASE_URL="${CANVAS_BASE_URL:-https://canvas.uw.edu}"
 aws ecr describe-repositories --region $REGION --repository-names $REPO >/dev/null 2>&1 \
   || aws ecr create-repository --region $REGION --repository-name $REPO >/dev/null
 aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin "${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com"
-# App Runner runs x86_64 images
-docker build --platform linux/amd64 -t "$IMAGE_TAG" .
+# App Runner runs x86_64 images. --provenance=false: modern Docker attaches a
+# build-provenance attestation by default, which turns the pushed artifact
+# into a multi-entry manifest list (image + attestation) instead of a plain
+# single-platform manifest — App Runner can fail to resolve the real image
+# out of that list (pulls "successfully" but the container never actually
+# runs, no application logs at all). Same fix ux-team-kb's own deploy uses.
+docker build --provenance=false --platform linux/amd64 -t "$IMAGE_TAG" .
 docker push "$IMAGE_TAG"
 
 # 2) Instance role: lets the running container call Bedrock (Retrieve + Claude on the KB)
@@ -119,7 +124,7 @@ if [ "$EXISTING" = "None" ] || [ -z "$EXISTING" ]; then
   aws apprunner create-service --region $REGION --service-name $SERVICE \
     --source-configuration "$SRC_JSON" \
     --instance-configuration "InstanceRoleArn=${INSTANCE_ROLE_ARN}" \
-    --health-check-configuration "Protocol=HTTP,Path=/api/health,Interval=10,Timeout=5,HealthyThreshold=1,UnhealthyThreshold=5" \
+    --health-check-configuration "Protocol=HTTP,Path=/api/health,Interval=10,Timeout=10,HealthyThreshold=1,UnhealthyThreshold=10" \
     --query "Service.ServiceArn" --output text
 else
   echo "service exists; updating image + env vars: $EXISTING"
