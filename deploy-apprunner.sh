@@ -127,12 +127,17 @@ if [ "$EXISTING" = "None" ] || [ -z "$EXISTING" ]; then
     --health-check-configuration "Protocol=HTTP,Path=/api/health,Interval=10,Timeout=10,HealthyThreshold=1,UnhealthyThreshold=10" \
     --query "Service.ServiceArn" --output text
 else
-  echo "service exists; updating image + env vars: $EXISTING"
-  # update-service (not start-deployment) so changed env vars actually apply —
-  # it triggers its own deployment of the new config, so no separate
-  # start-deployment call is needed (that would just race it).
+  echo "service exists; updating env vars: $EXISTING"
   aws apprunner update-service --region $REGION --service-arn "$EXISTING" \
     --source-configuration "$SRC_JSON" >/dev/null
+  # update-service alone does NOT reliably redeploy when only the *contents*
+  # behind the (mutable) :latest tag changed — App Runner's change detection
+  # looks at the SourceConfiguration string values, and "...:latest" never
+  # looks different across builds. Confirmed empirically: a code fix pushed
+  # under the same tag sat un-deployed after update-service alone. Always
+  # force it explicitly.
+  echo "forcing a fresh deployment of the current :latest image…"
+  aws apprunner start-deployment --region $REGION --service-arn "$EXISTING" >/dev/null
 fi
 
 echo
