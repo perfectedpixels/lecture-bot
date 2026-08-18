@@ -65,11 +65,22 @@ else
   echo "Reusing existing ACM certificate: $CERT_ARN"
 fi
 
-# ACM needs a few seconds to generate the validation record after a fresh request.
-sleep 5
-RECORD_NAME=$(aws acm describe-certificate --region $REGION --certificate-arn "$CERT_ARN" --query "Certificate.DomainValidationOptions[0].ResourceRecord.Name" --output text)
+# ACM needs time to generate the validation record after a fresh request —
+# this can occasionally take longer than a few seconds, so poll for it rather
+# than assuming one fixed sleep is enough (a too-short wait here would print
+# "Name: None / Value: None" as the DNS instructions).
+RECORD_NAME="None"
+for i in $(seq 1 12); do
+  RECORD_NAME=$(aws acm describe-certificate --region $REGION --certificate-arn "$CERT_ARN" --query "Certificate.DomainValidationOptions[0].ResourceRecord.Name" --output text)
+  [ "$RECORD_NAME" != "None" ] && [ -n "$RECORD_NAME" ] && break
+  sleep 5
+done
 RECORD_VALUE=$(aws acm describe-certificate --region $REGION --certificate-arn "$CERT_ARN" --query "Certificate.DomainValidationOptions[0].ResourceRecord.Value" --output text)
 CERT_STATUS=$(aws acm describe-certificate --region $REGION --certificate-arn "$CERT_ARN" --query "Certificate.Status" --output text)
+if [ "$RECORD_NAME" = "None" ] || [ -z "$RECORD_NAME" ]; then
+  echo "ERROR: ACM hasn't produced a DNS validation record yet after 60s — re-run this script in a minute." >&2
+  exit 1
+fi
 
 if [ "$CERT_STATUS" != "ISSUED" ]; then
   # GoDaddy's "Name" field wants the label relative to perfectpixels.com, not
@@ -191,6 +202,13 @@ print(json.dumps(config))
   DIST_RESULT=$(aws cloudfront create-distribution --distribution-config file:///tmp/cf-dist-config.json)
   DIST_ID=$(echo "$DIST_RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin)['Distribution']['Id'])")
   DIST_DOMAIN=$(echo "$DIST_RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin)['Distribution']['DomainName'])")
+  echo "Waiting for CloudFront distribution to finish deploying (new distributions take 5-15+ min)…"
+  for i in $(seq 1 60); do
+    DIST_STATUS=$(aws cloudfront get-distribution --id "$DIST_ID" --query "Distribution.Status" --output text)
+    echo "  [$i] $DIST_STATUS"
+    [ "$DIST_STATUS" = "Deployed" ] && break
+    sleep 15
+  done
 else
   DIST_ID="$EXISTING_DIST"
   DIST_DOMAIN=$(aws cloudfront get-distribution --id "$DIST_ID" --query "Distribution.DomainName" --output text)
