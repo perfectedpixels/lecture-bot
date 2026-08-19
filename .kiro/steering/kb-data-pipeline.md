@@ -26,7 +26,7 @@ When syncing Bedrock KB `HHYCUJH32J`, S3 Vectors rejects records with:
 ## KB Configuration
 
 - **KB ID**: `HHYCUJH32J` (shared ppmg/lecture-bot KB)
-- **Data source**: `perfectpixels-docs` / `NXVTBANBLQ`
+- **Data source**: `perfectpixels-kb-docs` / `B3BHIN3RF8` (verified 2026-08-18 via `list-data-sources`; this doc's prior value was stale)
 - **Bucket**: `s3://perfectpixels-kb-docs/kb-clean/v1/`
 - **Account**: `582234715800` (personal)
 - **Chunking strategy**: Default

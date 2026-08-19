@@ -15,6 +15,8 @@ import hashlib
 import boto3
 from pathlib import Path
 
+from kb_metadata import write_sidecar, upload_chunk_with_sidecar
+
 
 CONCEPT_KEYWORDS = {
     'personas': ['persona', 'user persona', 'empathy map', 'archetype'],
@@ -86,7 +88,9 @@ def process_lectures(input_dir: str, output_dir: str) -> list:
                 f"[Concepts: {', '.join(concepts)}]\n"
                 f"[Type: lecture]\n\n"
             )
-            (out / chunk_filename).write_text(header + chunk, encoding='utf-8')
+            chunk_path = out / chunk_filename
+            chunk_path.write_text(header + chunk, encoding='utf-8')
+            write_sidecar(chunk_path, layer="reference", doc_type="lecture", concepts=concepts)
             all_chunks.append(chunk_filename)
 
     return all_chunks
@@ -99,7 +103,7 @@ def upload_to_s3(output_dir: str, bucket: str, prefix: str) -> int:
 
     for txt_file in sorted(out.glob('lecture-*.txt')):
         key = f"{prefix}{txt_file.name}"
-        s3.upload_file(str(txt_file), bucket, key)
+        upload_chunk_with_sidecar(s3, txt_file, bucket, key)
         uploaded += 1
 
     print(f"Uploaded {uploaded} lecture chunks to s3://{bucket}/{prefix}")

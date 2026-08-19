@@ -11,6 +11,8 @@ import boto3
 from pathlib import Path
 from html.parser import HTMLParser
 
+from kb_metadata import write_sidecar, upload_chunk_with_sidecar
+
 
 # --- HTML to text ---
 
@@ -141,6 +143,7 @@ def process_course(input_dir: str, course_id: str, output_dir: str):
 
             chunk_path = output_path / chunk_filename
             chunk_path.write_text(chunk_with_header, encoding='utf-8')
+            write_sidecar(chunk_path, layer="reference", **metadata)
 
             all_chunks.append({
                 'filename': chunk_filename,
@@ -159,7 +162,7 @@ def upload_to_s3(output_dir: str, bucket: str, prefix: str):
 
     for txt_file in sorted(output_path.glob('*.txt')):
         key = f"{prefix}{txt_file.name}"
-        s3.upload_file(str(txt_file), bucket, key)
+        upload_chunk_with_sidecar(s3, txt_file, bucket, key)
         uploaded += 1
 
     print(f"Uploaded {uploaded} chunks to s3://{bucket}/{prefix}")

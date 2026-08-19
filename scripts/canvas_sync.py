@@ -25,6 +25,8 @@ import requests
 from pathlib import Path
 from html.parser import HTMLParser
 from typing import List, Dict, Optional
+
+from kb_metadata import write_sidecar
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -316,7 +318,15 @@ def process_course(course_id: str, teaching_concepts: dict) -> dict:
                 f"[Aligned Teaching Concepts: {', '.join(top_concepts)}]\n"
                 f"[Due: {due}]\n\n"
             )
-            (out_chunks / chunk_filename).write_text(header + chunk, encoding="utf-8")
+            chunk_path = out_chunks / chunk_filename
+            chunk_path.write_text(header + chunk, encoding="utf-8")
+            write_sidecar(
+                chunk_path,
+                layer="reference",
+                doc_type="assignment",
+                course=course_code,
+                concepts=concepts,
+            )
 
         alignment_results.append({
             "course": course_code,

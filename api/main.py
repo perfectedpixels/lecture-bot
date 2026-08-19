@@ -1,13 +1,17 @@
 import asyncio
+import json
 import os
 import sys
+import threading
 import time
 from collections import defaultdict, deque
+from contextlib import asynccontextmanager, AsyncExitStack
 from threading import Lock
 from typing import Any, Deque, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
@@ -64,6 +68,13 @@ except ImportError:
     print("Warning: boards_store not available")
 
 try:
+    from feedback_mode import classify_intent, run_feedback_stream
+    HAS_FEEDBACK = True
+except ImportError:
+    HAS_FEEDBACK = False
+    print("Warning: feedback_mode not available")
+
+try:
     from canvas_assignments import (
         get_next_due_assignments,
         get_assignment_by_id,
@@ -74,7 +85,32 @@ except ImportError:
     HAS_CANVAS = False
     print("Warning: canvas_assignments not available")
 
-app = FastAPI(title="Lecture Bot API")
+try:
+    from . import mcp_server
+    HAS_MCP = True
+except ImportError:
+    HAS_MCP = False
+    print("Warning: mcp_server not available (mcp package not installed?)")
+
+# Set by the MCP-mount block further down, before the app actually starts --
+# read here as a closure so `lifespan` can be passed to FastAPI() below,
+# before the mounted app it needs to enter the lifespan of even exists yet.
+_mcp_asgi_app = None
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    # A plain app.mount() does not propagate a mounted sub-app's own
+    # lifespan -- FastMCP's Streamable HTTP transport needs its internal
+    # session-manager task group started via its lifespan, or every request
+    # fails with "Task group is not initialized" (confirmed empirically).
+    async with AsyncExitStack() as stack:
+        if _mcp_asgi_app is not None:
+            await stack.enter_async_context(_mcp_asgi_app.router.lifespan_context(_mcp_asgi_app))
+        yield
+
+
+app = FastAPI(title="Lecture Bot API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -100,9 +136,15 @@ MODEL_ID = os.environ.get(
     "BEDROCK_MODEL_ID", "us.anthropic.claude-sonnet-4-20250514-v1:0"
 )
 CHAT_TIMEOUT_SECONDS = float(os.environ.get("CHAT_TIMEOUT_SECONDS", "25"))
+CHAT_MAX_MESSAGE_CHARS = int(os.environ.get("CHAT_MAX_MESSAGE_CHARS", "8000"))
 RATE_LIMIT_REQUESTS = int(os.environ.get("RATE_LIMIT_REQUESTS", "30"))
 RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("RATE_LIMIT_WINDOW_SECONDS", "60"))
 CHAT_MAX_RESULTS = int(os.environ.get("CHAT_MAX_RESULTS", "6"))
+FEEDBACK_INTENT_TIMEOUT_SECONDS = float(os.environ.get("FEEDBACK_INTENT_TIMEOUT_SECONDS", "8"))
+FEEDBACK_FIRST_TOKEN_TIMEOUT_SECONDS = float(
+    os.environ.get("FEEDBACK_FIRST_TOKEN_TIMEOUT_SECONDS", "15")
+)
+FEEDBACK_STREAM_TIMEOUT_SECONDS = float(os.environ.get("FEEDBACK_STREAM_TIMEOUT_SECONDS", "90"))
 EXPLORE_TIMEOUT_SECONDS = float(os.environ.get("EXPLORE_TIMEOUT_SECONDS", "30"))
 EXPLORE_MAX_RESULTS = int(os.environ.get("EXPLORE_MAX_RESULTS", "6"))
 BOARD_MAX_TITLE_CHARS = int(os.environ.get("BOARD_MAX_TITLE_CHARS", "200"))
@@ -116,6 +158,7 @@ _CANVAS_COURSE_IDS = [
     if cid.strip()
 ]
 CANVAS_COURSE_ID = _CANVAS_COURSE_IDS[0] if _CANVAS_COURSE_IDS else "1916689"
+MCP_API_KEY = os.environ.get("MCP_API_KEY", "")
 
 bot = None
 voice_gen = None
@@ -201,6 +244,82 @@ class ChatResponse(BaseModel):
     suggested_projects: List[Dict[str, str]] = []
 
 
+def _raw_bot():
+    """The raw FastPersonaBot instance, bypassing the CachedPersonaBot wrapper
+    (which only proxies a fixed set of methods). Returns None if the
+    initialized bot isn't a FastPersonaBot (e.g. a fallback bot without the
+    private retrieval methods explore/feedback need)."""
+    candidate = getattr(bot, "bot", bot)
+    if candidate is not None and hasattr(candidate, "_retrieve_parallel"):
+        return candidate
+    return None
+
+
+# Mounted at /api/mcp so it rides the existing App Runner service + the
+# existing CloudFront /api/* cache behavior -- no new infra. Fail closed: an
+# unset MCP_API_KEY means the mount is skipped entirely rather than served
+# unauthenticated.
+if HAS_MCP:
+    if MCP_API_KEY:
+        try:
+            _mcp_asgi_app = mcp_server.build_authenticated_mcp_app(
+                _raw_bot, MCP_API_KEY, check_rate_limit=_check_rate_limit
+            )
+            app.mount("/api/mcp", _mcp_asgi_app)
+            print("✓ MCP server mounted at /api/mcp")
+        except Exception as e:
+            print(f"Error initializing MCP server: {e}")
+    else:
+        print("⚠ MCP_API_KEY not set -- /api/mcp will not be mounted")
+
+
+async def _feedback_sse_generator(feedback_bot, message: str, lang: str):
+    """Bridges feedback_mode.run_feedback_stream (a sync generator making
+    blocking boto3 calls) onto an async SSE response: runs the generator in a
+    background thread, pushes each event onto an asyncio.Queue via
+    call_soon_threadsafe, and awaits the queue here."""
+    loop = asyncio.get_event_loop()
+    queue: asyncio.Queue = asyncio.Queue()
+    _SENTINEL = object()
+
+    def _produce():
+        try:
+            for event in run_feedback_stream(feedback_bot, message, response_language=lang):
+                loop.call_soon_threadsafe(queue.put_nowait, event)
+        except Exception as e:
+            print(f"⚠ Feedback stream generation failed: {e}")
+            loop.call_soon_threadsafe(
+                queue.put_nowait, {"type": "error", "message": "Feedback generation failed"}
+            )
+        finally:
+            loop.call_soon_threadsafe(queue.put_nowait, _SENTINEL)
+
+    threading.Thread(target=_produce, daemon=True).start()
+
+    start = time.time()
+    got_first_token = False
+    while True:
+        deadline = (
+            FEEDBACK_FIRST_TOKEN_TIMEOUT_SECONDS if not got_first_token else FEEDBACK_STREAM_TIMEOUT_SECONDS
+        )
+        wait_for = deadline - (time.time() - start)
+        if wait_for <= 0:
+            yield f"data: {json.dumps({'type': 'error', 'message': 'response truncated -- took too long'})}\n\n"
+            return
+        try:
+            item = await asyncio.wait_for(queue.get(), timeout=wait_for)
+        except asyncio.TimeoutError:
+            yield f"data: {json.dumps({'type': 'error', 'message': 'response truncated -- took too long'})}\n\n"
+            return
+        if item is _SENTINEL:
+            return
+        if item.get("type") == "delta":
+            got_first_token = True
+        yield f"data: {json.dumps(item)}\n\n"
+        if item.get("type") in ("done", "error"):
+            return
+
+
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest, http_request: Request):
     if not bot:
@@ -216,13 +335,43 @@ async def chat(request: ChatRequest, http_request: Request):
     message = request.message.strip()
     if not message:
         raise HTTPException(status_code=400, detail="Message cannot be empty")
-    if len(message) > 1000:
+    if len(message) > CHAT_MAX_MESSAGE_CHARS:
         raise HTTPException(
-            status_code=400, detail="Message too long (max 1000 characters)"
+            status_code=400,
+            detail=f"Message too long (max {CHAT_MAX_MESSAGE_CHARS} characters)",
+        )
+
+    lang = request.response_language if request.response_language in ("en", "zh") else "en"
+
+    # Homework-help (assignment_id set) always stays on the existing blocking
+    # concept path -- classification is skipped entirely for it.
+    intent = "concept"
+    if HAS_FEEDBACK and not request.assignment_id:
+        feedback_bot = _raw_bot()
+        if feedback_bot:
+            try:
+                intent = await asyncio.wait_for(
+                    run_in_threadpool(classify_intent, feedback_bot, message),
+                    timeout=FEEDBACK_INTENT_TIMEOUT_SECONDS,
+                )
+            except Exception as e:
+                print(f"⚠ Intent classification failed, defaulting to concept: {e}")
+                intent = "concept"
+
+    if intent == "feedback":
+        if not _check_rate_limit(f"{client_id}:feedback"):
+            raise HTTPException(
+                status_code=429,
+                detail="Rate limit exceeded. Please wait a moment before trying again.",
+            )
+        feedback_bot = _raw_bot()
+        return StreamingResponse(
+            _feedback_sse_generator(feedback_bot, message, lang),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
         )
 
     try:
-        lang = request.response_language if request.response_language in ("en", "zh") else "en"
 
         def _run_query():
             query_text = message
@@ -321,17 +470,6 @@ async def upcoming_assignments():
     }
 
 
-def _explore_bot():
-    """The raw FastPersonaBot instance, bypassing the CachedPersonaBot wrapper
-    (which only proxies a fixed set of methods, not explore_topic.run_explore).
-    Returns None if the initialized bot isn't a FastPersonaBot (e.g. a
-    fallback bot without the private retrieval methods explore needs)."""
-    candidate = getattr(bot, "bot", bot)
-    if candidate is not None and hasattr(candidate, "_retrieve_parallel"):
-        return candidate
-    return None
-
-
 class ExploreRequest(BaseModel):
     topic: str
     parent_path: List[str] = []
@@ -369,7 +507,7 @@ class ExploreResponse(BaseModel):
 
 @app.post("/api/explore", response_model=ExploreResponse)
 async def explore(request: ExploreRequest, http_request: Request):
-    explore_bot = _explore_bot() if HAS_EXPLORE else None
+    explore_bot = _raw_bot() if HAS_EXPLORE else None
     if not explore_bot:
         raise HTTPException(status_code=503, detail="Explore is not available")
 

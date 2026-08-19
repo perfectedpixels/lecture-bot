@@ -24,6 +24,8 @@ import hashlib
 import boto3
 from pathlib import Path
 
+from kb_metadata import write_sidecar, upload_chunk_with_sidecar
+
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -223,7 +225,7 @@ def upload_chunks(output_dir: str, bucket: str, prefix: str) -> int:
     out = Path(output_dir)
     uploaded = 0
     for f in sorted(out.glob("lecture-*.txt")):
-        s3.upload_file(str(f), bucket, f"{prefix}{f.name}")
+        upload_chunk_with_sidecar(s3, f, bucket, f"{prefix}{f.name}")
         uploaded += 1
     return uploaded
 
@@ -306,7 +308,9 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
                 f"[Concepts: {', '.join(concepts)}]\n"
                 f"[Type: lecture]\n\n"
             )
-            (out / chunk_filename).write_text(header + chunk, encoding="utf-8")
+            chunk_path = out / chunk_filename
+            chunk_path.write_text(header + chunk, encoding="utf-8")
+            write_sidecar(chunk_path, layer="reference", doc_type="lecture", concepts=concepts)
             all_chunks.append(chunk_filename)
 
     if not all_chunks:

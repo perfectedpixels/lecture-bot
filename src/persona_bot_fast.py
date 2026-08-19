@@ -10,10 +10,12 @@ import os
 import random
 import re
 import time
-from typing import Optional, List, Dict, Set, Tuple
+from typing import Optional, List, Dict, Set, Tuple, Iterator
 
 import hashlib
 from botocore.config import Config
+
+import guardrails
 
 try:
     from learning_card_generator import LearningCardGenerator
@@ -37,8 +39,12 @@ class FastPersonaBot:
         use_haiku: bool = False,
     ):
         # api/main.py passes use_haiku; honor it by selecting a Haiku model.
+        # claude-3-5-haiku-20241022 reached end-of-life on Bedrock (confirmed
+        # 2026-08-18 via a live InvokeModel ResourceNotFoundException) — this
+        # was broken for however long that took to reach EOL, silently, since
+        # nothing exercises use_haiku=True in normal operation.
         if use_haiku:
-            model_id = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+            model_id = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
         # Get AWS region from environment with fallback
         aws_region = (
             os.environ.get("AWS_REGION")
@@ -169,12 +175,15 @@ class FastPersonaBot:
         ]
         return any(signal in msg for signal in retry_signals)
 
-    def _invoke_model_with_retry(self, payload: Dict, max_attempts: int = 3):
+    def _invoke_model_with_retry(
+        self, payload: Dict, max_attempts: int = 3, model_id_override: Optional[str] = None
+    ):
+        model_id = model_id_override or self.model_id
         last_error: Optional[Exception] = None
         for attempt in range(1, max_attempts + 1):
             try:
                 return self.bedrock_runtime.invoke_model(
-                    modelId=self.model_id, body=json.dumps(payload)
+                    modelId=model_id, body=json.dumps(payload)
                 )
             except Exception as e:
                 last_error = e
@@ -185,6 +194,30 @@ class FastPersonaBot:
         raise RuntimeError(
             f"Bedrock model invocation failed after {max_attempts} attempts: {last_error}"
         )
+
+    def _invoke_model_stream(
+        self, payload: Dict, model_id_override: Optional[str] = None
+    ) -> Iterator[Dict]:
+        """Streaming counterpart to _invoke_model_with_retry. No retry logic —
+        once bytes start flowing, a retry would replay tokens the caller
+        already yielded downstream. Yields {"type": "delta", "text": ...} per
+        content_block_delta event."""
+        model_id = model_id_override or self.model_id
+        response = self.bedrock_runtime.invoke_model_with_response_stream(
+            modelId=model_id, body=json.dumps(payload)
+        )
+        for event in response.get("body", []):
+            chunk = event.get("chunk")
+            if not chunk:
+                continue
+            try:
+                data = json.loads(chunk["bytes"])
+            except (json.JSONDecodeError, KeyError):
+                continue
+            if data.get("type") == "content_block_delta":
+                text = (data.get("delta") or {}).get("text")
+                if text:
+                    yield {"type": "delta", "text": text}
 
     def _detect_domain_fast(self, query: str) -> Optional[str]:
         """Fast domain detection using keyword matching (no LLM)"""
@@ -377,17 +410,33 @@ class FastPersonaBot:
         return all_results[:max_results], last_error
 
     def _build_persona_prompt(
-        self, question: str, context: str, response_language: str = "en"
+        self, question: str, context: str, response_language: str = "en",
+        mode: Optional[str] = None,
     ) -> str:
-        """Build prompt with lecture-bot persona (teaching/student context)."""
+        """Build prompt with lecture-bot persona (teaching/student context).
 
-        # Advisor mode (PERSONA_MODE=advisor): a neutral METHODOLOGY KNOWLEDGE
-        # source whose output is consumed by an orchestrator. No teaching persona,
-        # no student framing, no refusals, no Socratic deflection — just the
-        # applicable UX / design-thinking / AI-product methodology, grounded in
-        # the source material.
-        if os.environ.get("PERSONA_MODE", "").lower() == "advisor":
+        mode: explicit override for which prompt variant to build. An
+        explicit value always wins; when unset, falls back to the
+        PERSONA_MODE env var (kept only for backward compatibility with any
+        external caller that imports this module directly and sets that env
+        var in its own process — new callers, e.g. the MCP methodology tool,
+        should pass mode="advisor" explicitly instead, since PERSONA_MODE is
+        process-global and this same process also serves guarded student
+        chat per-request).
+        """
+        effective_mode = (mode or os.environ.get("PERSONA_MODE", "")).lower()
+
+        # Advisor mode: a neutral METHODOLOGY KNOWLEDGE source whose output is
+        # consumed by an orchestrator (e.g. the MCP generate_methodology
+        # tool). No teaching persona, no student framing, no refusals, no
+        # Socratic deflection — just the applicable UX / design-thinking /
+        # AI-product methodology, grounded in the source material. Baseline
+        # safety rules still apply; the student-work-refusal rule does not
+        # (this isn't a student asking about their own assignment).
+        if effective_mode == "advisor":
             return f"""You are a UX, Design-Thinking, and AI-product METHODOLOGY reference. Extract and state the methodology that applies to the request below, grounded in the source material.
+
+{guardrails.BASELINE_RULES}
 
 OUTPUT:
 - The relevant principles, design-thinking steps, user-centered practices, AI-product methods, and risks that apply — as concrete, actionable guidance.
@@ -427,7 +476,9 @@ INSTRUCTIONS:
 - If source content is insufficient for the question, state that directly and suggest what the student could ask instead.
 - Focus on teaching the material — help students understand the "why" behind concepts, not just the "what".
 - If a student asks about an assignment, guide them toward the relevant concepts and frameworks rather than giving them the answer directly.
-- NEVER write, rewrite, or fix a student's assignment work. Do not produce deliverable content (persona descriptions, journey maps, wireframe labels, rubric responses, etc.) on their behalf. Explain what needs improvement and why, point to the right frameworks, and let them do the work.
+
+{guardrails.BASELINE_RULES}
+{guardrails.STUDENT_INTERFACE_ADDENDUM}
 
 Lecture content:
 {context}
@@ -455,12 +506,18 @@ Remember: be specific, grounded in lecture material, and help the student learn.
         use_persona: bool = True,
         exclude_projects: Optional[List[str]] = None,
         response_language: str = "en",
+        persona_mode: Optional[str] = None,
     ) -> dict:
         """
         Fast query with simple expansion, reranking, and source diversity.
         Optimized for speed with fewer retrieval results.
 
         response_language: "en" (default) or "zh" (Simplified Chinese output).
+        persona_mode: explicit prompt-variant override (e.g. "advisor" for
+        ungated methodology output). See _build_persona_prompt. Callers using
+        this must call the raw FastPersonaBot, never CachedPersonaBot — the
+        cache key doesn't have a mode dimension and could leak an
+        advisor-mode answer to a normal student request for the same text.
         """
         queries = self._expand_query_simple(question)
 
@@ -501,7 +558,7 @@ Remember: be specific, grounded in lecture material, and help the student learn.
         sources = [r["location"]["s3Location"]["uri"] for r in results]
 
         if use_persona:
-            prompt = self._build_persona_prompt(question, context, response_language)
+            prompt = self._build_persona_prompt(question, context, response_language, mode=persona_mode)
         else:
             if response_language == "zh":
                 prompt = f"Context:\n{context}\n\n问题：{question}\n\n请用简体中文回答。"

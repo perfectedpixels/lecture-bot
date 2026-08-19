@@ -17,8 +17,13 @@ COPY src/ /app/src/
 COPY api/ /app/api/
 COPY data/affinity_map.json /app/data/affinity_map.json
 COPY data/teaching_concepts.json /app/data/teaching_concepts.json
-COPY data/portfolio_image_metadata.json /app/data/portfolio_image_metadata.json
 COPY data/grading/grading-handbook-512-515.txt /app/data/grading/grading-handbook-512-515.txt
+# No data/portfolio_image_metadata.json here -- that dataset (and the images
+# under data/portfolio_images/) was removed from the working tree. Not
+# copying it is safe: LearningCardGenerator.__init__ (src/learning_card_generator.py)
+# already checks Path(portfolio_metadata_path).exists() before loading it and
+# degrades gracefully (portfolio-example enrichment on learning cards is
+# simply unavailable, nothing else depends on this file).
 
 # KB HHYCUJH32J lives in us-east-1; pin region so boto3 targets it.
 # PYTHONUNBUFFERED: without this, Python fully buffers stdout when it isn't a

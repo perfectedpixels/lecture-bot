@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
 import { NotebookPen, Sparkles, X } from 'lucide-react'
 import { ExploreCanvas } from './explore/ExploreCanvas'
-import { getUpcomingAssignments, postChat } from './api/client'
+import { getUpcomingAssignments, sendChatMessage } from './api/client'
 
 function App() {
   const [view, setView] = useState('chat')
@@ -13,6 +13,7 @@ function App() {
   const [autoplayEnabled, setAutoplayEnabled] = useState(true)
   const audioRef = useRef(null)
   const messagesEndRef = useRef(null)
+  const textareaRef = useRef(null)
 
   // Cross-view bridging: Chat -> Explore seeds the canvas with a topic and
   // switches view; Explore -> Chat seeds the chat input with a question,
@@ -43,6 +44,15 @@ function App() {
     scrollToBottom()
   }, [messages])
 
+  // Auto-grow the input textarea with the content, capped at max-h-48 (192px)
+  // to match the CSS cap below -- beyond that it scrolls internally.
+  useEffect(() => {
+    const el = textareaRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${Math.min(el.scrollHeight, 192)}px`
+  }, [input])
+
   const handleSend = useCallback(async (override, assignmentIdOverride) => {
     const text = (override ?? input).trim()
     if (!text) return
@@ -53,22 +63,66 @@ function App() {
     setInput('')
     setLoading(true)
 
+    // Feedback-mode responses stream in via SSE; concept/homework-help
+    // responses stay the classic blocking JSON call. The server picks which
+    // one via intent classification -- the client just reacts to whichever
+    // one it gets. `assistantId` identifies the (possibly still-empty)
+    // placeholder message deltas get appended into, added lazily on first
+    // event so a non-streamed response never leaves a stray empty bubble.
+    const assistantId = `${Date.now()}-${Math.random()}`
+    let placeholderAdded = false
+    const ensurePlaceholder = () => {
+      if (placeholderAdded) return
+      placeholderAdded = true
+      setLoading(false)
+      setMessages(prev => [...prev, { id: assistantId, role: 'assistant', content: '', streaming: true, question: text }])
+    }
+
     try {
-      const data = await postChat({ message: text, voiceEnabled, assignmentId })
+      const result = await sendChatMessage({
+        message: text,
+        voiceEnabled,
+        assignmentId,
+        onEvent: (event) => {
+          if (event.type === 'delta') {
+            ensurePlaceholder()
+            setMessages(prev => prev.map((m) =>
+              m.id === assistantId ? { ...m, content: m.content + event.text } : m
+            ))
+          } else if (event.type === 'done') {
+            setMessages(prev => prev.map((m) =>
+              m.id === assistantId
+                ? { ...m, streaming: false, sources: event.sources || [], directiveSources: event.directive_sources || [] }
+                : m
+            ))
+          } else if (event.type === 'error') {
+            ensurePlaceholder()
+            setMessages(prev => prev.map((m) =>
+              m.id === assistantId
+                ? { ...m, streaming: false, error: true, content: m.content || event.message || 'Something went wrong.' }
+                : m
+            ))
+          }
+        },
+      })
 
-      const botMessage = {
-        role: 'assistant',
-        content: data.answer,
-        audio: data.audio_base64,
-        sources: data.sources,
-        question: text,
-      }
+      if (!result.streamed) {
+        const data = result.data
+        const botMessage = {
+          role: 'assistant',
+          content: data.answer,
+          audio: data.audio_base64,
+          sources: data.sources,
+          question: text,
+        }
 
-      setMessages(prev => [...prev, botMessage])
+        setMessages(prev => [...prev, botMessage])
 
-      // Handle audio playback
-      if (voiceEnabled && data.audio_base64 && autoplayEnabled) {
-        playAudio(data.audio_base64)
+        // Handle audio playback (JSON path only -- feedback-mode streamed
+        // responses have no TTS in this pass)
+        if (voiceEnabled && data.audio_base64 && autoplayEnabled) {
+          playAudio(data.audio_base64)
+        }
       }
     } catch (error) {
       console.error('Error:', error)
@@ -248,7 +302,7 @@ function App() {
 
               {messages.map((msg, idx) => (
                 <div
-                  key={idx}
+                  key={msg.id ?? idx}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
@@ -260,7 +314,12 @@ function App() {
                         : 'bg-gradient-to-br from-[rgba(15,15,15,0.95)] to-[rgba(45,45,45,0.95)] text-gray-100'
                     }`}
                   >
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                    <p className="whitespace-pre-wrap">
+                      {msg.content}
+                      {msg.streaming && (
+                        <span className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-white/60 align-middle" />
+                      )}
+                    </p>
 
                     <div className="mt-2 flex flex-wrap items-center gap-3">
                       {msg.audio && voiceEnabled && (
@@ -272,7 +331,7 @@ function App() {
                         </button>
                       )}
 
-                      {msg.role === 'assistant' && !msg.error && msg.question && (
+                      {msg.role === 'assistant' && !msg.error && !msg.streaming && msg.question && (
                         <button
                           onClick={() => handleExploreFromChat(msg.question)}
                           title="Branch this topic visually on the Explore canvas"
@@ -283,6 +342,19 @@ function App() {
                         </button>
                       )}
                     </div>
+
+                    {msg.directiveSources && msg.directiveSources.length > 0 && (
+                      <details className="mt-2 text-sm text-white/60">
+                        <summary className="cursor-pointer hover:text-white/80">
+                          🎯 Grading criteria referenced ({msg.directiveSources.length})
+                        </summary>
+                        <ul className="mt-2 space-y-1 pl-4">
+                          {msg.directiveSources.map((source, i) => (
+                            <li key={i} className="text-xs">{source}</li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
 
                     {msg.sources && msg.sources.length > 0 && (
                       <details className="mt-2 text-sm text-white/60">
@@ -318,14 +390,20 @@ function App() {
 
           {/* Input Area */}
           <div className="border-t border-white/15 bg-black/20 p-4">
-            <div className="max-w-4xl mx-auto flex space-x-3">
-              <input
-                type="text"
+            <div className="max-w-4xl mx-auto flex items-end space-x-3">
+              <textarea
+                ref={textareaRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask Professor Levine about the lectures..."
-                className="flex-1 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault()
+                    handleSend()
+                  }
+                }}
+                placeholder="Ask Professor Levine about the lectures, or paste your work for feedback..."
+                rows={1}
+                className="flex-1 resize-none max-h-48 overflow-y-auto bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
                 disabled={loading}
               />
               <button

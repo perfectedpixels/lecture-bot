@@ -11,9 +11,9 @@
 #  - It's also the origin deploy-frontend.sh points CloudFront's /api/* behavior
 #    at, so the browser-facing app never talks to this URL directly.
 #
-# Reads CANVAS_API_TOKEN/CANVAS_BASE_URL/CANVAS_COURSE_IDS from .env (if
-# present) to inject as secrets into the running container — never hardcoded
-# here, never baked into the Docker image.
+# Reads CANVAS_API_TOKEN/CANVAS_BASE_URL/CANVAS_COURSE_IDS/MCP_API_KEY from
+# .env (if present) to inject as secrets into the running container — never
+# hardcoded here, never baked into the Docker image.
 set -euo pipefail
 
 REGION=us-east-1
@@ -32,8 +32,12 @@ if [ -f .env ]; then
   CANVAS_API_TOKEN=$(grep -E '^CANVAS_API_TOKEN=' .env | head -1 | cut -d= -f2-)
   CANVAS_BASE_URL=$(grep -E '^CANVAS_BASE_URL=' .env | head -1 | cut -d= -f2-)
   CANVAS_COURSE_IDS=$(grep -E '^CANVAS_COURSE_IDS=' .env | head -1 | cut -d= -f2-)
+  MCP_API_KEY=$(grep -E '^MCP_API_KEY=' .env | head -1 | cut -d= -f2-)
 fi
 CANVAS_BASE_URL="${CANVAS_BASE_URL:-https://canvas.uw.edu}"
+if [ -z "${MCP_API_KEY:-}" ]; then
+  echo "WARNING: MCP_API_KEY not set in .env — the /api/mcp endpoint will not be mounted (fails closed, not unauthenticated)."
+fi
 
 # 1) ECR repo + image
 aws ecr describe-repositories --region $REGION --repository-names $REPO >/dev/null 2>&1 \
@@ -91,6 +95,7 @@ sleep 8  # let IAM propagate
 SRC_JSON=$(
   IMAGE_TAG="$IMAGE_TAG" ACCESS_ROLE_ARN="$ACCESS_ROLE_ARN" BOARDS_TABLE="$BOARDS_TABLE" \
   CANVAS_API_TOKEN="${CANVAS_API_TOKEN:-}" CANVAS_BASE_URL="$CANVAS_BASE_URL" CANVAS_COURSE_IDS="${CANVAS_COURSE_IDS:-}" \
+  MCP_API_KEY="${MCP_API_KEY:-}" \
   python3 -c '
 import json, os
 
@@ -105,6 +110,8 @@ if os.environ.get("CANVAS_API_TOKEN"):
     env["CANVAS_API_TOKEN"] = os.environ["CANVAS_API_TOKEN"]
 if os.environ.get("CANVAS_COURSE_IDS"):
     env["CANVAS_COURSE_IDS"] = os.environ["CANVAS_COURSE_IDS"]
+if os.environ.get("MCP_API_KEY"):
+    env["MCP_API_KEY"] = os.environ["MCP_API_KEY"]
 
 src = {
     "ImageRepository": {

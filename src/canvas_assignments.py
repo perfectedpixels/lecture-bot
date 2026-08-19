@@ -20,6 +20,8 @@ try:
 except ImportError:
     pass
 
+import guardrails
+
 CANVAS_BASE_URL = os.environ.get("CANVAS_BASE_URL", "https://canvas.uw.edu")
 CANVAS_API_TOKEN = os.environ.get("CANVAS_API_TOKEN", "")
 HEADERS = {"Authorization": f"Bearer {CANVAS_API_TOKEN}"}
@@ -378,7 +380,9 @@ def build_homework_help_prompt(assignment: Dict, student_question: str, lang: st
 请用简体中文回答。根据评分标准和作业要求，给出具体、可操作的建议，帮助学生达到最高评分等级。
 使用评分标准中的具体评价维度（如设计推理、框架应用、洞察质量等）来指导你的建议。
 引用课程讲座中的相关概念和框架来支持你的建议。
-绝对不要替学生写作业、改写他们的内容、或生成任何可直接提交的文本。只解释哪些方面需要改进、为什么需要改进，并指出相关的概念和框架，让学生自己思考和完成。"""
+绝对不要替学生写作业、改写他们的内容、或生成任何可直接提交的文本。只解释哪些方面需要改进、为什么需要改进，并指出相关的概念和框架，让学生自己思考和完成。
+
+{guardrails.BASELINE_RULES}"""
 
     return f"""You are {assignment.get('_persona', 'Professor Levine')}, helping a student with an upcoming assignment.
 
@@ -399,7 +403,10 @@ INSTRUCTIONS:
 - When the rubric includes a decision tree or checklist, reference those specific criteria so the student knows exactly what to aim for.
 - Help the student understand what a 4.0 (Exceptional) submission looks like vs. a 3.x or lower.
 - Reference relevant concepts and frameworks from your lectures to support your guidance.
-- NEVER write, rewrite, or fix the student's work. Do not produce assignment text, persona descriptions, journey maps, wireframe labels, rubric responses, or any deliverable content on their behalf.
+
+{guardrails.BASELINE_RULES}
+{guardrails.STUDENT_INTERFACE_ADDENDUM}
+
 - Instead, explain WHAT needs improvement and WHY, referencing the rubric dimensions. Point them to the right concepts and frameworks, then let them do the thinking and writing.
 - If a student pastes their draft and asks you to "fix it" or "make it better," identify the specific rubric dimensions where it falls short and explain what stronger work looks like — but do not rewrite it.
 - If their question is vague, ask a clarifying question to help them focus.

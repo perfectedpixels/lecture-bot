@@ -14,6 +14,8 @@ import hashlib
 import boto3
 from pathlib import Path
 
+from kb_metadata import write_sidecar, upload_chunk_with_sidecar
+
 
 ASSIGNMENT_MAP = {
     'Assignment 2.1: Persona Development': {
@@ -126,7 +128,9 @@ def process_grading_handbook(filepath: str, output_dir: str) -> list:
         filename = f"grading-course-policy-part-{i:04d}-{content_hash}.txt"
 
         header = "[Course Policy: UX Research & Strategy Grading]\n[Applies to: COMMLD-512, COMMLD-515]\n[Type: course-policy]\n\n"
-        (out / filename).write_text(header + chunk, encoding='utf-8')
+        chunk_path = out / filename
+        chunk_path.write_text(header + chunk, encoding='utf-8')
+        write_sidecar(chunk_path, layer="directive", doc_type="course-policy")
         all_chunks.append(filename)
 
     print(f"  {len(policy_chunks)} chunks")
@@ -150,7 +154,9 @@ def process_grading_handbook(filepath: str, output_dir: str) -> list:
                 f"[Related assignments: {', '.join(linked)}]\n"
                 f"[Type: rubric]\n\n"
             )
-            (out / filename).write_text(header + chunk, encoding='utf-8')
+            chunk_path = out / filename
+            chunk_path.write_text(header + chunk, encoding='utf-8')
+            write_sidecar(chunk_path, layer="directive", doc_type="rubric", assignment=name, concepts=concepts)
             all_chunks.append(filename)
 
         print(f"  {name}: {len(rubric_chunks)} chunks | concepts: {concepts}")
@@ -174,11 +180,11 @@ def upload_to_s3(output_dir: str, bucket: str, prefix: str):
     if deleted:
         print(f"Deleted {deleted} old grading chunks from S3")
 
-    # Upload new chunks
+    # Upload new chunks (+ their .metadata.json sidecars, if present)
     uploaded = 0
     for txt_file in sorted(out.glob('grading-*.txt')):
         key = f"{prefix}{txt_file.name}"
-        s3.upload_file(str(txt_file), bucket, key)
+        upload_chunk_with_sidecar(s3, txt_file, bucket, key)
         uploaded += 1
 
     print(f"Uploaded {uploaded} grading chunks to s3://{bucket}/{prefix}")
