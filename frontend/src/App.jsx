@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
+import { ChatBubbleLeftRightIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
 import { NotebookPen, Sparkles, X } from 'lucide-react'
 import { ExploreCanvas } from './explore/ExploreCanvas'
 import { getUpcomingAssignments, sendChatMessage } from './api/client'
@@ -7,10 +8,17 @@ import { getUpcomingAssignments, sendChatMessage } from './api/client'
 function App() {
   const [view, setView] = useState('chat')
   const [messages, setMessages] = useState([])
+  // Before the first message, the input sits centered so it's impossible to
+  // miss; once the conversation starts, it animates down to its permanent
+  // dock at the bottom (framer-motion's `layout` prop handles the slide).
+  const hasMessages = messages.length > 0
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [voiceEnabled, setVoiceEnabled] = useState(true)
-  const [autoplayEnabled, setAutoplayEnabled] = useState(true)
+  // Reply language toggle, ported from the original Streamlit app's
+  // "Language / 语言" English/中文 buttons (app/streamlit_app.py) -- the
+  // student may type in either language regardless of this setting.
+  const [responseLanguage, setResponseLanguage] = useState('en')
   const audioRef = useRef(null)
   const messagesEndRef = useRef(null)
   const textareaRef = useRef(null)
@@ -82,6 +90,7 @@ function App() {
       const result = await sendChatMessage({
         message: text,
         voiceEnabled,
+        responseLanguage,
         assignmentId,
         onEvent: (event) => {
           if (event.type === 'delta') {
@@ -117,12 +126,8 @@ function App() {
         }
 
         setMessages(prev => [...prev, botMessage])
-
-        // Handle audio playback (JSON path only -- feedback-mode streamed
-        // responses have no TTS in this pass)
-        if (voiceEnabled && data.audio_base64 && autoplayEnabled) {
-          playAudio(data.audio_base64)
-        }
+        // Autoplay defaults off (and isn't user-toggleable) -- audio is
+        // available via the per-message "Play audio" button only.
       }
     } catch (error) {
       console.error('Error:', error)
@@ -134,7 +139,7 @@ function App() {
     } finally {
       setLoading(false)
     }
-  }, [input, voiceEnabled, autoplayEnabled, activeAssignment])
+  }, [input, voiceEnabled, responseLanguage, activeAssignment])
 
   const handleGetHomeworkHelp = (assignment) => {
     setActiveAssignment(assignment)
@@ -184,70 +189,72 @@ function App() {
             <div className="flex items-center gap-3">
               <img src="/uw-logo.png" alt="UW" className="h-10 w-auto" />
               <span className="text-lg font-semibold text-white hidden sm:inline">Lecture Bot</span>
-            </div>
 
-            <div className="flex items-center space-x-4">
-              {/* Chat / Explore view toggle */}
-              <div className="flex rounded-lg bg-black/20 p-1">
+              {/* Chat / Explore view toggle -- anchored to the logo group
+                  (a fixed reference point) rather than centered on or
+                  packed against the right-hand controls, so it never
+                  shifts position when the chat-only controls (language,
+                  voice) appear/disappear on view switch. */}
+              <div className="ml-4 flex rounded-lg bg-black/20 p-1">
                 <button
                   onClick={() => setView('chat')}
-                  className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-medium transition-colors ${
                     view === 'chat' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                   }`}
                 >
+                  <ChatBubbleLeftRightIcon className="h-4 w-4" />
                   Chat
                 </button>
                 <button
                   onClick={() => setView('explore')}
-                  className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-medium transition-colors ${
                     view === 'explore' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                   }`}
                 >
+                  <Sparkles className="h-4 w-4" />
                   Explore
                 </button>
               </div>
+            </div>
 
-              {voiceEnabled && view === 'chat' && (
-                <span className="text-sm text-white/70 hidden md:inline">
-                  🎙️ Chris • Autoplay {autoplayEnabled ? 'on' : 'off'}
-                </span>
+            <div className="flex items-center space-x-4">
+              {view === 'chat' && (
+                <div className="flex rounded-lg bg-black/20 p-1" title="Reply language — you may type in either language">
+                  <button
+                    onClick={() => setResponseLanguage('en')}
+                    className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                      responseLanguage === 'en' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => setResponseLanguage('zh')}
+                    className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                      responseLanguage === 'zh' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    中文
+                  </button>
+                </div>
               )}
 
               {view === 'chat' && (
-                <>
-                  {/* Voice Toggle */}
-                  <button
-                    onClick={() => setVoiceEnabled(!voiceEnabled)}
-                    className={`p-2 rounded-lg border transition-colors ${
-                      voiceEnabled
-                        ? 'bg-white/15 border-white/30 hover:bg-white/25'
-                        : 'bg-transparent border-white/20 hover:bg-white/10'
-                    }`}
-                    title="Toggle voice"
-                  >
-                    {voiceEnabled ? (
-                      <SpeakerWaveIcon className="h-6 w-6 text-white" />
-                    ) : (
-                      <SpeakerXMarkIcon className="h-6 w-6 text-white" />
-                    )}
-                  </button>
-
-                  {/* Autoplay Toggle */}
-                  <button
-                    onClick={() => setAutoplayEnabled(!autoplayEnabled)}
-                    disabled={!voiceEnabled}
-                    className={`p-2 rounded-lg border transition-colors ${
-                      voiceEnabled
-                        ? autoplayEnabled
-                          ? 'bg-white/15 border-white/30 hover:bg-white/25'
-                          : 'bg-transparent border-white/20 hover:bg-white/10'
-                        : 'bg-transparent border-white/10 opacity-40 cursor-not-allowed'
-                    }`}
-                    title="Toggle autoplay"
-                  >
+                <button
+                  onClick={() => setVoiceEnabled(!voiceEnabled)}
+                  className={`p-2 rounded-lg border transition-colors ${
+                    voiceEnabled
+                      ? 'bg-white/15 border-white/30 hover:bg-white/25'
+                      : 'bg-transparent border-white/20 hover:bg-white/10'
+                  }`}
+                  title={voiceEnabled ? 'Voice: Chris (on) — click to mute' : 'Voice: Chris (off) — click to enable'}
+                >
+                  {voiceEnabled ? (
                     <SpeakerWaveIcon className="h-6 w-6 text-white" />
-                  </button>
-                </>
+                  ) : (
+                    <SpeakerXMarkIcon className="h-6 w-6 text-white" />
+                  )}
+                </button>
               )}
             </div>
           </div>
@@ -261,9 +268,9 @@ function App() {
           onAskInChat={handleAskInChat}
         />
       ) : (
-        <>
+        <div className="flex-1 relative overflow-hidden">
           {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="absolute inset-0 overflow-y-auto p-4 space-y-4 pb-32">
             <div className="max-w-4xl mx-auto">
               {assignments.length > 0 && !activeAssignment && (
                 <div className="mb-4 space-y-2">
@@ -388,43 +395,64 @@ function App() {
             </div>
           </div>
 
-          {/* Input Area */}
-          <div className="border-t border-white/15 bg-black/20 p-4">
-            <div className="max-w-4xl mx-auto flex items-end space-x-3">
-              <textarea
-                ref={textareaRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault()
-                    handleSend()
-                  }
-                }}
-                placeholder="Ask Professor Levine about the lectures, or paste your work for feedback..."
-                rows={1}
-                className="flex-1 resize-none max-h-48 overflow-y-auto bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
-                disabled={loading}
-              />
-              <button
-                onClick={() => handleSend()}
-                disabled={loading || !input.trim()}
-                className="bg-white/15 hover:bg-white/25 border-2 border-white/30 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-medium transition-colors hover:underline"
-              >
-                Send
-              </button>
-              <button
-                onClick={() => handleExploreFromChat(input)}
-                disabled={!input.trim()}
-                title="Open this topic on the Explore canvas"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-[#9D4EDD]/60 bg-[#9D4EDD]/15 px-4 py-3 text-sm font-medium text-[#E0B0FF] hover:bg-[#9D4EDD]/25 disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                <Sparkles size={15} />
-                <span className="hidden sm:inline">Explore</span>
-              </button>
-            </div>
+          {/* Input dock: centered on launch, animates down to a bottom bar
+              once the conversation starts (hasMessages flips items-center
+              to a bottom-hugging position; framer-motion's `layout` prop
+              animates the resulting position change on the row itself). */}
+          <div
+            className={`absolute inset-x-0 flex justify-center px-4 pointer-events-none ${
+              hasMessages
+                ? 'bottom-0 border-t border-white/15 bg-black/20'
+                : 'top-0 bottom-0 items-center'
+            }`}
+          >
+            <motion.div
+              layout
+              transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+              className="w-full max-w-4xl py-4 pointer-events-auto"
+            >
+              {!hasMessages && (
+                <p className="mb-4 text-center text-white/70">
+                  Ask Professor Levine about the lectures, or paste your work for feedback
+                </p>
+              )}
+              <div className="flex items-end space-x-3">
+                <textarea
+                  ref={textareaRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault()
+                      handleSend()
+                    }
+                  }}
+                  placeholder="Ask Professor Levine about the lectures, or paste your work for feedback..."
+                  rows={1}
+                  className="flex-1 resize-none max-h-48 overflow-y-auto bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
+                  disabled={loading}
+                  autoFocus
+                />
+                <button
+                  onClick={() => handleSend()}
+                  disabled={loading || !input.trim()}
+                  className="bg-white/15 hover:bg-white/25 border-2 border-white/30 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-medium transition-colors hover:underline"
+                >
+                  Send
+                </button>
+                <button
+                  onClick={() => handleExploreFromChat(input)}
+                  disabled={!input.trim()}
+                  title="Open this topic on the Explore canvas"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#9D4EDD]/60 bg-[#9D4EDD]/15 px-4 py-3 text-sm font-medium text-[#E0B0FF] hover:bg-[#9D4EDD]/25 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <Sparkles size={15} />
+                  <span className="hidden sm:inline">Explore</span>
+                </button>
+              </div>
+            </motion.div>
           </div>
-        </>
+        </div>
       )}
 
       {/* Hidden audio element for playback */}
