@@ -14,7 +14,9 @@ function App() {
   const hasMessages = messages.length > 0
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [voiceEnabled, setVoiceEnabled] = useState(true)
+  // Defaults off; when on, audio auto-plays for each new response (no
+  // separate autoplay toggle -- one button, one concept).
+  const [voiceEnabled, setVoiceEnabled] = useState(false)
   // Reply language toggle, ported from the original Streamlit app's
   // "Language / 语言" English/中文 buttons (app/streamlit_app.py) -- the
   // student may type in either language regardless of this setting.
@@ -52,13 +54,15 @@ function App() {
     scrollToBottom()
   }, [messages])
 
-  // Auto-grow the input textarea with the content, capped at max-h-48 (192px)
-  // to match the CSS cap below -- beyond that it scrolls internally.
+  // Auto-grow the input textarea with the content. Floored at 48px (h-12) so
+  // it never renders shorter than the Send/Explore buttons beside it, capped
+  // at 192px (max-h-48) to match the CSS cap below -- beyond that it scrolls
+  // internally.
   useEffect(() => {
     const el = textareaRef.current
     if (!el) return
     el.style.height = 'auto'
-    el.style.height = `${Math.min(el.scrollHeight, 192)}px`
+    el.style.height = `${Math.max(48, Math.min(el.scrollHeight, 192))}px`
   }, [input])
 
   const handleSend = useCallback(async (override, assignmentIdOverride) => {
@@ -126,8 +130,10 @@ function App() {
         }
 
         setMessages(prev => [...prev, botMessage])
-        // Autoplay defaults off (and isn't user-toggleable) -- audio is
-        // available via the per-message "Play audio" button only.
+
+        if (voiceEnabled && data.audio_base64) {
+          playAudio(data.audio_base64)
+        }
       }
     } catch (error) {
       console.error('Error:', error)
@@ -198,7 +204,7 @@ function App() {
               <div className="ml-4 flex rounded-lg bg-black/20 p-1">
                 <button
                   onClick={() => setView('chat')}
-                  className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                  className={`h-7 flex items-center gap-1.5 rounded-md px-3 text-sm font-medium transition-colors ${
                     view === 'chat' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -207,7 +213,7 @@ function App() {
                 </button>
                 <button
                   onClick={() => setView('explore')}
-                  className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                  className={`h-7 flex items-center gap-1.5 rounded-md px-3 text-sm font-medium transition-colors ${
                     view === 'explore' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -222,7 +228,7 @@ function App() {
                 <div className="flex rounded-lg bg-black/20 p-1" title="Reply language — you may type in either language">
                   <button
                     onClick={() => setResponseLanguage('en')}
-                    className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                    className={`h-7 flex items-center rounded-md px-3 text-sm font-medium transition-colors ${
                       responseLanguage === 'en' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                     }`}
                   >
@@ -230,7 +236,7 @@ function App() {
                   </button>
                   <button
                     onClick={() => setResponseLanguage('zh')}
-                    className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                    className={`h-7 flex items-center rounded-md px-3 text-sm font-medium transition-colors ${
                       responseLanguage === 'zh' ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
                     }`}
                   >
@@ -240,21 +246,24 @@ function App() {
               )}
 
               {view === 'chat' && (
-                <button
-                  onClick={() => setVoiceEnabled(!voiceEnabled)}
-                  className={`p-2 rounded-lg border transition-colors ${
-                    voiceEnabled
-                      ? 'bg-white/15 border-white/30 hover:bg-white/25'
-                      : 'bg-transparent border-white/20 hover:bg-white/10'
-                  }`}
-                  title={voiceEnabled ? 'Voice: Chris (on) — click to mute' : 'Voice: Chris (off) — click to enable'}
-                >
-                  {voiceEnabled ? (
-                    <SpeakerWaveIcon className="h-6 w-6 text-white" />
-                  ) : (
-                    <SpeakerXMarkIcon className="h-6 w-6 text-white" />
-                  )}
-                </button>
+                // Same rounded-lg bg-black/20 p-1 container as the language
+                // toggle, so this button matches its height/vertical
+                // alignment exactly rather than approximating it separately.
+                <div className="flex rounded-lg bg-black/20 p-1">
+                  <button
+                    onClick={() => setVoiceEnabled(!voiceEnabled)}
+                    className={`h-7 flex items-center justify-center rounded-md px-3 text-sm font-medium transition-colors ${
+                      voiceEnabled ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'
+                    }`}
+                    title={voiceEnabled ? 'Voice: Chris (on) — click to mute' : 'Voice: Chris (off) — click to enable'}
+                  >
+                    {voiceEnabled ? (
+                      <SpeakerWaveIcon className="h-4 w-4" />
+                    ) : (
+                      <SpeakerXMarkIcon className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -416,7 +425,7 @@ function App() {
                   Ask Professor Levine about the lectures, or paste your work for feedback
                 </p>
               )}
-              <div className="flex items-end space-x-3">
+              <div className="flex items-center space-x-3">
                 <textarea
                   ref={textareaRef}
                   value={input}
@@ -429,14 +438,14 @@ function App() {
                   }}
                   placeholder="Ask Professor Levine about the lectures, or paste your work for feedback..."
                   rows={1}
-                  className="flex-1 resize-none max-h-48 overflow-y-auto bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
+                  className="flex-1 h-12 resize-none max-h-48 overflow-y-auto bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-white/40"
                   disabled={loading}
                   autoFocus
                 />
                 <button
                   onClick={() => handleSend()}
                   disabled={loading || !input.trim()}
-                  className="bg-white/15 hover:bg-white/25 border-2 border-white/30 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-medium transition-colors hover:underline"
+                  className="h-12 flex items-center justify-center bg-white/15 hover:bg-white/25 border-2 border-white/30 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 rounded-lg font-medium transition-colors hover:underline"
                 >
                   Send
                 </button>
@@ -444,7 +453,7 @@ function App() {
                   onClick={() => handleExploreFromChat(input)}
                   disabled={!input.trim()}
                   title="Open this topic on the Explore canvas"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#9D4EDD]/60 bg-[#9D4EDD]/15 px-4 py-3 text-sm font-medium text-[#E0B0FF] hover:bg-[#9D4EDD]/25 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="h-12 inline-flex items-center gap-1.5 rounded-lg border border-[#9D4EDD]/60 bg-[#9D4EDD]/15 px-4 text-sm font-medium text-[#E0B0FF] hover:bg-[#9D4EDD]/25 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <Sparkles size={15} />
                   <span className="hidden sm:inline">Explore</span>
