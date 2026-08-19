@@ -21,6 +21,18 @@ import { ClarifyNode } from './ClarifyNode'
 const nodeTypes = { card: CardNode, clarify: ClarifyNode }
 const COL_W = 360
 const ROW_H = 220
+// Vertical breathing room between stacked cards in the same column. Card
+// height varies a lot with content (a plain card renders well under 220px,
+// one with citations and a directed-branch composer can top 400px), so a
+// fixed ROW_H alone isn't enough to prevent overlap -- see the reflow effect
+// below, which is what actually enforces this gap using each card's real
+// measured height once React Flow has rendered it.
+const CARD_GAP = 15
+// Used only for the brief window before a freshly-added card has been
+// measured (React Flow populates node.measured after its first paint) --
+// close to the observed real range so the pre-measurement layout doesn't
+// visibly jump much once the true height snaps in.
+const FALLBACK_CARD_HEIGHT = 400
 
 let _seq = 0
 const genId = () => `n${Date.now().toString(36)}_${_seq++}`
@@ -75,6 +87,41 @@ function CanvasInner({ seed, onSeedConsumed, onAskInChat }) {
     columnCursor.current[col] += ROW_H
     return y
   }, [])
+
+  // Enforces a consistent CARD_GAP between stacked cards, using each card's
+  // real rendered height (node.measured.height, populated by React Flow
+  // after first paint) rather than the rough ROW_H estimate nextY() uses for
+  // provisional placement. Re-runs on every nodes change, so it also keeps
+  // cards from overlapping if one grows (e.g. expanding a clamped paragraph)
+  // or shrinks (collapsing it back). Converges in 1-2 passes: it only
+  // updates positions that actually need to move, so once a column is
+  // correctly spaced this is a no-op and doesn't loop.
+  useEffect(() => {
+    const byColumn = new Map()
+    for (const n of nodes) {
+      const col = metaRef.current[n.id]?.columnIndex ?? 0
+      if (!byColumn.has(col)) byColumn.set(col, [])
+      byColumn.get(col).push(n)
+    }
+
+    let changed = false
+    const nextPositions = new Map()
+    for (const colNodes of byColumn.values()) {
+      colNodes.sort((a, b) => a.position.y - b.position.y)
+      let cursorY = colNodes[0]?.position.y ?? 40
+      for (const n of colNodes) {
+        if (Math.abs(n.position.y - cursorY) > 0.5) {
+          nextPositions.set(n.id, cursorY)
+          changed = true
+        }
+        cursorY += (n.measured?.height ?? FALLBACK_CARD_HEIGHT) + CARD_GAP
+      }
+    }
+
+    if (changed) {
+      setNodes((ns) => ns.map((n) => (nextPositions.has(n.id) ? { ...n, position: { ...n.position, y: nextPositions.get(n.id) } } : n)))
+    }
+  }, [nodes, setNodes])
 
   const focus = useCallback(
     (x, y) => {
