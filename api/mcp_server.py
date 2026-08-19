@@ -64,6 +64,7 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
     api/main.py's _raw_bot), or None if unavailable. Called per-request, not
     once at import time, since bot initialization can fail independently."""
     from mcp.server.mcpserver import MCPServer
+    from mcp.server.transport_security import TransportSecuritySettings
 
     import mcp_tools  # sibling module in src/, already on sys.path via api/main.py's insert
 
@@ -95,7 +96,21 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
     # Mount path is "/" here because this whole app is itself mounted at
     # /api/mcp by api/main.py -- the sub-app only ever sees paths relative
     # to that mount point, so its own route table should start at "/".
-    return mcp_server.streamable_http_app(streamable_http_path="/")
+    #
+    # transport_security: the mcp SDK's streamable_http_app() auto-enables
+    # DNS-rebinding Host-header validation whenever its own `host` config
+    # param is "127.0.0.1" (its default) -- which we never override, since
+    # we don't use it to bind a socket (we mount this Starlette app inside
+    # our own FastAPI app instead). That auto-enable only allow-lists
+    # 127.0.0.1/localhost/::1, so every request against the real deployed
+    # hostname gets rejected with 421 "Invalid Host header" -- confirmed by
+    # reading mcp/server/lowlevel/server.py's streamable_http_app(). Explicitly
+    # disabling it here is correct, not just a workaround: BearerAuthMiddleware
+    # above already gates this endpoint, and Host-header allow-listing would
+    # need per-environment config anyway (App Runner's default hostname today,
+    # a custom domain later) for no real security benefit over the bearer token.
+    transport_security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+    return mcp_server.streamable_http_app(streamable_http_path="/", transport_security=transport_security)
 
 
 def build_authenticated_mcp_app(
