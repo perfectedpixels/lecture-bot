@@ -89,6 +89,13 @@ def mcp_grade(bot, submission: str, assignment: str) -> Dict[str, Any]:
     return grading.grade_submission(bot, submission, assignment)
 
 
+def mcp_derive_calibration(bot, submission: str, assignment: str) -> Dict[str, Any]:
+    """Draft reusable 4.0 grading criteria from an exemplar submission."""
+    import grading
+
+    return grading.derive_calibration(bot, submission, assignment)
+
+
 def mcp_methodology(
     bot, request: str, response_language: str = "en", max_results: int = 6
 ) -> Dict[str, Any]:

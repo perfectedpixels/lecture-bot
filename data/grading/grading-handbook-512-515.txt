@@ -198,6 +198,11 @@ Weak Signals:
 - Inconsistent components
 - Over-styled design hiding weak structure
 
+Decision Tree:
+- Clear hierarchy + consistent components + flows preserved from the prototype = 4.0
+- Sound structure but inconsistent components or a broken flow = 3.x
+- Screens disconnected from flows, or styling substituting for structure = 2.x
+
 Assignment 2: Design Aesthetics Evaluation
 
 Assignment Objective: Analyze interface aesthetics using design theory.
@@ -239,6 +244,11 @@ Recommendation: Persist form data during session.
 Weak Issue Example:
 Problem: The interface is confusing.
 Heuristic: None provided.
+
+Decision Tree:
+- Specific problems, correctly mapped heuristics, calibrated severity, actionable recommendations = 4.0
+- Real problems identified but heuristics mismapped or severity uncalibrated = 3.x
+- Vague problem statements, or missing heuristic mapping and recommendations = 2.x
 
 --- INSTRUCTOR NOTES ---
 

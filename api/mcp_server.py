@@ -124,6 +124,21 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
             return {"error": "bot not initialized"}
         return mcp_tools.mcp_grade(bot, submission, assignment)
 
+    @mcp_server.tool()
+    def derive_calibration(submission: str, assignment: str) -> dict:
+        """INSTRUCTOR TOOL. Given a submission the instructor scored 4.0, draft
+        reusable grading criteria for that assignment: what the 4.0 bar is,
+        what separates 4.0 from 3.x, and the failure modes weaker work shows.
+
+        Returns rubric LANGUAGE rather than storing the submission, so
+        calibration can be kept without retaining student work. Output is a
+        draft to review and edit -- once saved under data/grading/calibration/
+        it shapes every later grade for that assignment."""
+        bot = get_raw_bot()
+        if bot is None:
+            return {"error": "bot not initialized"}
+        return mcp_tools.mcp_derive_calibration(bot, submission, assignment)
+
     # Mount path is "/" here because this whole app is itself mounted at
     # /api/mcp by api/main.py -- the sub-app only ever sees paths relative
     # to that mount point, so its own route table should start at "/".

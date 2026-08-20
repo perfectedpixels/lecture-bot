@@ -17,7 +17,10 @@ COPY src/ /app/src/
 COPY api/ /app/api/
 COPY data/affinity_map.json /app/data/affinity_map.json
 COPY data/teaching_concepts.json /app/data/teaching_concepts.json
-COPY data/grading/grading-handbook-512-515.txt /app/data/grading/grading-handbook-512-515.txt
+# Whole grading dir, not just the handbook: also carries data/grading/calibration/,
+# the per-assignment 4.0 anchors. Copying the directory means adding a new
+# calibration file doesn't also require remembering to edit this Dockerfile.
+COPY data/grading/ /app/data/grading/
 # No data/portfolio_image_metadata.json here -- that dataset (and the images
 # under data/portfolio_images/) was removed from the working tree. Not
 # copying it is safe: LearningCardGenerator.__init__ (src/learning_card_generator.py)
