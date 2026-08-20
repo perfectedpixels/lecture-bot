@@ -68,6 +68,27 @@ def mcp_retrieve(
     return {"results": [_result_to_dict(bot, r) for r in results]}
 
 
+def mcp_list_rubrics() -> Dict[str, Any]:
+    """Assignment rubrics available in the instructor grading handbook."""
+    import grading
+
+    return {"rubrics": grading.list_rubrics()}
+
+
+def mcp_get_rubric(assignment: str) -> Dict[str, Any]:
+    """Full handbook rubric for one assignment, by loose name."""
+    import grading
+
+    return grading.get_rubric(assignment)
+
+
+def mcp_grade(bot, submission: str, assignment: str) -> Dict[str, Any]:
+    """Instructor-side draft assessment of a student submission."""
+    import grading
+
+    return grading.grade_submission(bot, submission, assignment)
+
+
 def mcp_methodology(
     bot, request: str, response_language: str = "en", max_results: int = 6
 ) -> Dict[str, Any]:

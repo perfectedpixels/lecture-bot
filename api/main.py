@@ -88,9 +88,14 @@ except ImportError:
 try:
     from . import mcp_server
     HAS_MCP = True
-except ImportError:
+except ImportError as e:
     HAS_MCP = False
-    print("Warning: mcp_server not available (mcp package not installed?)")
+    # Print the real cause: this fires both when the `mcp` package is missing
+    # AND when main.py is run as a top-level script (python main.py) rather
+    # than as the api.main submodule, which breaks the relative import. The
+    # Dockerfile runs `uvicorn api.main:app`, so production takes the working
+    # path -- but the old message blamed the package either way.
+    print(f"Warning: mcp_server not available ({e})")
 
 # Set by the MCP-mount block further down, before the app actually starts --
 # read here as a closure so `lifespan` can be passed to FastAPI() below,

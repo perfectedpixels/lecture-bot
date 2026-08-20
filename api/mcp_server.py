@@ -93,6 +93,37 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
             return {"error": "bot not initialized"}
         return mcp_tools.mcp_methodology(bot, request, response_language=response_language)
 
+    @mcp_server.tool()
+    def list_rubrics() -> dict:
+        """List the assignment rubrics available in the instructor grading
+        handbook. Use this to discover valid `assignment` values for
+        get_rubric and grade_submission."""
+        return mcp_tools.mcp_list_rubrics()
+
+    @mcp_server.tool()
+    def get_rubric(assignment: str) -> dict:
+        """Full grading rubric for one assignment, including its Instructor
+        Evaluation Checklist, annotated strong/weak examples, and the decision
+        tree that maps work quality to a score band. `assignment` accepts loose
+        names ("persona", "wireframes", "Assignment 6")."""
+        return mcp_tools.mcp_get_rubric(assignment)
+
+    @mcp_server.tool()
+    def grade_submission(submission: str, assignment: str) -> dict:
+        """INSTRUCTOR TOOL. Assess a student's submission against the course
+        grading handbook and return per-criterion findings, a suggested score
+        on the handbook's 0-4.0 scale, the decision-tree branch it matched, and
+        draft feedback for the student.
+
+        Output is a DRAFT for the instructor to review and edit -- it is not a
+        final grade and must not be handed to a student unreviewed. Returns
+        gradable=false rather than guessing when the submission is too short or
+        no rubric matches the assignment."""
+        bot = get_raw_bot()
+        if bot is None:
+            return {"error": "bot not initialized"}
+        return mcp_tools.mcp_grade(bot, submission, assignment)
+
     # Mount path is "/" here because this whole app is itself mounted at
     # /api/mcp by api/main.py -- the sub-app only ever sees paths relative
     # to that mount point, so its own route table should start at "/".
