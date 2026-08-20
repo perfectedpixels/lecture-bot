@@ -79,7 +79,7 @@ function CanvasInner({ seed, onSeedConsumed, onAskInChat }) {
   nodesRef.current = nodes
   const edgesRef = useRef([])
   edgesRef.current = edges
-  const { setCenter, fitView } = useReactFlow()
+  const { setCenter, fitView, getZoom } = useReactFlow()
 
   const nextY = useCallback((col) => {
     if (columnCursor.current[col] === undefined) columnCursor.current[col] = 40
@@ -89,14 +89,24 @@ function CanvasInner({ seed, onSeedConsumed, onAskInChat }) {
   }, [])
 
   // Enforces a consistent CARD_GAP between stacked cards, using each card's
-  // real rendered height (node.measured.height, populated by React Flow
-  // after first paint) rather than the rough ROW_H estimate nextY() uses for
-  // provisional placement. Re-runs on every nodes change, so it also keeps
-  // cards from overlapping if one grows (e.g. expanding a clamped paragraph)
-  // or shrinks (collapsing it back). Converges in 1-2 passes: it only
-  // updates positions that actually need to move, so once a column is
-  // correctly spaced this is a no-op and doesn't loop.
+  // real rendered DOM height rather than the rough ROW_H estimate nextY()
+  // uses for provisional placement. Deliberately measures the DOM directly
+  // (via getBoundingClientRect, corrected for the canvas's own zoom) instead
+  // of trusting React Flow's node.measured -- that looked right in local dev
+  // testing but proved unreliable in the production build (positions stayed
+  // on the ROW_H-based estimate indefinitely). Measures synchronously inside
+  // the effect body rather than behind a requestAnimationFrame: useEffect
+  // already runs after the browser paints the current render, and wrapping
+  // it in rAF turned out to race against the focus()/fitView() viewport
+  // animation -- nodes kept changing reference during that ~500ms window,
+  // tearing down and rescheduling this effect's rAF pair before it ever
+  // fired, so the correction never landed. Re-runs on every nodes change, so
+  // it also keeps cards from overlapping if one grows (e.g. expanding a
+  // clamped paragraph) or shrinks (collapsing it back) -- each correction
+  // triggers another nodes change, which re-measures and converges within a
+  // few passes; once a column is correctly spaced this is a no-op.
   useEffect(() => {
+    const zoom = getZoom() || 1
     const byColumn = new Map()
     for (const n of nodes) {
       const col = metaRef.current[n.id]?.columnIndex ?? 0
@@ -114,14 +124,16 @@ function CanvasInner({ seed, onSeedConsumed, onAskInChat }) {
           nextPositions.set(n.id, cursorY)
           changed = true
         }
-        cursorY += (n.measured?.height ?? FALLBACK_CARD_HEIGHT) + CARD_GAP
+        const el = document.querySelector(`.react-flow__node[data-id="${n.id}"]`)
+        const domHeight = el ? el.getBoundingClientRect().height / zoom : null
+        cursorY += (domHeight || n.measured?.height || FALLBACK_CARD_HEIGHT) + CARD_GAP
       }
     }
 
     if (changed) {
       setNodes((ns) => ns.map((n) => (nextPositions.has(n.id) ? { ...n, position: { ...n.position, y: nextPositions.get(n.id) } } : n)))
     }
-  }, [nodes, setNodes])
+  }, [nodes, setNodes, getZoom])
 
   const focus = useCallback(
     (x, y) => {
