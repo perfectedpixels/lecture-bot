@@ -83,6 +83,7 @@ INSTRUCTIONS:
 - Every point you make must cite a specific retrieved source by its [n] marker. If you cannot ground a point in the sources, leave it out.
 - A contradiction means the draft asserts something the material actually says otherwise. Do not report mere differences in wording or emphasis as contradictions.
 - If the retrieved material is too thin or off-topic to judge the draft, say so plainly rather than manufacturing findings.
+- When you quote the draft or the material inside a JSON string value, use SINGLE quotes for the inner quotation. Never place an unescaped double quote inside a JSON string -- it produces invalid JSON and the whole review is lost. To cite two separate phrases in one field, join them with a semicolon inside a single pair of double quotes.
 
 Return ONLY a JSON object (no markdown fences):
 {{
@@ -140,23 +141,28 @@ def review_document(
     results = bot._select_diverse_results(query, results, max_results)
 
     prompt = _build_review_prompt(document, focus, _format_sources(bot, results))
-    response = bot._invoke_model_with_retry(
-        {
-            "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": DOC_REVIEW_MAX_TOKENS,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": DOC_REVIEW_TEMPERATURE,
-        }
-    )
-    body = json.loads(response["body"].read())
-    text = body["content"][0]["text"]
+
+    def _invoke(messages):
+        response = bot._invoke_model_with_retry(
+            {
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": DOC_REVIEW_MAX_TOKENS,
+                "messages": messages,
+                "temperature": DOC_REVIEW_TEMPERATURE,
+            }
+        )
+        body = json.loads(response["body"].read())
+        return body, body["content"][0]["text"]
+
+    messages = [{"role": "user", "content": prompt}]
+    body, text = _invoke(messages)
 
     try:
         review = _extract_json_object(text)
-    except (json.JSONDecodeError, ValueError):
-        # Distinguish "ran out of room" from "emitted malformed JSON" -- the
-        # first is actionable (shorten the document or raise the cap) and the
-        # findings up to the cut are usually real; the second is not.
+    except (json.JSONDecodeError, ValueError) as err:
+        # Truncation is a different failure from malformed syntax: it's
+        # actionable by the caller (shorten the document) and the findings up
+        # to the cut are usually real, so don't burn a retry on it.
         if body.get("stop_reason") == "max_tokens":
             return {
                 "ok": False,
@@ -164,7 +170,27 @@ def review_document(
                 "hint": "Review a section at a time, or narrow `focus` to what matters most.",
                 "partial": text,
             }
-        return {"ok": False, "error": "could not parse review output", "raw": text}
+        # Malformed JSON is usually one bad string value (an unescaped inner
+        # quote) in an otherwise-correct review. Re-asking with the specific
+        # error recovers real findings that would otherwise be thrown away.
+        print(f"⚠ Review JSON malformed ({err}); retrying once with correction.")
+        messages += [
+            {"role": "assistant", "content": text},
+            {
+                "role": "user",
+                "content": (
+                    f"That was not valid JSON ({err}). Return the same review as a single "
+                    "valid JSON object. Use single quotes for any quotation inside a string "
+                    "value, and never place an unescaped double quote inside one. Output the "
+                    "JSON only, with no commentary."
+                ),
+            },
+        ]
+        body, text = _invoke(messages)
+        try:
+            review = _extract_json_object(text)
+        except (json.JSONDecodeError, ValueError):
+            return {"ok": False, "error": "could not parse review output", "raw": text}
 
     review["ok"] = True
     review["sources_consulted"] = [bot._source_name_from_result(r) for r in results]
