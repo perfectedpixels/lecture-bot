@@ -71,15 +71,38 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
     mcp_server: MCPServer = MCPServer("lecture-bot-mcp")
 
     @mcp_server.tool()
-    def retrieve_lectures(query: str, layer: Optional[str] = None, max_results: int = 6) -> dict:
-        """Raw retrieval from the UX/design-thinking lecture knowledge base.
-        layer: omit for normal ranked retrieval across all content, or pass
-        "directive" for grading rubric/course-policy content only, or
-        "reference" for lecture-transcript content only."""
+    def retrieve_lectures(
+        query: str,
+        layer: Optional[str] = None,
+        doc_type: Optional[str] = None,
+        max_results: int = 6,
+    ) -> dict:
+        """Raw retrieval from the UX/design-thinking knowledge base.
+
+        layer: omit for normal ranked retrieval across everything;
+          "directive" = grading rubrics and course policy ONLY (what governs
+          a grade); "reference" = all other course material.
+
+        doc_type: narrow further by kind of material --
+          "lecture"     lecture and talk transcripts (the bulk of the corpus)
+          "assignment"  assignment briefs
+          "rubric"      grading rubrics
+          "course-policy" the course grading policy
+          "case-study"  professional project case studies
+          "portfolio"   agency/portfolio material
+          "cv"          the instructor's professional background
+          "framework"   agentic-AI operating model and design frameworks
+          "meta"        repo/build documentation -- not course content
+
+        The two combine. Use doc_type to keep bio material ("cv",
+        "portfolio") out of a subject-matter answer, or to target it
+        deliberately when the question really is about background."""
         bot = get_raw_bot()
         if bot is None:
             return {"error": "bot not initialized"}
-        return mcp_tools.mcp_retrieve(bot, query, layer=layer, max_results=max_results)
+        return mcp_tools.mcp_retrieve(
+            bot, query, layer=layer, doc_type=doc_type, max_results=max_results
+        )
 
     @mcp_server.tool()
     def generate_methodology(request: str, response_language: str = "en") -> dict:

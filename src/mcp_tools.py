@@ -19,26 +19,33 @@ from typing import Any, Dict, List, Optional
 DIRECTIVE_RETRIEVE_N = 6
 
 
-def _retrieve_layer_filtered(bot, query: str, layer: str, n: int) -> List[Dict]:
-    """Filtered retrieve for a specific `layer` metadata value (e.g.
-    "directive" or "reference"). Generalizes
-    feedback_mode._retrieve_directive_channel, which hardcodes "directive"
-    for its own single use case; this one is parameterized for MCP callers
-    who may want either channel explicitly."""
+def _retrieve_metadata_filtered(
+    bot, query: str, n: int, layer: Optional[str] = None, doc_type: Optional[str] = None
+) -> List[Dict]:
+    """Filtered retrieve on the `layer` and/or `doc_type` metadata attributes.
+
+    Generalizes feedback_mode._retrieve_directive_channel, which hardcodes
+    layer="directive" for its own use. Both filters combine with andAll when
+    given together."""
+    clauses = []
+    if layer:
+        clauses.append({"equals": {"key": "layer", "value": layer}})
+    if doc_type:
+        clauses.append({"equals": {"key": "doc_type", "value": doc_type}})
+    if not clauses:
+        return []
+    filt = clauses[0] if len(clauses) == 1 else {"andAll": clauses}
     try:
         response = bot.bedrock_agent.retrieve(
             knowledgeBaseId=bot.knowledge_base_id,
             retrievalQuery={"text": query},
             retrievalConfiguration={
-                "vectorSearchConfiguration": {
-                    "numberOfResults": n,
-                    "filter": {"equals": {"key": "layer", "value": layer}},
-                }
+                "vectorSearchConfiguration": {"numberOfResults": n, "filter": filt}
             },
         )
         return list(response.get("retrievalResults", []))
     except Exception as e:
-        print(f"⚠ Layer-filtered retrieve failed (degrading gracefully): {e}")
+        print(f"⚠ Metadata-filtered retrieve failed (degrading gracefully): {e}")
         return []
 
 
@@ -55,14 +62,20 @@ def _result_to_dict(bot, r: Dict) -> Dict[str, Any]:
 
 
 def mcp_retrieve(
-    bot, query: str, layer: Optional[str] = None, max_results: int = 6
+    bot,
+    query: str,
+    layer: Optional[str] = None,
+    doc_type: Optional[str] = None,
+    max_results: int = 6,
 ) -> Dict[str, Any]:
-    """Raw KB retrieval for MCP clients. layer=None uses the normal
-    multi-signal retrieve (query expansion not applied here -- MCP callers
-    supply their own query text directly); layer="directive"|"reference"
-    uses a filtered retrieve on that metadata channel."""
-    if layer:
-        results = _retrieve_layer_filtered(bot, query, layer, max_results)
+    """Raw KB retrieval for MCP clients. With neither filter, uses the normal
+    multi-signal retrieve (query expansion is not applied -- MCP callers supply
+    their own query text). With `layer` and/or `doc_type`, uses a filtered
+    retrieve on those metadata attributes."""
+    if layer or doc_type:
+        results = _retrieve_metadata_filtered(
+            bot, query, max_results, layer=layer, doc_type=doc_type
+        )
     else:
         results, _err = bot._retrieve_parallel([query], max_results=max_results)
     return {"results": [_result_to_dict(bot, r) for r in results]}
