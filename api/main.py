@@ -1,5 +1,6 @@
 import asyncio
 import json
+import logging
 import os
 import sys
 import threading
@@ -174,6 +175,39 @@ MCP_API_KEY = os.environ.get("MCP_API_KEY", "")
 # MCP_API_KEY: a token in a URL is exposed in more places than one in a header,
 # so a leak there must not also compromise the header endpoint.
 MCP_URL_TOKEN = os.environ.get("MCP_URL_TOKEN", "")
+
+
+class _RedactUrlToken(logging.Filter):
+    """Keeps MCP_URL_TOKEN out of the access log.
+
+    Because this credential travels in the path rather than a header, uvicorn's
+    access logger writes it verbatim on every request -- which on App Runner
+    means the secret lands in CloudWatch, readable by anyone with log access.
+    That was observed happening, not anticipated. Bearer tokens never had this
+    problem because headers are not logged.
+
+    Redacts the token anywhere in the record: uvicorn.access passes the request
+    path as args[2], but the message itself is checked too so no formatting
+    variant slips through."""
+
+    def __init__(self, token: str):
+        super().__init__()
+        self.token = token
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        if record.args:
+            record.args = tuple(
+                a.replace(self.token, "<redacted>") if isinstance(a, str) and self.token in a else a
+                for a in (record.args if isinstance(record.args, tuple) else (record.args,))
+            )
+        if isinstance(record.msg, str) and self.token in record.msg:
+            record.msg = record.msg.replace(self.token, "<redacted>")
+        return True
+
+
+if MCP_URL_TOKEN:
+    for _name in ("uvicorn.access", "uvicorn.error", "uvicorn"):
+        logging.getLogger(_name).addFilter(_RedactUrlToken(MCP_URL_TOKEN))
 
 bot = None
 voice_gen = None

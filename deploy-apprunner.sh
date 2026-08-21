@@ -147,6 +147,18 @@ else
   # looks different across builds. Confirmed empirically: a code fix pushed
   # under the same tag sat un-deployed after update-service alone. Always
   # force it explicitly.
+  # update-service is itself an operation, and start-deployment is rejected
+  # while one is in flight ("isn't in RUNNING state"). When the env vars
+  # actually changed, that rejection used to abort the whole script under
+  # `set -e`, leaving the cached :latest deployed and the new image unused.
+  echo "waiting for the env-var update to settle before forcing a redeploy…"
+  for i in $(seq 1 60); do
+    S=$(aws apprunner describe-service --region $REGION --service-arn "$EXISTING" --query "Service.Status" --output text)
+    [ "$S" = "RUNNING" ] && break
+    sleep 10
+  done
+  [ "$S" = "RUNNING" ] || { echo "ERROR: service stuck in $S; not forcing a deployment."; exit 1; }
+
   echo "forcing a fresh deployment of the current :latest image…"
   aws apprunner start-deployment --region $REGION --service-arn "$EXISTING" >/dev/null
 fi
