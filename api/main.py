@@ -209,6 +209,37 @@ if MCP_URL_TOKEN:
     for _name in ("uvicorn.access", "uvicorn.error", "uvicorn"):
         logging.getLogger(_name).addFilter(_RedactUrlToken(MCP_URL_TOKEN))
 
+
+class _McpUrlSlashMiddleware:
+    """Makes the path mount answer its own URL without a trailing slash.
+
+    claude.ai normalizes the trailing slash off a connector URL before calling
+    it. Starlette's Mount only matches WITH the slash, so the bare form fell
+    through to the shorter /api/mcp mount -- the bearer one -- and got a 401.
+    The client read that 401 as "this resource is protected", went looking for
+    OAuth metadata, found none, and failed at dynamic client registration:
+    "Couldn't register with the sign-in service". Observed in the App Runner
+    access log, which is the only reason the cause was findable at all.
+
+    Rewriting the scope here rather than returning a 307 keeps it transparent:
+    no redirect for the client to follow, and no reliance on a client
+    re-sending a POST body across one. Pure ASGI so it runs before routing.
+    Only the one exact path is touched; anything else, including a wrong
+    token, is passed through untouched and still 401s."""
+
+    def __init__(self, app, bare_path: str):
+        self.app = app
+        self.bare_path = bare_path
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http" and scope.get("path") == self.bare_path:
+            scope = dict(scope)
+            scope["path"] = self.bare_path + "/"
+            raw = scope.get("raw_path")
+            if raw:
+                scope["raw_path"] = raw + b"/"
+        await self.app(scope, receive, send)
+
 bot = None
 voice_gen = None
 
@@ -329,7 +360,10 @@ if HAS_MCP:
                     _raw_bot, check_rate_limit=_check_rate_limit
                 )
                 app.mount(f"/api/mcp/u/{MCP_URL_TOKEN}", _mcp_url_app)
-                print("✓ MCP server mounted at /api/mcp/u/<token>")
+                app.add_middleware(
+                    _McpUrlSlashMiddleware, bare_path=f"/api/mcp/u/{MCP_URL_TOKEN}"
+                )
+                print("✓ MCP server mounted at /api/mcp/u/<token> (bare path rewritten)")
             except Exception as e:
                 print(f"Error initializing URL-token MCP server: {e}")
 
