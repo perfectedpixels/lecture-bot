@@ -262,6 +262,30 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
     return mcp_server.streamable_http_app(streamable_http_path="/", transport_security=transport_security)
 
 
+def build_url_token_mcp_app(
+    get_raw_bot: Callable[[], Optional[Any]],
+    check_rate_limit: Optional[Callable[[str], bool]] = None,
+) -> Starlette:
+    """MCP app with NO header auth, intended to be mounted beneath an
+    unguessable path segment so the URL itself is the credential.
+
+    This exists because claude.ai's "Add custom connector" dialog accepts only
+    a URL and optional OAuth client credentials -- there is no custom-header
+    field, so a bearer token cannot be supplied there.
+
+    The tradeoff is real and worth stating: URLs are logged in more places
+    than headers (browser history, proxy and access logs, the connector
+    settings screen), so this credential is more exposed than the header one.
+    It therefore uses its OWN token, separate from MCP_API_KEY, so that a
+    leaked URL does not also compromise the header-authenticated endpoint and
+    can be rotated on its own. Rate limiting still applies.
+    """
+    inner = build_mcp_asgi_app(get_raw_bot)
+    if check_rate_limit is not None:
+        inner.add_middleware(RateLimitMiddleware, check_rate_limit=check_rate_limit, namespace="mcp-url")
+    return inner
+
+
 def build_authenticated_mcp_app(
     get_raw_bot: Callable[[], Optional[Any]],
     api_key: str,

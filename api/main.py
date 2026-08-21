@@ -101,6 +101,7 @@ except ImportError as e:
 # read here as a closure so `lifespan` can be passed to FastAPI() below,
 # before the mounted app it needs to enter the lifespan of even exists yet.
 _mcp_asgi_app = None
+_mcp_url_app = None
 
 
 @asynccontextmanager
@@ -109,9 +110,12 @@ async def lifespan(_app: FastAPI):
     # lifespan -- FastMCP's Streamable HTTP transport needs its internal
     # session-manager task group started via its lifespan, or every request
     # fails with "Task group is not initialized" (confirmed empirically).
+    # Each mounted MCP app is a separate instance with its own session
+    # manager, so each needs its own lifespan entered.
     async with AsyncExitStack() as stack:
-        if _mcp_asgi_app is not None:
-            await stack.enter_async_context(_mcp_asgi_app.router.lifespan_context(_mcp_asgi_app))
+        for sub in (_mcp_asgi_app, _mcp_url_app):
+            if sub is not None:
+                await stack.enter_async_context(sub.router.lifespan_context(sub))
         yield
 
 
@@ -164,6 +168,12 @@ _CANVAS_COURSE_IDS = [
 ]
 CANVAS_COURSE_ID = _CANVAS_COURSE_IDS[0] if _CANVAS_COURSE_IDS else "1916689"
 MCP_API_KEY = os.environ.get("MCP_API_KEY", "")
+
+# Separate credential for the path-based MCP mount (see the mount block below
+# and mcp_server.build_url_token_mcp_app). Deliberately NOT the same value as
+# MCP_API_KEY: a token in a URL is exposed in more places than one in a header,
+# so a leak there must not also compromise the header endpoint.
+MCP_URL_TOKEN = os.environ.get("MCP_URL_TOKEN", "")
 
 bot = None
 voice_gen = None
@@ -265,6 +275,30 @@ def _raw_bot():
 # unset MCP_API_KEY means the mount is skipped entirely rather than served
 # unauthenticated.
 if HAS_MCP:
+    # Mounted FIRST, because Starlette matches mounts in registration order and
+    # the "/api/mcp" mount below would otherwise swallow this longer path.
+    #
+    # This second mount exists for claude.ai's "Add custom connector" dialog,
+    # which accepts only a URL -- it has no field for a custom Authorization
+    # header, so the bearer endpoint cannot be used from there. Here the
+    # unguessable path segment IS the credential. Fail closed the same way: no
+    # MCP_URL_TOKEN means no mount, so an unset env var can never expose an
+    # unauthenticated MCP endpoint at a guessable path.
+    if MCP_URL_TOKEN:
+        if MCP_URL_TOKEN == MCP_API_KEY:
+            print("⚠ MCP_URL_TOKEN must differ from MCP_API_KEY -- URL mount skipped")
+        elif len(MCP_URL_TOKEN) < 32:
+            print("⚠ MCP_URL_TOKEN too short to be unguessable -- URL mount skipped")
+        else:
+            try:
+                _mcp_url_app = mcp_server.build_url_token_mcp_app(
+                    _raw_bot, check_rate_limit=_check_rate_limit
+                )
+                app.mount(f"/api/mcp/u/{MCP_URL_TOKEN}", _mcp_url_app)
+                print("✓ MCP server mounted at /api/mcp/u/<token>")
+            except Exception as e:
+                print(f"Error initializing URL-token MCP server: {e}")
+
     if MCP_API_KEY:
         try:
             _mcp_asgi_app = mcp_server.build_authenticated_mcp_app(
