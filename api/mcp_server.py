@@ -185,6 +185,63 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
             return {"error": "bot not initialized"}
         return mcp_tools.mcp_review_document(bot, document, focus=focus)
 
+    @mcp_server.tool()
+    def check_authorship_signals(
+        document: str,
+        assignment_brief: str = "",
+        prior_artifacts: str = "",
+        style_trigger: float = 0.40,
+    ) -> dict:
+        """INSTRUCTOR TOOL. Gather evidence about how a submission was produced,
+        for the instructor to review before talking to the student.
+
+        This does NOT determine authorship and never says a document was
+        AI-generated. It returns findings across tiers:
+          tier1  verifiable -- fabricated citations, untraceable external
+                 statistics, claims misattributed to real sources
+          tier3  substance -- missing required specifics, internal
+                 contradictions, contradictions with the student's prior work
+          tier4  leakage -- prompt residue, unrendered markdown
+          style  register/formatting habits -- CORROBORATING ONLY
+
+        outcome is NO_SIGNAL, STYLE_ONLY_INSUFFICIENT, or INVESTIGATE.
+        Style can never produce INVESTIGATE on its own however many tells
+        fire: those tells also describe formal academic writing and misfire
+        disproportionately on students who learned English academically.
+
+        Supply assignment_brief to enable the missing-specifics check (without
+        it that check is disabled rather than guessing at requirements), and
+        prior_artifacts to enable continuity checking against the student's
+        own earlier work -- the strongest substance signal available.
+
+        Tier 2 (document version history, submission telemetry) is the
+        strongest evidence class and cannot be seen from text; the result
+        lists what to check yourself."""
+        bot = get_raw_bot()
+        if bot is None:
+            return {"error": "bot not initialized"}
+        return mcp_tools.mcp_check_authorship(
+            bot,
+            document,
+            assignment_brief=assignment_brief,
+            prior_artifacts=prior_artifacts,
+            style_trigger=style_trigger,
+        )
+
+    @mcp_server.tool()
+    def calibrate_authorship(documents: list[str]) -> dict:
+        """INSTRUCTOR TOOL. Measure the style tells' false-positive rate against
+        writing you know a human produced (pre-2022 submissions are ideal).
+
+        Every document supplied is treated as known-human, so any threshold it
+        trips is by construction a false positive. Returns the false-positive
+        rate at each candidate threshold plus a per-tell misfire rate -- a tell
+        that fires on most of your students' real writing carries no
+        information and should be dropped or re-thresholded.
+
+        Use this to choose style_trigger from evidence rather than a priori."""
+        return mcp_tools.mcp_calibrate_authorship(documents)
+
     # Mount path is "/" here because this whole app is itself mounted at
     # /api/mcp by api/main.py -- the sub-app only ever sees paths relative
     # to that mount point, so its own route table should start at "/".

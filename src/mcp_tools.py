@@ -118,6 +118,32 @@ def mcp_review_document(
     return doc_review.review_document(bot, document, focus=focus, max_results=max_results)
 
 
+def mcp_check_authorship(
+    bot,
+    document: str,
+    assignment_brief: str = "",
+    prior_artifacts: str = "",
+    style_trigger: float = 0.40,
+) -> Dict[str, Any]:
+    """Gather tiered authorship evidence for instructor review."""
+    import authorship
+
+    return authorship.check_authorship_signals(
+        bot,
+        document,
+        assignment_brief=assignment_brief,
+        prior_artifacts=prior_artifacts,
+        style_trigger=style_trigger,
+    )
+
+
+def mcp_calibrate_authorship(documents: List[str]) -> Dict[str, Any]:
+    """False-positive rate of the style tells on known-human writing."""
+    import authorship
+
+    return authorship.calibrate(documents)
+
+
 def mcp_methodology(
     bot, request: str, response_language: str = "en", max_results: int = 6
 ) -> Dict[str, Any]:
