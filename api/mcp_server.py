@@ -139,6 +139,29 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
             return {"error": "bot not initialized"}
         return mcp_tools.mcp_derive_calibration(bot, submission, assignment)
 
+    @mcp_server.tool()
+    def review_document(document: str, focus: str = "") -> dict:
+        """INSTRUCTOR TOOL. Check the instructor's OWN draft (a lecture, syllabus,
+        assignment brief, case study) against their own course material.
+
+        Reports contradictions with what the lectures/rubrics actually say,
+        claims the material doesn't support, and relevant material the draft
+        omits -- each tied to a retrieved source.
+
+        Scope is consistency and coverage ONLY. It deliberately does not assess
+        structure, clarity, tone or style: the knowledge base is lecture and
+        rubric content and cannot ground that kind of feedback.
+
+        For a STUDENT's work use the student-facing feedback path instead --
+        that carries the never-do-their-work rule, which this tool does not.
+
+        focus: optional, what to check in particular (e.g. "does this match
+        what I taught about journey mapping?")."""
+        bot = get_raw_bot()
+        if bot is None:
+            return {"error": "bot not initialized"}
+        return mcp_tools.mcp_review_document(bot, document, focus=focus)
+
     # Mount path is "/" here because this whole app is itself mounted at
     # /api/mcp by api/main.py -- the sub-app only ever sees paths relative
     # to that mount point, so its own route table should start at "/".

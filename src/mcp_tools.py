@@ -96,6 +96,15 @@ def mcp_derive_calibration(bot, submission: str, assignment: str) -> Dict[str, A
     return grading.derive_calibration(bot, submission, assignment)
 
 
+def mcp_review_document(
+    bot, document: str, focus: str = "", max_results: int = 10
+) -> Dict[str, Any]:
+    """Check an instructor's own draft against their own course material."""
+    import doc_review
+
+    return doc_review.review_document(bot, document, focus=focus, max_results=max_results)
+
+
 def mcp_methodology(
     bot, request: str, response_language: str = "en", max_results: int = 6
 ) -> Dict[str, Any]:

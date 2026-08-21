@@ -1,0 +1,324 @@
+<title>Lecture KB Wiring</title>
+
+<style>
+  :root {
+    --ground: #F5F7FA;
+    --surface: #FFFFFF;
+    --surface-2: #EEF1F6;
+    --ink: #1A1F27;
+    --ink-soft: #596373;
+    --rule: #D3D9E3;
+    --accent: #5B3DF5;
+    --accent-soft: #ECE8FF;
+
+    --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #10131A;
+      --surface: #181D26;
+      --surface-2: #1F2530;
+      --ink: #E3E8F0;
+      --ink-soft: #939EAF;
+      --rule: #2B3340;
+      --accent: #9E8AFF;
+      --accent-soft: #241F44;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #10131A;
+    --surface: #181D26;
+    --surface-2: #1F2530;
+    --ink: #E3E8F0;
+    --ink-soft: #939EAF;
+    --rule: #2B3340;
+    --accent: #9E8AFF;
+    --accent-soft: #241F44;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  header { display: flex; flex-direction: column; gap: 10px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 620;
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 0;
+    max-width: 66ch;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  figure { margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .scroll { overflow-x: auto; }
+  svg { display: block; min-width: 900px; width: 100%; height: auto; }
+
+  figcaption {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    max-width: 78ch;
+  }
+
+  /* diagram tokens */
+  .b-fill   { fill: var(--surface-2); }
+  .b-stroke { stroke: var(--rule); fill: none; stroke-width: 1.25; }
+  .b-dash   { stroke-dasharray: 5 4; }
+  .ink      { fill: var(--ink); }
+  .soft     { fill: var(--ink-soft); }
+  .mono     { font-family: var(--mono); }
+  .sans     { font-family: var(--sans); }
+  .acc      { fill: var(--accent); }
+  .acc-fill { fill: var(--accent-soft); }
+  .acc-str  { stroke: var(--accent); fill: none; stroke-width: 1.25; }
+  .wire     { stroke: var(--ink-soft); fill: none; stroke-width: 1.25; }
+  .rule-l   { stroke: var(--rule); stroke-width: 1; }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .note h3 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    font-weight: 640;
+  }
+
+  .note p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .note code, .inline-code {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+
+  .status {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .status.live { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">lecture-bot &middot; architecture</span>
+    <h1>Lecture KB Wiring</h1>
+    <p class="lede">
+      One knowledge base, two doors. The student web app and any MCP client both read the same
+      lecture material and rubrics &mdash; but they are governed by different rules, and grading
+      deliberately bypasses semantic search.
+    </p>
+  </header>
+
+  <div class="card">
+    <figure>
+      <div class="scroll">
+        <svg viewBox="0 0 1020 552" role="img"
+             aria-label="Schematic: the Bedrock knowledge base and on-disk grading files feed the lecture-bot service on AWS App Runner, which exposes an unauthenticated REST surface to the student web app and a bearer-token MCP surface with six tools to Claude Code, and prospectively to Word documents and the ai-behavior-maker app.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+
+          <!-- column headings -->
+          <text x="24"  y="24" class="mono soft" font-size="11" letter-spacing="0.09em">KNOWLEDGE SOURCES</text>
+          <text x="316" y="24" class="mono soft" font-size="11" letter-spacing="0.09em">SERVICE</text>
+          <text x="756" y="24" class="mono soft" font-size="11" letter-spacing="0.09em">CONSUMERS</text>
+
+          <!-- ================= sources ================= -->
+          <rect x="24" y="48" width="232" height="148" rx="7" class="b-fill"/>
+          <rect x="24" y="48" width="232" height="148" rx="7" class="b-stroke"/>
+          <text x="42" y="72"  class="sans ink"  font-size="14" font-weight="620">Bedrock knowledge base</text>
+          <text x="42" y="89"  class="mono soft" font-size="10.5">S3 Vectors &middot; semantic search</text>
+          <line x1="42" y1="102" x2="238" y2="102" class="rule-l"/>
+          <text x="42" y="122" class="mono ink"  font-size="11">layer=directive</text>
+          <text x="42" y="137" class="sans soft" font-size="11.5">rubrics &middot; course policy</text>
+          <text x="42" y="163" class="mono ink"  font-size="11">layer=reference</text>
+          <text x="42" y="178" class="sans soft" font-size="11.5">lectures &middot; assignments</text>
+
+          <rect x="24" y="236" width="232" height="112" rx="7" class="b-fill"/>
+          <rect x="24" y="236" width="232" height="112" rx="7" class="b-stroke"/>
+          <text x="42" y="260" class="sans ink"  font-size="14" font-weight="620">Repo files</text>
+          <text x="42" y="277" class="mono soft" font-size="10.5">read verbatim, never chunked</text>
+          <line x1="42" y1="290" x2="238" y2="290" class="rule-l"/>
+          <text x="42" y="310" class="mono ink" font-size="11">grading-handbook.txt</text>
+          <text x="42" y="331" class="mono ink" font-size="11">calibration/*.json</text>
+
+          <!-- source wires -->
+          <line x1="256" y1="122" x2="310" y2="122" class="wire" marker-end="url(#ah)"/>
+          <text x="283" y="113" class="sans soft" font-size="10.5" text-anchor="middle">retrieved</text>
+
+          <line x1="256" y1="292" x2="310" y2="292" class="wire" marker-end="url(#ah)"/>
+          <text x="283" y="283" class="sans soft" font-size="10.5" text-anchor="middle">read direct</text>
+
+          <!-- ================= service ================= -->
+          <rect x="316" y="40" width="380" height="446" rx="9" class="b-stroke"/>
+          <text x="336" y="62" class="mono soft" font-size="10.5">AWS App Runner &middot; FastAPI</text>
+
+          <!-- guardrails -->
+          <rect x="336" y="78" width="340" height="88" rx="6" class="b-fill"/>
+          <rect x="336" y="78" width="340" height="88" rx="6" class="b-stroke"/>
+          <text x="352" y="99"  class="mono ink" font-size="11">guardrails.py</text>
+          <text x="352" y="121" class="sans ink" font-size="11.5">Baseline rules &mdash; applied to every path</text>
+          <rect x="352" y="132" width="308" height="24" rx="4" class="acc-fill"/>
+          <text x="362" y="148" class="sans acc" font-size="11.5">Never do the student&rsquo;s work &mdash; student path only</text>
+
+          <!-- REST surface -->
+          <rect x="336" y="186" width="340" height="64" rx="6" class="b-fill"/>
+          <rect x="336" y="186" width="340" height="64" rx="6" class="b-stroke"/>
+          <rect x="336" y="186" width="3.5" height="64" class="acc"/>
+          <text x="352" y="209" class="mono ink"  font-size="12">/api/*</text>
+          <text x="352" y="228" class="sans soft" font-size="11">no auth &middot; both rule sets apply</text>
+
+          <!-- MCP surface -->
+          <rect x="336" y="270" width="340" height="200" rx="6" class="b-fill"/>
+          <rect x="336" y="270" width="340" height="200" rx="6" class="b-stroke"/>
+          <text x="352" y="293" class="mono ink"  font-size="12">/api/mcp/</text>
+          <text x="660" y="293" class="mono soft" font-size="10.5" text-anchor="end">bearer token</text>
+          <line x1="352" y1="305" x2="660" y2="305" class="rule-l"/>
+
+          <text x="352" y="326" class="mono ink" font-size="10.5">retrieve_lectures</text>
+          <text x="352" y="350" class="mono ink" font-size="10.5">generate_methodology</text>
+          <text x="352" y="374" class="mono ink" font-size="10.5">list_rubrics</text>
+          <text x="516" y="326" class="mono ink" font-size="10.5">get_rubric</text>
+          <text x="516" y="350" class="mono ink" font-size="10.5">grade_submission</text>
+          <text x="516" y="374" class="mono ink" font-size="10.5">derive_calibration</text>
+
+          <line x1="352" y1="396" x2="660" y2="396" class="rule-l"/>
+          <text x="352" y="416" class="sans soft" font-size="11">Baseline rules only &mdash; grading is the</text>
+          <text x="352" y="432" class="sans soft" font-size="11">instructor&rsquo;s own work, not a student&rsquo;s.</text>
+          <text x="352" y="454" class="sans soft" font-size="11">Rubrics come from disk, not search.</text>
+
+          <!-- ================= consumers ================= -->
+          <rect x="756" y="186" width="240" height="64" rx="7" class="b-fill"/>
+          <rect x="756" y="186" width="240" height="64" rx="7" class="b-stroke"/>
+          <text x="774" y="209" class="sans ink"  font-size="13" font-weight="620">Student web app</text>
+          <text x="774" y="228" class="mono soft" font-size="10">chat &middot; explore &middot; feedback</text>
+
+          <rect x="756" y="272" width="240" height="58" rx="7" class="b-fill"/>
+          <rect x="756" y="272" width="240" height="58" rx="7" class="b-stroke"/>
+          <text x="774" y="294" class="sans ink"  font-size="13" font-weight="620">Claude Code</text>
+          <text x="774" y="312" class="mono soft" font-size="10">grading &middot; rubric lookup</text>
+
+          <rect x="756" y="346" width="240" height="58" rx="7" class="b-stroke b-dash"/>
+          <text x="774" y="368" class="sans soft" font-size="13" font-weight="620">Word documents</text>
+          <text x="774" y="386" class="mono soft" font-size="10">writing against your material</text>
+
+          <rect x="756" y="420" width="240" height="58" rx="7" class="b-stroke b-dash"/>
+          <text x="774" y="442" class="sans soft" font-size="13" font-weight="620">ai-behavior-maker</text>
+          <text x="774" y="460" class="mono soft" font-size="10">user-centric design checks</text>
+
+          <!-- consumer wires -->
+          <line x1="676" y1="218" x2="750" y2="218" class="wire" marker-end="url(#ah)"/>
+          <line x1="676" y1="301" x2="750" y2="301" class="wire" marker-end="url(#ah)"/>
+          <line x1="676" y1="375" x2="750" y2="375" class="wire b-dash" marker-end="url(#ah)"/>
+          <line x1="676" y1="449" x2="750" y2="449" class="wire b-dash" marker-end="url(#ah)"/>
+
+          <!-- legend -->
+          <line x1="24" y1="516" x2="52" y2="516" class="wire"/>
+          <text x="60" y="520" class="sans soft" font-size="11">live today</text>
+
+          <line x1="146" y1="516" x2="174" y2="516" class="wire b-dash"/>
+          <text x="182" y="520" class="sans soft" font-size="11">proposed, not built</text>
+
+          <rect x="330" y="509" width="14" height="13" rx="3" class="acc-fill"/>
+          <rect x="330" y="509" width="14" height="13" rx="3" class="acc-str"/>
+          <text x="352" y="520" class="sans soft" font-size="11">rule that applies to students but not to MCP tools</text>
+        </svg>
+      </div>
+      <figcaption>
+        Both surfaces sit on one FastAPI service and share one knowledge base. What differs is
+        governance and retrieval: the student path carries the &ldquo;never do the student&rsquo;s work&rdquo; rule
+        and the MCP path does not, because grading is the instructor&rsquo;s own work. Grading also reads
+        rubrics verbatim from disk rather than through semantic search, so a partial match can never
+        quietly change the criteria a student is measured against.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <span class="status live">live</span>
+      <h3>Student web app</h3>
+      <p>Chat, Explore canvas, and Socratic feedback on pasted work, at
+      <code>lecturebot.perfectpixels.com</code>. Unauthenticated, and the only path that carries the
+      never-do-their-work rule.</p>
+    </div>
+
+    <div class="note">
+      <span class="status live">live</span>
+      <h3>Claude Code</h3>
+      <p>Six MCP tools over a bearer-token endpoint. Grade a submission against the handbook, pull a
+      rubric, or turn a 4.0 exemplar into reusable criteria with <code>derive_calibration</code>.</p>
+    </div>
+
+    <div class="note">
+      <span class="status">proposed</span>
+      <h3>Word documents</h3>
+      <p>Same MCP endpoint, different client &mdash; drafts checked against your own lecture material.
+      No server work needed; it is a client-side setup question.</p>
+    </div>
+
+    <div class="note">
+      <span class="status">proposed</span>
+      <h3>ai-behavior-maker</h3>
+      <p>The one that may not want MCP at all. An app calling programmatically can hit the REST API
+      directly; MCP earns its place only if that app runs its own agent loop that decides when to
+      consult.</p>
+    </div>
+  </div>
+</div>
