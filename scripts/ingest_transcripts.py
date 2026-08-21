@@ -19,6 +19,7 @@ After running, sync the Bedrock KB in the AWS console to index
 the new content.
 """
 
+import json
 import os
 import re
 import hashlib
@@ -101,8 +102,47 @@ _TIMESTAMP_RE = re.compile(
     re.VERBOSE,
 )
 
+# Disfluencies. Anchored on BOTH sides: the previous pattern had no trailing
+# boundary, so `er+` ate the head of "error" -> "or", `ah+` of "ahead" -> "ead",
+# and `um+` of "umbrella" -> "brella". Verified against the May 21 transcript,
+# where it had already damaged four occurrences of "ahead" and one "error".
 _FILLER_RE = re.compile(
-    r"\b(um+|uh+|ah+|er+|like,?\s|you know,?\s|I mean,?\s|sort of,?\s|kind of,?\s)",
+    r"\b(?:u+m+|u+h+|e+r+m+|h+m+|a+h+|o+h+|uh[- ]?huh|mm[- ]?hmm)\b[,.]?\s*",
+    re.IGNORECASE,
+)
+
+# Discourse markers, only when comma-delimited -- which is how they appear as
+# filler. The old pattern stripped every "like ", turning "they like to admit"
+# into "they to admit" and "we like to think" into "we to think". Requiring the
+# commas keeps "like" as a verb or preposition intact.
+_MARKER_RE = re.compile(
+    r",\s*(?:you know|i mean|sort of|kind of|like|right|okay|so)\s*,",
+    re.IGNORECASE,
+)
+
+# Whole utterances carrying no content -- the "yeah" / "mm-hmm" backchannel that
+# fills a recorded class. Applied per line, which after WEBVTT stripping is one
+# spoken utterance. Deliberately excludes "yes", "no", "good", "correct":
+# standing alone those are often a real answer to a real question.
+_ASIDE_LINE_RE = re.compile(
+    r"^\s*(?:"
+    r"yeah|yep|yup|uh[- ]?huh|mm[- ]?hmm|hmm|okay|ok|alright|all right|right|"
+    r"sure|cool|nice|thanks|thank you|hi|hello|hey|bye|goodbye|exactly|"
+    r"oh|ah|um|uh|sorry|excuse me|one sec|one second|hold on"
+    r")[\s,.!?…]*$",
+    re.IGNORECASE,
+)
+
+# Recorded-meeting pleasantries and audio-check chatter. These recur in every
+# Zoom lecture and carry no teaching content.
+_PLEASANTRY_RE = re.compile(
+    r"\b(?:"
+    r"how are you(?: doing| today)?|how's everyone|how is everyone|"
+    r"can you hear me|can everyone hear me|can everybody hear me|"
+    r"are you able to hear me|is my (?:audio|screen|mic) (?:working|okay|ok)|"
+    r"nice to see you|good to see you|good morning|good afternoon|good evening|"
+    r"let me share my screen|can you see my screen|sorry about that"
+    r")\b[\s,.!?…]*",
     re.IGNORECASE,
 )
 
@@ -158,7 +198,15 @@ def scrub_transcript(text: str, speaker: str = SPEAKER_NAME) -> str:
     ]:
         text = re.sub(pat, "", text, flags=re.IGNORECASE)
 
-    # Filler words (light pass — keeps natural flow)
+    # Drop whole backchannel utterances BEFORE collapsing lines, while each
+    # line is still one utterance from the WEBVTT cue structure.
+    text = "\n".join(l for l in text.splitlines() if not _ASIDE_LINE_RE.match(l))
+
+    # Meeting pleasantries and audio-check chatter
+    text = _PLEASANTRY_RE.sub("", text)
+
+    # Comma-delimited discourse markers, then disfluencies
+    text = _MARKER_RE.sub(", ", text)
     text = _FILLER_RE.sub("", text)
 
     # Clean up artifacts from filler removal (double commas, leading commas)
@@ -204,6 +252,203 @@ def chunk_text(text: str, max_tokens: int = 400, overlap: int = 50) -> list:
 # ---------------------------------------------------------------------------
 # S3 duplicate check
 # ---------------------------------------------------------------------------
+
+def normalize_doc_name(name: str) -> str:
+    """Reduce a filename or S3 chunk key to a comparable document identity.
+
+    Four pipelines have written into this KB, each with its own naming scheme:
+
+        UX Studio Week 8 - using AI tools.txt                  (an upload)
+        ux-studio-week-8---using-ai-tools-txt-83d9...-part-0000.txt
+        ux-studio-week-2-personas-chunk-000-txt-b634...-part-0000.txt
+        lecture-GMT20260402-010351_Recording.transcript-part-0000-b46e....txt
+
+    All four collapse to the same string here, so a duplicate is recognized no
+    matter which pipeline first ingested it. The previous check matched only
+    `^lecture-...`, which could see 222 of 3,511 keys -- 94% of the corpus was
+    invisible to it, and re-uploading an existing lecture silently produced a
+    second copy. That is how the KB reached 47% duplication."""
+    s = re.sub(r"\.(txt|md|rtf)$", "", name, flags=re.I)
+    s = re.sub(r"-part-\d{4}", "", s)
+    s = re.sub(r"[-_]chunk[-_]\d+", "", s, flags=re.I)
+    s = re.sub(r"[-_][0-9a-f]{12}\b", "", s)
+    s = re.sub(r"^(lecture|framework|rubric|assignment|case-study)-", "", s, flags=re.I)
+    s = re.sub(r"[-_]txt\b", "", s, flags=re.I)
+    s = re.sub(r"[^a-z0-9]+", "-", s.lower())
+    return s.strip("-")
+
+
+MANIFEST_KEY = "kb-manifest/manifest.json"
+SKETCH_K = 256
+SHINGLE_WORDS = 8
+
+
+def content_sketch(text: str, k: int = SKETCH_K, shingle: int = SHINGLE_WORDS) -> list:
+    """A bottom-k sketch of the document's word shingles.
+
+    Name matching alone cannot catch the same lecture re-exported under a new
+    filename ("Week 8 final.txt" vs "UX Studio Week 8 - using AI tools.txt"),
+    which is the accidental re-upload worth rejecting. Comparing shingles of the
+    words themselves is independent of both the filename and of where a given
+    pipeline happened to cut its chunks.
+
+    Bottom-k rather than storing every shingle: a 20k-word transcript has ~20k
+    shingles, and keeping the 256 numerically smallest hashes estimates Jaccard
+    similarity to within a few percent while keeping the manifest small enough
+    to fetch on page load."""
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    if len(words) < shingle:
+        return []
+    hashes = {
+        int(hashlib.md5(" ".join(words[i:i + shingle]).encode()).hexdigest()[:16], 16)
+        for i in range(len(words) - shingle + 1)
+    }
+    return sorted(hashes)[:k]
+
+
+def sketch_similarity(a: list, b: list) -> float:
+    """Estimated Jaccard overlap of two bottom-k sketches (0.0 - 1.0)."""
+    if not a or not b:
+        return 0.0
+    sa, sb = set(a), set(b)
+    k = min(len(a), len(b))
+    union_bottom = sorted(sa | sb)[:k]
+    if not union_bottom:
+        return 0.0
+    return len(set(union_bottom) & sa & sb) / len(union_bottom)
+
+
+def load_manifest(bucket: str) -> dict:
+    """{normalized_name: {"sketch": [...], "chunks": n}}. Empty if absent."""
+    try:
+        s3 = boto3.client("s3", region_name=AWS_REGION)
+        body = s3.get_object(Bucket=bucket, Key=MANIFEST_KEY)["Body"].read()
+        return json.loads(body.decode("utf-8"))
+    except Exception:
+        return {}
+
+
+def save_manifest(bucket: str, manifest: dict) -> None:
+    """Stored OUTSIDE kb-clean/v1/ so Bedrock never ingests the manifest itself."""
+    s3 = boto3.client("s3", region_name=AWS_REGION)
+    s3.put_object(
+        Bucket=bucket,
+        Key=MANIFEST_KEY,
+        Body=json.dumps(manifest).encode("utf-8"),
+        ContentType="application/json",
+    )
+
+
+SHORTLIST_THRESHOLD = 0.20
+CONFIRM_THRESHOLD = 0.55
+PROBE_COUNT = 12
+PROBE_WORDS = 9
+
+
+def rank_candidates(text: str, manifest: dict) -> list:
+    """[(similarity, name)] sorted high to low."""
+    sketch = content_sketch(text)
+    scored = [
+        (sketch_similarity(sketch, rec.get("sketch") or []), name)
+        for name, rec in manifest.items()
+    ]
+    return sorted(scored, reverse=True)
+
+
+def _document_text(bucket: str, prefix: str, normalized_name: str) -> str:
+    """Concatenate every stored chunk belonging to one document."""
+    s3 = boto3.client("s3", region_name=AWS_REGION)
+    parts = []
+    for page in s3.get_paginator("list_objects_v2").paginate(Bucket=bucket, Prefix=prefix):
+        for obj in page.get("Contents", []):
+            key = obj["Key"]
+            if not key.endswith(".txt"):
+                continue
+            if normalize_doc_name(key.split("/")[-1]) != normalized_name:
+                continue
+            try:
+                parts.append(
+                    s3.get_object(Bucket=bucket, Key=key)["Body"].read().decode("utf-8", "replace")
+                )
+            except Exception:
+                pass
+    return "\n".join(parts)
+
+
+def confirm_duplicate(text: str, candidate: str, bucket: str, prefix: str) -> float:
+    """Fraction of distinctive passages from `text` that appear verbatim in the
+    stored document `candidate`. Exact matching, so unlike the sketch score it
+    does not decay when two copies were transcribed or scrubbed differently."""
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    if len(words) < PROBE_WORDS * 4:
+        return 0.0
+    body = _document_text(bucket, prefix, candidate)
+    if not body:
+        return 0.0
+    hay = " ".join(re.findall(r"[a-z0-9]+", body.lower()))
+    step = max(1, (len(words) - PROBE_WORDS) // (PROBE_COUNT + 1))
+    probes = [
+        " ".join(words[i:i + PROBE_WORDS])
+        for i in range(step, len(words) - PROBE_WORDS, step)
+    ][:PROBE_COUNT]
+    if not probes:
+        return 0.0
+    return sum(1 for p in probes if p in hay) / len(probes)
+
+
+def find_content_duplicate(
+    text: str, manifest: dict, bucket: str = S3_BUCKET, prefix: str = S3_PREFIX
+) -> tuple:
+    """Return (name, confidence) if `text` is already in the KB, else (None, best).
+
+    Two stages, because one is not enough:
+
+      1. The bottom-k sketch shortlists candidates cheaply. It cannot be the
+         sole test -- five 2020 COMMLD-512 recordings scored only 45-52% against
+         the very documents that already contain them verbatim, because each
+         lecture had been transcribed and scrubbed twice with different results.
+         A 0.55 cutoff would have admitted all five as new.
+      2. Anything above a deliberately low shortlist bar is then confirmed by
+         probing 12 distinctive 9-word passages against the stored document's
+         actual text. Exact matching does not decay with processing differences,
+         which is what makes it decisive.
+
+    A sharp single peak in stage 1 -- high against one document, ~0 against every
+    other -- is the signature of a re-upload, and stage 2 is what settles it."""
+    ranked = rank_candidates(text, manifest)
+    if not ranked:
+        return None, 0.0
+    best_sim = ranked[0][0]
+    for sim, name in ranked[:3]:
+        if sim < SHORTLIST_THRESHOLD:
+            break
+        overlap = confirm_duplicate(text, name, bucket, prefix)
+        if overlap >= CONFIRM_THRESHOLD:
+            return name, overlap
+    return None, best_sim
+
+
+def get_existing_doc_names(bucket: str, prefix: str) -> tuple:
+    """Every document already in the KB, as normalized names.
+
+    Returns (names, ok). `ok` is False when the S3 listing failed -- the caller
+    must surface that rather than treat an empty set as "nothing is ingested
+    yet", which would wave every upload through as new."""
+    names = set()
+    try:
+        s3 = boto3.client("s3", region_name=AWS_REGION)
+        for page in s3.get_paginator("list_objects_v2").paginate(Bucket=bucket, Prefix=prefix):
+            for obj in page.get("Contents", []):
+                key = obj["Key"].split("/")[-1]
+                if key.endswith(".metadata.json"):
+                    continue
+                n = normalize_doc_name(key)
+                if n:
+                    names.add(n)
+    except Exception as e:
+        return names, False
+    return names, True
+
 
 def get_existing_lecture_names(bucket: str, prefix: str, local_dir: str = OUTPUT_DIR) -> set:
     """
