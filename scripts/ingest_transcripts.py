@@ -19,6 +19,7 @@ After running, sync the Bedrock KB in the AWS console to index
 the new content.
 """
 
+import os
 import re
 import hashlib
 import boto3
@@ -40,6 +41,7 @@ INPUT_DIR = "data/new_lectures"
 OUTPUT_DIR = "data/lectures_chunked"
 S3_BUCKET = "perfectpixels-kb-docs"
 S3_PREFIX = "kb-clean/v1/"
+AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 SPEAKER_NAME = "Jason Levine"
 
 CONCEPT_KEYWORDS = {
@@ -105,8 +107,47 @@ _FILLER_RE = re.compile(
 )
 
 
+def strip_webvtt(text: str) -> str:
+    """Remove WEBVTT structure: the header, cue numbers, and cue timing lines.
+
+    Zoom exports transcripts as WEBVTT, which interleaves the spoken text with
+    a cue number and a `00:00:04.850 --> 00:00:07.650` timing line for every
+    utterance. _TIMESTAMP_RE below cannot handle this: it matches the `00:00:04`
+    portion only, leaving `.850 --> .650` plus a bare cue number behind. A
+    survey of the live KB found this had already happened to 854 chunks (26% of
+    the corpus, ~187k words) covering every recent lecture -- roughly a fifth of
+    the tokens in those chunks are timing debris competing with real content in
+    the embeddings.
+
+    Matching is structural rather than regex-per-line: a bare integer is only
+    dropped when the following line is actually a cue timing, so a line of prose
+    that happens to be a number survives."""
+    if "-->" not in text:
+        return text
+    lines = text.splitlines()
+    out, i, n = [], 0, len(lines)
+    while i < n:
+        stripped = lines[i].strip()
+        if stripped.upper().startswith("WEBVTT") or stripped.startswith("NOTE "):
+            i += 1
+            continue
+        # Cue number, but only when the next line confirms it by being a timing.
+        if stripped.isdigit() and i + 1 < n and "-->" in lines[i + 1]:
+            i += 2
+            continue
+        if "-->" in stripped:
+            i += 1
+            continue
+        out.append(lines[i])
+        i += 1
+    return "\n".join(out)
+
+
 def scrub_transcript(text: str, speaker: str = SPEAKER_NAME) -> str:
     """Remove timestamps, speaker labels, filler words, and collapse whitespace."""
+    # WEBVTT structure first -- _TIMESTAMP_RE mangles it rather than removing it.
+    text = strip_webvtt(text)
+
     # Timestamps
     text = _TIMESTAMP_RE.sub("", text)
 
@@ -201,7 +242,7 @@ def get_existing_lecture_names(bucket: str, prefix: str, local_dir: str = OUTPUT
 
     # 5. Try S3 as additional check (may fail if ListObjects not permitted)
     try:
-        s3 = boto3.client("s3")
+        s3 = boto3.client("s3", region_name=AWS_REGION)
         paginator = s3.get_paginator("list_objects_v2")
         for page in paginator.paginate(Bucket=bucket, Prefix=prefix):
             for obj in page.get("Contents", []):
@@ -220,11 +261,11 @@ def get_existing_lecture_names(bucket: str, prefix: str, local_dir: str = OUTPUT
 # S3 upload
 # ---------------------------------------------------------------------------
 
-def upload_chunks(output_dir: str, bucket: str, prefix: str) -> int:
-    s3 = boto3.client("s3")
+def upload_chunks(output_dir: str, bucket: str, prefix: str, file_prefix: str = "lecture-") -> int:
+    s3 = boto3.client("s3", region_name=AWS_REGION)
     out = Path(output_dir)
     uploaded = 0
-    for f in sorted(out.glob("lecture-*.txt")):
+    for f in sorted(out.glob(f"{file_prefix}*.txt")):
         upload_chunk_with_sidecar(s3, f, bucket, f"{prefix}{f.name}")
         uploaded += 1
     return uploaded
@@ -234,7 +275,9 @@ def upload_chunks(output_dir: str, bucket: str, prefix: str) -> int:
 # Main pipeline
 # ---------------------------------------------------------------------------
 
-def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool = False):
+def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool = False,
+           doc_type: str = "lecture", layer: str = "reference"):
+    file_prefix = "lecture-" if doc_type == "lecture" else f"{doc_type}-"
     inp = Path(input_dir)
     out = Path(output_dir)
     inp.mkdir(parents=True, exist_ok=True)
@@ -302,15 +345,16 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
         # Write tagged chunks
         for i, chunk in enumerate(chunks):
             content_hash = hashlib.md5(chunk.encode()).hexdigest()[:12]
-            chunk_filename = f"lecture-{filename}-part-{i:04d}-{content_hash}.txt"
+            chunk_filename = f"{file_prefix}{filename}-part-{i:04d}-{content_hash}.txt"
+            label = "Lecture" if doc_type == "lecture" else doc_type.title()
             header = (
-                f"[Lecture: {filename.replace('-', ' ').replace('_', ' ').title()}]\n"
+                f"[{label}: {filename.replace('-', ' ').replace('_', ' ').title()}]\n"
                 f"[Concepts: {', '.join(concepts)}]\n"
-                f"[Type: lecture]\n\n"
+                f"[Type: {doc_type}]\n\n"
             )
             chunk_path = out / chunk_filename
             chunk_path.write_text(header + chunk, encoding="utf-8")
-            write_sidecar(chunk_path, layer="reference", doc_type="lecture", concepts=concepts)
+            write_sidecar(chunk_path, layer=layer, doc_type=doc_type, concepts=concepts)
             all_chunks.append(chunk_filename)
 
     if not all_chunks:
@@ -321,7 +365,7 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
 
     # Upload to S3
     print(f"Uploading to s3://{S3_BUCKET}/{S3_PREFIX} ...")
-    uploaded = upload_chunks(output_dir, S3_BUCKET, S3_PREFIX)
+    uploaded = upload_chunks(output_dir, S3_BUCKET, S3_PREFIX, file_prefix)
     print(f"Uploaded {uploaded} chunks.\n")
 
     # Move originals to done/
@@ -339,6 +383,16 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
 
 
 if __name__ == "__main__":
-    import sys
-    _force = "--force" in sys.argv
-    ingest(force=_force)
+    import argparse
+
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--input-dir", default=INPUT_DIR)
+    ap.add_argument("--output-dir", default=OUTPUT_DIR)
+    ap.add_argument("--force", action="store_true", help="re-ingest even if the name already exists")
+    ap.add_argument("--doc-type", default="lecture",
+                    help="lecture (default) | framework | case-study | ...")
+    ap.add_argument("--layer", default="reference",
+                    help='reference (default) | directive -- "directive" governs grading, use with care')
+    a = ap.parse_args()
+    ingest(input_dir=a.input_dir, output_dir=a.output_dir, force=a.force,
+           doc_type=a.doc_type, layer=a.layer)
