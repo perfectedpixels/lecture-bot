@@ -162,3 +162,37 @@ def mcp_methodology(
         "answer": result.get("answer", ""),
         "sources": result.get("sources", []),
     }
+
+
+def mcp_ask(
+    bot, question: str, response_language: str = "en", max_results: int = 6
+) -> Dict[str, Any]:
+    """Answer in the teaching persona, with the student-facing guardrails on.
+
+    This is the MCP equivalent of what the web chat serves. The distinction
+    from the two neighbouring tools matters:
+
+      retrieve_lectures    raw chunks; the caller synthesizes, in its own
+                           voice, with none of our guardrails applied
+      generate_methodology synthesized but deliberately neutral and
+                           third-person (persona_mode="advisor",
+                           BASELINE_RULES only)
+      mcp_ask (this)       the teaching persona, carrying
+                           STUDENT_INTERFACE_ADDENDUM — so it explains and
+                           points at frameworks rather than producing a
+                           student's deliverable for them
+
+    Uses the default persona_mode deliberately: that is the variant the
+    student interface uses, and the addendum is the whole point of routing an
+    MCP consumer through here rather than letting it improvise over chunks.
+    """
+    result = bot.query(
+        question,
+        max_results,
+        True,
+        response_language=response_language,
+    )
+    return {
+        "answer": result.get("answer", ""),
+        "sources": result.get("sources", []),
+    }

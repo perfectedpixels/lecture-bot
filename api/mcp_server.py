@@ -105,6 +105,27 @@ def build_mcp_asgi_app(get_raw_bot: Callable[[], Optional[Any]]) -> Starlette:
         )
 
     @mcp_server.tool()
+    def ask_professor(question: str, response_language: str = "en") -> dict:
+        """Ask the course knowledge base a question and get a composed answer
+        in the instructor's teaching voice, with the student-facing guardrails
+        applied — the same behaviour as the web chat.
+
+        Prefer this over retrieve_lectures for any question you actually want
+        answered. retrieve_lectures returns raw chunks and leaves synthesis to
+        the caller, which means the answer arrives in the caller's voice with
+        none of the course guardrails; use it when you specifically want source
+        passages to inspect or quote.
+
+        Differs from generate_methodology, which is deliberately neutral and
+        third-person: this one stays in persona and will not produce a
+        student's deliverable for them.
+        response_language: "en" or "zh" (Simplified Chinese)."""
+        bot = get_raw_bot()
+        if bot is None:
+            return {"error": "bot not initialized"}
+        return mcp_tools.mcp_ask(bot, question, response_language=response_language)
+
+    @mcp_server.tool()
     def generate_methodology(request: str, response_language: str = "en") -> dict:
         """Ungated UX / design-thinking / AI-product methodology guidance,
         grounded in the lecture knowledge base. Neutral third-person
