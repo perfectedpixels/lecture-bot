@@ -26,7 +26,8 @@ import hashlib
 import boto3
 from pathlib import Path
 
-from kb_metadata import write_sidecar, upload_chunk_with_sidecar
+from kb_metadata import write_sidecar, upload_chunk_with_sidecar, get_policy
+from kbpolicy import blocking
 
 try:
     from dotenv import load_dotenv
@@ -551,6 +552,7 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
 
     all_chunks = []
     skipped_dupes = []
+    refused = []
 
     for filepath in files:
         filename = filepath.stem
@@ -570,6 +572,21 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
 
         if not text or len(text.split()) < 20:
             print(f"  Skipping {filepath.name} (too short)")
+            continue
+
+        # Publishability gate. Checked here, before any processing, so a
+        # document that cannot be published fails immediately with a clear
+        # reason rather than after chunking. kb_metadata.upload_chunk_with_sidecar
+        # re-checks at upload as a backstop.
+        gate_violations = blocking(
+            get_policy().check_content(text, source=filepath.name)
+        )
+        if gate_violations:
+            print(f"  ✋ REFUSED {filepath.name} — not publishable:")
+            for v in gate_violations:
+                print(f"       {v.rule}: {v.detail}")
+            print("       Left in place; not ingested, not moved to done/.")
+            refused.append(filepath)
             continue
 
         # Scrub
@@ -604,6 +621,12 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
 
     if not all_chunks:
         print("\nNo chunks produced.")
+        if refused:
+            # Surface the reason rather than exiting on a bare "nothing happened".
+            print(f"\n✋ REFUSED {len(refused)} file(s) — left in {input_dir}/:")
+            for f in refused:
+                print(f"     {f.name}")
+            print("  These are not publishable to a public knowledge base.")
         return
 
     print(f"\nTotal: {len(all_chunks)} chunks in {output_dir}/\n")
@@ -613,16 +636,29 @@ def ingest(input_dir: str = INPUT_DIR, output_dir: str = OUTPUT_DIR, force: bool
     uploaded = upload_chunks(output_dir, S3_BUCKET, S3_PREFIX, file_prefix)
     print(f"Uploaded {uploaded} chunks.\n")
 
-    # Move originals to done/
+    # Move originals to done/. Refused files stay put — moving them would make
+    # a document that was never ingested look processed, and the next person to
+    # look would find an empty input dir and assume it worked.
     done = inp / "done"
     done.mkdir(exist_ok=True)
+    moved = 0
     for f in files:
+        if f in refused:
+            continue
         f.rename(done / f.name)
-    print(f"Moved originals to {done}/")
+        moved += 1
+    print(f"Moved {moved} original(s) to {done}/")
 
     if skipped_dupes:
         print(f"\n⏭ Skipped {len(skipped_dupes)} duplicate(s): {', '.join(skipped_dupes)}")
         print("  Use --force to re-ingest them.")
+
+    if refused:
+        print(f"\n✋ REFUSED {len(refused)} file(s) — left in {input_dir}/:")
+        for f in refused:
+            print(f"     {f.name}")
+        print("  These are not publishable to a public knowledge base.")
+        print("  Remove the offending content, or keep them out of the KB.")
 
     print("\nDone! Sync the Bedrock KB in the AWS console to index the new content.")
 

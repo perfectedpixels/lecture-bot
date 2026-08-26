@@ -1,0 +1,51 @@
+# Publishability policy for the Bedrock knowledge base.
+#
+# The KB is queried by a PUBLIC-facing portfolio chatbot, so anything ingested
+# can be surfaced verbatim to any visitor. These rules run before ingestion and
+# block documents that must not be republished.
+#
+# This file is never itself ingested (only paths declared in corpus.yaml are).
+
+# Phrases indicating third-party licensed or confidential material that we do
+# not have the right to redistribute. Case-insensitive substring match.
+rights_markers:
+  - "licensed for distribution"
+  - "personal use of the license holder"
+  - "restricted to the personal use"
+  - "all rights reserved"
+  - "proprietary and confidential"
+  - "do not distribute"
+  - "not for redistribution"
+  - "internal use only"
+  - "gartner"
+  - "forrester"
+
+# Named third parties whose identity must not appear in public KB content.
+# Customers, partners, and prospects discussed in internal notes.
+deny_terms:
+  - "Belleron"
+  - "Autodesk"
+
+# Regex patterns. `email` catches third-party contact details left in meeting
+# notes and transcripts.
+deny_patterns:
+  email: "[A-Za-z0-9._%+-]+@(?!example\\.)[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+
+# Addresses that are deliberately public (published on the portfolio site) and
+# therefore exempt from the email rule. Everything else still blocks.
+allow_emails:
+  - "knockknock@perfectpixels.com"
+
+# Front-matter fields every document group must declare in corpus.yaml.
+# Ingestion fails if a group omits one.
+required_declarations:
+  - visibility   # public | internal
+  - rights       # original | third-party | mixed
+
+# Only these values may be ingested. `internal` and `third-party` are declared
+# but refused, so classifying something honestly keeps it out rather than
+# requiring anyone to remember to delete it.
+allow_visibility:
+  - public
+allow_rights:
+  - original
