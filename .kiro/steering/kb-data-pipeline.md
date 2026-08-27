@@ -55,7 +55,7 @@ Four scripts upload to `s3://perfectpixels-kb-docs/kb-clean/v1/`:
 
 | Script | What it uploads | S3 user metadata? |
 |--------|----------------|-------------------|
-| `scripts/build_kb_clean_prefix.py` | Re-chunks ALL source .txt/.md from bucket into `kb-clean/v1/` | No |
+| ~~`scripts/build_kb_clean_prefix.py`~~ | **RETIRED.** Scanned the whole bucket and subtracted an exclude list, so any new prefix was ingested by default. Replaced by ppmg's `kb/build_corpus.py`, which reads an allowlist (`corpus.yaml`) and gates every document for publishability. | n/a |
 | `scripts/process_assignments.py` | Assignment chunks from `data/assignments_chunked/` | No |
 | `scripts/process_grading.py` | Grading chunks from `data/grading_chunked/` | No |
 | `scripts/process_lectures.py` | Lecture chunks from `data/lectures_chunked/` | No |
@@ -95,4 +95,4 @@ See **`docs/FIX_S3_VECTORS_2048_METADATA.md`** for full steps (create new index,
 
 ## Chunk Script Changes (partial mitigation only)
 
-Shortened `target_key()` and Source line in `build_kb_clean_prefix.py`—helps with key length but does not resolve the filterable-metadata limit. The index config fix above is required.
+Shortened `target_key()` and Source line in the now-retired `build_kb_clean_prefix.py`—helps with key length but does not resolve the filterable-metadata limit. The index config fix above is required.

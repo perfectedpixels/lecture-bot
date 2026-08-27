@@ -49,15 +49,23 @@ aws s3 cp 2026-03-15-ux-research-qa.txt s3://perfectpixels-kb-docs/lectures/
 
 ## Step 3: Run the chunking pipeline
 
-This script reads all `.txt` and `.md` files from the bucket, chunks them (1200 chars, 200 overlap), and writes to `kb-clean/v1/`. It **overwrites** the entire `kb-clean/v1/` prefix each run.
+> **`scripts/build_kb_clean_prefix.py` is retired.** It scanned the whole bucket and
+> subtracted an exclude list, which meant any new prefix was ingested by default. In
+> August 2026 an archive prefix appeared and the next run duplicated the corpus. The
+> replacement is an allowlist and will not do that.
+
+The build now reads `corpus.yaml` and resolves only what is declared there, then runs
+every document through a publishability gate before writing to `kb-clean/v1/`.
 
 ```bash
-cd lecture-bot
-python scripts/build_kb_clean_prefix.py \
-  --bucket perfectpixels-kb-docs \
-  --target-prefix kb-clean/v1 \
-  --profile personal
+cd <ppmg>/pythonchatbot-integration/kb
+python3 build_corpus.py --profile personal            # dry run, writes nothing
+python3 build_corpus.py --profile personal --apply    # write chunks + sidecars
 ```
+
+If the source is a **new** transcript rather than a rebuild, use
+`scripts/ingest_transcripts.py` instead. That path is unaffected and still owns
+conversion, scrubbing, concept detection, and chunking for new lectures.
 
 **Options:**
 
@@ -100,8 +108,8 @@ Test the chatbot (Streamlit or ppmg portfolio) with prompts related to the new c
 # 1. Upload
 aws s3 cp new-lecture.txt s3://perfectpixels-kb-docs/lectures/ --profile personal
 
-# 2. Chunk (processes ALL docs in bucket)
-python scripts/build_kb_clean_prefix.py --bucket perfectpixels-kb-docs --profile personal
+# 2. Declare it in corpus.yaml, then chunk (only declared sources)
+python3 build_corpus.py --profile personal --apply
 
 # 3. Sync in Bedrock Console
 ```
@@ -118,4 +126,5 @@ This error is caused by the **S3 vector index configuration**, not the chunk fil
 
 - **Keyword extraction:** The chunker does not add keywords. Query expansion and reranking in `persona_bot_fast.py` handle domain terms at query time.
 - **Full preprocessing:** For concept extraction, affinity maps, and metadata, use the Streamlit **Preprocess** tab or `python -m src.preprocessing.pipeline`. That outputs JSON for a different KB setup; for HHYCUJH32J, the simple chunk pipeline above is sufficient.
-- **Incremental adds:** Each run of `build_kb_clean_prefix.py` processes the entire bucket. Add new files to S3, then re-run the script and sync.
+- **Incremental adds:** Each run of `build_corpus.py` rebuilds every declared source. Add the file to S3, declare it in `corpus.yaml`, re-run, and sync.
+- **Drift check:** `python3 verify_corpus.py --profile personal` reconciles the bucket against the declared corpus and exits 1 on drift. It is what catches another tool ingesting documents nobody declared.
